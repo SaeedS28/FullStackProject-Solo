@@ -11,9 +11,6 @@ import com.fdmgroup.util.DataSource;
 
 public class UserDAO implements IUserDao {
 	
-	private static final String DB_URL="jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String DB_USER="trainee1";
-	private static final String DB_PASSWORD="!QAZSE4";
 
 	@Override
 	public User create(User t) {
