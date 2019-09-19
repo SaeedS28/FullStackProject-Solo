@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.controller.HomeController;
-import com.fdmgroup.dao.IUserDao;
-import com.fdmgroup.dao.UserCollectionDao;
-import com.fdmgroup.dao.UserDAO;
+import com.fdmgroup.dao.implementation.UserCollectionDao;
+import com.fdmgroup.dao.implementation.UserDAO;
+import com.fdmgroup.dao.interfaces.IUserDao;
 import com.fdmgroup.view.DashboardView;
 import com.fdmgroup.view.HomeView;
 

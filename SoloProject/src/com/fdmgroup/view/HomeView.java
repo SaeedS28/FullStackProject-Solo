@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.controller.HomeController;
-import com.fdmgroup.dao.UserCollectionDao;
+import com.fdmgroup.dao.implementation.UserCollectionDao;
 import com.fdmgroup.model.User;
 
 public class HomeView {

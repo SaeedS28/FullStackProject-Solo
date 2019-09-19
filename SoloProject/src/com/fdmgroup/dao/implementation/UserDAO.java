@@ -1,4 +1,4 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.dao.implementation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fdmgroup.dao.interfaces.IUserDao;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 

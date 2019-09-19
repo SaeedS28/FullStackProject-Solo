@@ -1,4 +1,4 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.dao.interfaces;
 
 import java.util.List;
 

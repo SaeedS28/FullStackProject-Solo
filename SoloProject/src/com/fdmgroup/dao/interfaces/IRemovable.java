@@ -1,6 +1,4 @@
-package com.fdmgroup.dao;
-
-import com.fdmgroup.model.IStorable;
+package com.fdmgroup.dao.interfaces;
 
 public interface IRemovable<T extends IStorable> {
 	public boolean remove(T t);

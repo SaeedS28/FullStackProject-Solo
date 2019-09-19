@@ -1,8 +1,9 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.dao.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fdmgroup.dao.interfaces.IUserDao;
 import com.fdmgroup.model.User;
 
 public class UserCollectionDao implements IUserDao {

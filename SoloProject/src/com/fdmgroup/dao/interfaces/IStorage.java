@@ -1,8 +1,6 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.dao.interfaces;
 
 import java.util.List;
-
-import com.fdmgroup.model.IStorable;
 
 public interface IStorage<T extends IStorable> {
 	public T create(T t);

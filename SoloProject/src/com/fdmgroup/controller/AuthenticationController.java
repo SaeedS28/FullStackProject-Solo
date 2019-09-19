@@ -1,6 +1,6 @@
 package com.fdmgroup.controller;
 
-import com.fdmgroup.dao.IUserDao;
+import com.fdmgroup.dao.interfaces.IUserDao;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.DashboardView;

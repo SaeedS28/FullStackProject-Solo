@@ -1,5 +1,6 @@
 package com.fdmgroup.model;
 
+import com.fdmgroup.dao.interfaces.IStorable;
 import com.fdmgroup.util.IdGenerator;
 
 public class User implements IStorable {
