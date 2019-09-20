@@ -10,22 +10,16 @@ public class User implements IStorable {
 	private String password;
 	private String firstname;
 	private String lastname;
+	private String type;
 	
-	public User() {
-		super();
-	}
-
-	public User(String username, String password, String firstname, String lastname) {
-		this(IdGenerator.generate(), username, password, firstname, lastname);
-	}
-	
-	public User(int id, String username, String password, String firstname, String lastname) {
+	public User(int id, String username, String password, String firstname, String lastname, String type) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.type = type;
 	}
 
 	public int getId() {
@@ -34,6 +28,14 @@ public class User implements IStorable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getUsername() {
@@ -48,6 +50,7 @@ public class User implements IStorable {
 		return password;
 	}
 
+	// add hashing dependency for the password
 	public void setPassword(String password) {
 		this.password = password;
 	}

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ShoppingCart {
 	String emailAddress;
-	Map<Integer, Integer> itemCount;
+	Map<Item, Integer> itemCount;
 	
 	public ShoppingCart(String emailAddress){
 		itemCount= new HashMap<>();
@@ -13,13 +13,16 @@ public class ShoppingCart {
 	}
 	
 	public void addItems(Item item, int quantity){
-		itemCount.put(item.getProductID(), quantity);
+		itemCount.put(item, quantity);
 	}
 
+	public void reset(){
+		itemCount = new HashMap<>();
+	}
+	
 	@Override
 	public String toString() {
 		return "ShoppingCart [emailAddress=" + emailAddress + ", itemCount=" + itemCount.toString() + "]";
 	}
-	
 	
 }	

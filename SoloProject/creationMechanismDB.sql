@@ -20,7 +20,7 @@ create table users(
 );
 
 insert into users(email_address, password,first_name,last_name, types)
-values (saeeds28,'password','Saad', 'Saeed', 'admin')
+values ('saeeds28','password','Saad', 'Saeed', 'admin');
 
 -- addresses associated with users
 create table address(
@@ -46,7 +46,7 @@ create table item (
   quantity Number(4),
   primary key (product_id),
   
-  constraint ck_quantity check (quantity >= 0)
+  constraint ck_quantity check (quantity >= 0),
   constraint ck_price check (price >= 0)
 );
 
