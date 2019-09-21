@@ -47,7 +47,10 @@ public class MainApp {
 		//del.updatePassword(new User("saeeds28","password","Saad","Saeed","admin"), "genericPassword");
 		IAddressDao del = new AddressDAO();
 		//del.addAddress(new Address("saeeds28","130 Adelaide street","Toronto","ON","Canada","M5H0A1"));
-		del.changeCity("Kingston", new User("saeeds28","password","Saad","Saeed","admin"));
+		//del.changeCity("Kingston", new User("saeeds28","password","Saad","Saeed","admin"));
+		//del.changeStreet("4700 Keele Street", new User("saeeds28","password","Saad","Saeed","admin"));
+		//del.changeCountry("Can", new User("saeeds28","password","Saad","Saeed","admin"));
+		del.changePostalCode("M3J1P3", new User("saeeds28","password","Saad","Saeed","admin"));
 	}
 }
 

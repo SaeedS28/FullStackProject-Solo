@@ -70,20 +70,71 @@ public class AddressDAO implements IAddressDao {
 
 	@Override
 	public boolean changeStreet(String street, User u) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE address "
+				+ "SET street = ?" + 
+				"Where email_address = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, street);
+			stmt.setString(2, u.getUsername());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean changeCountry(String country, User u) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE address "
+				+ "SET country = ?" + 
+				"Where email_address = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, country);
+			stmt.setString(2, u.getUsername());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean changePostalCode(String postal, User u) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE address "
+				+ "SET postal_code= ?" + 
+				"Where email_address = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, postal);
+			stmt.setString(2, u.getUsername());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
