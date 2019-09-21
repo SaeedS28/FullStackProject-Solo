@@ -12,8 +12,29 @@ import com.fdmgroup.util.DataSource;
 
 public class UserDAO implements IUserDao{
 	
-	public User create(User t) {
-		return null;
+	public boolean create(User t) {
+		String query = "Insert into users(email_address, password, first_name, last_name, types) values (?,?,?,?,?)";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, t.getUsername());
+			stmt.setString(2, t.getPassword());
+			stmt.setString(3, t.getFirstname());
+			stmt.setString(4, t.getLastname());
+			stmt.setString(5, t.getType());
+			
+			stmt.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public boolean remove(User t) {
@@ -35,8 +56,8 @@ public class UserDAO implements IUserDao{
 				String firstName= rs.getString("first_name");
 				String lastName = rs.getString("last_name");
 				String type = rs.getString("types");
-				System.out.println(userName+") "+ userName+ " "+ pwd+" "+firstName+" "+lastName);
-				//user = new User(userName,pwd,firstName,lastName);
+				
+				user = new User(userName,pwd,firstName,lastName,type);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

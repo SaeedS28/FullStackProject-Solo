@@ -6,6 +6,7 @@ import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.controller.HomeController;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.dao.interfaces.IUserDao;
+import com.fdmgroup.model.User;
 import com.fdmgroup.view.DashboardView;
 import com.fdmgroup.view.HomeView;
 
@@ -37,7 +38,9 @@ public class MainApp {
 //		scanner.close();
 		
 		IUserDao del = new UserDAO();
-		del.findByUsername("saeeds28");
+		//User u = new User("sam","sam","Sam","Saeed","admin");
+		//del.create(u);
+		
 	}
 }
 
