@@ -37,9 +37,23 @@ public class UserDAO implements IUserDao{
 		return true;
 	}
 
-	public boolean remove(User t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean remove(String s) {
+		String query = "Delete from users where email_address = ?";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, s);			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public User findByUsername(String username) {

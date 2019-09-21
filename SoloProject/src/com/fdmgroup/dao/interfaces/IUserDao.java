@@ -6,6 +6,6 @@ public interface IUserDao {
 	public User findByUsername(String username);
 	public boolean updatePassword(User user, String password);
 	public boolean create(User t);
-	public boolean remove(User t);
+	public boolean remove(String s);
 	
 }

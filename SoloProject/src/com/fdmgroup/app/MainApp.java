@@ -40,6 +40,7 @@ public class MainApp {
 		IUserDao del = new UserDAO();
 		//User u = new User("sam","sam","Sam","Saeed","admin");
 		//del.create(u);
+		//del.remove("sam");
 		
 	}
 }
