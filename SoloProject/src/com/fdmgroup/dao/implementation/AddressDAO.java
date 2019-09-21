@@ -2,6 +2,7 @@ package com.fdmgroup.dao.implementation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.fdmgroup.dao.interfaces.IAddressDao;
@@ -11,15 +12,6 @@ import com.fdmgroup.util.DataSource;
 
 public class AddressDAO implements IAddressDao {
 
-	/*
-	 * email_address varchar2(50),
-  street varchar2(65) not null,
-  city varchar2(30) not null,
-  province varchar2(20) not null,
-  country varchar2(25) not null,
-  postal_code varchar2(8) not null
-	 */
-	@Override
 	public boolean addAddress(Address a) {
 		String query = "Insert into address(email_address, street, city, province, country, postal_code) values (?,?,?,?,?,?)";
 		try(Connection con = DataSource.getInstance().getConnection();
@@ -45,7 +37,6 @@ public class AddressDAO implements IAddressDao {
 		return true;
 	}
 
-	@Override
 	public boolean changeCity(String city, User u) {
 		String query = "UPDATE address "
 				+ "SET city = ?" + 
@@ -68,7 +59,6 @@ public class AddressDAO implements IAddressDao {
 		return true;
 	}
 
-	@Override
 	public boolean changeStreet(String street, User u) {
 		String query = "UPDATE address "
 				+ "SET street = ?" + 
@@ -91,7 +81,6 @@ public class AddressDAO implements IAddressDao {
 		return true;
 	}
 
-	@Override
 	public boolean changeCountry(String country, User u) {
 		String query = "UPDATE address "
 				+ "SET country = ?" + 
@@ -114,7 +103,6 @@ public class AddressDAO implements IAddressDao {
 		return true;
 	}
 
-	@Override
 	public boolean changePostalCode(String postal, User u) {
 		String query = "UPDATE address "
 				+ "SET postal_code= ?" + 
@@ -137,10 +125,29 @@ public class AddressDAO implements IAddressDao {
 		return true;
 	}
 
-	@Override
 	public Address getAddress(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "Select * from address where email_address = ?";
+		Address address=null;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, u.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				String userName = rs.getString("email_address");
+				String street = rs.getString("street");
+				String city = rs.getString("city");
+				String province = rs.getString("province");
+				String country = rs.getString("country");
+				String postalCode = rs.getString("postal_code");
+				
+				address = new Address(userName, street, city,province, country, postalCode);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return address;
 	}
 
 }

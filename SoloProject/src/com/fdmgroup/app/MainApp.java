@@ -50,7 +50,8 @@ public class MainApp {
 		//del.changeCity("Kingston", new User("saeeds28","password","Saad","Saeed","admin"));
 		//del.changeStreet("4700 Keele Street", new User("saeeds28","password","Saad","Saeed","admin"));
 		//del.changeCountry("Can", new User("saeeds28","password","Saad","Saeed","admin"));
-		del.changePostalCode("M3J1P3", new User("saeeds28","password","Saad","Saeed","admin"));
+		//del.changePostalCode("M3J1P3", new User("saeeds28","password","Saad","Saeed","admin"));
+		System.out.println(del.getAddress(new User("saeeds28","password","Saad","Saeed","admin")));
 	}
 }
 
