@@ -9,29 +9,6 @@ import com.fdmgroup.model.User;
 public class ItemDAO implements IItemDao {
 
 	@Override
-	public Item create(Item t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Item> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean remove(Item t) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean updateQuantity(Item i, int quantity) {
 		// TODO Auto-generated method stub
 		return false;
@@ -62,6 +39,12 @@ public class ItemDAO implements IItemDao {
 	}
 
 	@Override
+	public List<Item> getAllItems(String category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<Item> getItemsByCategory(String category) {
 		// TODO Auto-generated method stub
 		return null;
@@ -78,6 +61,5 @@ public class ItemDAO implements IItemDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 	
 }
