@@ -41,6 +41,7 @@ public class MainApp {
 		//User u = new User("sam","sam","Sam","Saeed","admin");
 		//del.create(u);
 		//del.remove("sam");
+		del.updatePassword(new User("saeeds28","password","Saad","Saeed","admin"), "genericPassword");
 		
 	}
 }

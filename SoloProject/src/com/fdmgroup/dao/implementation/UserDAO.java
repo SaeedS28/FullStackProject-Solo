@@ -81,7 +81,24 @@ public class UserDAO implements IUserDao{
 	}
 
 	public boolean updatePassword(User user, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE users "
+				+ "SET password = ?" + 
+				"Where email_address = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, password);
+			stmt.setString(2, user.getUsername());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }
