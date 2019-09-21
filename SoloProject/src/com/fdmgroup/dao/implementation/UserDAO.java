@@ -10,34 +10,43 @@ import com.fdmgroup.dao.interfaces.IUserDao;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
-public class UserDAO implements IUserDao {
+public class UserDAO implements IUserDao{
 	
-
-	@Override
 	public User create(User t) {
 		return null;
 	}
 
-	@Override
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User update(User t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean remove(User t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public User findByUsername(String username) {
-		return null;
+		String query = "Select * from users where email_address = ?";
+		User user=null;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, username);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				String userName = rs.getString("email_address");
+				String pwd = rs.getString("password");
+				String firstName= rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				String type = rs.getString("types");
+				System.out.println(userName+") "+ userName+ " "+ pwd+" "+firstName+" "+lastName);
+				//user = new User(userName,pwd,firstName,lastName);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	public boolean updatePassword(User user, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

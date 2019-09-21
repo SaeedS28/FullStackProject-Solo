@@ -37,8 +37,8 @@ public class DataSource {
 		// pooling properties
 		cpds.setMinPoolSize(5);			// default 3
 		cpds.setMaxPoolSize(20);		// default 15
-		cpds.setAcquireIncrement(5);	// default 3	(creates new objects when all have been exhausted
-		cpds.setMaxStatements(10);  	// default 0
+		cpds.setAcquireIncrement(5);	// default 3	(creates new objects when all have been exhausted)
+		///cpds.setMaxStatements(10);  	// default 0
 	}
 	
 	

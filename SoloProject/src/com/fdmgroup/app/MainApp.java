@@ -11,30 +11,33 @@ import com.fdmgroup.view.HomeView;
 
 public class MainApp {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		//IUserDao userDao = new UserCollectionDao();
-		IUserDao userDao = new UserDAO();
-		//Views
-		HomeView hv = new HomeView(scanner);
-		DashboardView dv = new DashboardView(scanner);
+//		Scanner scanner = new Scanner(System.in);
+//		//IUserDao userDao = new UserCollectionDao();
+//		IUserDao userDao = new UserDAO();
+//		//Views
+//		HomeView hv = new HomeView(scanner);
+//		DashboardView dv = new DashboardView(scanner);
+//		
+//		//Controllers
+//		HomeController hc = new HomeController();
+//		AuthenticationController ac = new AuthenticationController();
+//		
+//		hc.setHomeView(hv);
+//		ac.setDashboardView(dv);
+//		ac.setHomeView(hv);
+//		ac.setUserDao(userDao);
+//		
+//		hv.setAuthenticationController(ac);
+//		hv.setHomeController(hc);
+//		dv.setAuthenticationController(ac);
+//		
+//		
+//		hc.showHome();
+//		
+//		scanner.close();
 		
-		//Controllers
-		HomeController hc = new HomeController();
-		AuthenticationController ac = new AuthenticationController();
-		
-		hc.setHomeView(hv);
-		ac.setDashboardView(dv);
-		ac.setHomeView(hv);
-		ac.setUserDao(userDao);
-		
-		hv.setAuthenticationController(ac);
-		hv.setHomeController(hc);
-		dv.setAuthenticationController(ac);
-		
-		
-		hc.showHome();
-		
-		scanner.close();
+		IUserDao del = new UserDAO();
+		del.findByUsername("saeeds28");
 	}
 }
 
