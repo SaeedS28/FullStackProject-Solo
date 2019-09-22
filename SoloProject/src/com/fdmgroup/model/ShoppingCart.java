@@ -18,6 +18,10 @@ public class ShoppingCart {
 	public void reset() {
 		itemCount = new HashMap<>();
 	}
+	
+	public Map<Item, Integer> getItems(){
+		return this.itemCount;
+	}
 
 	public boolean removeItem(int pid) {
 		Iterator<Item> it = itemCount.keySet().iterator();

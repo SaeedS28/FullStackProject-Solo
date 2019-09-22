@@ -66,18 +66,61 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		return true;
 	}
 
-	@Override
 	public int getSize(User u) {
-		
+		String query = "SELECT SUM(quantity) as cart_quantity " + 
+				"FROM shopping_cart " + 
+				"where shopping_cart.email_address like ?";
+		int size=0;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, u.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				size = rs.getInt("cart_quantity");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return size;
 	}
-
-	@Override
+	
 	public ShoppingCart getCartDetails(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT item.product_id PRODUCT_ID," + 
+				"item.NAME NAME, " + 
+				"item.PRICE PRICE, " + 
+				"item.QUANTITY iQuantity, " +
+				"item.CATEGORY CATEGORY, " + 
+				"item.DESCRIPTION DESCRIPTION, " + 
+				"shopping_cart.QUANTITY CART_QUANTITY " + 
+				"FROM shopping_cart " + 
+				"INNER JOIN item ON " + 
+				"shopping_cart.product_id = item.product_id " + 
+				"WHERE shopping_cart.email_address like ?";
+		ShoppingCart cart = new ShoppingCart();
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, u.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int productID = rs.getInt("PRODUCT_ID");
+				String name = rs.getString("NAME");
+				int iQuantity = rs.getInt("iQuantity");
+				double price = rs.getDouble("PRICE");
+				String category = rs.getString("CATEGORY");
+				String description = rs.getString("DESCRIPTION");
+				int quantity = rs.getInt("CART_QUANTITY");
+				cart.addItems(new Item(productID,name,category,description,iQuantity,price), quantity);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cart;
 	}
 
-	@Override
 	public double getCartTotal(User u) {
 		String query = "SELECT SUM(item.price*shopping_cart.quantity) as total_cart_price " + 
 				"FROM shopping_cart " + 

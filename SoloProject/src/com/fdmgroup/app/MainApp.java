@@ -1,6 +1,7 @@
 package com.fdmgroup.app;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
@@ -13,6 +14,7 @@ import com.fdmgroup.dao.interfaces.IAddressDao;
 import com.fdmgroup.dao.interfaces.IItemDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.ShoppingCart;
 import com.fdmgroup.model.User;
 import com.fdmgroup.view.DashboardView;
 import com.fdmgroup.view.HomeView;
@@ -47,9 +49,12 @@ public class MainApp {
 		User u = new User("saeeds28", "saad", "Saad", "Saeed", "regular");
 		ShoppingCartDAO del = new ShoppingCartDAO();
 		//del.addItem(u, 5, 10);
-		System.out.println(del.getCartTotal(u));
-		del.removeItem(u, 5);
-		System.out.println(del.getCartTotal(u));
+		ShoppingCart cart = del.getCartDetails(u);
+		
+		for (Map.Entry<Item,Integer> entry : cart.getItems().entrySet()) {
+			System.out.println("Key = " + entry.getKey() + 
+					", Value = " + entry.getValue()); 
+		}
 	}
 }
 
