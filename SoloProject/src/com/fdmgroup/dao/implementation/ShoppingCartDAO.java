@@ -4,15 +4,10 @@ import java.util.List;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.ShoppingCart;
 import com.fdmgroup.model.User;
 
 public class ShoppingCartDAO implements IShoppingCartDAO {
-
-	@Override
-	public List<Item> getAllItems(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean addItem(Item t) {
@@ -21,9 +16,9 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	@Override
-	public Item removeItem(User u, String itemName) {
+	public boolean removeItem(User u, int pid) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
@@ -33,10 +28,15 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	@Override
+	public ShoppingCart getCartDetails(User u) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public double getCartTotal(User u) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
+	
 }
