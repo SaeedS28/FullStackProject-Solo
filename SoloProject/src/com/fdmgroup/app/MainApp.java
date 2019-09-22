@@ -7,6 +7,7 @@ import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.controller.HomeController;
 import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.ItemDAO;
+import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.dao.interfaces.IAddressDao;
 import com.fdmgroup.dao.interfaces.IItemDAO;
@@ -43,6 +44,9 @@ public class MainApp {
 //		
 //		scanner.close();
 		
+		User u = new User("saeeds28", "saad", "Saad", "Saeed", "regular");
+		ShoppingCartDAO del = new ShoppingCartDAO();
+		//del.addItem(u, 3, 25);
 	}
 }
 

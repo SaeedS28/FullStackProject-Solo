@@ -5,7 +5,7 @@ import com.fdmgroup.model.ShoppingCart;
 import com.fdmgroup.model.User;
 
 public interface IShoppingCartDAO  {
-	public boolean addItem(Item t);
+	public boolean addItem(User u, int pid, int quantity);
 	public boolean removeItem(User u, int pid);
 	public int getSize(User u);
 	public ShoppingCart getCartDetails(User u);
