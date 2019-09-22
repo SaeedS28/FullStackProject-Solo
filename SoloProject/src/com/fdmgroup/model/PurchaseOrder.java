@@ -1,15 +1,15 @@
 package com.fdmgroup.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PurchaseOrder {
 	int purchaseID;
-	Date purchaseDate;
+	Timestamp purchaseDate;
 	String emailAddress;
 	int productID;
 	int quantity;
 	
-	public PurchaseOrder(int purchaseID, Date purchaseDate, String emailAddress, int productID, int quantity) {
+	public PurchaseOrder(int purchaseID, Timestamp purchaseDate, String emailAddress, int productID, int quantity) {
 		super();
 		this.purchaseID = purchaseID;
 		this.purchaseDate = purchaseDate;
@@ -26,11 +26,11 @@ public class PurchaseOrder {
 		this.purchaseID = purchaseID;
 	}
 
-	public Date getPurchaseDate() {
+	public Timestamp getPurchaseDate() {
 		return purchaseDate;
 	}
 
-	public void setPurchaseDate(Date purchaseDate) {
+	public void setPurchaseDate(Timestamp purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 

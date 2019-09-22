@@ -8,6 +8,7 @@ import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.controller.HomeController;
 import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.ItemDAO;
+import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.dao.interfaces.IAddressDao;
@@ -51,10 +52,8 @@ public class MainApp {
 		//del.addItem(u, 5, 10);
 		ShoppingCart cart = del.getCartDetails(u);
 		
-		for (Map.Entry<Item,Integer> entry : cart.getItems().entrySet()) {
-			System.out.println("Key = " + entry.getKey() + 
-					", Value = " + entry.getValue()); 
-		}
+		PurchaseOrderDAO po = new PurchaseOrderDAO();
+		po.addPurchaseOrder(u, cart);
 	}
 }
 
