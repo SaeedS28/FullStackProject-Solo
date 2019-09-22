@@ -44,23 +44,13 @@ create table item (
   price number(5) not null,
   category varchar2(30) not null,
   quantity Number(4),
+  description varchar(300) not null,
   primary key (product_id),
   
   constraint ck_quantity check (quantity >= 0),
   constraint ck_price check (price >= 0)
 );
-
--- create product description table
-create table item_description (
-  product_id Number(6),
-  description varchar(300) not null,
-  primary key (product_id),
-  
-  CONSTRAINT fk_pid
-  FOREIGN KEY (product_id)
-  REFERENCES item(product_id) on delete cascade
-);
-
+select max(product_id) from item;
 -- create shopping_cart table
 create table shopping_cart (
   email_address varchar2(50),

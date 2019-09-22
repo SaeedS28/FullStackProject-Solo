@@ -1,19 +1,19 @@
 package com.fdmgroup.model;
 
-import com.fdmgroup.dao.interfaces.IStorable;
-
-public class Item implements IStorable {
+public class Item {
 	private int productID;
 	private String name;
 	private String description;
 	private int quantity;
 	private double price;
+	private String category;
 	
-	public Item(int productID, String name, String description, int quantity, double price){
+	public Item(int productID, String name, String category, String description, int quantity, double price){
 		this.productID=productID;
 		this.name=name;
 		this.description = description;
 		this.quantity = quantity;
+		this.category = category;
 		this.setPrice(price);
 	}
 
@@ -51,6 +51,14 @@ public class Item implements IStorable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override

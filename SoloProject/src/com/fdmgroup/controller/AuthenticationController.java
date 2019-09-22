@@ -1,6 +1,6 @@
 package com.fdmgroup.controller;
 
-import com.fdmgroup.dao.interfaces.IUserDao;
+import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.DashboardView;
@@ -10,13 +10,13 @@ public class AuthenticationController {
 
 	private DashboardView dashboardView;
 	private HomeView homeView;
-	private IUserDao userDao;
+	private IUserDAO userDao;
 	
 	public AuthenticationController() {
 		super();
 	}
 
-	public AuthenticationController(DashboardView dashboardView, HomeView homeView, IUserDao userDao) {
+	public AuthenticationController(DashboardView dashboardView, HomeView homeView, IUserDAO userDao) {
 		super();
 		this.dashboardView = dashboardView;
 		this.homeView = homeView;
@@ -55,11 +55,11 @@ public class AuthenticationController {
 		this.homeView = homeView;
 	}
 
-	public IUserDao getUserDao() {
+	public IUserDAO getUserDao() {
 		return userDao;
 	}
 
-	public void setUserDao(IUserDao userDao) {
+	public void setUserDao(IUserDAO userDao) {
 		this.userDao = userDao;
 	}
 }

@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.fdmgroup.dao.interfaces.IUserDao;
+import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
-public class UserDAO implements IUserDao{
+public class UserDAO implements IUserDAO{
 	
 	public boolean create(User t) {
 		String query = "Insert into users(email_address, password, first_name, last_name, types) values (?,?,?,?,?)";
