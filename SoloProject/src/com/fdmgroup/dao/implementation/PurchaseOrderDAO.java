@@ -8,7 +8,7 @@ import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.User;
 
-public class PoDAO implements IPurchaseOrderDAO {
+public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
 	@Override
 	public boolean addPurchaseOrder(User u, List<Item> items) {
