@@ -41,7 +41,7 @@ CONSTRAINT fk_email
 create table item (
   product_id Number(6),
   name varchar2(50) not null,
-  price number(5) not null,
+  price number(6,2) not null,
   category varchar2(30) not null,
   quantity Number(4),
   description varchar(300) not null,
@@ -50,7 +50,7 @@ create table item (
   constraint ck_quantity check (quantity >= 0),
   constraint ck_price check (price >= 0)
 );
-select max(product_id) from item;
+
 -- create shopping_cart table
 create table shopping_cart (
   email_address varchar2(50),
@@ -75,6 +75,17 @@ create table purchase_history (
   product_id Number(6) NOT NULL,
   quantity Number(4) not null,
   primary key (purchase_id)
+);
+
+-- create review table
+
+create table review(
+    review_id Number(3),
+    product_id Number(4) NOT NULL,
+    username varchar(25) NOT NULL,
+    review_text varchar2(500) NOT NULL,
+    rating Number(2) NOT NULL,    
+    PRIMARY KEY (review_id)
 );
 
 commit;
