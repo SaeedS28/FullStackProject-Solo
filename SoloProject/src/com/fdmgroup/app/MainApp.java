@@ -43,8 +43,13 @@ public class MainApp {
 //		scanner.close();
 		
 		IItemDAO del = new ItemDAO();
-		Item dummyItem = new Item(del.getMaxPid(),"50 Shades of Gray","Books","why do I keep doing this?",52,32.21);
-		del.addItem(dummyItem);
+		//Item dummyItem = new Item(del.getMaxPid(),"50 Shades of Gray","Books","why do I keep doing this?",52,32.21);
+		//del.addItem(dummyItem);
+		//del.updateQuantity(1, 12);
+		//del.updatePrice(2, 12.34);
+		//del.updateName(1, "Maple Baseball bat");
+		//del.updateDescription(2, "WHYYYYY?????????????");
+		del.updateCategory(2, "Literotica");
 	}
 }
 

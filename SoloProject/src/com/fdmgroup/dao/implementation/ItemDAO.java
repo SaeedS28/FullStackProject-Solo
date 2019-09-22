@@ -58,34 +58,115 @@ public class ItemDAO implements IItemDAO {
 		return maxPid;
 	}
 
-	@Override
 	public boolean updateQuantity(int pid, int quantity) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE item "
+				+ "SET quantity = ?" + 
+				"where  product_id = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setInt(1,quantity);
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
-	@Override
 	public boolean updateName(int pid, String name) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE item "
+				+ "SET name = ?" + 
+				"where  product_id = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1,name);
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
-	@Override
 	public boolean updateDescription(int pid, String description) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE item "
+				+ "SET description = ?" + 
+				"where  product_id = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1,description);
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean updateCategory(int pid, String category) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE item "
+				+ "SET category = ?" + 
+				"where  product_id = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1,category);
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
-	@Override
 	public boolean updatePrice(int pid, double price) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "UPDATE item "
+				+ "SET price = ?" + 
+				"where  product_id = ? ";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setDouble(1,price);
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
