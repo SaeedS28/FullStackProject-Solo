@@ -14,6 +14,7 @@ public interface IItemDAO {
 	public int getMaxPid();
 	public List<Item> getAllItems();
 	public Item getItemByPid(int pid);
+	public int getItemQuantity(int pid);
 	public List<Item> getItemsByCategory(String category);
 	public List<Item> getItemsByPriceRange(double low, double high);
 	public List<Item> getItemsByName(String name);

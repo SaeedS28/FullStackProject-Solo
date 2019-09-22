@@ -266,7 +266,6 @@ public class ItemDAO implements IItemDAO {
 		return priceList;
 	}
 
-	@Override
 	public Item getItemByPid(int pid) {
 		String query = "Select * from item where product_id = ?";
 		Item item = null;
@@ -292,7 +291,6 @@ public class ItemDAO implements IItemDAO {
 		return item;
 	}
 
-	@Override
 	public boolean removeItem(int pid) {
 		String query = "Delete from item where product_id = ?";
 		try(Connection con = DataSource.getInstance().getConnection();
@@ -310,5 +308,23 @@ public class ItemDAO implements IItemDAO {
 			return false;
 		}
 		return true;
+	}
+
+	public int getItemQuantity(int pid) {
+		String query = "Select quantity from item where product_id = ?";
+		int quantity=0;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setInt(1, pid);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				quantity = rs.getInt("quantity");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return quantity;
 	}
 }

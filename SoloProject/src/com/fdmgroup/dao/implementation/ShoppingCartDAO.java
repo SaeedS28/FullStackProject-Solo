@@ -48,14 +48,27 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 
 	@Override
 	public boolean removeItem(User u, int pid) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "Delete from shopping_cart where email_address = ? and product_id = ?";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, u.getUsername());
+			stmt.setInt(2, pid);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public int getSize(User u) {
-		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 
 	@Override
@@ -66,8 +79,25 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 
 	@Override
 	public double getCartTotal(User u) {
-		// TODO Auto-generated method stub
-		return 0;
+		String query = "SELECT SUM(item.price*shopping_cart.quantity) as total_cart_price " + 
+				"FROM shopping_cart " + 
+				"INNER JOIN item ON " + 
+				"shopping_cart.product_id = item.product_id " + 
+				"where shopping_cart.email_address like ?";
+		double priceTotal=0;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, u.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				priceTotal = rs.getDouble("total_cart_price");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return priceTotal;
 	}
 	
 	private int getQuantity(User u, int pid) {

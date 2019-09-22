@@ -46,7 +46,10 @@ public class MainApp {
 		
 		User u = new User("saeeds28", "saad", "Saad", "Saeed", "regular");
 		ShoppingCartDAO del = new ShoppingCartDAO();
-		//del.addItem(u, 3, 25);
+		//del.addItem(u, 5, 10);
+		System.out.println(del.getCartTotal(u));
+		del.removeItem(u, 5);
+		System.out.println(del.getCartTotal(u));
 	}
 }
 
