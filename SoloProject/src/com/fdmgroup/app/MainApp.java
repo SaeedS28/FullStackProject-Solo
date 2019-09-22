@@ -1,5 +1,6 @@
 package com.fdmgroup.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
@@ -43,13 +44,26 @@ public class MainApp {
 //		scanner.close();
 		
 		IItemDAO del = new ItemDAO();
-		//Item dummyItem = new Item(del.getMaxPid(),"50 Shades of Gray","Books","why do I keep doing this?",52,32.21);
-		//del.addItem(dummyItem);
+//		Item dummyItem = new Item(del.getMaxPid(),"Canadian Encyclopedia","Books","Canada, eh?",52,32.21);
+//		del.addItem(dummyItem);
 		//del.updateQuantity(1, 12);
 		//del.updatePrice(2, 12.34);
 		//del.updateName(1, "Maple Baseball bat");
 		//del.updateDescription(2, "WHYYYYY?????????????");
-		del.updateCategory(2, "Literotica");
+		//del.updateCategory(2, "Literotica");
+//		Item dummyItem = new Item(del.getMaxPid(),"An angel in the works","Books","A classical book",23,2.21);
+//		del.addItem(dummyItem);
+//		Item dummyItem2 = new Item(del.getMaxPid(),"I can do it","Books","Can I do it?",15,4.62);
+//		del.addItem(dummyItem2);
+//		Item dummyItem3 = new Item(del.getMaxPid(),"Inferno","Books","This is a good one",4,13.23);
+//		del.addItem(dummyItem3);
+//		Item dummyItem4 = new Item(del.getMaxPid(),"Origin","Books","Last one",6,6.90);
+//		del.addItem(dummyItem4);
+		
+		List<Item> booksList = del.getItemsByName("can");
+		for (Item item : booksList) {
+			System.out.println(item);
+		}
 	}
 }
 

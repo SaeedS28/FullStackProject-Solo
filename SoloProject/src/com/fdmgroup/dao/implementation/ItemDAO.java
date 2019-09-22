@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fdmgroup.dao.interfaces.IItemDAO;
@@ -18,9 +19,9 @@ public class ItemDAO implements IItemDAO {
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
 			stmt.setInt(1, i.getProductID());
-			stmt.setString(2, i.getName());
+			stmt.setString(2, i.getName().toUpperCase());
 			stmt.setDouble(3,i.getPrice());
-			stmt.setString(4, i.getCategory());
+			stmt.setString(4, i.getCategory().toUpperCase());
 			stmt.setInt(5, i.getQuantity());
 			stmt.setString(6, i.getDescription());
 			stmt.executeUpdate();
@@ -86,7 +87,7 @@ public class ItemDAO implements IItemDAO {
 				"where  product_id = ? ";
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1,name);
+			stmt.setString(1,name.toUpperCase());
 			stmt.setInt(2, pid);
 			stmt.executeUpdate();
 			
@@ -131,7 +132,7 @@ public class ItemDAO implements IItemDAO {
 				"where  product_id = ? ";
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1,category);
+			stmt.setString(1,category.toUpperCase());
 			stmt.setInt(2, pid);
 			stmt.executeUpdate();
 			
@@ -169,26 +170,110 @@ public class ItemDAO implements IItemDAO {
 		return true;
 	}
 
-	@Override
-	public List<Item> getAllItems(String category) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> getAllItems() {
+		String query = "Select * from item";
+		List<Item> all = new ArrayList<>();
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pid = rs.getInt("product_id");
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				all.add(new Item(pid,name,categoryReturn,description,quantity,price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return all;
 	}
 
-	@Override
 	public List<Item> getItemsByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "Select * from item where category = ?";
+		List<Item> cat = new ArrayList<>();
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, category.toUpperCase());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pid = rs.getInt("product_id");
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				cat.add(new Item(pid,name,categoryReturn,description,quantity,price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cat;
 	}
 
-	@Override
-	public List<Item> getItemsByPrice(double price) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> getItemsByPriceRange(double low, double high) {
+		String query = "Select * from item where price between ? and ?";
+		List<Item> priceList = new ArrayList<>();
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setDouble(1, low);
+			stmt.setDouble(2, high);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pid = rs.getInt("product_id");
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				priceList.add(new Item(pid,name,categoryReturn,description,quantity,price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return priceList;
 	}
 
-	@Override
 	public List<Item> getItemsByName(String name) {
+		String query = "Select * from item where name like ?";
+		List<Item> priceList = new ArrayList<>();
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, "%" + name.toUpperCase() + "%");
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pid = rs.getInt("product_id");
+				String nameReturn = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				priceList.add(new Item(pid,nameReturn,categoryReturn,description,quantity,price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return priceList;
+	}
+
+	@Override
+	public Item getItemByPid(int pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Item> removeItem(int pid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
