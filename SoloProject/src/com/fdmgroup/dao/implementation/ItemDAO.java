@@ -268,14 +268,47 @@ public class ItemDAO implements IItemDAO {
 
 	@Override
 	public Item getItemByPid(int pid) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "Select * from item where product_id = ?";
+		Item item = null;
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setDouble(1, pid);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pidReturn = rs.getInt("product_id");
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				item = new Item(pid,name,categoryReturn,description,quantity,price);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
 	}
 
 	@Override
-	public List<Item> removeItem(int pid) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean removeItem(int pid) {
+		String query = "Delete from item where product_id = ?";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setInt(1, pid);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
-	
 }

@@ -17,6 +17,6 @@ public interface IItemDAO {
 	public List<Item> getItemsByCategory(String category);
 	public List<Item> getItemsByPriceRange(double low, double high);
 	public List<Item> getItemsByName(String name);
-	public List<Item> removeItem(int pid);
+	public boolean removeItem(int pid);
 	
 }
