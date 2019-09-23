@@ -19,10 +19,6 @@ import com.fdmgroup.util.DataSource;
 
 public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
-	/*
-	 * int purchaseID; Date purchaseDate; String emailAddress; int productID; int
-	 * quantity;
-	 */
 	public boolean addPurchaseOrder(User u, ShoppingCart cart) {
 		String query = "insert into purchase_history values (?,?,?,?,?,?)";
 		
