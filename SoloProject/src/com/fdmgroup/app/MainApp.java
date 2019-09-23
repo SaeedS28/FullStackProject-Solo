@@ -1,5 +1,6 @@
 package com.fdmgroup.app;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ import com.fdmgroup.dao.interfaces.IAddressDao;
 import com.fdmgroup.dao.interfaces.IItemDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.ShoppingCart;
 import com.fdmgroup.model.User;
 import com.fdmgroup.view.DashboardView;
@@ -47,13 +49,11 @@ public class MainApp {
 //		
 //		scanner.close();
 		
-		User u = new User("saeeds28", "saad", "Saad", "Saeed", "regular");
-		ShoppingCartDAO del = new ShoppingCartDAO();
-		//del.addItem(u, 5, 10);
-		ShoppingCart cart = del.getCartDetails(u);
+		User u = new User("samad", "saad", "Saad", "Saeed", "regular");
 		
 		PurchaseOrderDAO po = new PurchaseOrderDAO();
-		po.addPurchaseOrder(u, cart);
+		ArrayList<PurchaseOrder> list=po.getPurchaseOrdersByUser(u);
+		System.out.println(list.toString());
 	}
 }
 

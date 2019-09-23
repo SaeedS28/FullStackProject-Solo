@@ -3,19 +3,21 @@ package com.fdmgroup.model;
 import java.sql.Timestamp;
 
 public class PurchaseOrder {
-	int purchaseID;
-	Timestamp purchaseDate;
-	String emailAddress;
-	int productID;
-	int quantity;
+	private int purchaseID;
+	private Timestamp purchaseDate;
+	private String emailAddress;
+	private int productID;
+	private int quantity;
+	private double price;
 	
-	public PurchaseOrder(int purchaseID, Timestamp purchaseDate, String emailAddress, int productID, int quantity) {
+	public PurchaseOrder(int purchaseID, Timestamp purchaseDate, String emailAddress, int productID, int quantity, double price) {
 		super();
 		this.purchaseID = purchaseID;
 		this.purchaseDate = purchaseDate;
 		this.emailAddress = emailAddress;
 		this.productID = productID;
 		this.quantity = quantity;
+		this.setPrice(price);
 	}
 
 	public int getPurchaseID() {
@@ -58,11 +60,21 @@ public class PurchaseOrder {
 		this.quantity = quantity;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
-		return "PurchaseOrder [purchaseID=" + purchaseID + ", purchaseDate=" + purchaseDate + ", emailAddress="
-				+ emailAddress + ", productID=" + productID + ", quantity=" + quantity + "]";
+		return "PurchaseOrder [purchaseID = " + purchaseID + ", purchaseDate = " + purchaseDate + ", emailAddress = "
+				+ emailAddress + ", productID = " + productID + ", quantity = " + quantity + ", price = " + price + "]";
 	}
+
+	
 	
 	
 }

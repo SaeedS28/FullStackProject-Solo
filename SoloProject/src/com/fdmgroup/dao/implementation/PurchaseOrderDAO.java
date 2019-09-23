@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 	 * quantity;
 	 */
 	public boolean addPurchaseOrder(User u, ShoppingCart cart) {
-		String query = "insert into purchase_history values (?,?,?,?,?)";
+		String query = "insert into purchase_history values (?,?,?,?,?,?)";
 		
 		try (Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt = con.prepareStatement(query);) {
@@ -33,6 +34,7 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 				stmt.setString(3, u.getUsername());
 				stmt.setInt(4,entry.getKey().getProductID());
 				stmt.setInt(5, entry.getValue());
+				stmt.setDouble(6, entry.getKey().getPrice());
 				stmt.executeUpdate();
 			}
 			ShoppingCartDAO del = new ShoppingCartDAO();
@@ -49,10 +51,28 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		return true;
 	}
 
-	@Override
-	public List<PurchaseOrder> getPurchaseOrdersByUser(User u) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u) {
+		ArrayList<PurchaseOrder> po = new ArrayList<>();
+		String query = "Select * from purchase_history where email_address like ?";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1,u.getUsername());
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				int purchaseID = rs.getInt("purchase_id");
+				Timestamp ts = rs.getTimestamp("purchase_date");
+				String emailAddress = rs.getString("email_address");
+				int productID = rs.getInt("product_id");
+				double price = rs.getDouble("price_per_unit");
+				int quantity = rs.getInt("quantity");
+				po.add(new PurchaseOrder(purchaseID, ts, emailAddress, productID, quantity, price));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return po;
+		
 	}
 
 	private int getMaxPurchaseID() {
@@ -75,11 +95,5 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 			e.printStackTrace();
 		}
 		return maxPid;
-	}
-
-	@Override
-	public List<PurchaseOrder> getPurchaseOrdersByDate(Timestamp d) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
