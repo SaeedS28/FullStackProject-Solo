@@ -22,6 +22,8 @@ create table users(
 insert into users(email_address, password,first_name,last_name, types)
 values ('saeeds28','password','Saad', 'Saeed', 'admin');
 
+insert into users(email_address, password,first_name,last_name, types)
+values ('samad','password','Samad', 'Saeed', 'regular');
 -- addresses associated with users
 create table address(
   email_address varchar2(50),
@@ -70,22 +72,30 @@ create table shopping_cart (
 -- create purchase_history
 create table purchase_history (
   purchase_id Number(6),
-  purchase_date Date not null,
+  purchase_date TIMESTAMP not null,
   email_address varchar2(50),
   product_id Number(6) NOT NULL,
   quantity Number(4) not null,
+  price_per_unit number(6,2),
   primary key (purchase_id)
 );
 
 -- create review table
-
 create table review(
     review_id Number(3),
     product_id Number(4) NOT NULL,
-    username varchar(25) NOT NULL,
+    email_address varchar2(50) NOT NULL,
     review_text varchar2(500) NOT NULL,
     rating Number(2) NOT NULL,    
-    PRIMARY KEY (review_id)
+    PRIMARY KEY (review_id),
+    
+    CONSTRAINT fk_email_review
+    FOREIGN KEY (email_address)
+    REFERENCES users(email_address) on delete cascade,
+    
+    CONSTRAINT fk_product_review
+    FOREIGN KEY (product_id)
+    REFERENCES item(product_id) on delete cascade
 );
 
 commit;
