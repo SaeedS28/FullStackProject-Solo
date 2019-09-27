@@ -82,13 +82,12 @@ create table purchase_history (
 
 -- create review table
 create table review(
-    review_id Number(3),
     product_id Number(4) NOT NULL,
     email_address varchar2(50) NOT NULL,
     review_text varchar2(500) NOT NULL,
     rating Number(2) NOT NULL,    
     review_date TIMESTAMP not null,
-    PRIMARY KEY (review_id),
+    PRIMARY KEY (email_address,product_id),
     
     CONSTRAINT fk_email_review
     FOREIGN KEY (email_address)

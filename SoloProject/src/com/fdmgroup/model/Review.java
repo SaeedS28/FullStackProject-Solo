@@ -4,16 +4,14 @@ import java.sql.Timestamp;
 
 public class Review {
 	private String reviewText, emailAddress;
-	private int reviewID;
 	private int productID;
 	private int rating;
 	private Timestamp reviewDate;
 	
-	public Review(String reviewText, String emailAddress, int reviewID, int productID, int rating, Timestamp reviewDate) {
+	public Review(String reviewText, String emailAddress, int productID, int rating, Timestamp reviewDate) {
 		super();
 		this.reviewText = reviewText;
 		this.emailAddress = emailAddress;
-		this.reviewID = reviewID;
 		this.productID = productID;
 		this.rating = rating;
 		this.reviewDate = reviewDate;
@@ -33,14 +31,6 @@ public class Review {
 	
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
-	
-	public int getReviewID() {
-		return reviewID;
-	}
-	
-	public void setReviewID(int reviewID) {
-		this.reviewID = reviewID;
 	}
 	
 	public int getProductID() {
@@ -68,8 +58,7 @@ public class Review {
 	}
 
 	public String toString() {
-		return "username = " + emailAddress + ", reviewID = " + reviewID + ", productID = "
-				+ productID + ", rating=" + rating +" reviewText = " + reviewText + ", reviewDate=" + reviewDate + "]";
+		return "username = " + emailAddress + ", productID = " + productID + ", rating=" + rating +" reviewText = " + reviewText + ", reviewDate=" + reviewDate + "]";
 	}
 	
 	
