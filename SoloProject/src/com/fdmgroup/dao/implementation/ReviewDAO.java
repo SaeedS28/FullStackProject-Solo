@@ -21,22 +21,19 @@ public class ReviewDAO implements IReviewDAO {
 				PreparedStatement stmt = con.prepareStatement(statement);) {
 			
 			if(retrieveReview(b.getEmailAddress(), b.getProductID())!= null) {
-				
+				removeReview(b.getEmailAddress(), b.getProductID());
 			}
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				String emailAddress = rs.getString("email_address");
-				int rating = rs.getInt("rating");
-				String reviewText = rs.getString("review_text");
-				Timestamp time = rs.getTimestamp("review_date");
-				retreiver.add(new Review(reviewText,emailAddress,productID,rating,time));
-			}
+			stmt.setInt(1, b.getProductID());
+			stmt.setString(2, b.getEmailAddress());
+			stmt.setString(3, b.getReviewText());
+			stmt.setInt(4, b.getRating());
+			stmt.setTimestamp(5, b.getReviewDate());
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 	
 	public ArrayList<Review> retrieveReviews(int productID) {
