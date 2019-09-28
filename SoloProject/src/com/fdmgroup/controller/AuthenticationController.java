@@ -1,37 +1,35 @@
 package com.fdmgroup.controller;
 
+import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
-import com.fdmgroup.view.DashboardView;
+import com.fdmgroup.view.AdminChoiceView;
 import com.fdmgroup.view.HomeView;
 
 public class AuthenticationController {
-
-	private DashboardView dashboardView;
-	private HomeView homeView;
-	private IUserDAO userDao;
+	HomeView homeView;
 	
 	public AuthenticationController() {
-		super();
+		 homeView = new HomeView();
 	}
-
-	public AuthenticationController(DashboardView dashboardView, HomeView homeView, IUserDAO userDao) {
-		super();
-		this.dashboardView = dashboardView;
-		this.homeView = homeView;
-		this.userDao = userDao;
-	}
-
 	public void login(String username, String password) {
+		UserDAO userDao = new UserDAO();
 		User user = userDao.findByUsername(username);
 		if (user != null && user.getPassword().equals(password)) {
 			UserSession.setLoggedInUser(user);
-			dashboardView.showDashboard();
-			return;
+			
+			if(UserSession.getLoggedInUser().getType().equals("admin")) {
+				AdminChoiceView acw = new AdminChoiceView();
+				acw.showDashboard();
+			}
+			else if(UserSession.getLoggedInUser().getType().equals("regular")) {
+				System.out.println("Regular user hit");
+			}
+			else {
+				homeView.showLoginOptions(true);
+			}
 		}
-		
-		homeView.showLoginOptions(true);
 	}
 
 	public void logout() {
@@ -39,46 +37,4 @@ public class AuthenticationController {
 		homeView.showInitialOptions(true);
 	}
 
-	public DashboardView getDashboardView() {
-		return dashboardView;
-	}
-
-	public void setDashboardView(DashboardView dashboardView) {
-		this.dashboardView = dashboardView;
-	}
-
-	public HomeView getHomeView() {
-		return homeView;
-	}
-
-	public void setHomeView(HomeView homeView) {
-		this.homeView = homeView;
-	}
-
-	public IUserDAO getUserDao() {
-		return userDao;
-	}
-
-	public void setUserDao(IUserDAO userDao) {
-		this.userDao = userDao;
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
