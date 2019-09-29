@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
@@ -64,7 +64,7 @@ public class UserDAO implements IUserDAO{
 			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			
-			while(rs.next()){
+			if(rs.next()){
 				String userName = rs.getString("email_address");
 				String pwd = rs.getString("password");
 				String firstName= rs.getString("first_name");
@@ -100,5 +100,29 @@ public class UserDAO implements IUserDAO{
 			return false;
 		}
 		return true;
+	}
+
+	
+	public ArrayList<User> getAllUsers() {
+		ArrayList<User> users = new ArrayList<>();
+		String query = "Select * from users";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				String userName = rs.getString("email_address");
+				String pwd = rs.getString("password");
+				String firstName= rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				String type = rs.getString("types");
+				
+				users.add(new User(userName,pwd,firstName,lastName,type));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
 	}
 }
