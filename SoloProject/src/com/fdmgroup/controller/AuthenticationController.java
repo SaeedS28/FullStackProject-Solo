@@ -30,11 +30,15 @@ public class AuthenticationController {
 				homeView.showLoginOptions(true);
 			}
 		}
+		else {
+			System.out.println("Incorrect credentials provided. Try again");
+			homeView.showLoginOptions(false);
+		}
 	}
 
 	public void logout() {
 		UserSession.setLoggedInUser(null);
 		homeView.showInitialOptions(true);
 	}
-
+	
 }
