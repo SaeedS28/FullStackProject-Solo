@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.UserController;
+import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 
@@ -26,7 +27,7 @@ public class UserView {
 		System.out.println("3) Change your own password");
 		System.out.println("4) Go Back");
 		System.out.print(">>> ");
-		String userInput = scanner.next();
+		String userInput = scanner.nextLine();
 
 		switch (userInput) {
 		case "1":
@@ -51,7 +52,7 @@ public class UserView {
 	private void changePassword() {
 		System.out.println("-------------------------------");
 		System.out.print("Enter current password: ");
-		String currentPassword = scanner.next();
+		String currentPassword = scanner.nextLine();
 		
 		if(!UserSession.getLoggedInUser().getPassword().equals(currentPassword)) {
 			System.out.println("Current password does not match the records. Bailing out");
@@ -59,9 +60,9 @@ public class UserView {
 		}
 		do {
 			System.out.print("Enter new password: ");
-			String newPassword = scanner.next();
+			String newPassword = scanner.nextLine();
 			System.out.print("Confirm password: ");
-			String confirmPassword = scanner.next();
+			String confirmPassword = scanner.nextLine();
 			if(!newPassword.equals(confirmPassword)) {
 				System.out.println("Password don't match. Try again");
 				continue;
@@ -83,7 +84,7 @@ public class UserView {
 
 		System.out.println("Enter the number on the side to delete that user");
 		System.out.print(">>> ");
-		index = scanner.nextInt();
+		index = Integer.parseInt(scanner.nextLine());
 
 		if ((index - 1) < 0 || (index - 1) >= users.size()) {
 			System.out.println("Invalid choice, try again");
@@ -93,6 +94,72 @@ public class UserView {
 	}
 
 	private void addUser() {
-
+		String userName;
+		String password;
+		String firstName;
+		String lastName;
+		String type;
+		int typeChoice;
+		System.out.println("-------------------------------");
+		System.out.println("New User Wizard");
+		
+		do {
+			System.out.print("Enter user name: ");
+			userName = scanner.nextLine();
+			if(uc.getUser(userName)!=null) {
+				System.out.println("Username already taken. Enter a new username");
+				continue;
+			}
+			break;
+		} while(true);
+		
+		System.out.print("Enter password: ");
+		password = scanner.nextLine();
+		System.out.print("Enter first name: ");
+		firstName = scanner.nextLine();
+		System.out.print("Enter last name: ");
+		lastName = scanner.nextLine();
+		
+		do {
+			System.out.println("Pick user type: ");
+			System.out.println("1) regular");
+			System.out.println("2) admin");
+			System.out.print(">>> ");
+			typeChoice = Integer.parseInt(scanner.nextLine());
+			if(typeChoice==1) {
+				type = "regular";
+			}else if(typeChoice==2) {
+				type = "admin";
+			}
+			else {
+				System.out.println("Invalid choice. Try again");
+				continue;
+			}
+			break;
+		} while(true);
+		User newUser = new User(userName,password,firstName,lastName,type);
+		
+		String street;
+		String city;
+		String province;
+		String country;
+		String postalCode;
+		
+		System.out.println("-------------------------------");
+		System.out.println("New Address Wizard");
+		System.out.print("Enter Steet adress: ");
+		street = scanner.nextLine();
+		System.out.print("Enter City: ");
+		city = scanner.nextLine();
+		System.out.print("Enter Province: ");
+		province = scanner.nextLine();
+		System.out.print("Enter Country: ");
+		country = scanner.nextLine();
+		System.out.print("Enter Postal code: ");
+		postalCode= scanner.nextLine();
+		
+		Address newAddress = new Address(userName, street, city, province, country, postalCode);
+		
+		uc.addUser(newUser, newAddress);
 	}
 }

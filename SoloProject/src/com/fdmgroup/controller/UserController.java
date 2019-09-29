@@ -2,17 +2,21 @@ package com.fdmgroup.controller;
 
 import java.util.ArrayList;
 
+import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
+import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.UserView;
 
 public class UserController {
 	private UserDAO ud;
+	private AddressDAO ad;
 	private UserView uv;
 	
 	public UserController() {
 		ud = new UserDAO();
+		ad = new AddressDAO();
 	}
 	
 	public ArrayList<User> getAllUsers(){
@@ -39,5 +43,17 @@ public class UserController {
 		AuthenticationController ac = new AuthenticationController();
 		ac.logout();
 		
+	}
+	
+	public User getUser(String userName) {
+		return ud.findByUsername(userName);
+	}
+	
+	public void addUser(User newUser, Address newAddress) {
+		ud.create(newUser);
+		ad.addAddress(newAddress);
+		System.out.println("New user added successfully");
+		uv = new UserView();
+		uv.showDashboard();
 	}
 }

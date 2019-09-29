@@ -3,7 +3,7 @@ package com.fdmgroup.dao.interfaces;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 
-public interface IAddressDao {
+public interface IAddressDAO {
 	
 	public boolean addAddress(Address a);
 	public boolean changeCity(String city, User u);

@@ -26,7 +26,7 @@ public class AdminChoiceView {
 		System.out.println("2) Perform Inventory related Activities");
 		System.out.println("3) Logout");
 		System.out.print(">>> ");
-		String userInput = scanner.next();
+		String userInput = scanner.nextLine();
 		
 		switch (userInput) {
 		case "1":

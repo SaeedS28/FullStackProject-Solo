@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.fdmgroup.dao.interfaces.IAddressDao;
+import com.fdmgroup.dao.interfaces.IAddressDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
-public class AddressDAO implements IAddressDao {
+public class AddressDAO implements IAddressDAO {
 
 	public boolean addAddress(Address a) {
 		String query = "Insert into address(email_address, street, city, province, country, postal_code) values (?,?,?,?,?,?)";

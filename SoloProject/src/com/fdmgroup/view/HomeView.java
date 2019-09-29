@@ -28,7 +28,7 @@ public class HomeView {
 		System.out.println("2) Exit");
 		System.out.println("-------------------------------");
 		System.out.print(">>> ");
-		String userInput = scanner.next();
+		String userInput = scanner.nextLine();
 		
 		switch (userInput) {
 		case "1":
@@ -51,9 +51,9 @@ public class HomeView {
 		
 		System.out.println("Login");
 		System.out.print("Please enter username: ");
-		String username = scanner.next();
+		String username = scanner.nextLine();
 		System.out.print("Please enter password: ");
-		String password = scanner.next();
+		String password = scanner.nextLine();
 
 		//TODO add validation here
 		AuthenticationController ac = new AuthenticationController();
