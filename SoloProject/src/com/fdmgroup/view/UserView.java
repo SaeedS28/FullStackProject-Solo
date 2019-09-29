@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.fdmgroup.controller.UserController;
 import com.fdmgroup.model.User;
+import com.fdmgroup.model.UserSession;
 
 public class UserView {
 	private Scanner scanner;
@@ -48,8 +49,26 @@ public class UserView {
 	}
 
 	private void changePassword() {
-		// TODO Auto-generated method stub
+		System.out.println("-------------------------------");
+		System.out.print("Enter current password: ");
+		String currentPassword = scanner.next();
 		
+		if(!UserSession.getLoggedInUser().getPassword().equals(currentPassword)) {
+			System.out.println("Current password does not match the records. Bailing out");
+			showDashboard();
+		}
+		do {
+			System.out.print("Enter new password: ");
+			String newPassword = scanner.next();
+			System.out.print("Confirm password: ");
+			String confirmPassword = scanner.next();
+			if(!newPassword.equals(confirmPassword)) {
+				System.out.println("Password don't match. Try again");
+				continue;
+			}
+			uc.changePassword(confirmPassword);
+			break;
+		} while(true);
 	}
 
 	private void removeUser() {

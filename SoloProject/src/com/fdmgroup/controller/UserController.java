@@ -31,4 +31,13 @@ public class UserController {
 		System.out.println(userToDelete + " was deleted successfully.");
 		uv.showDashboard();
 	}
+	
+	public void changePassword(String confirmPassword) {
+		ud.updatePassword(UserSession.getLoggedInUser(), confirmPassword);
+		UserSession.getLoggedInUser().setPassword(confirmPassword);
+		System.out.println("Password changed successfully\nLogging out");
+		AuthenticationController ac = new AuthenticationController();
+		ac.logout();
+		
+	}
 }
