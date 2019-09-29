@@ -45,7 +45,7 @@ create table item (
   name varchar2(50) not null,
   price number(6,2) not null,
   category varchar2(30) not null,
-  quantity Number(4),
+  quantity Number(4) not null,
   description varchar(300) not null,
   primary key (product_id),
   

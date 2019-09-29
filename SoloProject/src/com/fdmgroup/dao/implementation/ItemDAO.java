@@ -125,7 +125,6 @@ public class ItemDAO implements IItemDAO {
 		return true;
 	}
 
-	@Override
 	public boolean updateCategory(int pid, String category) {
 		String query = "UPDATE item "
 				+ "SET category = ?" + 
@@ -170,9 +169,9 @@ public class ItemDAO implements IItemDAO {
 		return true;
 	}
 
-	public List<Item> getAllItems() {
+	public ArrayList<Item> getAllItems() {
 		String query = "Select * from item";
-		List<Item> all = new ArrayList<>();
+		ArrayList<Item> all = new ArrayList<>();
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
 			ResultSet rs = stmt.executeQuery();
@@ -193,9 +192,9 @@ public class ItemDAO implements IItemDAO {
 		return all;
 	}
 
-	public List<Item> getItemsByCategory(String category) {
+	public ArrayList<Item> getItemsByCategory(String category) {
 		String query = "Select * from item where category = ?";
-		List<Item> cat = new ArrayList<>();
+		ArrayList<Item> cat = new ArrayList<>();
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
 			stmt.setString(1, category.toUpperCase());
@@ -217,9 +216,9 @@ public class ItemDAO implements IItemDAO {
 		return cat;
 	}
 
-	public List<Item> getItemsByPriceRange(double low, double high) {
+	public ArrayList<Item> getItemsByPriceRange(double low, double high) {
 		String query = "Select * from item where price between ? and ?";
-		List<Item> priceList = new ArrayList<>();
+		ArrayList<Item> priceList = new ArrayList<>();
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
 			stmt.setDouble(1, low);
@@ -242,9 +241,9 @@ public class ItemDAO implements IItemDAO {
 		return priceList;
 	}
 
-	public List<Item> getItemsByName(String name) {
+	public ArrayList<Item> getItemsByName(String name) {
 		String query = "Select * from item where name like ?";
-		List<Item> priceList = new ArrayList<>();
+		ArrayList<Item> priceList = new ArrayList<>();
 		try(Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt= con.prepareStatement(query);){
 			stmt.setString(1, "%" + name.toUpperCase() + "%");
@@ -326,5 +325,22 @@ public class ItemDAO implements IItemDAO {
 			e.printStackTrace();
 		}
 		return quantity;
+	}
+
+	public ArrayList<String> getCategories() {
+		ArrayList<String> categories = new ArrayList<>();
+		String query = "Select distinct category from item";
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				categories.add(rs.getString("category"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return categories;
 	}
 }

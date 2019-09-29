@@ -1,6 +1,6 @@
 package com.fdmgroup.dao.interfaces;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.fdmgroup.model.Item;
 
@@ -12,12 +12,12 @@ public interface IItemDAO {
 	public boolean updateCategory(int pid, String category);
 	public boolean updatePrice(int pid, double price);
 	public int getMaxPid();
-	public List<Item> getAllItems();
+	public ArrayList<Item> getAllItems();
 	public Item getItemByPid(int pid);
 	public int getItemQuantity(int pid);
-	public List<Item> getItemsByCategory(String category);
-	public List<Item> getItemsByPriceRange(double low, double high);
-	public List<Item> getItemsByName(String name);
+	public ArrayList<Item> getItemsByCategory(String category);
+	public ArrayList<Item> getItemsByPriceRange(double low, double high);
+	public ArrayList<Item> getItemsByName(String name);
 	public boolean removeItem(int pid);
-	
+	public ArrayList<String> getCategories();
 }

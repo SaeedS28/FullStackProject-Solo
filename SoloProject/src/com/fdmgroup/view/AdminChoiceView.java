@@ -3,7 +3,6 @@ package com.fdmgroup.view;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
-import com.fdmgroup.controller.UserController;
 import com.fdmgroup.model.UserSession;
 
 public class AdminChoiceView {
@@ -17,7 +16,6 @@ public class AdminChoiceView {
 	public void showDashboard() {
 		AuthenticationController ac = new AuthenticationController();
 		
-		UserController uc = new UserController();
 		System.out.println("-------------------------------");
 		System.out.println("Welcome " + UserSession.getLoggedInUser().getFirstname() + " " + 
 				UserSession.getLoggedInUser().getLastname() + "\tType: "+UserSession.getLoggedInUser().getType());
@@ -34,7 +32,8 @@ public class AdminChoiceView {
 			uw.showDashboard();
 			break;
 		case "2":
-			System.out.println("Inventory Hit");	
+			AdminInventoryView aiv = new AdminInventoryView();
+			aiv.showDashBoard();
 			break;
 		case "3":
 			ac.logout();

@@ -26,7 +26,6 @@ public class HomeView {
 		System.out.println("Please choose one of the options below:");
 		System.out.println("1) Login");
 		System.out.println("2) Exit");
-		System.out.println("-------------------------------");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 		
@@ -48,14 +47,11 @@ public class HomeView {
 		if (showError) {
 			System.out.println("Username/Password is wrong.");
 		}
-		
-		System.out.println("Login");
+		System.out.println("-------------------------------");
 		System.out.print("Please enter username: ");
 		String username = scanner.nextLine();
 		System.out.print("Please enter password: ");
 		String password = scanner.nextLine();
-
-		//TODO add validation here
 		AuthenticationController ac = new AuthenticationController();
 		
 		ac.login(username, password);
