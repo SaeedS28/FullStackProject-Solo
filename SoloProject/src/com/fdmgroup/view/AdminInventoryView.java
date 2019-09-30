@@ -11,12 +11,12 @@ public class AdminInventoryView {
 	private Scanner scanner;
 	private ArrayList<Item> allItems;
 	private AdminInventoryController aic;
-	
+
 	public AdminInventoryView() {
 		scanner = new Scanner(System.in);
 		aic = new AdminInventoryController();
 	}
-	
+
 	public void showDashBoard() {
 		System.out.println("-------------------------------");
 		System.out.println("Please select one of the options below: ");
@@ -32,7 +32,7 @@ public class AdminInventoryView {
 		System.out.println("10) Logout");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
-		
+
 		switch (userInput) {
 		case "1":
 			showAllItems();
@@ -75,80 +75,80 @@ public class AdminInventoryView {
 	private void updateDescription() {
 		allItems = aic.getAllItems();
 		System.out.println("-------------------------------");
-		
-		for(int i=0;i<allItems.size();i++) {
-			System.out.println(i+1+") " +allItems.get(i));
+
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
 		}
-		if(allItems.size()==0) {
+		if (allItems.size() == 0) {
 			System.out.println("All out of items!");
 			showDashBoard();
 		}
-		
+
 		System.out.println("Enter the number on the side to update its descriptiom");
 		System.out.print(">>> ");
 		int choice = Integer.parseInt(scanner.nextLine());
-		if(choice-1<0 || choice-1>=allItems.size()) {
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
 			System.out.println("Invalid choice. Bailing out");
 			showDashBoard();
 		}
 		System.out.print("Enter the new Description: ");
 		String newDescription = scanner.nextLine();
-		aic.updateDescription(allItems.get(choice-1).getProductID(), newDescription);
-		
+		aic.updateDescription(allItems.get(choice - 1).getProductID(), newDescription);
+
 	}
 
 	private void updateCategory() {
 		allItems = aic.getAllItems();
 		System.out.println("-------------------------------");
-		
-		for(int i=0;i<allItems.size();i++) {
-			System.out.println(i+1+") " +allItems.get(i));
+
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
 		}
-		if(allItems.size()==0) {
+		if (allItems.size() == 0) {
 			System.out.println("All out of items!");
 			showDashBoard();
 		}
-		
+
 		System.out.println("Enter the number on the side to update its category");
 		System.out.print(">>> ");
 		int choice = Integer.parseInt(scanner.nextLine());
-		if(choice-1<0 || choice-1>=allItems.size()) {
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
 			System.out.println("Invalid choice. Bailing out");
 			showDashBoard();
 		}
 		System.out.print("Enter the new category: ");
 		String newCategory = scanner.nextLine();
-		aic.updateCategory(allItems.get(choice-1).getProductID(), newCategory);
+		aic.updateCategory(allItems.get(choice - 1).getProductID(), newCategory);
 	}
 
 	private void updatePrice() {
-		
+
 	}
 
 	private void addQuantity() {
-		
+
 	}
 
 	private void deleteItem() {
 		allItems = aic.getAllItems();
 		System.out.println("-------------------------------");
-		
-		for(int i=0;i<allItems.size();i++) {
-			System.out.println(i+1+") " +allItems.get(i));
+
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
 		}
-		if(allItems.size()==0) {
+		if (allItems.size() == 0) {
 			System.out.println("All out of items!");
 			showDashBoard();
 		}
-		
+
 		System.out.println("Enter the number on the side to delete that item");
 		System.out.print(">>> ");
 		int choice = Integer.parseInt(scanner.nextLine());
-		if(choice-1<0 || choice-1>=allItems.size()) {
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
 			System.out.println("Invalid choice. Bailing out");
 			showDashBoard();
 		}
-		aic.removeItem(allItems.get(choice-1).getProductID());
+		aic.removeItem(allItems.get(choice - 1).getProductID());
 	}
 
 	private void addItem() {
@@ -157,7 +157,7 @@ public class AdminInventoryView {
 		double price;
 		int quantity;
 		String description;
-		
+
 		System.out.println("-------------------------------");
 		System.out.println("New Item Wizard");
 		System.out.print("Enter Item name: ");
@@ -166,11 +166,17 @@ public class AdminInventoryView {
 		price = Double.parseDouble(scanner.nextLine());
 		System.out.print("Enter item category: ");
 		category = scanner.nextLine().toUpperCase();
-		
-		Item itemDup = aic.checkDuplicates(name,category,price);
-		if(itemDup==null) {
+
+		Item itemDup = aic.checkDuplicates(name, category, price);
+		if (itemDup == null) {
 			System.out.print("Enter quantity: ");
-			quantity = Integer.parseInt(scanner.nextLine());
+			do {
+				quantity = Integer.parseInt(scanner.nextLine());
+				if (quantity <= 0) {
+					System.out.println("Quantity must be positive");
+					System.out.print("Enter quantity");
+				}
+			} while (quantity <= 0);
 			System.out.print("Enter product description");
 			description = scanner.nextLine();
 			aic.addItem(name, price, quantity, category, description);
@@ -178,14 +184,19 @@ public class AdminInventoryView {
 			System.out.print("An item of this type already exists. Description will be overwritten and quantities will"
 					+ " be added. Proceed? [Y/N]: ");
 			char choice = scanner.nextLine().toUpperCase().charAt(0);
-			if(choice == 'Y') {
+			if (choice == 'Y') {
 				System.out.print("Enter quantity: ");
-				quantity = Integer.parseInt(scanner.nextLine());
+				do {
+					quantity = Integer.parseInt(scanner.nextLine());
+					if (quantity <= 0) {
+						System.out.println("Quantity must be positive");
+						System.out.print("Enter quantity");
+					}
+				} while (quantity <= 0);
 				System.out.print("Enter product description: ");
 				description = scanner.nextLine();
 				aic.updateDuplicateItem(itemDup, description, quantity);
-			}
-			else {
+			} else {
 				System.out.println("Nothing was modified");
 				showDashBoard();
 			}
@@ -195,23 +206,23 @@ public class AdminInventoryView {
 	private void showItemsByCategories() {
 		ArrayList<String> categories = aic.getAllCategories();
 		int catChoice;
-		
+
 		do {
 			System.out.println("-------------------------------");
 			System.out.println("Categories");
-			for(int i = 0;i<categories.size();i++) {
-				System.out.println(i+1+") "+categories.get(i));
+			for (int i = 0; i < categories.size(); i++) {
+				System.out.println(i + 1 + ") " + categories.get(i));
 			}
 			System.out.println("Make a choice");
 			System.out.print(">>> ");
 			catChoice = Integer.parseInt(scanner.nextLine());
-			if(catChoice-1>=0 && catChoice-1<categories.size()) {
+			if (catChoice - 1 >= 0 && catChoice - 1 < categories.size()) {
 				break;
 			}
 			System.out.println("Invalid choice. Try again");
 		} while (true);
-		ArrayList<Item> items = aic.getItemsByCategory(categories.get(catChoice-1));
-		for(int i=0;i<items.size();i++) {
+		ArrayList<Item> items = aic.getItemsByCategory(categories.get(catChoice - 1));
+		for (int i = 0; i < items.size(); i++) {
 			System.out.println(items.get(i));
 		}
 		System.out.println();
@@ -223,11 +234,11 @@ public class AdminInventoryView {
 	private void showAllItems() {
 		allItems = aic.getAllItems();
 		System.out.println("-------------------------------");
-		
-		for(int i=0;i<allItems.size();i++) {
+
+		for (int i = 0; i < allItems.size(); i++) {
 			System.out.println(allItems.get(i));
 		}
-		if(allItems.size()==0) {
+		if (allItems.size() == 0) {
 			System.out.println("All out of items!");
 		}
 		System.out.print("Press any key to go back: ");
