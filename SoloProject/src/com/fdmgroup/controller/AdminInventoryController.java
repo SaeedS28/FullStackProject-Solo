@@ -69,4 +69,10 @@ public class AdminInventoryController {
 		System.out.println("Category updated successfully");
 		showDashBoardAIV();
 	}
+	
+	public void updatePrice(int pid,double price) {
+		id.updatePrice(pid, price);
+		System.out.println("Price updated successfully");
+		showDashBoardAIV();
+	}
 }

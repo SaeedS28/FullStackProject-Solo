@@ -122,7 +122,31 @@ public class AdminInventoryView {
 	}
 
 	private void updatePrice() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
 
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
+		}
+		if (allItems.size() == 0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+
+		System.out.println("Enter the number on the side to update its price");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		System.out.print("Enter the new price: ");
+		double newPrice = Double.parseDouble(scanner.nextLine());
+		if(newPrice<=0) {
+			System.out.println("Price must be positive, bailing out");
+			showDashBoard();
+		}
+		aic.updatePrice(allItems.get(choice - 1).getProductID(), newPrice);
 	}
 
 	private void addQuantity() {
