@@ -37,14 +37,17 @@ public class AdminInventoryController {
 		id.updateQuantity(i.getProductID(), i.getQuantity()+quantity);
 		id.updateDescription(i.getProductID(), description);
 		System.out.println("Item updated successfully.");
-		AdminInventoryView aiv = new AdminInventoryView();
-		aiv.showDashBoard();
+		showDashBoardAIV();
 	}
 	
 	public void addItem(String name,double price, int quantity,String category, String description) {
 		Item newItem = new Item(id.getMaxPid(), name, category, description, quantity, price);
 		id.addItem(newItem);
 		System.out.println("Item added successfully");
+		showDashBoardAIV();
+	}
+	
+	public void showDashBoardAIV(){
 		AdminInventoryView aiv = new AdminInventoryView();
 		aiv.showDashBoard();
 	}
@@ -52,7 +55,18 @@ public class AdminInventoryController {
 	public void removeItem(int pid) {
 		id.removeItem(pid);
 		System.out.println("Item removed successfully");
-		AdminInventoryView aiv = new AdminInventoryView();
-		aiv.showDashBoard();
+		showDashBoardAIV();
+	}
+	
+	public void updateDescription(int pid,String description) {
+		id.updateDescription(pid, description);
+		System.out.println("Description updated successfully");
+		showDashBoardAIV();
+	}
+	
+	public void updateCategory(int pid,String category) {
+		id.updateCategory(pid, category);
+		System.out.println("Category updated successfully");
+		showDashBoardAIV();
 	}
 }

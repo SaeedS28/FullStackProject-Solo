@@ -44,16 +44,25 @@ public class AdminInventoryView {
 			addItem();
 			break;
 		case "4":
-			
+			addQuantity();
 			break;
 		case "5":
-			deleteItem();
+			updatePrice();
 			break;
 		case "6":
+			updateCategory();
+			break;
+		case "7":
+			updateDescription();
+			break;
+		case "8":
+			deleteItem();
+			break;
+		case "9":
 			AdminChoiceView acw = new AdminChoiceView();
 			acw.showDashboard();
 			break;
-		case "7":
+		case "10":
 			AuthenticationController ac = new AuthenticationController();
 			ac.logout();
 			break;
@@ -61,6 +70,63 @@ public class AdminInventoryView {
 			System.out.println("The input was invalid.");
 			showDashBoard();
 		}
+	}
+
+	private void updateDescription() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
+		
+		for(int i=0;i<allItems.size();i++) {
+			System.out.println(i+1+") " +allItems.get(i));
+		}
+		if(allItems.size()==0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+		
+		System.out.println("Enter the number on the side to update its descriptiom");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if(choice-1<0 || choice-1>=allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		System.out.print("Enter the new Description: ");
+		String newDescription = scanner.nextLine();
+		aic.updateDescription(allItems.get(choice-1).getProductID(), newDescription);
+		
+	}
+
+	private void updateCategory() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
+		
+		for(int i=0;i<allItems.size();i++) {
+			System.out.println(i+1+") " +allItems.get(i));
+		}
+		if(allItems.size()==0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+		
+		System.out.println("Enter the number on the side to update its category");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if(choice-1<0 || choice-1>=allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		System.out.print("Enter the new category: ");
+		String newCategory = scanner.nextLine();
+		aic.updateCategory(allItems.get(choice-1).getProductID(), newCategory);
+	}
+
+	private void updatePrice() {
+		
+	}
+
+	private void addQuantity() {
+		
 	}
 
 	private void deleteItem() {
