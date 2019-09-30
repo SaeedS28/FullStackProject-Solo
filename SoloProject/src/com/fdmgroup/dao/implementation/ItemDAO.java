@@ -275,7 +275,6 @@ public class ItemDAO implements IItemDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
-				int pidReturn = rs.getInt("product_id");
 				String name = rs.getString("name");
 				double price = rs.getDouble("price");
 				String categoryReturn = rs.getString("category");
@@ -342,5 +341,32 @@ public class ItemDAO implements IItemDAO {
 			e.printStackTrace();
 		}
 		return categories;
+	}
+
+	public Item checkDuplicates(String name, String category, double qPrice) {
+		String query = "Select * from item where name = ? and category = ? and price = ?";
+		
+		try(Connection con = DataSource.getInstance().getConnection();
+				PreparedStatement stmt= con.prepareStatement(query);){
+			stmt.setString(1, name);
+			stmt.setString(2, category);
+			stmt.setDouble(3, qPrice);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int pid = rs.getInt("product_id");
+				String nameReturn = rs.getString("name");
+				double price = rs.getDouble("price");
+				String categoryReturn = rs.getString("category");
+				int quantity = rs.getInt("quantity");
+				String description = rs.getString("description");
+				return new Item(pid,nameReturn,categoryReturn,description,quantity,price);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

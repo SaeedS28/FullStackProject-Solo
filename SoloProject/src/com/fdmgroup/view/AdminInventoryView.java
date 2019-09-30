@@ -6,7 +6,6 @@ import java.util.Scanner;
 import com.fdmgroup.controller.AdminInventoryController;
 import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.model.Item;
-import com.fdmgroup.model.UserSession;
 
 public class AdminInventoryView {
 	private Scanner scanner;
@@ -39,7 +38,7 @@ public class AdminInventoryView {
 			showItemsByCategories();
 			break;
 		case "3":
-			
+			addItem();
 			break;
 		case "4":
 			
@@ -58,6 +57,47 @@ public class AdminInventoryView {
 		default:
 			System.out.println("The input was invalid.");
 			showDashBoard();
+		}
+	}
+
+	private void addItem() {
+		String name;
+		String category;
+		double price;
+		int quantity;
+		String description;
+		
+		System.out.println("-------------------------------");
+		System.out.println("New Item Wizard");
+		System.out.print("Enter Item name: ");
+		name = scanner.nextLine().toUpperCase();
+		System.out.print("Enter price per unit: ");
+		price = Double.parseDouble(scanner.nextLine());
+		System.out.print("Enter item category: ");
+		category = scanner.nextLine().toUpperCase();
+		
+		Item itemDup = aic.checkDuplicates(name,category,price);
+		if(itemDup==null) {
+			System.out.print("Enter quantity: ");
+			quantity = Integer.parseInt(scanner.nextLine());
+			System.out.print("Enter product description");
+			description = scanner.nextLine();
+			aic.addItem(name, price, quantity, category, description);
+		} else {
+			System.out.print("An item of this type already exists. Description will be overwritten and quantities will"
+					+ " be added. Proceed? [Y/N]: ");
+			char choice = scanner.nextLine().toUpperCase().charAt(0);
+			if(choice == 'Y') {
+				System.out.print("Enter quantity: ");
+				quantity = Integer.parseInt(scanner.nextLine());
+				System.out.print("Enter product description: ");
+				description = scanner.nextLine();
+				aic.updateDuplicateItem(itemDup, description, quantity);
+			}
+			else {
+				System.out.println("Nothing was modified");
+				showDashBoard();
+			}
 		}
 	}
 

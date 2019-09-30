@@ -20,4 +20,5 @@ public interface IItemDAO {
 	public ArrayList<Item> getItemsByName(String name);
 	public boolean removeItem(int pid);
 	public ArrayList<String> getCategories();
+	public Item checkDuplicates(String name, String category, double qPrice);
 }
