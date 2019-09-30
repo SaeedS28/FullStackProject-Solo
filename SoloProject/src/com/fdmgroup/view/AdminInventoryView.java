@@ -22,11 +22,14 @@ public class AdminInventoryView {
 		System.out.println("Please select one of the options below: ");
 		System.out.println("1) Show all items");
 		System.out.println("2) Show items by category");
-		System.out.println("3) Add new item");
-		System.out.println("4) Change Item property");
-		System.out.println("5) Delete Item");
-		System.out.println("6) Go back");
-		System.out.println("7) Logout");
+		System.out.println("3) Add item");
+		System.out.println("4) Add quantity");
+		System.out.println("5) Update price");
+		System.out.println("6) Update category");
+		System.out.println("7) Update description");
+		System.out.println("8) Delete Item");
+		System.out.println("9) Go back");
+		System.out.println("10) Logout");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 		
