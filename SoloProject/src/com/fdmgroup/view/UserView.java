@@ -49,27 +49,9 @@ public class UserView {
 		}
 	}
 
-	private void changePassword() {
-		System.out.println("-------------------------------");
-		System.out.print("Enter current password: ");
-		String currentPassword = scanner.nextLine();
-		
-		if(!UserSession.getLoggedInUser().getPassword().equals(currentPassword)) {
-			System.out.println("Current password does not match the records. Bailing out");
-			showDashboard();
-		}
-		do {
-			System.out.print("Enter new password: ");
-			String newPassword = scanner.nextLine();
-			System.out.print("Confirm password: ");
-			String confirmPassword = scanner.nextLine();
-			if(!newPassword.equals(confirmPassword)) {
-				System.out.println("Password don't match. Try again");
-				continue;
-			}
-			uc.changePassword(confirmPassword);
-			break;
-		} while(true);
+	public void changePassword() {
+		UserController uc = new UserController();
+		uc.changePassword();
 	}
 
 	private void removeUser() {

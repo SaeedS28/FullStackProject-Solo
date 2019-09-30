@@ -6,6 +6,7 @@ import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.AdminChoiceView;
 import com.fdmgroup.view.HomeView;
+import com.fdmgroup.view.RegularUserView;
 
 public class AuthenticationController {
 	HomeView homeView;
@@ -24,7 +25,8 @@ public class AuthenticationController {
 				acw.showDashboard();
 			}
 			else if(UserSession.getLoggedInUser().getType().equals("regular")) {
-				System.out.println("Regular user hit");
+				RegularUserView ruv = new RegularUserView();
+				ruv.showDashboard();
 			}
 			else {
 				homeView.showLoginOptions(true);
