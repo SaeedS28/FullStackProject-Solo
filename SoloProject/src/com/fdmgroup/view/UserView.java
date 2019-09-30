@@ -40,7 +40,7 @@ public class UserView {
 			changePassword();
 			break;
 		case "4":
-			AdminChoiceView aw = new AdminChoiceView();
+			AdminUserMainView aw = new AdminUserMainView();
 			aw.showDashboard();
 			break;
 		default:

@@ -59,7 +59,7 @@ public class AdminInventoryView {
 			deleteItem();
 			break;
 		case "9":
-			AdminChoiceView acw = new AdminChoiceView();
+			AdminUserMainView acw = new AdminUserMainView();
 			acw.showDashboard();
 			break;
 		case "10":

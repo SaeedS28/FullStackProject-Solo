@@ -4,9 +4,9 @@ import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
-import com.fdmgroup.view.AdminChoiceView;
+import com.fdmgroup.view.AdminUserMainView;
 import com.fdmgroup.view.HomeView;
-import com.fdmgroup.view.RegularUserView;
+import com.fdmgroup.view.RegularUserMainView;
 
 public class AuthenticationController {
 	HomeView homeView;
@@ -21,11 +21,11 @@ public class AuthenticationController {
 			UserSession.setLoggedInUser(user);
 			
 			if(UserSession.getLoggedInUser().getType().equals("admin")) {
-				AdminChoiceView acw = new AdminChoiceView();
+				AdminUserMainView acw = new AdminUserMainView();
 				acw.showDashboard();
 			}
 			else if(UserSession.getLoggedInUser().getType().equals("regular")) {
-				RegularUserView ruv = new RegularUserView();
+				RegularUserMainView ruv = new RegularUserMainView();
 				ruv.showDashboard();
 			}
 			else {

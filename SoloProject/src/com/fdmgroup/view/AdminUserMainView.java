@@ -5,11 +5,11 @@ import java.util.Scanner;
 import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.model.UserSession;
 
-public class RegularUserView {
+public class AdminUserMainView {
 
 	private Scanner scanner;
 	
-	public RegularUserView() {
+	public AdminUserMainView() {
 		scanner = new Scanner(System.in);
 	}
 
@@ -20,25 +20,22 @@ public class RegularUserView {
 		System.out.println("Welcome " + UserSession.getLoggedInUser().getFirstname() + " " + 
 				UserSession.getLoggedInUser().getLastname() + "\tType: "+UserSession.getLoggedInUser().getType());
 		System.out.println("Please select one of the options below: ");
-		System.out.println("1) Change Password");
-		System.out.println("2) Change Address");
-		System.out.println("3) Go Shopping");
-		System.out.println("4) Shopping Cart");
-		System.out.println("5) Logout");
-		
+		System.out.println("1) Perform User related Activities");
+		System.out.println("2) Perform Inventory related Activities");
+		System.out.println("3) Logout");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 		
 		switch (userInput) {
 		case "1":
-			UserView uv = new UserView();
-			uv.changePassword();
+			UserView uw = new UserView();
+			uw.showDashboard();
 			break;
 		case "2":
 			AdminInventoryView aiv = new AdminInventoryView();
 			aiv.showDashBoard();
 			break;
-		case "5":
+		case "3":
 			ac.logout();
 			break;
 		default:

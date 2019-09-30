@@ -11,4 +11,5 @@ public interface IShoppingCartDAO  {
 	public int getSize(User u);
 	public ShoppingCart getCartDetails(User u);
 	public double getCartTotal(User u);
+	public int getQuantity(User u, int pid);
 }

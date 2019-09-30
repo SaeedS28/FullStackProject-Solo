@@ -9,4 +9,5 @@ import com.fdmgroup.model.User;
 public interface IPurchaseOrderDAO {
 	public boolean addPurchaseOrder(User u, ShoppingCart cart);
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u);
+	public int getMaxPurchaseID();
 }

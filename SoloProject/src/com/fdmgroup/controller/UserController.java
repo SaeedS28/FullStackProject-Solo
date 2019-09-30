@@ -8,8 +8,8 @@ import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
-import com.fdmgroup.view.AdminChoiceView;
-import com.fdmgroup.view.RegularUserView;
+import com.fdmgroup.view.AdminUserMainView;
+import com.fdmgroup.view.RegularUserMainView;
 import com.fdmgroup.view.UserView;
 
 public class UserController {
@@ -51,10 +51,10 @@ public class UserController {
 		if(!UserSession.getLoggedInUser().getPassword().equals(currentPassword)) {
 			System.out.println("Current password does not match the records. Bailing out");
 			if(UserSession.getLoggedInUser().getType().equals("admin")) {
-				AdminChoiceView acw = new AdminChoiceView();
+				AdminUserMainView acw = new AdminUserMainView();
 				acw.showDashboard();
 			} else if(UserSession.getLoggedInUser().getType().equals("regular")) {
-				RegularUserView ruv = new RegularUserView();
+				RegularUserMainView ruv = new RegularUserMainView();
 				ruv.showDashboard();
 			}
 		}

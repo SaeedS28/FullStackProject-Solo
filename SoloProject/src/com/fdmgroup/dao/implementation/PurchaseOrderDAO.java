@@ -71,7 +71,7 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		
 	}
 
-	private int getMaxPurchaseID() {
+	public int getMaxPurchaseID() {
 		String query = "Select max(purchase_id) as purchase_count from purchase_history";
 		int maxPid = 0;
 		try (Connection con = DataSource.getInstance().getConnection();

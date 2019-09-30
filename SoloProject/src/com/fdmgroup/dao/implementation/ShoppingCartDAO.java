@@ -128,7 +128,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		return priceTotal;
 	}
 
-	private int getQuantity(User u, int pid) {
+	public int getQuantity(User u, int pid) {
 		String query = "Select Quantity from shopping_cart where email_address = ? and product_id = ?";
 		int quantity = 0;
 		try (Connection con = DataSource.getInstance().getConnection();
