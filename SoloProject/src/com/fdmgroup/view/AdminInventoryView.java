@@ -44,7 +44,7 @@ public class AdminInventoryView {
 			
 			break;
 		case "5":
-			
+			deleteItem();
 			break;
 		case "6":
 			AdminChoiceView acw = new AdminChoiceView();
@@ -58,6 +58,28 @@ public class AdminInventoryView {
 			System.out.println("The input was invalid.");
 			showDashBoard();
 		}
+	}
+
+	private void deleteItem() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
+		
+		for(int i=0;i<allItems.size();i++) {
+			System.out.println(i+1+") " +allItems.get(i));
+		}
+		if(allItems.size()==0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+		
+		System.out.println("Enter the number on the side to delete that item");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if(choice-1<0 || choice-1>=allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		aic.removeItem(allItems.get(choice-1).getProductID());
 	}
 
 	private void addItem() {
@@ -135,6 +157,9 @@ public class AdminInventoryView {
 		
 		for(int i=0;i<allItems.size();i++) {
 			System.out.println(allItems.get(i));
+		}
+		if(allItems.size()==0) {
+			System.out.println("All out of items!");
 		}
 		System.out.print("Press any key to go back: ");
 		scanner.nextLine();

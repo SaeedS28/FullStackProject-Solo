@@ -48,4 +48,11 @@ public class AdminInventoryController {
 		AdminInventoryView aiv = new AdminInventoryView();
 		aiv.showDashBoard();
 	}
+	
+	public void removeItem(int pid) {
+		id.removeItem(pid);
+		System.out.println("Item removed successfully");
+		AdminInventoryView aiv = new AdminInventoryView();
+		aiv.showDashBoard();
+	}
 }
