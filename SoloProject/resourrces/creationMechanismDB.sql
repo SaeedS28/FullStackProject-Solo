@@ -45,13 +45,17 @@ create table item (
   name varchar2(50) not null,
   price number(6,2) not null,
   category varchar2(30) not null,
-  quantity Number(4),
+  quantity Number(4) not null,
   description varchar(300) not null,
   primary key (product_id),
   
   constraint ck_quantity check (quantity >= 0),
   constraint ck_price check (price >= 0)
 );
+
+insert into item values(1,'BASEBALL BAT', 45.99,'SPORTS',32,'they maple, eh');
+insert into item values(2,'BASEBALLS', 5.00,'SPORTS',32,'throw one over the plate');
+insert into item values(3,'SURFACE PRO 6', 1999.99,'ELECTRONICS',12,'very fast computer');
 
 -- create shopping_cart table
 create table shopping_cart (
@@ -82,12 +86,12 @@ create table purchase_history (
 
 -- create review table
 create table review(
+    review_id Number(3),
     product_id Number(4) NOT NULL,
     email_address varchar2(50) NOT NULL,
     review_text varchar2(500) NOT NULL,
     rating Number(2) NOT NULL,    
-    review_date TIMESTAMP not null,
-    PRIMARY KEY (email_address,product_id),
+    PRIMARY KEY (review_id),
     
     CONSTRAINT fk_email_review
     FOREIGN KEY (email_address)

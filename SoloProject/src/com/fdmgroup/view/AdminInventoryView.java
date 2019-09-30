@@ -150,7 +150,32 @@ public class AdminInventoryView {
 	}
 
 	private void addQuantity() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
 
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
+		}
+		if (allItems.size() == 0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+
+		System.out.println("Enter the number on the side to update its quantity");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		System.out.print("Enter the new quantity: ");
+		int quantity= Integer.parseInt(scanner.nextLine());
+		if(quantity<=0) {
+			System.out.println("Quantity must be positive, bailing out");
+			showDashBoard();
+		}
+		System.out.println(quantity);
+		aic.updateQuantity(allItems.get(choice - 1).getProductID(),allItems.get(choice - 1).getQuantity()+quantity);
 	}
 
 	private void deleteItem() {
@@ -187,7 +212,13 @@ public class AdminInventoryView {
 		System.out.print("Enter Item name: ");
 		name = scanner.nextLine().toUpperCase();
 		System.out.print("Enter price per unit: ");
-		price = Double.parseDouble(scanner.nextLine());
+		do {
+			price = Double.parseDouble(scanner.nextLine());
+			if (price <= 0) {
+				System.out.println("Price must be positive");
+				System.out.print("Enter price per unit ");
+			}
+		} while (price <= 0);
 		System.out.print("Enter item category: ");
 		category = scanner.nextLine().toUpperCase();
 
@@ -198,7 +229,7 @@ public class AdminInventoryView {
 				quantity = Integer.parseInt(scanner.nextLine());
 				if (quantity <= 0) {
 					System.out.println("Quantity must be positive");
-					System.out.print("Enter quantity");
+					System.out.print("Enter quantity: ");
 				}
 			} while (quantity <= 0);
 			System.out.print("Enter product description");

@@ -75,4 +75,10 @@ public class AdminInventoryController {
 		System.out.println("Price updated successfully");
 		showDashBoardAIV();
 	}
+	
+	public void updateQuantity(int pid,int quantity) {
+		id.updateQuantity(pid, quantity);
+		System.out.println("Quantity updated successfully");
+		showDashBoardAIV();
+	}
 }
