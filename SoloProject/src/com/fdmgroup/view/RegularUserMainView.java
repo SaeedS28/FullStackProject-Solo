@@ -24,7 +24,7 @@ public class RegularUserMainView {
 		System.out.println("2) Change Address");
 		System.out.println("3) Go Shopping");
 		System.out.println("4) Shopping Cart");
-		System.out.println("5) Review");
+		System.out.println("5) See order history");
 		System.out.println("6) Logout");
 		
 		System.out.print(">>> ");
@@ -48,7 +48,7 @@ public class RegularUserMainView {
 			scv.showDashBoard();
 			break;
 		case "5":
-			
+			seeOrderHistory();
 			break;
 		case "6":
 			ac.logout();
@@ -57,5 +57,11 @@ public class RegularUserMainView {
 			System.out.println("The input was invalid.");
 			showDashboard();
 		}
+	}
+
+	private void seeOrderHistory() {
+		System.out.println("-------------------------------");
+		
+		
 	}
 }

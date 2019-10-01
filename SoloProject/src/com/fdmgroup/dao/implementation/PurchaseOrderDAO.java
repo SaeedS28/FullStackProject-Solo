@@ -24,23 +24,19 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		
 		try (Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt = con.prepareStatement(query);) {
-			for (Map.Entry<Item,Integer> entry : cart.getItems().entrySet()) {
+			for (int i=0;i<cart.size();i++) {
 				stmt.setInt(1,getMaxPurchaseID());
 				stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
 				stmt.setString(3, u.getUsername());
-				stmt.setInt(4,entry.getKey().getProductID());
-				stmt.setInt(5, entry.getValue());
-				stmt.setDouble(6, entry.getKey().getPrice());
+				stmt.setInt(4,cart.get(i).getProductID());
+				stmt.setInt(5, cart.get(i).getQuantity());
+				stmt.setDouble(6, cart.get(i).getPrice());
 				stmt.executeUpdate();
 			}
 			ShoppingCartDAO del = new ShoppingCartDAO();
 			del.removeAllItem(u);
-			cart.reset();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}

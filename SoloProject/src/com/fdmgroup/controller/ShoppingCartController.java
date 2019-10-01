@@ -3,8 +3,10 @@ package com.fdmgroup.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
@@ -61,5 +63,28 @@ public class ShoppingCartController {
 		System.out.println("Modified "+quantity+" "+sci.getName()+" to your cart");
 		ShoppingCartView scv= new ShoppingCartView();
 		scv.showDashBoard();
+	}
+
+	public void removeOutright(User loggedInUser, ShoppingCartItem choice) {
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		scd.removeItem(UserSession.getLoggedInUser(), choice.getProductID());
+		System.out.println("Item was removed from cart");
+		ShoppingCartView scv= new ShoppingCartView();
+		scv.showDashBoard();
+	}
+
+	public void processOrders(User loggedInUser, ArrayList<ShoppingCartItem> sci) {
+		PurchaseOrderDAO pod = new PurchaseOrderDAO();
+		pod.addPurchaseOrder(loggedInUser, sci);
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		scd.removeAllItem(UserSession.getLoggedInUser());
+		System.out.println("Order Processed successfully. Thank you for shopping with us!!!!");
+		ShoppingCartView sv = new ShoppingCartView();
+		sv.showDashBoard();
+	}
+	
+	public ArrayList<PurchaseOrder> getUserOrders(User u){
+		PurchaseOrderDAO pod = new PurchaseOrderDAO();
+		return pod.getPurchaseOrdersByUser(u);
 	}
 }
