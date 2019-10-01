@@ -1,8 +1,11 @@
 package com.fdmgroup.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
+import com.fdmgroup.controller.ShoppingCartController;
+import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.UserSession;
 
 public class RegularUserMainView {
@@ -61,7 +64,20 @@ public class RegularUserMainView {
 
 	private void seeOrderHistory() {
 		System.out.println("-------------------------------");
+		ShoppingCartController scc = new ShoppingCartController();
 		
+		System.out.println("Order history");
+		ArrayList<PurchaseOrder> po = scc.getUserOrders(UserSession.getLoggedInUser());
 		
+		if(po.size()==0) {
+			System.out.println("No order exists!");
+		}
+		
+		for(int i=0;i<po.size();i++) {
+			System.out.println(i+1+") "+po.get(i));
+		}
+		System.out.println("Press any key to go back");
+		scanner.nextLine();
+		showDashboard();
 	}
 }

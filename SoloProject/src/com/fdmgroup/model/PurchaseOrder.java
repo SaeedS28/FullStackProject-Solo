@@ -68,10 +68,9 @@ public class PurchaseOrder {
 		this.price = price;
 	}
 
-	@Override
 	public String toString() {
-		return "PurchaseOrder [purchaseID = " + purchaseID + ", purchaseDate = " + purchaseDate + ", emailAddress = "
-				+ emailAddress + ", productID = " + productID + ", quantity = " + quantity + ", price = " + price + "]";
+		return "purchaseID = " + purchaseID + ", purchaseDate = " + purchaseDate + ", emailAddress = "
+				+ emailAddress + ", productID = " + productID + ", quantity = " + quantity + ", price = " + price;
 	}
 
 	
