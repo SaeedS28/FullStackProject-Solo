@@ -1,23 +1,35 @@
 package com.fdmgroup.model;
 
 public class ShoppingCartItem {
+	private int productID;
 	private String name;
 	private double price;
 	private String category;
 	private String description;
 	private int quantity;
+	private int itemQuantity;
 	
-	public ShoppingCartItem(String name, double price, String category, String description, int quantity) {
+	public ShoppingCartItem(int productID, String name, double price, String category, String description, int quantity, int itemQuantity) {
 		super();
+		this.productID=productID;
 		this.name = name;
 		this.price = price;
 		this.category = category;
 		this.description = description;
 		this.quantity = quantity;
+		this.itemQuantity= itemQuantity;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public int getProductID() {
+		return productID;
+	}
+
+	public void setProductID(int productID) {
+		this.productID = productID;
 	}
 
 	public void setName(String name) {
@@ -56,8 +68,16 @@ public class ShoppingCartItem {
 		this.quantity = quantity;
 	}
 
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
 	public String toString() {
-		return " name=" + name + ", price=" + price + ", category=" + category + ", description="
+		return "name=" + name + ", price=" + price + ", category=" + category + ", description="
 				+ description + ", quantity=" + quantity;
 	}	
 }

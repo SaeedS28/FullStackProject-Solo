@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
+
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
@@ -83,8 +84,8 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
-		String query = "Select item.NAME NAME, " + "item.PRICE PRICE, "
-				+ "item.CATEGORY CATEGORY, " + "item.DESCRIPTION DESCRIPTION, "
+		String query = "Select item.product_id PRODUCT_ID, item.NAME NAME, " + "item.PRICE PRICE, "
+				+ "item.CATEGORY CATEGORY, " + "item.DESCRIPTION DESCRIPTION, item.quantity iqty, "
 				+ "shopping_cart.QUANTITY CART_QUANTITY " + "FROM shopping_cart " + "INNER JOIN item ON "
 				+ "shopping_cart.product_id = item.product_id " + "WHERE shopping_cart.email_address like ?";
 		ArrayList<ShoppingCartItem> cart = new ArrayList<>();
@@ -94,12 +95,15 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				int productId = rs.getInt("PRODUCT_ID");
 				String name = rs.getString("NAME");
 				double price = rs.getDouble("PRICE");
 				String category = rs.getString("CATEGORY");
+				
 				String description = rs.getString("DESCRIPTION");
 				int quantity = rs.getInt("CART_QUANTITY");
-				cart.add(new ShoppingCartItem(name, price, category, description, quantity));
+				int itemQty = rs.getInt("iqty");
+				cart.add(new ShoppingCartItem(productId, name, price, category, description, quantity,itemQty));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

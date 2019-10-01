@@ -8,6 +8,7 @@ import com.fdmgroup.model.Item;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
+import com.fdmgroup.view.ShoppingCartView;
 import com.fdmgroup.view.StoreView;
 
 public class ShoppingCartController {
@@ -37,5 +38,28 @@ public class ShoppingCartController {
 	public ArrayList<ShoppingCartItem> getCartDetails(User u){
 		ShoppingCartDAO scd = new ShoppingCartDAO();
 		return scd.getCartDetails(u);
+	}
+	
+	public double getTotalPrice(User u) {
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		return scd.getCartTotal(u);
+	}
+	
+	public void addQuantity(User u, ShoppingCartItem sci) {
+		System.out.print("Enter quantity (- to remove): ");
+		int quantity = Integer.parseInt(scanner.nextLine());
+		
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		
+		if(scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity > sci.getItemQuantity()
+				|| scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity<0) {
+			System.out.println("Quantity maxed out or negative quantity. Nothing was modified from the cart");
+			ShoppingCartView sv = new ShoppingCartView();
+			sv.showDashBoard();
+		}
+		scd.addItem(UserSession.getLoggedInUser(), sci.getProductID(), quantity);
+		System.out.println("Modified "+quantity+" "+sci.getName()+" to your cart");
+		ShoppingCartView scv= new ShoppingCartView();
+		scv.showDashBoard();
 	}
 }
