@@ -3,6 +3,7 @@ package com.fdmgroup.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.fdmgroup.controller.AdminInventoryController;
 import com.fdmgroup.controller.ShoppingCartController;
 import com.fdmgroup.controller.StoreController;
 import com.fdmgroup.model.Item;
@@ -134,7 +135,59 @@ public class StoreView {
 	}
 
 	private void showItemsByCategories() {
+		AdminInventoryController aic = new AdminInventoryController();
+		ArrayList<String> categories = aic.getAllCategories();
+		int catChoice;
 
+		do {
+			System.out.println("-------------------------------");
+			System.out.println("Categories");
+			for (int i = 0; i < categories.size(); i++) {
+				System.out.println(i + 1 + ") " + categories.get(i));
+			}
+			System.out.println("Make a choice");
+			System.out.print(">>> ");
+			catChoice = Integer.parseInt(scanner.nextLine());
+			if (catChoice - 1 >= 0 && catChoice - 1 < categories.size()) {
+				break;
+			}
+			System.out.println("Invalid choice. Try again");
+		} while (true);
+		
+		String userInput;
+		allItems = aic.getItemsByCategory(categories.get(catChoice - 1));
+		
+		do {
+			System.out.println("-------------------------------");
+
+			if (allItems.size() == 0) {
+				System.out.println("All out of items!");
+				System.out.print("Press any key to go back: ");
+				scanner.nextLine();
+				showDashBoard();
+			}
+
+			System.out.println("All Items in the chosen category");
+			for (int i = 0; i < allItems.size(); i++) {
+				System.out.println(i + 1 + ") " + allItems.get(i));
+			}
+
+			System.out.println();
+			System.out.println("1) Add item to cart");
+			System.out.println("2) Go back");
+			System.out.print(">>> ");
+			userInput = scanner.nextLine();
+
+			if (!userInput.equals("1") && !userInput.equals("2")) {
+				System.out.println("Invalid choice. Try again");
+			}
+		} while (!userInput.equals("1") && !userInput.equals("2"));
+
+		if (userInput.equals("1")) {
+			addToCart(allItems);
+		} else {
+			showDashBoard();
+		}
 	}
 
 	private void showAllItems() {
