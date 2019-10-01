@@ -13,13 +13,13 @@ import java.util.Map;
 import com.fdmgroup.dao.interfaces.IPurchaseOrderDAO;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
-import com.fdmgroup.model.ShoppingCart;
+import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
 public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
-	public boolean addPurchaseOrder(User u, ShoppingCart cart) {
+	public boolean addPurchaseOrder(User u, ArrayList<ShoppingCartItem> cart) {
 		String query = "insert into purchase_history values (?,?,?,?,?,?)";
 		
 		try (Connection con = DataSource.getInstance().getConnection();

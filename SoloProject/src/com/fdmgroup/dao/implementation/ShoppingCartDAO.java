@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
-import com.fdmgroup.model.ShoppingCart;
+import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
@@ -81,26 +82,24 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		return size;
 	}
 
-	public ShoppingCart getCartDetails(User u) {
-		String query = "SELECT item.product_id PRODUCT_ID," + "item.NAME NAME, " + "item.PRICE PRICE, "
-				+ "item.QUANTITY iQuantity, " + "item.CATEGORY CATEGORY, " + "item.DESCRIPTION DESCRIPTION, "
+	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
+		String query = "Select item.NAME NAME, " + "item.PRICE PRICE, "
+				+ "item.CATEGORY CATEGORY, " + "item.DESCRIPTION DESCRIPTION, "
 				+ "shopping_cart.QUANTITY CART_QUANTITY " + "FROM shopping_cart " + "INNER JOIN item ON "
 				+ "shopping_cart.product_id = item.product_id " + "WHERE shopping_cart.email_address like ?";
-		ShoppingCart cart = new ShoppingCart();
+		ArrayList<ShoppingCartItem> cart = new ArrayList<>();
 		try (Connection con = DataSource.getInstance().getConnection();
 				PreparedStatement stmt = con.prepareStatement(query);) {
 			stmt.setString(1, u.getUsername());
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				int productID = rs.getInt("PRODUCT_ID");
 				String name = rs.getString("NAME");
-				int iQuantity = rs.getInt("iQuantity");
 				double price = rs.getDouble("PRICE");
 				String category = rs.getString("CATEGORY");
 				String description = rs.getString("DESCRIPTION");
 				int quantity = rs.getInt("CART_QUANTITY");
-				cart.addItems(new Item(productID, name, category, description, iQuantity, price), quantity);
+				cart.add(new ShoppingCartItem(name, price, category, description, quantity));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

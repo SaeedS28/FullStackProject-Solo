@@ -1,9 +1,12 @@
 package com.fdmgroup.controller;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.ShoppingCartItem;
+import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.StoreView;
 
@@ -29,5 +32,10 @@ public class ShoppingCartController {
 		System.out.println("Added "+quantity+" "+i.getName()+" to your cart");
 		StoreView sv = new StoreView();
 		sv.showDashBoard();
+	}
+	
+	public ArrayList<ShoppingCartItem> getCartDetails(User u){
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		return scd.getCartDetails(u);
 	}
 }

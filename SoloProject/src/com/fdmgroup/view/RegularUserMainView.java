@@ -44,7 +44,8 @@ public class RegularUserMainView {
 			sv.showDashBoard();
 			break;
 		case "4":
-			
+			ShoppingCartView scv = new ShoppingCartView();
+			scv.showDashBoard();
 			break;
 		case "5":
 			

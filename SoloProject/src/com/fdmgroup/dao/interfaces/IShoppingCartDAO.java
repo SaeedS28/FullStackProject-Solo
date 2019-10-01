@@ -1,7 +1,9 @@
 package com.fdmgroup.dao.interfaces;
 
-import com.fdmgroup.model.Item;
-import com.fdmgroup.model.ShoppingCart;
+import java.util.ArrayList;
+
+
+import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 
 public interface IShoppingCartDAO  {
@@ -9,7 +11,7 @@ public interface IShoppingCartDAO  {
 	public boolean removeItem(User u, int pid);
 	public boolean removeAllItem(User u);
 	public int getSize(User u);
-	public ShoppingCart getCartDetails(User u);
+	public ArrayList<ShoppingCartItem> getCartDetails(User u);
 	public double getCartTotal(User u);
 	public int getQuantity(User u, int pid);
 }
