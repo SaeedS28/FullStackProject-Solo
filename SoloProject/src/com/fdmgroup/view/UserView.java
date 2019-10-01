@@ -6,7 +6,6 @@ import java.util.Scanner;
 import com.fdmgroup.controller.UserController;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
-import com.fdmgroup.model.UserSession;
 
 public class UserView {
 	private Scanner scanner;
@@ -18,8 +17,6 @@ public class UserView {
 	}
 
 	public void showDashboard() {
-		UserController uc = new UserController();
-
 		System.out.println("-------------------------------");
 		System.out.println("Please select one of the options below: ");
 		System.out.println("1) Add user");

@@ -40,7 +40,8 @@ public class RegularUserMainView {
 			acw.showDashboard();
 			break;
 		case "3":
-			
+			StoreView sv = new StoreView();
+			sv.showDashBoard();
 			break;
 		case "4":
 			

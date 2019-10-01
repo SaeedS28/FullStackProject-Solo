@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
-import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.ShoppingCart;
 import com.fdmgroup.model.User;
@@ -20,7 +18,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		int retQuantity = getQuantity(u, pid);
 
 		if (retQuantity > 0) {
-			query = "Update shopping_cart " + "set quantity = ? " + "where email_address = ? and product_id = ?";
+			query = "Update shopping_cart " + "set quantity = quantity + ? " + "where email_address = ? and product_id = ?";
 		} else {
 			query = "Insert into shopping_cart(quantity, email_address, product_id) values (?,?,?)";
 		}
@@ -71,6 +69,9 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				if(rs.wasNull()) {
+					return 0;
+				}
 				size = rs.getInt("cart_quantity");
 			}
 		} catch (SQLException e) {
@@ -138,7 +139,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				quantity = rs.getInt("quantity");
+				quantity = quantity + rs.getInt("quantity");
 			}
 
 		} catch (SQLException e) {
