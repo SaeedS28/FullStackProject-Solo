@@ -10,5 +10,6 @@ public interface IAddressDAO {
 	public boolean changeStreet(String street, User u);
 	public boolean changeCountry(String country, User u);
 	public boolean changePostalCode(String postal, User u);
+	public boolean changeProvince(String province, User u);
 	public Address getAddress(User u);	
 }

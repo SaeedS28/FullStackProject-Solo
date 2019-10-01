@@ -67,22 +67,34 @@ public class AddressChangeView {
 	}
 
 	private void changePostalCode() {
+		System.out.println("-------------------------------");
+		AddressController ac = new AddressController();
+		System.out.println("Postal code on file: "+ac.getAddress(UserSession.getLoggedInUser()).getPostalCode());
+		
+		String newCode;
+		do {
+			System.out.print("Enter new postal code: ");
+			newCode = scanner.nextLine();
+			if(newCode.length()>7) {
+				System.out.println("Postal Code must be less than 8 characters long.");
+			}
+		}while(newCode.length()>7);
 		
 	}
 
 	private void changeStreet() {
-		
+		System.out.println("-------------------------------");
 	}
 
 	private void changeCountry() {
-		
+		System.out.println("-------------------------------");
 	}
 
 	private void changeProvince() {
-		
+		System.out.println("-------------------------------");
 	}
 
 	private void changeCity() {
-		
+		System.out.println("-------------------------------");
 	}
 }
