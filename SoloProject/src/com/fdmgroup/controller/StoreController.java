@@ -28,4 +28,8 @@ public class StoreController {
 	public ArrayList<Item> getItemsByName(String name){
 		return id.getItemsByName(name);
 	}
+
+	public ArrayList<Item> getItemsByPriceRange(double minPrice, double maxPrice){
+		return id.getItemsByPriceRange(minPrice, maxPrice);
+	}
 }

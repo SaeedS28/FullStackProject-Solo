@@ -90,6 +90,46 @@ public class StoreView {
 	}
 
 	private void showItemsByPriceRange() {
+		StoreController sc = new StoreController();
+		String userInput;
+		
+		
+		System.out.println("-------------------------------");
+		System.out.print("Enter min price: ");
+		double minPrice = Double.parseDouble(scanner.nextLine());
+		System.out.print("Enter max price: ");
+		double maxPrice = Double.parseDouble(scanner.nextLine());
+		
+		allItems = sc.getItemsByPriceRange(minPrice, maxPrice);
+		System.out.println("Search result for price range: $"+minPrice +"-"+maxPrice);
+		
+		if (allItems.size() == 0) {
+			System.out.println("Nothing popped up");
+			System.out.print("Press any key to go back: ");
+			scanner.nextLine();
+			showDashBoard();
+		}
+		do {
+			for (int i = 0; i < allItems.size(); i++) {
+				System.out.println(i + 1 + ") " + allItems.get(i));
+			}
+			
+			System.out.println();
+			System.out.println("1) Add item to cart");
+			System.out.println("2) Go back");
+			System.out.print(">>> ");
+			userInput = scanner.nextLine();
+			
+			if (!userInput.equals("1") && !userInput.equals("2")) {
+				System.out.println("Invalid choice. Try again");
+			}
+		} while (!userInput.equals("1") && !userInput.equals("2"));
+		
+		if (userInput.equals("1")) {
+			addToCart(allItems);
+		} else {
+			showDashBoard();
+		}
 
 	}
 
