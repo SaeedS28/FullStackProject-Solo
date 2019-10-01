@@ -25,4 +25,7 @@ public class StoreController {
 		return id.getItemsByCategory(category);
 	}
 	
+	public ArrayList<Item> getItemsByName(String name){
+		return id.getItemsByName(name);
+	}
 }

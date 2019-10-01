@@ -50,7 +50,43 @@ public class StoreView {
 	}
 
 	private void showItemsByName() {
-
+		StoreController sc = new StoreController();
+		String userInput;
+		
+		
+		System.out.println("-------------------------------");
+		System.out.print("Enter a string to search for an item: ");
+		String searchString = scanner.nextLine();
+		allItems = sc.getItemsByName(searchString);
+		System.out.println("Search result for: "+searchString);
+		
+		if (allItems.size() == 0) {
+			System.out.println("Nothing popped up");
+			System.out.print("Press any key to go back: ");
+			scanner.nextLine();
+			showDashBoard();
+		}
+		do {
+			for (int i = 0; i < allItems.size(); i++) {
+				System.out.println(i + 1 + ") " + allItems.get(i));
+			}
+			
+			System.out.println();
+			System.out.println("1) Add item to cart");
+			System.out.println("2) Go back");
+			System.out.print(">>> ");
+			userInput = scanner.nextLine();
+			
+			if (!userInput.equals("1") && !userInput.equals("2")) {
+				System.out.println("Invalid choice. Try again");
+			}
+		} while (!userInput.equals("1") && !userInput.equals("2"));
+		
+		if (userInput.equals("1")) {
+			addToCart(allItems);
+		} else {
+			showDashBoard();
+		}
 	}
 
 	private void showItemsByPriceRange() {
