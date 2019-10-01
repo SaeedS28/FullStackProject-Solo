@@ -22,7 +22,7 @@ public class AddressChangeView {
 		System.out.println("3) Change Province/Territory");
 		System.out.println("4) Change Country");
 		System.out.println("5) Change Postal Code");
-		System.out.println("6  Show current address");
+		System.out.println("6) Show current address");
 		System.out.println("7) Go back");
 		
 		System.out.print(">>> ");
@@ -79,22 +79,50 @@ public class AddressChangeView {
 				System.out.println("Postal Code must be less than 8 characters long.");
 			}
 		}while(newCode.length()>7);
-		
+		ac.changePostalCode(newCode, UserSession.getLoggedInUser());
 	}
 
 	private void changeStreet() {
 		System.out.println("-------------------------------");
+		AddressController ac = new AddressController();
+		System.out.println("Street on file: "+ac.getAddress(UserSession.getLoggedInUser()).getStreet());
+		
+		String newStreet;
+		System.out.print("Enter new street: ");
+		newStreet = scanner.nextLine();
+		ac.changeStreet(newStreet, UserSession.getLoggedInUser());
 	}
 
 	private void changeCountry() {
 		System.out.println("-------------------------------");
+		AddressController ac = new AddressController();
+		System.out.println("Country on file: "+ac.getAddress(UserSession.getLoggedInUser()).getCountry());
+		
+		String newCountry;
+		System.out.print("Enter new country: ");
+		newCountry = scanner.nextLine();
+		ac.changeCountry(newCountry, UserSession.getLoggedInUser());
 	}
 
 	private void changeProvince() {
 		System.out.println("-------------------------------");
+		AddressController ac = new AddressController();
+		System.out.println("Province on file: "+ac.getAddress(UserSession.getLoggedInUser()).getProvince());
+		
+		String newProvince;
+		System.out.print("Enter new province: ");
+		newProvince = scanner.nextLine();
+		ac.changeProvince(newProvince, UserSession.getLoggedInUser());
 	}
 
 	private void changeCity() {
 		System.out.println("-------------------------------");
+		AddressController ac = new AddressController();
+		System.out.println("City on file: "+ac.getAddress(UserSession.getLoggedInUser()).getCity());
+		
+		String newCity;
+		System.out.print("Enter new city: ");
+		newCity = scanner.nextLine();
+		ac.changeCity(newCity, UserSession.getLoggedInUser());
 	}
 }
