@@ -36,11 +36,11 @@ public class RegularUserMainView {
 			uv.changePassword();
 			break;
 		case "2":
-			AdminInventoryView aiv = new AdminInventoryView();
-			aiv.showDashBoard();
+			AddressChangeView acw = new AddressChangeView();
+			acw.showDashboard();
 			break;
 		case "3":
-
+			
 			break;
 		case "4":
 			
