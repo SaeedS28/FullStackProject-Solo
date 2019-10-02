@@ -1,6 +1,7 @@
 package com.fdmgroup.dao.implementation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,11 +42,12 @@ public class UserDAO implements IUserDAO{
 
 	public User findByUsername(String name) {
 		Query query = em.createQuery(
-				   "SELECT u FROM User_List u WHERE u.username LIKE :name");
+				   "SELECT u FROM User_List u WHERE u.username LIKE :name", User.class);
 		query.setParameter("name", name);
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<User> toReturn =(ArrayList<User>) query.getResultList();
+		//@SuppressWarnings("unchecked")
+		//ArrayList<User> toReturn =(ArrayList<User>) query.getResultList();
+		List<User> toReturn = query.getResultList();
 		if(toReturn.size()==0) {
 			return null;
 		}

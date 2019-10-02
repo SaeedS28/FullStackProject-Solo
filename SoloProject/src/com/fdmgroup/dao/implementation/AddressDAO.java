@@ -5,35 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.fdmgroup.dao.interfaces.IAddressDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
+import com.fdmgroup.model.UserSession;
 import com.fdmgroup.util.DataSource;
 
 public class AddressDAO implements IAddressDAO {
 
-	public boolean addAddress(Address a) {
-		String query = "Insert into address(email_address, street, city, province, country, postal_code) values (?,?,?,?,?,?)";
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, a.getEmailAddress());
-			stmt.setString(2, a.getStreet());
-			stmt.setString(3, a.getCity());
-			stmt.setString(4, a.getProvince());
-			stmt.setString(5, a.getCountry());
-			stmt.setString(6, a.getPostalCode());
+	EntityManagerFactory emf;
+	EntityManager em;
 
-			stmt.execute();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+	public AddressDAO() {
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();		
 	}
 
 	public boolean changeCity(String city, User u) {
@@ -113,28 +102,8 @@ public class AddressDAO implements IAddressDAO {
 	}
 
 	public Address getAddress(User u) {
-		String query = "Select * from address where email_address = ?";
-		Address address = null;
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				String userName = rs.getString("email_address");
-				String street = rs.getString("street");
-				String city = rs.getString("city");
-				String province = rs.getString("province");
-				String country = rs.getString("country");
-				String postalCode = rs.getString("postal_code");
-
-				address = new Address(userName, street, city, province, country, postalCode);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return address;
+		Address a = em.find(Address.class, u.getUsername());
+		return a;
 	}
 
 	public boolean changeProvince(String province, User u) {
@@ -156,4 +125,12 @@ public class AddressDAO implements IAddressDAO {
 		return true;
 	}
 
+	public boolean addAddress(Address a) {
+		User u = em.find(User.class, UserSession.getLoggedInUser().getUsername());
+		em.getTransaction().begin();
+		em.persist(u);
+		u.setAddress(a);
+		em.getTransaction().commit();
+		return true;
+	}
 }

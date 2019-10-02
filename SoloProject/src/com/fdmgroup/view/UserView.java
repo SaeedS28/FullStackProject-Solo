@@ -116,7 +116,6 @@ public class UserView {
 			}
 			break;
 		} while(true);
-		User newUser = new User(userName,password,firstName,lastName,type);
 		
 		String street;
 		String city;
@@ -139,6 +138,7 @@ public class UserView {
 		
 		Address newAddress = new Address(userName, street, city, province, country, postalCode);
 		
+		User newUser = new User(userName,password,firstName,lastName,type,newAddress);
 		uc.addUser(newUser, newAddress);
 	}
 }

@@ -1,16 +1,32 @@
 package com.fdmgroup.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name ="Address_List")
+@Table(name="Address_List")
 public class Address {
+	@Id
 	private String emailAddress;
+	@Column(nullable=false)
 	private String street;
+	@Column(nullable=false)
 	private String city;
+	@Column(nullable=false)
 	private String province;
+	@Column(nullable=false)
 	private String country;
+	@Column(nullable=false)
 	private String postalCode;
-		
+	
+	public Address() {
+		super();
+	}
+	
 	public Address(String emailAddress, String street, String city, String province, String country,
 			String postalCode) {
-		super();
 		this.emailAddress = emailAddress;
 		this.street = street;
 		this.city = city;
@@ -21,10 +37,6 @@ public class Address {
 
 	public String getEmailAddress() {
 		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
 	}
 
 	public String getStreet() {

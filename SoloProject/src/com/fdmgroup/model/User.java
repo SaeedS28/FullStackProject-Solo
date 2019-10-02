@@ -1,8 +1,11 @@
 package com.fdmgroup.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name ="User_List")
@@ -20,17 +23,22 @@ public class User {
 	@Column(nullable=false)
 	private String type;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="emailAddress")
+	private Address address;
+	
 	public User() {
 		super();
 	}
 	
-	public User(String username, String password, String firstname, String lastname, String type) {
+	public User(String username, String password, String firstname, String lastname, String type, Address a) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.type = type;
+		this.address = a;
 	}
 
 	public String getType() {
@@ -74,7 +82,14 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	@Override
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public String toString() {
 		return "username = " + username +  ", firstname = " + firstname
 				+ ", lastname = " + lastname + ", user type = " + type;
