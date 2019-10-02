@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.ShoppingCartController;
-import com.fdmgroup.controller.StoreController;
-import com.fdmgroup.model.Item;
+
 import com.fdmgroup.model.ShoppingCartItem;
-import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 
 public class ShoppingCartView {

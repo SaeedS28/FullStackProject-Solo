@@ -1,128 +1,69 @@
 package com.fdmgroup.dao.implementation;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
-import com.fdmgroup.util.DataSource;
 
 public class UserDAO implements IUserDAO{
 	
+	EntityManagerFactory emf;
+	EntityManager em;
+	public UserDAO() {
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();		
+	}
+	
 	public boolean create(User t) {
-		String query = "Insert into users(email_address, password, first_name, last_name, types) values (?,?,?,?,?)";
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1, t.getUsername());
-			stmt.setString(2, t.getPassword());
-			stmt.setString(3, t.getFirstname());
-			stmt.setString(4, t.getLastname());
-			stmt.setString(5, t.getType());
-			
-			stmt.execute();
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		em.getTransaction().begin();
+		em.persist(t);
+		em.getTransaction().commit();
 		return true;
 	}
 
 	public boolean remove(String s) {
-		String query = "Delete from users where email_address = ?";
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1, s);			
-			stmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		User u = em.find(User.class, s);
+		
+		if(u==null) {
 			return false;
+		} else {
+			em.getTransaction().begin();
+			em.remove(u);
+			em.getTransaction().commit();
+			return true;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
 	}
 
-	public User findByUsername(String username) {
-		String query = "Select * from users where email_address = ?";
-		User user=null;
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1, username);
-			ResultSet rs = stmt.executeQuery();
-			
-			if(rs.next()){
-				String userName = rs.getString("email_address");
-				String pwd = rs.getString("password");
-				String firstName= rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				String type = rs.getString("types");
-				
-				user = new User(userName,pwd,firstName,lastName,type);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public User findByUsername(String name) {
+		Query query = em.createQuery(
+				   "SELECT u FROM User_List u WHERE u.username LIKE :name");
+		query.setParameter("name", name);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<User> toReturn =(ArrayList<User>) query.getResultList();
+		if(toReturn.size()==0) {
+			return null;
 		}
-		return user;
+		return toReturn.get(0);
 	}
 
 	public boolean updatePassword(User user, String password) {
-		String query = "UPDATE users "
-				+ "SET password = ?" + 
-				"Where email_address = ? ";
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1, password);
-			stmt.setString(2, user.getUsername());
-			stmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		User fU = em.find(User.class, user.getUsername());
+		em.getTransaction().begin();
+		fU.setPassword(password);
+		em.getTransaction().commit();
 		return true;
 	}
 
-	
+	@SuppressWarnings("unchecked")
 	public ArrayList<User> getAllUsers() {
-		ArrayList<User> users = new ArrayList<>();
-		String query = "Select * from users";
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()){
-				String userName = rs.getString("email_address");
-				String pwd = rs.getString("password");
-				String firstName= rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				String type = rs.getString("types");
-				
-				users.add(new User(userName,pwd,firstName,lastName,type));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return users;
+		Query q = em.createQuery("Select u from User_List u", User.class);
+		return (ArrayList<User>) q.getResultList();
 	}
+	
 }

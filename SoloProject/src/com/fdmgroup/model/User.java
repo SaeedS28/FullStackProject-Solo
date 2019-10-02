@@ -1,12 +1,28 @@
 package com.fdmgroup.model;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity(name ="User_List")
+@Table(name="User_List")
+public class User {
+	//private int id;
+	@Id
 	private String username;
+	@Column(nullable=false)
 	private String password;
+	@Column(nullable=false)
 	private String firstname;
+	@Column(nullable=false)
 	private String lastname;
+	@Column(nullable=false)
 	private String type;
+	
+	public User() {
+		super();
+	}
 	
 	public User(String username, String password, String firstname, String lastname, String type) {
 		super();

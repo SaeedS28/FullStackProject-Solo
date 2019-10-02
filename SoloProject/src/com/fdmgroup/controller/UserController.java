@@ -13,22 +13,22 @@ import com.fdmgroup.view.RegularUserMainView;
 import com.fdmgroup.view.UserView;
 
 public class UserController {
-	private UserDAO ud;
 	private AddressDAO ad;
 	private UserView uv;
 	private Scanner scanner;
 	
 	public UserController() {
-		ud = new UserDAO();
 		ad = new AddressDAO();
 		scanner = new Scanner(System.in);
 	}
 	
 	public ArrayList<User> getAllUsers(){
+		UserDAO ud = new UserDAO();
 		return ud.getAllUsers();
 	}
 	
 	public void removeUser(int i, ArrayList<User> users) {
+		UserDAO ud = new UserDAO();
 		uv = new UserView();
 		String userToDelete;
 		if(users.get(i).getUsername().equals(UserSession.getLoggedInUser().getUsername())) {
@@ -43,6 +43,7 @@ public class UserController {
 	
 	public void changePassword() {
 		System.out.println("-------------------------------");
+		UserDAO ud = new UserDAO();
 		System.out.print("Enter current password: ");
 		String currentPassword = scanner.nextLine();
 		String confirmPassword; 
@@ -78,10 +79,12 @@ public class UserController {
 	}
 	
 	public User getUser(String userName) {
+		UserDAO ud = new UserDAO();
 		return ud.findByUsername(userName);
 	}
 	
 	public void addUser(User newUser, Address newAddress) {
+		UserDAO ud = new UserDAO();
 		ud.create(newUser);
 		ad.addAddress(newAddress);
 		System.out.println("New user added successfully");
