@@ -83,10 +83,10 @@ public class UserController {
 		return ud.findByUsername(userName);
 	}
 	
-	public void addUser(User newUser, Address newAddress) {
+	public void addUser(User newUser) {
 		UserDAO ud = new UserDAO();
 		ud.create(newUser);
-		ad.addAddress(newAddress);
+//		ad.addAddress(newAddress);
 		System.out.println("New user added successfully");
 		uv = new UserView();
 		uv.showDashboard();

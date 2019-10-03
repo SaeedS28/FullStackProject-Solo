@@ -5,7 +5,6 @@ import com.fdmgroup.model.User;
 
 public interface IAddressDAO {
 	
-	public boolean addAddress(Address a);
 	public boolean changeCity(String city, User u);
 	public boolean changeStreet(String street, User u);
 	public boolean changeCountry(String country, User u);

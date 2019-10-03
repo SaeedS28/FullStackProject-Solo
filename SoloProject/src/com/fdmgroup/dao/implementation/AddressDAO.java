@@ -125,12 +125,12 @@ public class AddressDAO implements IAddressDAO {
 		return true;
 	}
 
-	public boolean addAddress(Address a) {
-		User u = em.find(User.class, UserSession.getLoggedInUser().getUsername());
-		em.getTransaction().begin();
-		em.persist(u);
-		u.setAddress(a);
-		em.getTransaction().commit();
-		return true;
-	}
+//	public boolean addAddress(Address a) {
+//		User u = em.find(User.class, UserSession.getLoggedInUser().getUsername());
+//		em.getTransaction().begin();
+//		u.setAddress(a);
+//		em.merge(u);
+//		em.getTransaction().commit();
+//		return true;
+//	}
 }

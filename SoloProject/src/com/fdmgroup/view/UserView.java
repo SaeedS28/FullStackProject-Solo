@@ -139,6 +139,6 @@ public class UserView {
 		Address newAddress = new Address(userName, street, city, province, country, postalCode);
 		
 		User newUser = new User(userName,password,firstName,lastName,type,newAddress);
-		uc.addUser(newUser, newAddress);
+		uc.addUser(newUser);
 	}
 }
