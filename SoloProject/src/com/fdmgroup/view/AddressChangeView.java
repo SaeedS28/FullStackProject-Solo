@@ -3,7 +3,6 @@ package com.fdmgroup.view;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AddressController;
-import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.model.UserSession;
 
 public class AddressChangeView {
