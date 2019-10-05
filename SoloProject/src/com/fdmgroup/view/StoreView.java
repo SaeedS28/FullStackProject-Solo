@@ -142,6 +142,13 @@ public class StoreView {
 		do {
 			System.out.println("-------------------------------");
 			System.out.println("Categories");
+			
+			if(categories.size()==0) {
+				System.out.println("Nothing exists");
+				System.out.println("Press Enter to go back");
+				scanner.nextLine();
+				showDashBoard();
+			}
 			for (int i = 0; i < categories.size(); i++) {
 				System.out.println(i + 1 + ") " + categories.get(i));
 			}

@@ -10,6 +10,7 @@ import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.view.HomeView;
 
+
 public class MainApp {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);

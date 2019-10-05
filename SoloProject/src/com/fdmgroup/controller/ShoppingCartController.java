@@ -21,9 +21,15 @@ public class ShoppingCartController {
 	}
 	
 	public void addToCart(Item i) {
-		System.out.print("Enter quantity: ");
-		int quantity = Integer.parseInt(scanner.nextLine());
-		
+		int quantity;
+		do {
+			System.out.print("Enter quantity: ");
+			quantity = Integer.parseInt(scanner.nextLine());
+			if(quantity<=0) {
+				System.out.println("Invalid quantity, try again");
+			}
+			break;
+		} while(true);
 		ShoppingCartDAO scd = new ShoppingCartDAO();
 		
 		if(scd.getQuantity(UserSession.getLoggedInUser(), i.getProductID())+quantity > i.getQuantity()) {

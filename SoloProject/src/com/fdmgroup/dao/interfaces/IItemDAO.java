@@ -11,7 +11,6 @@ public interface IItemDAO {
 	public boolean updateDescription(int pid, String description);
 	public boolean updateCategory(int pid, String category);
 	public boolean updatePrice(int pid, double price);
-	public int getMaxPid();
 	public ArrayList<Item> getAllItems();
 	public Item getItemByPid(int pid);
 	public int getItemQuantity(int pid);

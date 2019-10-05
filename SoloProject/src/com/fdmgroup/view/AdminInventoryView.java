@@ -232,7 +232,7 @@ public class AdminInventoryView {
 					System.out.print("Enter quantity: ");
 				}
 			} while (quantity <= 0);
-			System.out.print("Enter product description");
+			System.out.print("Enter product description: ");
 			description = scanner.nextLine();
 			aic.addItem(name, price, quantity, category, description);
 		} else {
@@ -267,6 +267,12 @@ public class AdminInventoryView {
 			System.out.println("Categories");
 			for (int i = 0; i < categories.size(); i++) {
 				System.out.println(i + 1 + ") " + categories.get(i));
+			}
+			if(categories.size()==0) {
+				System.out.println("Nothing exists");
+				System.out.println("Press Enter to go back");
+				scanner.nextLine();
+				showDashBoard();
 			}
 			System.out.println("Make a choice");
 			System.out.print(">>> ");

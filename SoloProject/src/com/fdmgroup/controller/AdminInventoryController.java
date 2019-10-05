@@ -41,7 +41,7 @@ public class AdminInventoryController {
 	}
 	
 	public void addItem(String name,double price, int quantity,String category, String description) {
-		Item newItem = new Item(id.getMaxPid(), name, category, description, quantity, price);
+		Item newItem = new Item(name, category, description, quantity, price);
 		id.addItem(newItem);
 		System.out.println("Item added successfully");
 		showDashBoardAIV();
