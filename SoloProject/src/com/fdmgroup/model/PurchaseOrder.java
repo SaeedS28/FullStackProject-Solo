@@ -2,7 +2,22 @@ package com.fdmgroup.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity(name ="Purchase_Order_List")
+@Table(name="Purchase_Order_List")
 public class PurchaseOrder {
+	
+	@Id
+	@SequenceGenerator(name="product_order_generator", sequenceName = "pid_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_order_generator")
+	@Column(nullable=false)
 	private int purchaseID;
 	private Timestamp purchaseDate;
 	private String emailAddress;
@@ -10,9 +25,8 @@ public class PurchaseOrder {
 	private int quantity;
 	private double price;
 	
-	public PurchaseOrder(int purchaseID, Timestamp purchaseDate, String emailAddress, int productID, int quantity, double price) {
+	public PurchaseOrder(Timestamp purchaseDate, String emailAddress, int productID, int quantity, double price) {
 		super();
-		this.purchaseID = purchaseID;
 		this.purchaseDate = purchaseDate;
 		this.emailAddress = emailAddress;
 		this.productID = productID;
@@ -20,6 +34,8 @@ public class PurchaseOrder {
 		this.setPrice(price);
 	}
 
+	public PurchaseOrder() {}
+	
 	public int getPurchaseID() {
 		return purchaseID;
 	}
@@ -72,8 +88,4 @@ public class PurchaseOrder {
 		return "purchaseID = " + purchaseID + ", purchaseDate = " + purchaseDate + ", emailAddress = "
 				+ emailAddress + ", productID = " + productID + ", quantity = " + quantity + ", price = " + price;
 	}
-
-	
-	
-	
 }
