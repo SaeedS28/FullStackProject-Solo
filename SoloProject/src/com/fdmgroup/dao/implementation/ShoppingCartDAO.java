@@ -35,7 +35,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		}
 		else {
 			Item i = em.find(Item.class, pid);
-			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName(),u.getUsername(),i.getPrice(),quantity);
+			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName().toUpperCase(),u.getUsername(),i.getPrice(),quantity);
 			em.getTransaction().begin();
 			em.persist(sce);
 			em.getTransaction().commit();

@@ -42,9 +42,11 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 			item.setQuantity(item.getQuantity()-cart.get(i).getCartQuantity());
 			em.getTransaction().commit();
 		}
+		
 		for(int i=0; i<cart.size();i++) {
+			ShoppingCartItem sci = em.find(ShoppingCartItem.class, cart.get(i).getItemID());
 			em.getTransaction().begin();
-			em.remove(cart.get(i));
+			em.remove(sci);
 			em.getTransaction().commit();
 		}
 		
