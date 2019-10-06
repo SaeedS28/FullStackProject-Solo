@@ -5,82 +5,62 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
-
+import com.fdmgroup.model.ShoppingCartEntry;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
 
+
 public class ShoppingCartDAO implements IShoppingCartDAO {
 
+	EntityManagerFactory emf;
+	EntityManager em;
+
+	public ShoppingCartDAO() {
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();		
+	}
+
 	public boolean addItem(User u, int pid, int quantity) {
-		String query;
-		int retQuantity = getQuantity(u, pid);
-
-		if (retQuantity > 0) {
-			query = "Update shopping_cart " + "set quantity = quantity + ? " + "where email_address = ? and product_id = ?";
-		} else {
-			query = "Insert into shopping_cart(quantity, email_address, product_id) values (?,?,?)";
+		if(getQuantity(u, pid)>0) {
+			Query q = em.createQuery("Select s from Shopping_Cart_Entry s where s.userName like :name and s.productID = :pid",ShoppingCartEntry.class);
+			q.setParameter("name", u.getUsername());
+			q.setParameter("pid", pid);
+			ShoppingCartEntry sce = (ShoppingCartEntry) q.getSingleResult();
+			
+			em.getTransaction().begin();
+			sce.setItemQuantity(sce.getItemQuantity()+quantity);
+			em.getTransaction().commit();
 		}
-
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setInt(1, quantity);
-			stmt.setString(2, u.getUsername());
-			stmt.setInt(3, pid);
-			stmt.execute();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+		else {
+			ShoppingCartEntry sce = new ShoppingCartEntry(u.getUsername(), pid, quantity);
+			em.getTransaction().begin();
+			em.persist(sce);
+			em.getTransaction().commit();
 		}
 		return true;
 	}
 
 	public boolean removeItem(User u, int pid) {
-		String query = "Delete from shopping_cart where email_address = ? and product_id = ?";
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			stmt.setInt(2, pid);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		
 		return true;
 	}
 
-	public int getSize(User u) {
-		String query = "SELECT SUM(quantity) as cart_quantity " + "FROM shopping_cart "
-				+ "where shopping_cart.email_address like ?";
-		int size = 0;
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				if(rs.wasNull()) {
-					return 0;
-				}
-				size = rs.getInt("cart_quantity");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return size;
+	public int getSize(User u)  {
+		Query q = em.createQuery("Select s from Shopping_Cart_Entry s where s.userName like :name",ShoppingCartEntry.class);
+		q.setParameter("name", u.getUsername());
+		ShoppingCartEntry sce = (ShoppingCartEntry) q.getSingleResult();
+		System.out.println(sce);
+		return 0;
 	}
 
 	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
@@ -133,23 +113,16 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public int getQuantity(User u, int pid) {
-		String query = "Select Quantity from shopping_cart where email_address = ? and product_id = ?";
-		int quantity = 0;
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			stmt.setInt(2, pid);
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				quantity = quantity + rs.getInt("quantity");
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Query q = em.createQuery("Select s.itemQuantity from Shopping_Cart_Entry s where s.userName like :name and s.productID = :pid", Integer.class);
+		q.setParameter("name", u.getUsername());
+		q.setParameter("pid", pid);
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer> sce = (ArrayList<Integer>) q.getResultList();
+		
+		if(sce.size()==0) {
+			return 0;
 		}
-		return quantity;
+		return sce.get(0);
 	}
 
 	public boolean removeAllItem(User u) {
