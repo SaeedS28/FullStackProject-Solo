@@ -1,7 +1,5 @@
 package com.fdmgroup.dao.implementation;
 
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -12,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IPurchaseOrderDAO;
+import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
@@ -38,10 +37,17 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		}
 		
 		for(int i=0; i<cart.size();i++) {
+			Item item = em.find(Item.class, cart.get(i).getProductID());
+			em.getTransaction().begin();
+			item.setQuantity(item.getQuantity()-cart.get(i).getCartQuantity());
+			em.getTransaction().commit();
+		}
+		for(int i=0; i<cart.size();i++) {
 			em.getTransaction().begin();
 			em.remove(cart.get(i));
 			em.getTransaction().commit();
 		}
+		
 		return true;
 	}
 

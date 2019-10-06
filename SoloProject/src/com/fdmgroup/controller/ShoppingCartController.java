@@ -3,6 +3,10 @@ package com.fdmgroup.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
@@ -82,10 +86,21 @@ public class ShoppingCartController {
 	}
 
 	public void processOrders(User loggedInUser, ArrayList<ShoppingCartItem> sci) {
+		EntityManagerFactory emf;
+		EntityManager em;
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();		
+
+		for(int i=0;i<sci.size();i++) {
+			Item item = em.find(Item.class, sci.get(i).getProductID());
+			if(item.getQuantity()<sci.get(i).getCartQuantity()) {
+				System.out.println("Product inventory insufficient to complete the order. Nothing was processed");
+				ShoppingCartView sv = new ShoppingCartView();
+				sv.showDashBoard();
+			}
+		}
 		PurchaseOrderDAO pod = new PurchaseOrderDAO();
 		pod.addPurchaseOrder(loggedInUser, sci);
-		ShoppingCartDAO scd = new ShoppingCartDAO();
-		scd.removeAllItem(UserSession.getLoggedInUser().getUsername());
 		System.out.println("Order Processed successfully. Thank you for shopping with us!!!!");
 		ShoppingCartView sv = new ShoppingCartView();
 		sv.showDashBoard();
