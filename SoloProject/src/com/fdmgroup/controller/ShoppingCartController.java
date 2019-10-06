@@ -83,7 +83,7 @@ public class ShoppingCartController {
 		PurchaseOrderDAO pod = new PurchaseOrderDAO();
 		pod.addPurchaseOrder(loggedInUser, sci);
 		ShoppingCartDAO scd = new ShoppingCartDAO();
-		scd.removeAllItem(UserSession.getLoggedInUser());
+		scd.removeAllItem(UserSession.getLoggedInUser().getUsername());
 		System.out.println("Order Processed successfully. Thank you for shopping with us!!!!");
 		ShoppingCartView sv = new ShoppingCartView();
 		sv.showDashBoard();

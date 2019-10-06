@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.dao.implementation.AddressDAO;
+import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
@@ -13,12 +14,10 @@ import com.fdmgroup.view.RegularUserMainView;
 import com.fdmgroup.view.UserView;
 
 public class UserController {
-	private AddressDAO ad;
 	private UserView uv;
 	private Scanner scanner;
 	
 	public UserController() {
-		ad = new AddressDAO();
 		scanner = new Scanner(System.in);
 	}
 	
@@ -37,6 +36,8 @@ public class UserController {
 		}
 		userToDelete = users.get(i).getUsername();
 		ud.remove(users.get(i).getUsername());
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		scd.removeAllItem(userToDelete);
 		System.out.println(userToDelete + " was deleted successfully.");
 		uv.showDashboard();
 	}

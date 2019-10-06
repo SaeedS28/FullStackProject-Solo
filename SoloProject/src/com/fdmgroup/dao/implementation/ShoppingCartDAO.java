@@ -52,7 +52,14 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public boolean removeItem(User u, int pid) {
+		Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
+		q.setParameter("name", u.getUsername());
+		q.setParameter("pid", pid);
+		ShoppingCartItem sce = (ShoppingCartItem) q.getSingleResult();
 		
+		em.getTransaction().begin();
+		em.remove(sce);
+		em.getTransaction().commit();
 		return true;
 	}
 
@@ -130,19 +137,21 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		return sce.get(0);
 	}
 
-	public boolean removeAllItem(User u) {
-		String query = "Delete from shopping_cart where email_address = ?";
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+	public boolean removeAllItem(String userName) {
+		Query query = em.createQuery(
+				   "SELECT s FROM Shopping_Cart_Item s WHERE s.userName = :username", ShoppingCartItem.class);
+		query.setParameter("username", userName);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		if(sce.size()==0) {
+			return true;
+		}
+		
+		for(int j = 0; j < sce.size(); j++) {
+			em.getTransaction().begin();
+			em.remove(sce.get(j));
+			em.getTransaction().commit();
 		}
 		return true;
 	}
