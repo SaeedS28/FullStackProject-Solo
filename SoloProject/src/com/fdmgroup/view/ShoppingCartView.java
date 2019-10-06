@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.ShoppingCartController;
-
+import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.UserSession;
 
@@ -178,19 +178,21 @@ public class ShoppingCartView {
 	
 	private void getCartDetails() {
 		ShoppingCartController scc = new ShoppingCartController();
-		sci = scc.getCartDetails(UserSession.getLoggedInUser());
+//		sci = scc.getCartDetails(UserSession.getLoggedInUser());
 		
 		System.out.println("-------------------------------");
-		if(sci.size()==0) {
-			System.out.println("Nothing in the cart fam");
-		}
-		System.out.println("Cart total: "+ scc.getTotalPrice(UserSession.getLoggedInUser()));		
-		for (ShoppingCartItem scp : sci) {
-			System.out.println(scp);
-		}
-		
-		System.out.print("Press any key to go back");
-		scanner.nextLine();
+		ShoppingCartDAO scd = new ShoppingCartDAO();
+		System.out.println("Size of cart: "+scd.getSize(UserSession.getLoggedInUser()));
+//		if(sci.size()==0) {
+//			System.out.println("Nothing in the cart fam");
+//		}
+//		System.out.println("Cart total: "+ scc.getTotalPrice(UserSession.getLoggedInUser()));		
+//		for (ShoppingCartItem scp : sci) {
+//			System.out.println(scp);
+//		}
+//		
+//		System.out.print("Press any key to go back");
+//		scanner.nextLine();
 		showDashBoard();
 	}
 	

@@ -56,11 +56,15 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public int getSize(User u)  {
-		Query q = em.createQuery("Select s from Shopping_Cart_Entry s where s.userName like :name",ShoppingCartEntry.class);
+		Query q = em.createQuery("Select SUM(s.itemQuantity) from Shopping_Cart_Entry s where s.userName like :name",Long.class);
 		q.setParameter("name", u.getUsername());
-		ShoppingCartEntry sce = (ShoppingCartEntry) q.getSingleResult();
-		System.out.println(sce);
-		return 0;
+		@SuppressWarnings("unchecked")
+		ArrayList<Long> sce = (ArrayList<Long>) q.getResultList();
+		if(sce.size()==0) {
+			return 0;
+		}
+		Integer i = (int) (long) sce.get(0);
+		return i;
 	}
 
 	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
