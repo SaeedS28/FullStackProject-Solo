@@ -27,20 +27,17 @@ public class ShoppingCartItem {
 	private double price;
 	@Column(nullable=false)
 	private int cartQuantity;
-	@Column(nullable=false)
-	private int itemQuantity;
 	
 	public ShoppingCartItem() {}
 
 	public ShoppingCartItem(int productID, String productName, String userName, double price,
-			int cartQuantity, int itemQuantity) {
+			int cartQuantity) {
 		super();
 		this.productID = productID;
 		this.productName = productName;
 		this.userName = userName;
 		this.price = price;
 		this.cartQuantity = cartQuantity;
-		this.itemQuantity = itemQuantity;
 	}
 
 	public int getItemID() {
@@ -91,18 +88,9 @@ public class ShoppingCartItem {
 		this.cartQuantity = cartQuantity;
 	}
 
-	public int getItemQuantity() {
-		return itemQuantity;
-	}
-
-	public void setItemQuantity(int itemQuantity) {
-		this.itemQuantity = itemQuantity;
-	}
-
 	public String toString() {
-		return "itemID=" + itemID + ", productID=" + productID + ", productName=" + productName
-				+ ", userName=" + userName + ", price=" + price + ", cartQuantity=" + cartQuantity + ", itemQuantity="
-				+ itemQuantity;
+		return "itemID=" + itemID + ", productID =" + productID + ", productName =" + productName
+				+ ", " + ", price per unit =" + price + ", quantity =" + cartQuantity;
 	}
 	
 		

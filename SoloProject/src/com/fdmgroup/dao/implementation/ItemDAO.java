@@ -146,6 +146,22 @@ public class ItemDAO implements IItemDAO {
 		em.getTransaction().begin();
 		em.remove(i);
 		em.getTransaction().commit();
+		
+		Query query = em.createQuery(
+				   "SELECT s FROM Shopping_Cart_Item s WHERE s.productID = :pid", ShoppingCartItem.class);
+		query.setParameter("pid", pid);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		if(sce.size()==0) {
+			return true;
+		}
+		
+		for(int j = 0; j < sce.size(); j++) {
+			em.getTransaction().begin();
+			em.remove(sce.get(j));
+			em.getTransaction().commit();
+		}
 		return true;
 	}
 
