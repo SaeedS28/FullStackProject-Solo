@@ -20,72 +20,18 @@ import com.fdmgroup.util.DataSource;
 public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
 	public boolean addPurchaseOrder(User u, ArrayList<ShoppingCartItem> cart) {
-		String query = "insert into purchase_history values (?,?,?,?,?,?)";
 		
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			for (int i=0;i<cart.size();i++) {
-				stmt.setInt(1,getMaxPurchaseID());
-				stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-				stmt.setString(3, u.getUsername());
-				stmt.setInt(4,cart.get(i).getProductID());
-				stmt.setInt(5, cart.get(i).getQuantity());
-				stmt.setDouble(6, cart.get(i).getPrice());
-				stmt.executeUpdate();
-			}
-			ShoppingCartDAO del = new ShoppingCartDAO();
-			del.removeAllItem(u);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
 		return true;
 	}
 
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u) {
-		ArrayList<PurchaseOrder> po = new ArrayList<>();
-		String query = "Select * from purchase_history where email_address like ?";
-		try(Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt= con.prepareStatement(query);){
-			stmt.setString(1,u.getUsername());
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
-				int purchaseID = rs.getInt("purchase_id");
-				Timestamp ts = rs.getTimestamp("purchase_date");
-				String emailAddress = rs.getString("email_address");
-				int productID = rs.getInt("product_id");
-				double price = rs.getDouble("price_per_unit");
-				int quantity = rs.getInt("quantity");
-				po.add(new PurchaseOrder(purchaseID, ts, emailAddress, productID, quantity, price));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return po;
 		
+		return null;
 	}
 
-	public int getMaxPurchaseID() {
-		String query = "Select max(purchase_id) as purchase_count from purchase_history";
-		int maxPid = 0;
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				maxPid = rs.getInt("purchase_count");
-				if (rs.wasNull()) {
-					maxPid = 1;
-				} else {
-					++maxPid;
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return maxPid;
+	public ArrayList<PurchaseOrder> getAllPurchaseOrders() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

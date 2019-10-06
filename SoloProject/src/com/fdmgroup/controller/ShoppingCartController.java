@@ -66,7 +66,7 @@ public class ShoppingCartController {
 			sv.showDashBoard();
 		}
 		scd.addItem(UserSession.getLoggedInUser(), sci.getProductID(), quantity);
-		System.out.println("Modified "+quantity+" "+sci.getName()+" to your cart");
+		System.out.println("Modified "+quantity+" "+sci.getProductName()+" to your cart");
 		ShoppingCartView scv= new ShoppingCartView();
 		scv.showDashBoard();
 	}

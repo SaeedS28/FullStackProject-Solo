@@ -20,30 +20,27 @@ public class ShoppingCartItem {
 	@Column(nullable=false)
 	private int productID;
 	@Column(nullable=false)
-	private String name;
+	private String productName;
+	@Column(nullable=false)
+	private String userName;
 	@Column(nullable=false)
 	private double price;
-	@Column(nullable=false)
-	private String category;
-	@Column(nullable=false)
-	private String description;
 	@Column(nullable=false)
 	private int cartQuantity;
 	@Column(nullable=false)
 	private int itemQuantity;
 	
-	public ShoppingCartItem() {
+	public ShoppingCartItem() {}
+
+	public ShoppingCartItem(int productID, String productName, String userName, double price,
+			int cartQuantity, int itemQuantity) {
 		super();
-	}
-	
-	public ShoppingCartItem(int productID, String name, double price, String category, String description, int quantity, int itemQuantity) {
-		super();
-		this.productID=productID;
-		this.name = name;
+		this.productID = productID;
+		this.productName = productName;
+		this.userName = userName;
 		this.price = price;
-		this.description = description;
-		this.cartQuantity = quantity;
-		this.itemQuantity= itemQuantity;
+		this.cartQuantity = cartQuantity;
+		this.itemQuantity = itemQuantity;
 	}
 
 	public int getItemID() {
@@ -62,12 +59,20 @@ public class ShoppingCartItem {
 		this.productID = productID;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public double getPrice() {
@@ -76,22 +81,6 @@ public class ShoppingCartItem {
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public int getCartQuantity() {
@@ -110,12 +99,11 @@ public class ShoppingCartItem {
 		this.itemQuantity = itemQuantity;
 	}
 
-	@Override
 	public String toString() {
-		return "itemID=" + itemID + ", productID=" + productID + ", name=" + name + ", price=" + price
-				+ ", category=" + category + ", description=" + description + ", cartQuantity=" + cartQuantity
-				+ ", itemQuantity=" + itemQuantity;
+		return "itemID=" + itemID + ", productID=" + productID + ", productName=" + productName
+				+ ", userName=" + userName + ", price=" + price + ", cartQuantity=" + cartQuantity + ", itemQuantity="
+				+ itemQuantity;
 	}
-
 	
+		
 }

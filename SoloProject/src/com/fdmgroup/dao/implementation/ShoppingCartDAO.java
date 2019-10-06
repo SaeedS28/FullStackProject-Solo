@@ -32,17 +32,18 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 
 	public boolean addItem(User u, int pid, int quantity) {
 		if(getQuantity(u, pid)>0) {
-			Query q = em.createQuery("Select s from Shopping_Cart_Entry s where s.userName like :name and s.productID = :pid",ShoppingCartEntry.class);
+			Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
 			q.setParameter("name", u.getUsername());
 			q.setParameter("pid", pid);
-			ShoppingCartEntry sce = (ShoppingCartEntry) q.getSingleResult();
+			ShoppingCartItem sce = (ShoppingCartItem) q.getSingleResult();
 			
 			em.getTransaction().begin();
-			sce.setItemQuantity(sce.getItemQuantity()+quantity);
+			sce.setCartQuantity(sce.getCartQuantity()+quantity);
 			em.getTransaction().commit();
 		}
 		else {
-			ShoppingCartEntry sce = new ShoppingCartEntry(u.getUsername(), pid, quantity);
+			Item i = em.find(Item.class, pid);
+			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName(),u.getUsername(),i.getPrice(),quantity,i.getQuantity());
 			em.getTransaction().begin();
 			em.persist(sce);
 			em.getTransaction().commit();
@@ -56,7 +57,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public int getSize(User u)  {
-		Query q = em.createQuery("Select SUM(s.itemQuantity) from Shopping_Cart_Entry s where s.userName like :name",Long.class);
+		Query q = em.createQuery("Select SUM(s.cartQuantity) from Shopping_Cart_Item s where s.userName like :name",Long.class);
 		q.setParameter("name", u.getUsername());
 		@SuppressWarnings("unchecked")
 		ArrayList<Long> sce = (ArrayList<Long>) q.getResultList();
@@ -117,7 +118,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public int getQuantity(User u, int pid) {
-		Query q = em.createQuery("Select s.itemQuantity from Shopping_Cart_Entry s where s.userName like :name and s.productID = :pid", Integer.class);
+		Query q = em.createQuery("Select s.cartQuantity from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid", Integer.class);
 		q.setParameter("name", u.getUsername());
 		q.setParameter("pid", pid);
 		@SuppressWarnings("unchecked")

@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IItemDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.ShoppingCartItem;
 
 public class ItemDAO implements IItemDAO {
 
@@ -42,6 +43,22 @@ public class ItemDAO implements IItemDAO {
 		em.getTransaction().begin();
 		i.setName(name.toUpperCase());
 		em.getTransaction().commit();
+		
+		Query query = em.createQuery(
+				   "SELECT s FROM Shopping_Cart_Item s WHERE s.productID = :pid", ShoppingCartItem.class);
+		query.setParameter("pid", pid);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		if(sce.size()==0) {
+			return true;
+		}
+		
+		for(int j = 0; j < sce.size(); j++) {
+			em.getTransaction().begin();
+			sce.get(j).setProductName(name);
+			em.getTransaction().commit();
+		}
 		return true;
 	}
 
@@ -69,6 +86,22 @@ public class ItemDAO implements IItemDAO {
 		em.getTransaction().begin();
 		i.setPrice(price);
 		em.getTransaction().commit();
+		
+		Query query = em.createQuery(
+				   "SELECT s FROM Shopping_Cart_Item s WHERE s.productID = :pid", ShoppingCartItem.class);
+		query.setParameter("pid", pid);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		if(sce.size()==0) {
+			return true;
+		}
+		
+		for(int j = 0; j < sce.size(); j++) {
+			em.getTransaction().begin();
+			sce.get(j).setPrice(price);
+			em.getTransaction().commit();
+		}
 		return true;
 	}
 

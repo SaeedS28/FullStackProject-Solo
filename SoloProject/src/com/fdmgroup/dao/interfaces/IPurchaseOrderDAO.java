@@ -9,5 +9,6 @@ import com.fdmgroup.model.User;
 public interface IPurchaseOrderDAO {
 	public boolean addPurchaseOrder(User u, ArrayList<ShoppingCartItem> cart);
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u);
-	public int getMaxPurchaseID();
+	public ArrayList<PurchaseOrder> getAllPurchaseOrders();	// admin feature
+	
 }
