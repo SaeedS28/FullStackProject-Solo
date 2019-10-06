@@ -62,8 +62,8 @@ public class ShoppingCartController {
 		ShoppingCartDAO scd = new ShoppingCartDAO();
 		
 		if(scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity > itd.getItemQuantity(sci.getItemID())
-				|| scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity<0) {
-			System.out.println("Quantity maxed out or negative quantity. Nothing was modified from the cart");
+				|| scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity<=0) {
+			System.out.println("Quantity maxed out or non-positve quantity detected. Nothing was modified from the cart");
 			ShoppingCartView sv = new ShoppingCartView();
 			sv.showDashBoard();
 		}

@@ -70,6 +70,12 @@ public class AdminInventoryController {
 		showDashBoardAIV();
 	}
 	
+	public void updateName(int pid,String name) {
+		id.updateName(pid, name);
+		System.out.println("Name updated successfully");
+		showDashBoardAIV();
+	}
+	
 	public void updatePrice(int pid,double price) {
 		id.updatePrice(pid, price);
 		System.out.println("Price updated successfully");

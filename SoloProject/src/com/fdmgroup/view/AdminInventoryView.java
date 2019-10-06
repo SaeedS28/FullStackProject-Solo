@@ -25,11 +25,11 @@ public class AdminInventoryView {
 		System.out.println("3) Add item");
 		System.out.println("4) Add quantity");
 		System.out.println("5) Update price");
-		System.out.println("6) Update category");
-		System.out.println("7) Update description");
-		System.out.println("8) Delete Item");
-		System.out.println("9) Go back");
-		System.out.println("10) Logout");
+		System.out.println("6) Update name");
+		System.out.println("7) Update category");
+		System.out.println("8) Update description");
+		System.out.println("9) Delete Item");
+		System.out.println("10) Go back");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 
@@ -50,26 +50,49 @@ public class AdminInventoryView {
 			updatePrice();
 			break;
 		case "6":
-			updateCategory();
+			updateName();
 			break;
 		case "7":
-			updateDescription();
+			updateCategory();
 			break;
 		case "8":
-			deleteItem();
+			updateDescription();
 			break;
 		case "9":
-			AdminUserMainView acw = new AdminUserMainView();
-			acw.showDashboard();
+			deleteItem();
 			break;
 		case "10":
-			AuthenticationController ac = new AuthenticationController();
-			ac.logout();
+			AdminUserMainView aumv = new AdminUserMainView();
+			aumv.showDashboard();
 			break;
 		default:
 			System.out.println("The input was invalid.");
 			showDashBoard();
 		}
+	}
+
+	private void updateName() {
+		allItems = aic.getAllItems();
+		System.out.println("-------------------------------");
+
+		for (int i = 0; i < allItems.size(); i++) {
+			System.out.println(i + 1 + ") " + allItems.get(i));
+		}
+		if (allItems.size() == 0) {
+			System.out.println("All out of items!");
+			showDashBoard();
+		}
+
+		System.out.println("Enter the number on the side to update its name");
+		System.out.print(">>> ");
+		int choice = Integer.parseInt(scanner.nextLine());
+		if (choice - 1 < 0 || choice - 1 >= allItems.size()) {
+			System.out.println("Invalid choice. Bailing out");
+			showDashBoard();
+		}
+		System.out.print("Enter the new name: ");
+		String newName = scanner.nextLine();
+		aic.updateName(allItems.get(choice - 1).getProductID(), newName);
 	}
 
 	private void updateDescription() {
