@@ -19,10 +19,15 @@ public class PurchaseOrder {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_order_generator")
 	@Column(nullable=false)
 	private int purchaseID;
+	@Column(nullable=false)
 	private Timestamp purchaseDate;
+	@Column(nullable=false)
 	private String emailAddress;
+	@Column(nullable=false)
 	private int productID;
+	@Column(nullable=false)
 	private int quantity;
+	@Column(nullable=false)
 	private double price;
 	
 	public PurchaseOrder(Timestamp purchaseDate, String emailAddress, int productID, int quantity, double price) {

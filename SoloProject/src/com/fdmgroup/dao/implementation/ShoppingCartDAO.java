@@ -1,11 +1,6 @@
 package com.fdmgroup.dao.implementation;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,8 +11,6 @@ import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
-import com.fdmgroup.util.DataSource;
-
 
 public class ShoppingCartDAO implements IShoppingCartDAO {
 

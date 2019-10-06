@@ -22,7 +22,8 @@ public class AdminUserMainView {
 		System.out.println("Please select one of the options below: ");
 		System.out.println("1) Perform User related Activities");
 		System.out.println("2) Perform Inventory related Activities");
-		System.out.println("3) Logout");
+		System.out.println("3) See all processed orders ");
+		System.out.println("4) Logout");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 		
@@ -36,11 +37,18 @@ public class AdminUserMainView {
 			aiv.showDashBoard();
 			break;
 		case "3":
-			ac.logout();
+			showAllOrders();
 			break;
+		case "4":
+			ac.logout();
 		default:
 			System.out.println("The input was invalid.");
 			showDashboard();
 		}
+		
+	}
+
+	private void showAllOrders() {
+		
 	}
 }

@@ -3,35 +3,65 @@ package com.fdmgroup.dao.implementation;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IPurchaseOrderDAO;
-import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
-import com.fdmgroup.util.DataSource;
 
 public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
+	EntityManagerFactory emf;
+	EntityManager em;
+
+	public PurchaseOrderDAO() {
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();		
+	}
+	
 	public boolean addPurchaseOrder(User u, ArrayList<ShoppingCartItem> cart) {
+		for(int i=0; i<cart.size();i++) {
+			PurchaseOrder po = new PurchaseOrder(
+					new Timestamp(System.currentTimeMillis()), u.getUsername(), 
+					cart.get(i).getProductID(), cart.get(i).getCartQuantity(), 
+					cart.get(i).getPrice());
+			em.getTransaction().begin();
+			em.persist(po);
+			em.getTransaction().commit();
+		}
 		
+		for(int i=0; i<cart.size();i++) {
+			em.getTransaction().begin();
+			em.remove(cart.get(i));
+			em.getTransaction().commit();
+		}
 		return true;
 	}
 
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u) {
+		Query query = em.createQuery(
+				   "SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username", PurchaseOrder.class);
+		query.setParameter("username", u.getUsername());
 		
-		return null;
+		@SuppressWarnings("unchecked")
+		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		return sce;
 	}
 
 	public ArrayList<PurchaseOrder> getAllPurchaseOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery(
+				   "SELECT p FROM Purchase_Order_List p", PurchaseOrder.class);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		return sce;
 	}
 
 }
