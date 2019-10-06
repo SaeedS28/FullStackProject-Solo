@@ -89,8 +89,7 @@ public class ShoppingCartItem {
 	}
 
 	public String toString() {
-		return "itemID=" + itemID + ", productID =" + productID + ", productName =" + productName
-				+ ", " + ", price per unit =" + price + ", quantity =" + cartQuantity;
+		return "itemID = " + itemID + ", productName = " + productName+ ", price per unit = " + price + ", quantity = " + cartQuantity;
 	}
 	
 		

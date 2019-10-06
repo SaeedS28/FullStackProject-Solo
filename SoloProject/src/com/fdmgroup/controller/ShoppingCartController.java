@@ -3,6 +3,7 @@ package com.fdmgroup.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.Item;
@@ -54,12 +55,13 @@ public class ShoppingCartController {
 	}
 	
 	public void addQuantity(User u, ShoppingCartItem sci) {
+		ItemDAO itd = new ItemDAO();
 		System.out.print("Enter quantity (- to remove): ");
 		int quantity = Integer.parseInt(scanner.nextLine());
 		
 		ShoppingCartDAO scd = new ShoppingCartDAO();
 		
-		if(scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity > sci.getItemQuantity()
+		if(scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity > itd.getItemQuantity(sci.getItemID())
 				|| scd.getQuantity(UserSession.getLoggedInUser(), sci.getProductID())+quantity<0) {
 			System.out.println("Quantity maxed out or negative quantity. Nothing was modified from the cart");
 			ShoppingCartView sv = new ShoppingCartView();

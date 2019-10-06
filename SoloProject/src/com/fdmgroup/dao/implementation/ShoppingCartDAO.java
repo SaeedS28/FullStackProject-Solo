@@ -14,7 +14,6 @@ import javax.persistence.Query;
 
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
-import com.fdmgroup.model.ShoppingCartEntry;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.util.DataSource;
@@ -43,7 +42,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		}
 		else {
 			Item i = em.find(Item.class, pid);
-			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName(),u.getUsername(),i.getPrice(),quantity,i.getQuantity());
+			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName(),u.getUsername(),i.getPrice(),quantity);
 			em.getTransaction().begin();
 			em.persist(sce);
 			em.getTransaction().commit();
@@ -76,52 +75,26 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
-		String query = "Select item.product_id PRODUCT_ID, item.NAME NAME, " + "item.PRICE PRICE, "
-				+ "item.CATEGORY CATEGORY, " + "item.DESCRIPTION DESCRIPTION, item.quantity iqty, "
-				+ "shopping_cart.QUANTITY CART_QUANTITY " + "FROM shopping_cart " + "INNER JOIN item ON "
-				+ "shopping_cart.product_id = item.product_id " + "WHERE shopping_cart.email_address like ?";
-		ArrayList<ShoppingCartItem> cart = new ArrayList<>();
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				int productId = rs.getInt("PRODUCT_ID");
-				String name = rs.getString("NAME");
-				double price = rs.getDouble("PRICE");
-				String category = rs.getString("CATEGORY");
-				
-				String description = rs.getString("DESCRIPTION");
-				int quantity = rs.getInt("CART_QUANTITY");
-				int itemQty = rs.getInt("iqty");
-				cart.add(new ShoppingCartItem(productId, name, price, category, description, quantity,itemQty));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return cart;
+		Query query = em.createQuery(
+				   "SELECT s FROM Shopping_Cart_Item s WHERE s.userName = :username", ShoppingCartItem.class);
+		query.setParameter("username", u.getUsername());
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		return sce;
 	}
 
 	public double getCartTotal(User u) {
-		String query = "SELECT SUM(item.price*shopping_cart.quantity) as total_cart_price " + "FROM shopping_cart "
-				+ "INNER JOIN item ON " + "shopping_cart.product_id = item.product_id "
-				+ "where shopping_cart.email_address like ?";
-		double priceTotal = 0;
-		try (Connection con = DataSource.getInstance().getConnection();
-				PreparedStatement stmt = con.prepareStatement(query);) {
-			stmt.setString(1, u.getUsername());
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				priceTotal = rs.getDouble("total_cart_price");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Query q = em.createQuery("Select SUM(s.cartQuantity * s.price) from Shopping_Cart_Item s where s.userName like :name",Double.class);
+		q.setParameter("name", u.getUsername());
+		@SuppressWarnings("unchecked")
+		ArrayList<Double> sce = (ArrayList<Double>) q.getResultList();
+		
+		Double total =  sce.get(0);
+		if(total==null) {
+			return 0;
 		}
-		return priceTotal;
+		return total;
 	}
 
 	public int getQuantity(User u, int pid) {

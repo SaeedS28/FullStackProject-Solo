@@ -17,6 +17,8 @@ public class ShoppingCartView {
 	}
 	
 	public void showDashBoard() {
+		
+		System.out.println("-------------------------------");
 		System.out.println("Please select one of the options below: ");
 		System.out.println("1) Show Cart Details");
 		System.out.println("2) Add/Remove Quantity");
@@ -178,21 +180,21 @@ public class ShoppingCartView {
 	
 	private void getCartDetails() {
 		ShoppingCartController scc = new ShoppingCartController();
-//		sci = scc.getCartDetails(UserSession.getLoggedInUser());
+		sci = scc.getCartDetails(UserSession.getLoggedInUser());
 		
 		System.out.println("-------------------------------");
-		ShoppingCartDAO scd = new ShoppingCartDAO();
-		System.out.println("Size of cart: "+scd.getSize(UserSession.getLoggedInUser()));
-//		if(sci.size()==0) {
-//			System.out.println("Nothing in the cart fam");
-//		}
-//		System.out.println("Cart total: "+ scc.getTotalPrice(UserSession.getLoggedInUser()));		
-//		for (ShoppingCartItem scp : sci) {
-//			System.out.println(scp);
-//		}
-//		
-//		System.out.print("Press any key to go back");
-//		scanner.nextLine();
+		System.out.println();
+		if(sci.size()==0) {
+			System.out.println("Nothing in the cart fam");
+		}
+		System.out.println("Cart total: "+ scc.getTotalPrice(UserSession.getLoggedInUser()));		
+		for (ShoppingCartItem scp : sci) {
+			System.out.println(scp);
+		}
+		System.out.println();
+		
+		System.out.print("Press any key to go back");
+		scanner.nextLine();
 		showDashBoard();
 	}
 	
