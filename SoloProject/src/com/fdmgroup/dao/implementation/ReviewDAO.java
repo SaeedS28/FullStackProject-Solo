@@ -46,7 +46,12 @@ public class ReviewDAO implements IReviewDAO {
 	}
 	
 	public ArrayList<Review> retrieveReviews(int productID) {
+		Query q = em.createQuery("Select r from Review_List r where r.productID = :pid",Review.class);
+		q.setParameter("pid", productID);
+		@SuppressWarnings("unchecked")
+		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
 		
+		return rev;
 	}
 
 	public boolean removeReview(String userName, int productID) {
