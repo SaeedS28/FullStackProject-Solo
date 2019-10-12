@@ -7,7 +7,6 @@ import com.fdmgroup.model.Review;
 public interface IReviewDAO {
 	public boolean addReview(Review b);
 	public ArrayList<Review> retrieveReviews(int productID);
-	public boolean removeReview(String userName, int productID);
-	public Review retrieveReview(String userName, int productID);
-	
+	public boolean removeReviewForItem(int productID);
+	public boolean removeReviewForUser(String userName);
 }

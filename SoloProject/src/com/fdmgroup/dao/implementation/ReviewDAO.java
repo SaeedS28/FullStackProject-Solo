@@ -54,8 +54,32 @@ public class ReviewDAO implements IReviewDAO {
 		return rev;
 	}
 
-	public boolean removeReview(String userName, int productID) {
+	public boolean removeReviewForItem(int productID) {
+		Query q = em.createQuery("Select r from Review_List r where r.productID = :pid",Review.class);
+		q.setParameter("pid", productID);
+		@SuppressWarnings("unchecked")
+		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
 		
+		for(int i=0;i<rev.size();i++) {
+			em.getTransaction().begin();
+			em.remove(rev.get(i));
+			em.getTransaction().commit();
+		}
+		return true;
+	}
+
+	public boolean removeReviewForUser(String userName) {
+		Query q = em.createQuery("Select r from Review_List r where r.emailAddress like :userName",Review.class);
+		q.setParameter("userName", userName);
+		@SuppressWarnings("unchecked")
+		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
+		
+		for(int i=0;i<rev.size();i++) {
+			em.getTransaction().begin();
+			em.remove(rev.get(i));
+			em.getTransaction().commit();
+		}
+		return true;
 	}
 
 }

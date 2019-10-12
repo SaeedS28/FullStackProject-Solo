@@ -157,6 +157,9 @@ public class ItemDAO implements IItemDAO {
 			return true;
 		}
 		
+		ReviewDAO rd = new ReviewDAO();
+		rd.removeReviewForItem(pid);
+		
 		for(int j = 0; j < sce.size(); j++) {
 			em.getTransaction().begin();
 			em.remove(sce.get(j));
