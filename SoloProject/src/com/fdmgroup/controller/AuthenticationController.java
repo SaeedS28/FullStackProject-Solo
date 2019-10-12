@@ -1,7 +1,6 @@
 package com.fdmgroup.controller;
 
 import com.fdmgroup.dao.implementation.UserDAO;
-import com.fdmgroup.dao.interfaces.IUserDAO;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.AdminUserMainView;

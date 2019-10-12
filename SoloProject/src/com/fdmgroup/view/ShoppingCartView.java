@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.ShoppingCartController;
-import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.UserSession;
 

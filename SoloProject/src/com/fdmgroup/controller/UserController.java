@@ -3,10 +3,8 @@ package com.fdmgroup.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
-import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 import com.fdmgroup.view.AdminUserMainView;

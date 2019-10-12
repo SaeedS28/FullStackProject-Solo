@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AdminInventoryController;
-import com.fdmgroup.controller.AuthenticationController;
 import com.fdmgroup.model.Item;
 
 public class AdminInventoryView {
