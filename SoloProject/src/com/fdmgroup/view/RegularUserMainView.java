@@ -28,7 +28,8 @@ public class RegularUserMainView {
 		System.out.println("3) Go Shopping");
 		System.out.println("4) Shopping Cart");
 		System.out.println("5) See order history");
-		System.out.println("6) Logout");
+		System.out.println("6) Write a product review for an already purchased product");
+		System.out.println("7) Logout");
 		
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
@@ -54,12 +55,18 @@ public class RegularUserMainView {
 			seeOrderHistory();
 			break;
 		case "6":
+			writeReview();
+		case "7":
 			ac.logout();
 			break;
 		default:
 			System.out.println("The input was invalid.");
 			showDashboard();
 		}
+	}
+
+	private void writeReview() {
+		
 	}
 
 	private void seeOrderHistory() {

@@ -195,4 +195,16 @@ public class ItemDAO implements IItemDAO {
 		}
 		return i.get(0);
 	}
+
+	public ArrayList<Item> seePurchasedItemByUser(ArrayList<Integer> pids) {
+		ArrayList<Item> itemToFind = new ArrayList<>();
+		
+		for(int i=0;i<pids.size();i++) {
+			Item item = em.find(Item.class, pids.get(i));
+			if(item!=null) {
+				itemToFind.add(item);
+			}
+		}
+		return itemToFind;
+	}
 }

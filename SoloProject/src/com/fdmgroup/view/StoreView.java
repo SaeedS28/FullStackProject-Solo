@@ -23,7 +23,8 @@ public class StoreView {
 		System.out.println("2) Show items by category");
 		System.out.println("3) Show items by price range");
 		System.out.println("4) Search for an item by name");
-		System.out.println("5) Go back");
+		System.out.println("5) See Product Reviews");
+		System.out.println("6) Go back");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 
@@ -41,6 +42,9 @@ public class StoreView {
 			showItemsByName();
 			break;
 		case "5":
+			seeProductReviews();
+			break;
+		case "6":
 			RegularUserMainView rumv = new RegularUserMainView();
 			rumv.showDashboard();
 			break;
@@ -48,6 +52,10 @@ public class StoreView {
 			System.out.println("The input was invalid.");
 			showDashBoard();
 		}
+	}
+
+	private void seeProductReviews() {
+		
 	}
 
 	private void showItemsByName() {

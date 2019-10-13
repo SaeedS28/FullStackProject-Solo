@@ -72,4 +72,17 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		return sce;
 	}
 
+	public ArrayList<Item> getDistinctProductPurchasesByUser(User u) {
+		Query query = em.createQuery(
+				   "SELECT DISTINCT p.productID FROM Purchase_Order_List p where p.emailAddress like :name", Integer.class);
+		query.setParameter("name", u.getUsername());
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer> sce = (ArrayList<Integer>) query.getResultList();
+		if(sce.size()==0) {
+			return null;
+		}
+		ItemDAO itd = new ItemDAO();
+		return itd.seePurchasedItemByUser(sce);
+	}
+
 }
