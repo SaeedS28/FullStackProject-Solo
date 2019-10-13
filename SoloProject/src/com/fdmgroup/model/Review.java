@@ -92,7 +92,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "reviewID = " + reviewID + ", productID = " + productID + ", reviewText = " + reviewText
+		return "reviewID = " + reviewID + ", reviewText = " + reviewText
 				+ ", emailAddress = " + emailAddress + ", rating = " + rating + ", reviewDate = " + reviewDate;
 	}
 	

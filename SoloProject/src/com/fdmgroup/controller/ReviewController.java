@@ -18,4 +18,9 @@ public class ReviewController {
 		ReviewDAO rd = new ReviewDAO();
 		rd.addReview(r);
 	}
+	
+	public ArrayList<Review> getReviewByItem(int productID){
+		ReviewDAO rd = new ReviewDAO();
+		return rd.retrieveReviews(productID);
+	}
 }

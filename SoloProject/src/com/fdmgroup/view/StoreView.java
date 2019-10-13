@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AdminInventoryController;
+import com.fdmgroup.controller.ReviewController;
 import com.fdmgroup.controller.ShoppingCartController;
 import com.fdmgroup.controller.StoreController;
 import com.fdmgroup.dao.implementation.ReviewDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.Review;
 
 public class StoreView {
 	private Scanner scanner;
@@ -56,7 +58,49 @@ public class StoreView {
 	}
 
 	private void seeProductReviews() {
+		StoreController sc = new StoreController();
+		int userInput;
+		allItems = sc.getAllItems();
+
+		do {
+			System.out.println("-------------------------------");
+
+			if (allItems.size() == 0) {
+				System.out.println("All out of items!");
+				System.out.print("Press any key to go back: ");
+				scanner.nextLine();
+				showDashBoard();
+			}
+
+			System.out.println("All Items");
+			for (int i = 0; i < allItems.size(); i++) {
+				System.out.println(i + 1 + ") " + allItems.get(i));
+			}
+
+			System.out.println();
+			System.out.println("Choose an item to populate its reviews");
+			System.out.print(">>> ");
+			userInput = Integer.parseInt(scanner.nextLine());
+			if(userInput<1 || userInput>allItems.size()) {
+				System.out.println("Invalid choice, try again");
+				continue;
+			}
+			break;
+		} while (true);
+		ReviewController rc = new ReviewController();
+		ArrayList<Review> reviews = rc.getReviewByItem(allItems.get(userInput-1).getProductID());
 		
+		if (reviews.size() == 0) {
+			System.out.println("No review exists for this item.");
+		}
+		else {
+			for (Review review : reviews) {
+				System.out.println(review);
+			}
+		}
+		System.out.print("Press any key to go back: ");
+		scanner.nextLine();
+		showDashBoard();
 	}
 
 	private void showItemsByName() {

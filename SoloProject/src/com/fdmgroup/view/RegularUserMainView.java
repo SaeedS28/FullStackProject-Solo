@@ -117,7 +117,7 @@ public class RegularUserMainView {
 		Review rv = new Review(productID,reviewDesc,UserSession.getLoggedInUser().getUsername(), 
 				rating,new Timestamp(System.currentTimeMillis()));
 		rc.addReview(rv);
-		System.out.println("Added review for  "+purchased.get(productChoice-1).getName()+" successfully");
+		System.out.println("Added review for "+purchased.get(productChoice-1).getName()+" successfully");
 		showDashboard();
 	}
 
