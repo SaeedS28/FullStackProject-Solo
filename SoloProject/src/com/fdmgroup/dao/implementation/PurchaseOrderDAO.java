@@ -86,7 +86,7 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 	}
 
 	public ArrayList<Item> retrieveTopTenPurchases() {
-		Query query = em.createQuery("Select p.productID from purchase_order_list p "
+		Query query = em.createQuery("Select p.productID from Purchase_Order_List p "
 				+ "GROUP BY p.productID having sum(p.quantity) > 0 order by p.productID", Integer.class);
 		
 		@SuppressWarnings("unchecked")

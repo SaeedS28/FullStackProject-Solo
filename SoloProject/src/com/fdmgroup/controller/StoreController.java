@@ -3,6 +3,7 @@ package com.fdmgroup.controller;
 import java.util.ArrayList;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
+import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.model.Item;
 
 
@@ -31,5 +32,19 @@ public class StoreController {
 
 	public ArrayList<Item> getItemsByPriceRange(double minPrice, double maxPrice){
 		return id.getItemsByPriceRange(minPrice, maxPrice);
+	}
+	
+	public ArrayList<Item> getPopularItems(){
+		PurchaseOrderDAO pod = new PurchaseOrderDAO();
+		ArrayList<Item> popular = pod.retrieveTopTenPurchases();
+		if(popular == null) {
+			return null;
+		}
+		if(popular.size()>10) {
+			ArrayList<Item> topTen = new ArrayList<Item>();
+			topTen = (ArrayList<Item>) popular.subList(0, 10);
+			return topTen;
+		}
+		return popular;
 	}
 }

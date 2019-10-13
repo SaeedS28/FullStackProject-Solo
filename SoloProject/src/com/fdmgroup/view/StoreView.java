@@ -26,7 +26,8 @@ public class StoreView {
 		System.out.println("3) Show items by price range");
 		System.out.println("4) Search for an item by name");
 		System.out.println("5) See Product Reviews");
-		System.out.println("6) Go back");
+		System.out.println("6) See most popular products by purchases");
+		System.out.println("7) Go back");
 		System.out.print(">>> ");
 		String userInput = scanner.nextLine();
 
@@ -47,11 +48,52 @@ public class StoreView {
 			seeProductReviews();
 			break;
 		case "6":
+			showPopularItems();
+			break;
+		case "7":
 			RegularUserMainView rumv = new RegularUserMainView();
 			rumv.showDashboard();
 			break;
 		default:
 			System.out.println("The input was invalid.");
+			showDashBoard();
+		}
+	}
+
+	private void showPopularItems() {
+		StoreController sc = new StoreController();
+		String userInput;
+		allItems = sc.getPopularItems();
+
+		do {
+			System.out.println("-------------------------------");
+
+			if (allItems == null || allItems.size() == 0) {
+				System.out.println("All out of items!");
+				System.out.print("Press any key to go back: ");
+				scanner.nextLine();
+				showDashBoard();
+			}
+
+			System.out.println("Popular Items");
+			for (int i = 0; i < allItems.size(); i++) {
+				System.out.println(i + 1 + ") " + allItems.get(i));
+			}
+
+			System.out.println();
+			System.out.println("1) Add item to cart");
+			System.out.println("2) Go back");
+			System.out.print(">>> ");
+			userInput = scanner.nextLine();
+
+			if (!userInput.equals("1") && !userInput.equals("2")) {
+				System.out.println("Invalid choice. Try again");
+			}
+		} while (!userInput.equals("1") && !userInput.equals("2"));
+
+		if (userInput.equals("1")) {
+			addToCart(allItems);
+		} else {
 			showDashBoard();
 		}
 	}
