@@ -85,4 +85,16 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		return itd.seePurchasedItemByUser(sce);
 	}
 
+	public ArrayList<Item> retrieveTopTenPurchases() {
+		Query query = em.createQuery("Select p.productID from purchase_order_list p "
+				+ "GROUP BY p.productID having sum(p.quantity) > 0 order by p.productID", Integer.class);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer> sce = (ArrayList<Integer>) query.getResultList();
+		if(sce.size()==0) {
+			return null;
+		}
+		ItemDAO itd = new ItemDAO();
+		return itd.seePurchasedItemByUser(sce);
+	}
 }

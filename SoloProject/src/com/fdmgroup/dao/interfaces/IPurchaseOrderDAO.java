@@ -12,4 +12,5 @@ public interface IPurchaseOrderDAO {
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u);
 	public ArrayList<PurchaseOrder> getAllPurchaseOrders();	// admin feature
 	public ArrayList<Item> getDistinctProductPurchasesByUser(User u);
+	public ArrayList<Item> retrieveTopTenPurchases();
 }

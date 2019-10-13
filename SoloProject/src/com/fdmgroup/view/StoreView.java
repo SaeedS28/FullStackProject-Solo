@@ -7,7 +7,6 @@ import com.fdmgroup.controller.AdminInventoryController;
 import com.fdmgroup.controller.ReviewController;
 import com.fdmgroup.controller.ShoppingCartController;
 import com.fdmgroup.controller.StoreController;
-import com.fdmgroup.dao.implementation.ReviewDAO;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.Review;
 
