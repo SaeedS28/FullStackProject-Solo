@@ -1,11 +1,16 @@
 package com.fdmgroup.view;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.fdmgroup.controller.AuthenticationController;
+import com.fdmgroup.controller.ReviewController;
 import com.fdmgroup.controller.ShoppingCartController;
+import com.fdmgroup.controller.UserController;
+import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
+import com.fdmgroup.model.Review;
 import com.fdmgroup.model.UserSession;
 
 public class RegularUserMainView {
@@ -56,6 +61,7 @@ public class RegularUserMainView {
 			break;
 		case "6":
 			writeReview();
+			break;
 		case "7":
 			ac.logout();
 			break;
@@ -66,7 +72,53 @@ public class RegularUserMainView {
 	}
 
 	private void writeReview() {
+		ReviewController rc = new ReviewController();
+		ArrayList<Item> purchased = rc.getAllPurchasedItems(UserSession.getLoggedInUser());
+		System.out.println("-------------------------------");
+		if(purchased==null) {
+			System.out.println("You cannot add a review because you haven't made a purchase yet");
+			System.out.println("Press enter to go back: ");
+			scanner.nextLine();
+			showDashboard();
+		}
+		int productChoice;
+		do {
+			System.out.println("Products bought");
+			for(int i =0;i<purchased.size();i++) {
+				System.out.println(i+1+") "+ purchased.get(i).getName()+ "\t"+purchased.get(i).getCategory());
+			}
+			
+			System.out.println("Choose an item to write a review: ");
+			System.out.print(">>> ");
+			productChoice =Integer.parseInt(scanner.nextLine());
+			if(productChoice<1||productChoice>purchased.size()) {
+				System.out.println("Invalid choice, try again");
+				System.out.println("-------------------------------");
+				continue;
+			}
+			break;
+		} while(true);
 		
+		int productID = purchased.get(productChoice-1).getProductID();
+		int rating;
+		
+		System.out.print("Enter review text: ");
+		String reviewDesc = scanner.nextLine();
+		
+		while(true) {
+			System.out.print("Enter a rating from 1 to 5 (1-horrible   5-excellent): ");
+			rating = Integer.parseInt(scanner.nextLine());
+			if(rating < 1 || rating > 5) {
+				System.out.println("Invalid rating, try again");
+				continue;
+			}
+			break;
+		}
+		Review rv = new Review(productID,reviewDesc,UserSession.getLoggedInUser().getUsername(), 
+				rating,new Timestamp(System.currentTimeMillis()));
+		rc.addReview(rv);
+		System.out.println("Added review for  "+purchased.get(productChoice-1).getName()+" successfully");
+		showDashboard();
 	}
 
 	private void seeOrderHistory() {
