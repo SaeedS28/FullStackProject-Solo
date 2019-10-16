@@ -1,0 +1,97 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="StyleSheet" href="Styles.css" />
+<link rel="StyleSheet" href="Payment.css" type="text/css" />
+<style>
+	#cartEmpty{
+   		width: 790px;
+    	height: 100px;
+
+    	position: absolute;
+    	top:0;
+    	bottom: 0;
+    	left: 0;
+    	right: 0;
+
+    	margin: auto;	
+	}
+</style>
+<title>Payment</title>
+</head>
+	
+<body>
+<div class="row">
+  <div class="col-50">
+    <div class="container">
+      <form action="/Bookstore/Checkout" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"> Full Name</label>
+            <input type="text" id="fname" name="firstname" value="" required="true"/>
+            <label for="adr">Address</label>
+            <input type="text" id="adr" name="address" value="" required="true"/>
+            <label for="city"> City</label>
+            <input type="text" id="city" name="city" value="" required="true"/>
+
+            <div class="row">
+              <div class="col-50">
+                <label for="state">Province</label>
+                <input type="text" id="province" name="province" value="" required/>
+              </div>
+              <div class="col-50">
+                <label for="postalcode">Postal Code</label>
+                <input type="text" id="postalcode" name="postalcode" value="" required/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Payment</h3>
+			<div class="row">
+              <div class="col-50">
+              	<label for="cname">First name on card</label>
+            	<input type="text" id="cfname" name="cardfname" placeholder="John" required="true"/>
+              </div>
+              <div class="col-50">
+             	 <label for="cname">Last name on card</label>
+           		 <input type="text" id="clname" name="cardlname" placeholder="Cena" required="true"/>
+              </div>
+            </div>
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required="true"/>
+            
+            <div class="row">
+              <div class="col-50">
+                <label for="expmonth">Expiry Month</label>
+                <input type="number" id="expmonth" name="expmonth" placeholder="01"  required="true"/>
+              </div>
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="number" id="expyear" name="expyear" placeholder="2018" required="true"/>
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv" name="cvv" placeholder="000" size="3" required="true"/>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <input type="submit" value="Confirm order" class="btn" name="submit" onclick="return validateInfo();"/>
+      </form>
+    </div>
+  </div>
+  <div class="col-50">
+    <div class="container" id="cartContainer">
+    	cart details go here
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
+</jsp:root>
