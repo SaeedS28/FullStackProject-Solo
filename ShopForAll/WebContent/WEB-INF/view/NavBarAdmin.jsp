@@ -47,7 +47,8 @@
 				<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
-			</ul>
+				<li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+				</ul>
 		</div>
 	</nav>
 	<div id="setting" class="modal">

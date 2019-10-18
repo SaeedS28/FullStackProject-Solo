@@ -40,7 +40,7 @@
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-door-open"></span> Log out</a></li>
+				<li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
 			</ul>
 		</div>
 	</nav>
