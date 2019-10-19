@@ -137,7 +137,8 @@
 			<%
 			ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
  			for(int i = 0; i< allUsers.size();i++) { %>
-				 <a href=""><%= allUsers.get(i).getUsername()+"    "+allUsers.get(i).getFirstname() + " " +allUsers.get(i).getLastname() %></a>
+				 <a href="DeleteUser?username=<%= allUsers.get(i).getUsername()%> "><%= allUsers.get(i).getUsername()+"    "+allUsers.get(i).getFirstname() + " " +allUsers.get(i).getLastname()
+				 + "    " + allUsers.get(i).getType() %></a>
 			<% } %>
 			</div>
 		</div>

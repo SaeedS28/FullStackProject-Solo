@@ -41,4 +41,13 @@
     <servlet-name>AddUser</servlet-name>
     <url-pattern>/AddUser</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/DeleteUser</url-pattern>
+  </servlet-mapping>
 </web-app>
