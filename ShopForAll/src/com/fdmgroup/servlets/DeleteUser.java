@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.model.User;
 
@@ -46,6 +46,8 @@ public class DeleteUser extends HttpServlet {
 		}
 		else {
 			ud.remove(userName);
+			ShoppingCartDAO scd = new ShoppingCartDAO();
+			scd.removeAllItem(userName);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			out.println("<script type=\"text/javascript\">");
