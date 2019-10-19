@@ -2,6 +2,7 @@ package com.fdmgroup.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +39,7 @@ public class MainPage extends HttpServlet {
 			request.setAttribute("allUsers", allUsers);
 		}
 		
-		ArrayList<Item> topPurchases = getTopNinePurchases();
+		List<Item> topPurchases = getTopNinePurchases();
 		request.setAttribute("topPurchase", topPurchases);
 		request.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(request, response);
 	}
@@ -56,12 +57,12 @@ public class MainPage extends HttpServlet {
 		return  ud.getAllUsers();
 	}
 	
-	public ArrayList<Item> getTopNinePurchases(){
+	public List<Item> getTopNinePurchases(){
 		PurchaseOrderDAO pod = new PurchaseOrderDAO();
-		ArrayList<Item> popular = pod.retrieveTopTenPurchases();
+		List<Item> popular = pod.retrieveTopTenPurchases();
 		
-		ArrayList<Item> topNine = new ArrayList<Item>();
-		topNine = (ArrayList<Item>) popular.subList(0,9);
+		List<Item> topNine = new ArrayList<Item>();
+		topNine = popular.subList(0,9);
 		return topNine;
 	}
 }

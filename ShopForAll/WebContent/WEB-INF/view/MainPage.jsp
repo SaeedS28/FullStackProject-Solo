@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.fdmgroup.model.Item"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.fdmgroup.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -53,97 +56,96 @@ User loggedIn = (User)session.getAttribute("user");
 		</div>
 	</div>
 	<h1 style="text-align: center">Most popular items</h1>
+		<% List<Item> pop = (List<Item>) request.getAttribute("topPurchase"); %>
 	<div class="sales">
 		<table border="1" align="center" style="text-align: center;">
 			<tr>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+						href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
-				</a></td><td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+						<h4><%= pop.get(0).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(0).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(0).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(0).getDescription() %></h6>
+				</a></td>
+				<td style="width: 300px; height: 400"><a
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
+						<h4><%= pop.get(1).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(1).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(1).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(1).getDescription() %></h6>
 						
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
-						
+						<h4><%= pop.get(2).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(2).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(2).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(2).getDescription() %></h6>						
 				</a></td>
 			</tr>
 			<tr>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
+						<h4><%= pop.get(3).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(3).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(3).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(3).getDescription() %></h6>
+				</a></td>
+				<td style="width: 300px; height: 400"><a
+					href=""> <img
+						src="image/heroImg.jpg"
+						style="height: 100%; width: 100%" /> 
+						<h4><%= pop.get(4).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(4).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(4).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(4).getDescription() %></h6>
 						
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
-						
-				</a></td>
-				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
-						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
+						<h4><%= pop.get(5).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(5).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(5).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(5).getDescription() %></h6>
 				</a></td>
 			</tr>
 			<tr>
 			<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
-						
+						<h4><%= pop.get(6).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(6).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(6).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(6).getDescription() %></h6>
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
-									</a></td>
+						<h4><%= pop.get(7).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(7).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(7).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(7).getDescription() %></h6>
+				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href="/Bookstore/Book?bid=${randbook0}"> <img
-						src="../WebContent/images/heroImg.jpg"
+					href=""> <img
+						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
-						<h4>Tailored Jeans</h4>
-						<h6 class="price">$19.99</h6>
-						<h6>Some text about the jeans. Super slim and comfy lorem ipsum
-							lorem jeansum. Lorem jeamsun denim lorem jeansum.</h6>
+						<h4><%= pop.get(8).getName() %></h4>
+						<h6 class="price">Price: <%= pop.get(8).getPrice() %></h6>
+						<h6 class="price">Quantity: <%= pop.get(8).getQuantity() %></h6>
+						<h6 class="price"> <%= pop.get(8).getDescription() %></h6>
 				</a></td>
 			</tr>
 		</table>
