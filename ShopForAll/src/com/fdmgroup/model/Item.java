@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="Item_List")
 public class Item {
 	@Id
-	@SequenceGenerator(name="id_generator", sequenceName = "product_id_seq")
+	@SequenceGenerator(name="id_generator", sequenceName = "product_id_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
 	@Column(nullable=false)
 	private int productID;

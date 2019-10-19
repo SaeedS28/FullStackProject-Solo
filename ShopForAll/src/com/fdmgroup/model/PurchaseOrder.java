@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class PurchaseOrder {
 	
 	@Id
-	@SequenceGenerator(name="product_order_generator", sequenceName = "pid_seq")
+	@SequenceGenerator(name="product_order_generator", sequenceName = "pid_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_order_generator")
 	@Column(nullable=false)
 	private int purchaseID;

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
+import com.fdmgroup.model.Item;
 import com.fdmgroup.model.User;
 
 /**
@@ -35,6 +37,9 @@ public class MainPage extends HttpServlet {
 			ArrayList<User> allUsers = getAllUsers();
 			request.setAttribute("allUsers", allUsers);
 		}
+		
+		ArrayList<Item> topPurchases = getTopNinePurchases();
+		request.setAttribute("topPurchase", topPurchases);
 		request.getRequestDispatcher("/WEB-INF/view/MainPage.jsp").forward(request, response);
 	}
 
@@ -49,5 +54,14 @@ public class MainPage extends HttpServlet {
 	public ArrayList<User> getAllUsers(){
 		UserDAO ud = new UserDAO();
 		return  ud.getAllUsers();
+	}
+	
+	public ArrayList<Item> getTopNinePurchases(){
+		PurchaseOrderDAO pod = new PurchaseOrderDAO();
+		ArrayList<Item> popular = pod.retrieveTopTenPurchases();
+		
+		ArrayList<Item> topNine = new ArrayList<Item>();
+		topNine = (ArrayList<Item>) popular.subList(0,9);
+		return topNine;
 	}
 }

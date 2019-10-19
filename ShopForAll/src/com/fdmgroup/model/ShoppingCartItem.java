@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 public class ShoppingCartItem {
 	@Id
-	@SequenceGenerator(name="iid_generator", sequenceName = "Item_id_seq")
+	@SequenceGenerator(name="iid_generator", sequenceName = "Item_id_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "iid_generator")
 	@Column(nullable=false)
 	private int itemID;
