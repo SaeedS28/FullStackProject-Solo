@@ -36,7 +36,7 @@ public class MainPage extends HttpServlet {
 		User loggedIn = (User) request.getSession().getAttribute("user");
 		if(loggedIn.getType().equals("admin")) {
 			ArrayList<User> allUsers = getAllUsers();
-			request.setAttribute("allUsers", allUsers);
+			request.getSession().setAttribute("allUsers", allUsers);
 		}
 		
 		List<Item> topPurchases = getTopNinePurchases();

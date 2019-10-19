@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.fdmgroup.model.User"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -132,17 +133,15 @@
 				<span onclick="document.getElementById('deleteUsers').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
-			<div class="container" style="text-align: left;">
-			
-			<%
-			ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
- 			for(int i = 0; i< allUsers.size();i++) { %>
-				 <a href="DeleteUser?username=<%= allUsers.get(i).getUsername()%> "><%= allUsers.get(i).getUsername()+"    "+allUsers.get(i).getFirstname() + " " +allUsers.get(i).getLastname()
-				 + "    " + allUsers.get(i).getType() %></a>
-			<% } %>
+			<div style="text-align: center; margin-left: 0;">
+			 <ul  style="font-size: 1.5em; list-style-type:none;">
+			 <c:forEach items="${allUsers}" var="allUsers">
+<li><a href="DeleteUser?username=${allUsers.username}" style="color: black;">${allUsers.username} &nbsp; ${allUsers.firstname} ${allUsers.lastname} &nbsp; ${allUsers.type}</a></li>
+			</c:forEach>
+			</ul>
 			</div>
-		</div>
-		</div>
+			</div>
+			</div>
 		
 		<div id="addItem" class="modal">
 		<form class="modal-content animate" action="" method="post">
@@ -196,7 +195,7 @@
 				placeholder="New Province" name="province" required> <label
 				for="country"><b>Country</b></label> <input type="text"
 				placeholder="New Country" name="country" required> <label
-				for="pCode"><b>Province</b></label> <input type="text"
+				for="pCode"><b>Postal Code</b></label> <input type="text"
 				placeholder="New Postal Code" name="pCode" required>
 			<button type="submit" name="addUserButton" value="pressed">Add New User</button>
 			</div>

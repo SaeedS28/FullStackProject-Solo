@@ -2,6 +2,7 @@ package com.fdmgroup.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,8 @@ public class DeleteUser extends HttpServlet {
 			ShoppingCartDAO scd = new ShoppingCartDAO();
 			scd.removeAllItem(userName);
 			PrintWriter out = response.getWriter();
+			ArrayList<User> allUsers = getAllUsers();
+			request.getSession().setAttribute("allUsers", allUsers);
 			response.setContentType("text/html");
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Account with username "+userName+" deleted successfully');");
@@ -63,6 +66,11 @@ public class DeleteUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	public ArrayList<User> getAllUsers(){
+		UserDAO ud = new UserDAO();
+		return  ud.getAllUsers();
 	}
 
 }

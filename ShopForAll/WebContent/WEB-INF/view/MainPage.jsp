@@ -61,7 +61,7 @@ User loggedIn = (User)session.getAttribute("user");
 		<table border="1" align="center" style="text-align: center;">
 			<tr>
 				<td style="width: 300px; height: 400"><a
-						href=""> <img
+						href="ProductPage?pid=<%= pop.get(0).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(0).getName() %></h4>
@@ -70,7 +70,7 @@ User loggedIn = (User)session.getAttribute("user");
 						<h6 class="price"> <%= pop.get(0).getDescription() %></h6>
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(1).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(1).getName() %></h4>
@@ -80,7 +80,7 @@ User loggedIn = (User)session.getAttribute("user");
 						
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(2).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(2).getName() %></h4>
@@ -91,7 +91,7 @@ User loggedIn = (User)session.getAttribute("user");
 			</tr>
 			<tr>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+				href="ProductPage?pid=<%= pop.get(3).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(3).getName() %></h4>
@@ -100,7 +100,7 @@ User loggedIn = (User)session.getAttribute("user");
 						<h6 class="price"> <%= pop.get(3).getDescription() %></h6>
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(4).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(4).getName() %></h4>
@@ -110,7 +110,7 @@ User loggedIn = (User)session.getAttribute("user");
 						
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(5).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(5).getName() %></h4>
@@ -121,7 +121,7 @@ User loggedIn = (User)session.getAttribute("user");
 			</tr>
 			<tr>
 			<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(6).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(6).getName() %></h4>
@@ -130,7 +130,7 @@ User loggedIn = (User)session.getAttribute("user");
 						<h6 class="price"> <%= pop.get(6).getDescription() %></h6>
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(7).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(7).getName() %></h4>
@@ -139,7 +139,7 @@ User loggedIn = (User)session.getAttribute("user");
 						<h6 class="price"> <%= pop.get(7).getDescription() %></h6>
 				</a></td>
 				<td style="width: 300px; height: 400"><a
-					href=""> <img
+					href="ProductPage?pid=<%= pop.get(8).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= pop.get(8).getName() %></h4>
