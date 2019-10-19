@@ -41,15 +41,7 @@ body{
 </style>
 </head>
 <body>
-<%
-User loggedIn = (User)session.getAttribute("user");
- if(loggedIn.getType().equals("admin")) { %>
 	<jsp:include page="NavBarAdmin.jsp" />
-<% 
- }
- else{ %>
-	<jsp:include page="NavBarUser.jsp" />
-<% } %>
 	<div class="parallax">
 		<div class="hero-text">
 			<h1 style="font-size: 50px">For all your shopping needs</h1>

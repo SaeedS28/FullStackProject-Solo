@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>NavBar</title>
 </head>
 <body>
 <link rel="stylesheet"
@@ -21,6 +21,7 @@
 </head>
 </head>
 <body>
+<% User loggedIn = (User)session.getAttribute("user"); %>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -35,14 +36,17 @@
 						<li><a href="#" onclick="document.getElementById('name').style.display='block'">Name</a></li>
 						<li><a href="#" onclick="document.getElementById('cat').style.display='block'">Category</a></li>
 					</ul>
+				<% if(loggedIn.getType().equals("admin")){ %>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+					data-toggle="dropdown" href="">Users <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#" onclick="document.getElementById('addUsers').style.display='block'">Add Users</a></li>
 						<li><a href="#" onclick="document.getElementById('deleteUsers').style.display='block'">Delete Users</a></li>
 					</ul>
 				<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
 				<li><a href="#"> See Customers History</a></li>
+				<% } %>
+				<li><a href="">Contact Us</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -50,6 +54,9 @@
 				<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
+						<% if(loggedIn.getType().equals("regular")){ %>
+							<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+						<% } %>
 				<li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
 				</ul>
 		</div>
@@ -67,12 +74,34 @@
 					name="cPassword" required> <label for="nPassword"><b>New
 						Password</b></label> <input type="password" placeholder="Enter New Password"
 					name="nPassword" required> <label for="rPassword"><b>Confirm
-						Password</b></label> <input type="password" placeholder="Re-enter Password"
+						Password</b></label> <input type="password" placeholder="Enter New Password"
 					name="Password" required>
 
 				<button type="submit">Change Password</button>
 			</div>
 		</form>
+		<% if(loggedIn.getType().equals("regular")){ %>
+	<form class="modal-content animate" action="" method="post">
+			<h3>Change Address</h3>
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('id01').style.display='none'"
+					class="close" title="Close Modal">&times;</span>
+			</div>
+			<div class="container">
+			<label for="street"><b>Street Address</b></label> <input type="text"
+				placeholder="New Street Address" name="street" required> <label
+				for="city"><b>City</b></label> <input type="text"
+				placeholder="New City" name="city" required> <label
+				for="province"><b>Province</b></label> <input type="text"
+				placeholder="New Province" name="province" required> <label
+				for="country"><b>Country</b></label> <input type="text"
+				placeholder="New Country" name="country" required> <label
+				for="pCode"><b>Province</b></label> <input type="text"
+				placeholder="New Postal Code" name="pCode" required>
+			<button type="submit">Change Address</button>
+			</div>
+		</form>
+		<%} %>
 		</div>
 			
 		<div id="priceRange" class="modal">
