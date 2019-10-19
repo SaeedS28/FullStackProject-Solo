@@ -35,7 +35,9 @@
 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>
 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
 		 <button onclick="document.getElementById('changePrice').style.display='block'">>Change Price</button>
-		 <button>Delete Item</button>
+		 <form action="DeleteItem" method="post">
+		 	<button name="delButt" value="${itemInfo.productID}" >Delete Item</button>
+		 </form>
 		 <% } %>
 	</div>
 	
