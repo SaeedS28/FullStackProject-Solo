@@ -43,6 +43,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>ChangePrice</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ChangePrice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangePrice</servlet-name>
+    <url-pattern>/ChangePrice</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ChangeDescription</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeDescription</servlet-class>
   </servlet>
