@@ -185,7 +185,7 @@
 				for="price"><b>Price</b></label> <input type="number"
 				placeholder="New Product Price" name="pPrice" required step="0.01" min="0.01"> <label
 				for="pQuantity"><b>Quantity</b></label> <input type="number"
-				placeholder="New Product Quantity" name="pQuantity" required min="1"> <label
+				placeholder="New Product Quantity" name="pQuantity" min="1" required > <label
 				for="pDesc"><b>Description</b></label> <input type="text"
 				placeholder="New Product Description" name="pDesc" required> <label
 				for="pCat"><b>Category</b></label> <input type="text"
