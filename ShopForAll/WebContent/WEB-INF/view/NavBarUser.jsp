@@ -1,3 +1,4 @@
+<%@page import="com.fdmgroup.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,7 +36,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						User</a></li>
+						<%= ((User)session.getAttribute("user")).getFirstname() +" " +((User)session.getAttribute("user")).getLastname() %></a></li>
 				<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>

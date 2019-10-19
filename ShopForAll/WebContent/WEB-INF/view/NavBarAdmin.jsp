@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.fdmgroup.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,14 +38,14 @@
 					data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#" onclick="document.getElementById('addUsers').style.display='block'">Add Users</a></li>
-						<li><a href="#">Delete Users</a></li>
+						<li><a href="#" onclick="document.getElementById('deleteUsers').style.display='block'">Delete Users</a></li>
 					</ul>
 				<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
 				<li><a href="#"> See Customers History</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-						User</a></li>
+						<%= ((User)session.getAttribute("user")).getFirstname() +" " +((User)session.getAttribute("user")).getLastname() %></a></li>
 				<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
@@ -120,6 +122,25 @@
 				 <a href="">Category D </a>
 			</div>
 		</form>
+		</div>
+		
+		<div id="deleteUsers" class="modal">
+		<div class="modal-content animate">
+			<h3>Delete Users</h3>
+			<h4>Click on a user to delete it</h4>
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('deleteUsers').style.display='none'"
+					class="close" title="Close Modal">&times;</span>
+			</div>
+			<div class="container" style="text-align: left;">
+			
+			<%
+			ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("allUsers");
+ 			for(int i = 0; i< allUsers.size();i++) { %>
+				 <a href=""><%= allUsers.get(i).getUsername()+"    "+allUsers.get(i).getFirstname() + " " +allUsers.get(i).getLastname() %></a>
+			<% } %>
+			</div>
+		</div>
 		</div>
 		
 		<div id="addItem" class="modal">
