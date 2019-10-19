@@ -90,7 +90,7 @@
 		</div>
 		
 	<div id="changeCat" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="ChangeCategory" method="post">
 			<h3>Change product category</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('changeCat').style.display='none'"
@@ -100,7 +100,7 @@
 				<label for="pCat"><b>Product Category</b></label> <input
 					type="text" placeholder="Enter a new Product category"
 					name="pCat" required> 
-				<button type="submit" name="productCat" value="${itemInfo.productID}">Change Category</button>
+				<button type="submit" name="pid" value="${itemInfo.productID}">Change Category</button>
 			</div>
 		</form>
 		</div>

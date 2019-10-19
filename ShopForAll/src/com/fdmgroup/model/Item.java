@@ -38,7 +38,7 @@ public class Item {
 		this.name=name;
 		this.description = description;
 		this.quantity = quantity;
-		this.category = category;
+		this.category = category.toUpperCase();
 		this.setPrice(price);
 	}
 
