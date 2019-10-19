@@ -146,8 +146,8 @@
 		</div>
 		
 		<div id="addUsers" class="modal">
-		<form class="modal-content animate" action="" method="post">
-			<h3>Add new User</h3>
+		<form class="modal-content animate" action="AddUser" method="post">
+			<h3>Add New User</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addUsers').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
@@ -162,11 +162,21 @@
 				for="lastName"><b>Last Name</b></label> <input type="text"
 				placeholder="Enter Last Name" name="lastName" required > 
 				<label for ="userType">User type</label>
-				<select required>
+				<select name= "userType" required>
   					<option value="regular">Customer</option>
   					<option value="admin">Administrator</option>
 				</select>
-			<button type="submit">Add New User</button>
+				<label for="street"><b>Street Address</b></label> <input type="text"
+				placeholder="New Street Address" name="street" required> <label
+				for="city"><b>City</b></label> <input type="text"
+				placeholder="New City" name="city" required> <label
+				for="province"><b>Province</b></label> <input type="text"
+				placeholder="New Province" name="province" required> <label
+				for="country"><b>Country</b></label> <input type="text"
+				placeholder="New Country" name="country" required> <label
+				for="pCode"><b>Province</b></label> <input type="text"
+				placeholder="New Postal Code" name="pCode" required>
+			<button type="submit" name="addUserButton" value="pressed">Add New User</button>
 			</div>
 		</form>
 		</div>

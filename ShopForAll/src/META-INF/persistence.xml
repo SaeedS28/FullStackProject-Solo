@@ -12,7 +12,7 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" />
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver" />
             <property name="hibernate.connection.url"
-                value="jdbc:oracle:thin:@localhost:1521:xe" />
+                value="jdbc:oracle:thin:@localhost:1521:DANK" />
             <property name="hibernate.connection.username" value="trainee1" />
             <property name="hibernate.connection.password" value="!QAZSE4"/>
             <property name="hibernate.enable_lazy_load_no_trans" value="true" />

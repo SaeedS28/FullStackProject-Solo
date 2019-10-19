@@ -12,7 +12,7 @@
 <style type="text/css">
 .parallax {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-		url(img/heroImg.jpg);
+		url(image/heroImg.jpg);
 	height: 25%;
 	background-attachment: fixed;
 	background-position: center;

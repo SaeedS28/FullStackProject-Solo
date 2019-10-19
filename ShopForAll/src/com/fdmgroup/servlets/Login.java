@@ -17,7 +17,7 @@ import com.fdmgroup.model.UserSession;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,13 +47,13 @@ public class Login extends HttpServlet {
 			if (userSession != null) {
 				HttpSession user = request.getSession();
 				user.setAttribute("user", userSession);
-				request.getRequestDispatcher("MainPage").forward(request, response);
+				request.getRequestDispatcher("/MainPage").forward(request, response);
 			} else {
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('invalid username or password');");
-				out.println("location='';");
+				out.println("location='Login';");
 				out.println("</script>");
 			}
 		}

@@ -18,7 +18,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">ShopForAll</a>
+				<a class="navbar-brand" href="MainPage">ShopForAll</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"

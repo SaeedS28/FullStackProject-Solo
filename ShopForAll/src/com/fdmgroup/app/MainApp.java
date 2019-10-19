@@ -64,7 +64,5 @@ public class MainApp {
 
 		System.out.println("Please work");
 		//Views
-		HomeView hv = new HomeView(scanner);
-		hv.showInitialOptions(false);
 	}
 }
