@@ -32,7 +32,7 @@ public class ItemDAO implements IItemDAO {
 		Item i = em.find(Item.class, pid);
 		
 		em.getTransaction().begin();
-		i.setQuantity(quantity);
+		i.setQuantity(i.getQuantity()+quantity);
 		em.getTransaction().commit();
 		return true;
 	}

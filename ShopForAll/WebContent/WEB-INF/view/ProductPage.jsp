@@ -58,7 +58,7 @@
 	</div>
 	
 	<div id="addQty" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="ChangeQuantity" method="Post">
 			<h3>Add Quantity</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addQty').style.display='none'"
@@ -68,7 +68,7 @@
 				<label for="pQty"><b>Quantity</b></label> <input
 					type="number" min="1" placeholder="Enter the product quantity"
 					name="pQty" required> 
-				<button type="submit" name="addQuantity" value="pressed">Add</button>
+				<button type="submit" name="pid" value="${itemInfo.productID}">Add</button>
 			</div>
 		</form>
 		</div>
@@ -100,7 +100,7 @@
 				<label for="pCat"><b>Product Category</b></label> <input
 					type="text" placeholder="Enter a new Product category"
 					name="pCat" required> 
-				<button type="submit" name="productCat" value="pressed">Change Description</button>
+				<button type="submit" name="productCat" value="pressed">Change Category</button>
 			</div>
 		</form>
 		</div>
