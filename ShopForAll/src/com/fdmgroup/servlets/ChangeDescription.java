@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.fdmgroup.dao.implementation.ItemDAO;
 
 /**
- * Servlet implementation class ChangeQuantity
+ * Servlet implementation class ChangeDescription
  */
-
-public class ChangeQuantity extends HttpServlet {
+public class ChangeDescription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeQuantity() {
+    public ChangeDescription() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +36,17 @@ public class ChangeQuantity extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int pid = Integer.parseInt(request.getParameter("pid"));
-		int pQty = Integer.parseInt(request.getParameter("pQty"));
+		String desc = request.getParameter("pDesc");
 		
 		ItemDAO itd = new ItemDAO();
-		itd.updateQuantity(pid, pQty);
+		itd.updateDescription(pid, desc);
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		out.println("<script type=\"text/javascript\">");
-		out.println("alert('Successfully updated quantity');");
+		out.println("alert('Successfully updated Description');");
 		out.println("location='ProductPage?pid="+pid+"';");
-		out.println("</script>");		
+		out.println("</script>");
 	}
 
 }

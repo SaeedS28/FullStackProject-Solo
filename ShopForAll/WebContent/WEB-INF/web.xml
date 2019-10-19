@@ -34,6 +34,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>ChangeDescription</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ChangeDescription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeDescription</servlet-name>
+    <url-pattern>/ChangeDescription</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ChangeQuantity</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeQuantity</servlet-class>
   </servlet>

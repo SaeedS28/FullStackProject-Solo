@@ -74,7 +74,7 @@
 		</div>
 		
 	<div id="changeDesc" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="ChangeDescription" method="post">
 			<h3>Change product description</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('changeDesc').style.display='none'"
@@ -84,7 +84,7 @@
 				<label for="pDesc"><b>Product Description</b></label> <input
 					type="text" placeholder="Enter a new Product description"
 					name="pDesc" required> 
-				<button type="submit" name="productDesc" value="pressed">Change Description</button>
+				<button type="submit" name="pid" value="${itemInfo.productID}">Change Description</button>
 			</div>
 		</form>
 		</div>
@@ -100,7 +100,7 @@
 				<label for="pCat"><b>Product Category</b></label> <input
 					type="text" placeholder="Enter a new Product category"
 					name="pCat" required> 
-				<button type="submit" name="productCat" value="pressed">Change Category</button>
+				<button type="submit" name="productCat" value="${itemInfo.productID}">Change Category</button>
 			</div>
 		</form>
 		</div>
@@ -116,7 +116,7 @@
 				<label for="cPrice"><b>Price</b></label> <input
 					type="number" min="0.1" step="0.01" placeholder="Enter the product price"
 					name="cPrice" required> 
-				<button type="submit" name="changePrice" value="pressed">Change Price</button>
+				<button type="submit" name="changePrice" value="${itemInfo.productID}">Change Price</button>
 			</div>
 		</form>
 		</div>
