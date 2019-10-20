@@ -62,7 +62,7 @@
 		</div>
 	</nav>
 	<div id="setting" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="ChangeSettings" method="post">
 			<h3>Change Password</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('setting').style.display='none'"
@@ -73,32 +73,32 @@
 					type="password" placeholder="Enter Current Password"
 					name="cPassword" required> <label for="nPassword"><b>New
 						Password</b></label> <input type="password" placeholder="Enter New Password"
-					name="nPassword" required> <label for="rPassword"><b>Confirm
+					name="nPassword" minLenght="7" required> <label for="rPassword"><b>Confirm
 						Password</b></label> <input type="password" placeholder="Enter New Password"
-					name="Password" required>
+					name="rPassword" minLenght="7" required>
 
-				<button type="submit">Change Password</button>
+				<button type="submit" name="passwordChange" value="pressed">Change Password</button>
 			</div>
 		</form>
 		<% if(loggedIn.getType().equals("regular")){ %>
 	<form class="modal-content animate" action="" method="post">
 			<h3>Change Address</h3>
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('id01').style.display='none'"
+				<span onclick="document.getElementById('setting').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
 			<label for="street"><b>Street Address</b></label> <input type="text"
-				placeholder="New Street Address" name="street" required> <label
+				 name="street" value ="<%= loggedIn.getAddress().getStreet() %>" required> <label
 				for="city"><b>City</b></label> <input type="text"
-				placeholder="New City" name="city" required> <label
+			 	name="city" value="<%= loggedIn.getAddress().getCity() %>" required> <label
 				for="province"><b>Province</b></label> <input type="text"
-				placeholder="New Province" name="province" required> <label
+				name="province" value="<%= loggedIn.getAddress().getProvince() %>" required> <label
 				for="country"><b>Country</b></label> <input type="text"
-				placeholder="New Country" name="country" required> <label
+				name="country" value="<%= loggedIn.getAddress().getCountry() %>" required> <label
 				for="pCode"><b>Province</b></label> <input type="text"
-				placeholder="New Postal Code" name="pCode" required>
-			<button type="submit">Change Address</button>
+				name="pCode" value="<%= loggedIn.getAddress().getPostalCode() %>" required >
+			<button type="submit" name="addressChange" value="Pressed">Change Address</button>
 			</div>
 		</form>
 		<%} %>

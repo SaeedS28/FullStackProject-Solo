@@ -25,6 +25,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>ChangeSettings</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ChangeSettings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeSettings</servlet-name>
+    <url-pattern>/ChangeSettings</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>SearchByPrice</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SearchByPrice</servlet-class>
   </servlet>
