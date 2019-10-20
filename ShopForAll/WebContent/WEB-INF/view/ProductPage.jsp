@@ -1,3 +1,5 @@
+<%@page import="com.fdmgroup.model.Item"%>
+<%@page import="com.fdmgroup.dao.implementation.ShoppingCartDAO"%>
 <%@page import="com.fdmgroup.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -19,7 +21,11 @@
 </head>
 <body>
 	<jsp:include page="NavBarAdmin.jsp" />
-<% User loggedIn = (User)session.getAttribute("user"); %>
+<% User loggedIn = (User)session.getAttribute("user"); 
+ShoppingCartDAO scd = new ShoppingCartDAO();
+Item item = (Item) request.getAttribute("itemInfo");
+boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
+%>
 	<div class="information" align="center" style="margin-top: 5%; max-width:500px; margin-left:34%">
 		<h1>${itemInfo.name}</h1>
 		<img alt="" src="image/heroImg.jpg" style="margin:15px 0 15px 0;height: 450px; width: 400px;">
@@ -27,9 +33,15 @@
 		<h4 style="margin-bottom: 15px">Price: ${itemInfo.price}</h4>
 		<h4 style="margin-bottom: 15px">Category: ${itemInfo.category}</h4>
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
-		<% if(loggedIn.getType().equals("regular")){ %>
-		 <button>Add to Cart</button>
+		
+		<% if(loggedIn.getType().equals("regular") && !isAdded && item.getQuantity()>0){ %>
+		<form action="AddItemToCart" method="get" >
+		 	<button name= "pid" value="<%=item.getProductID()%>">Add to Cart</button>
+		</form>
+		 <% } else{%>
+		 	<h4 style="margin-bottom: 15px">Item cannot be added </h4>
 		 <% } %>
+		 
 		<% if(loggedIn.getType().equals("admin")){ %>
 		 <button onclick="document.getElementById('addQty').style.display='block'">Add Quantity</button>
 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>

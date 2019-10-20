@@ -2,6 +2,7 @@ package com.fdmgroup.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
+import com.fdmgroup.model.ShoppingCartItem;
 import com.fdmgroup.model.User;
 import com.fdmgroup.model.UserSession;
 
@@ -47,7 +50,11 @@ public class Login extends HttpServlet {
 			if (userSession != null) {
 				HttpSession user = request.getSession();
 				user.setAttribute("user", userSession);
+				ShoppingCartDAO scd = new ShoppingCartDAO(); 
+				ArrayList<ShoppingCartItem> sci = scd.getCartDetails(userSession);
+				request.getSession().setAttribute("sCart", sci);
 				request.getRequestDispatcher("/MainPage").forward(request, response);
+				
 			} else {
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");

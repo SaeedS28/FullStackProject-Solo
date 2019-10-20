@@ -23,23 +23,13 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public boolean addItem(User u, int pid, int quantity) {
-		if(getQuantity(u, pid)>0) {
-			Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
-			q.setParameter("name", u.getUsername());
-			q.setParameter("pid", pid);
-			ShoppingCartItem sce = (ShoppingCartItem) q.getSingleResult();
-			
-			em.getTransaction().begin();
-			sce.setCartQuantity(sce.getCartQuantity()+quantity);
-			em.getTransaction().commit();
-		}
-		else {
+		
 			Item i = em.find(Item.class, pid);
 			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName().toUpperCase(),u.getUsername(),i.getPrice(),quantity);
 			em.getTransaction().begin();
 			em.persist(sce);
 			em.getTransaction().commit();
-		}
+		
 		return true;
 	}
 
@@ -54,7 +44,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		em.getTransaction().commit();
 		return true;
 	}
-
+	
 	public int getSize(User u)  {
 		Query q = em.createQuery("Select SUM(s.cartQuantity) from Shopping_Cart_Item s where s.userName like :name",Long.class);
 		q.setParameter("name", u.getUsername());
@@ -118,6 +108,18 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			em.getTransaction().begin();
 			em.remove(sce.get(j));
 			em.getTransaction().commit();
+		}
+		return true;
+	}
+
+	public boolean isItemInCart(User u, int pid) {
+		Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
+		q.setParameter("name", u.getUsername());
+		q.setParameter("pid", pid);
+		ArrayList<ShoppingCartItem> sci = (ArrayList<ShoppingCartItem>) q.getResultList();
+		
+		if(sci.size()==0) {
+			return false;
 		}
 		return true;
 	}

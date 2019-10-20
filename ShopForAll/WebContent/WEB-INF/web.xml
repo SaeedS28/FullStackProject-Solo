@@ -33,6 +33,15 @@
     <url-pattern>/ChangeSettings</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>AddItemToCart</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.AddItemToCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemToCart</servlet-name>
+    <url-pattern>/AddItemToCart</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>SearchByPrice</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SearchByPrice</servlet-class>

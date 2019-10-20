@@ -14,4 +14,5 @@ public interface IShoppingCartDAO  {
 	public ArrayList<ShoppingCartItem> getCartDetails(User u);
 	public double getCartTotal(User u);
 	public int getQuantity(User u, int pid);
+	public boolean isItemInCart(User u, int pid);
 }
