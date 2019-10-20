@@ -105,7 +105,7 @@
 		</div>
 			
 		<div id="priceRange" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="SearchByPrice" method="Get">
 			<h3>Price Search</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('priceRange').style.display='none'"
@@ -114,10 +114,10 @@
 			<div class="container">
 				<label for="minPrice"><b>Minimum Price</b></label> <input
 					type="number" placeholder="Enter Minimum Price"
-					name="minPrice" required> <label for="maxPrice"><b>Maximum Price
+					name="minPrice" required step="0.01"> <label for="maxPrice"><b>Maximum Price
 					</b></label> <input type="number" placeholder="Enter Maximum Price"
-					name="maxPrice" required> 
-				<button type="submit">Search Catalog</button>
+					name="maxPrice" required step="0.01"> 
+				<button type="submit" name="price" value="pressed">Search Catalog</button>
 			</div>
 		</form>
 		</div>

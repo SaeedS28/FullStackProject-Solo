@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,15 +13,15 @@ import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.model.Item;
 
 /**
- * Servlet implementation class SearchByName
+ * Servlet implementation class SearchByPrice
  */
-public class SearchByName extends HttpServlet {
+public class SearchByPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchByName() {
+    public SearchByPrice() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +30,16 @@ public class SearchByName extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchName = request.getParameter("searchName");
-		ItemDAO itd = new ItemDAO();
-		ArrayList<Item> items;
-		if(searchName.equals("pressed")) {
-			String name = request.getParameter("pName");
-			items = itd.getItemsByName(name);
-			request.setAttribute("allItems",items);
+		String price = request.getParameter("price");
+		
+		if(price.equals("pressed")) {
+			double minPrice = Double.parseDouble(request.getParameter("minPrice"));
+			double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
+			ItemDAO itd = new ItemDAO();
+			ArrayList<Item> getPrice = itd.getItemsByPriceRange(minPrice, maxPrice);
+			
+			request.setAttribute("allItems", getPrice);
+			
 			request.getRequestDispatcher("/WEB-INF/view/SearchPage.jsp").forward(request, response);
 		}
 	}
