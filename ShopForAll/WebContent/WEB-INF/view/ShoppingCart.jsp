@@ -1,3 +1,5 @@
+<%@page import="com.fdmgroup.model.User"%>
+<%@page import="com.fdmgroup.dao.implementation.ShoppingCartDAO"%>
 <%@page import="com.fdmgroup.model.ShoppingCartItem"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -51,16 +53,19 @@ body{
 		</div>
 	</div>
 <% ArrayList<ShoppingCartItem> items = (ArrayList<ShoppingCartItem>) session.getAttribute("sCart"); %>
+<% ShoppingCartDAO scd = new ShoppingCartDAO();
+	double total = scd.getCartTotal((User)session.getAttribute("user"));%>
 	<h1 style="text-align: center">Shopping Cart</h1>
 
 	<div class="sales">
 		<% if(items == null || items.size()==0){ %>
-			<h3 style="margin-top:50%;">No Item in the cart, fam</h3>
+			<h3 style="margin-top:20%; text-align: center;">No Item in the cart, fam</h3>
 		<%} else{ %>
+		<h3 style="text-align: center;">Subtotal: <%= total %> </h3>
 		<table border="1" align="center" style="text-align: center;">
 			<% for(int i = 0;i<items.size();i++) { %>
 				<tr>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px;"><a
 						href="ProductPage?pid=<%= items.get(i).getProductID() %>"> <h3><%= items.get(i).getProductName() %></h3></a>
 						<h3 class="price">Price: <%= items.get(i).getPrice() %> each</h3>
 						<h4 class="price">Quantity in cart: <%= items.get(i).getCartQuantity() %></h4>
