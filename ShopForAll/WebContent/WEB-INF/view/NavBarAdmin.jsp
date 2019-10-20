@@ -29,7 +29,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Search <span class="caret"></span></a>
+					data-toggle="dropdown" href="">Search <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="SearchAllItems">All Items</a></li>
 						<li><a href="#" onclick="document.getElementById('priceRange').style.display='block'">Price</a></li>
@@ -55,7 +55,8 @@
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
 						<% if(loggedIn.getType().equals("regular")){ %>
-							<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+						
+							<li><a href="ShoppingCart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 						<% } %>
 				<li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
 				</ul>

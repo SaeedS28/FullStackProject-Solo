@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -5,28 +9,46 @@
 <link rel="StyleSheet" href="Styles.css" />
 <link rel="StyleSheet" href="Payment.css" type="text/css" />
 <style>
-	#cartEmpty{
-   		width: 790px;
-    	height: 100px;
+.parallax {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url(image/heroImg.jpg);
+	height: 25%;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 
-    	position: absolute;
-    	top:0;
-    	bottom: 0;
-    	left: 0;
-    	right: 0;
-
-    	margin: auto;	
-	}
+body, html {
+	height: 100%;
+	margin: 0;
+}
+body{
+	background-color: rgb(238,238,238);
+}
+.hero-text {
+	text-align: center;
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
 </style>
 <title>Payment</title>
 </head>
 	
 <body>
-<div class="row">
+
+<div class="parallax">
+		<div class="hero-text">
+			<h1 style="font-size: 50px">For all your shopping needs</h1>
+		</div>
+	</div>
+<div class="row" style="margin-top: 5%; max-height: 80%;">
   <div class="col-50">
     <div class="container">
       <form action="/Bookstore/Checkout" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
-      
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>
@@ -85,13 +107,6 @@
       </form>
     </div>
   </div>
-  <div class="col-50">
-    <div class="container" id="cartContainer">
-    	cart details go here
-    </div>
-  </div>
 </div>
 </body>
-
 </html>
-</jsp:root>
