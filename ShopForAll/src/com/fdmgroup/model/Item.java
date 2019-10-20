@@ -35,7 +35,7 @@ public class Item {
 	public Item() {}
 	
 	public Item(String name, String category, String description, int quantity, double price){
-		this.name=name;
+		this.name=name.toUpperCase();
 		this.description = description;
 		this.quantity = quantity;
 		this.category = category.toUpperCase();

@@ -52,7 +52,7 @@ body{
 	<div class="sales">
 		<table border="1" align="center" style="text-align: center;">
 			<tr>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 						href="ProductPage?pid=<%= pop.get(0).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -61,7 +61,7 @@ body{
 						<h6 class="price">Quantity: <%= pop.get(0).getQuantity() %></h6>
 						<h6 class="price"> <%= pop.get(0).getDescription() %></h6>
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(1).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -71,7 +71,7 @@ body{
 						<h6 class="price"> <%= pop.get(1).getDescription() %></h6>
 						
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(2).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -82,7 +82,7 @@ body{
 				</a></td>
 			</tr>
 			<tr>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 				href="ProductPage?pid=<%= pop.get(3).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -91,7 +91,7 @@ body{
 						<h6 class="price">Quantity: <%= pop.get(3).getQuantity() %></h6>
 						<h6 class="price"> <%= pop.get(3).getDescription() %></h6>
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(4).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -101,7 +101,7 @@ body{
 						<h6 class="price"> <%= pop.get(4).getDescription() %></h6>
 						
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(5).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -112,7 +112,7 @@ body{
 				</a></td>
 			</tr>
 			<tr>
-			<td style="width: 300px; height: 400"><a
+			<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(6).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -121,7 +121,7 @@ body{
 						<h6 class="price">Quantity: <%= pop.get(6).getQuantity() %></h6>
 						<h6 class="price"> <%= pop.get(6).getDescription() %></h6>
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(7).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 
@@ -130,7 +130,7 @@ body{
 						<h6 class="price">Quantity: <%= pop.get(7).getQuantity() %></h6>
 						<h6 class="price"> <%= pop.get(7).getDescription() %></h6>
 				</a></td>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 400px;"><a
 					href="ProductPage?pid=<%= pop.get(8).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 

@@ -123,7 +123,7 @@
 		</div>
 		
 		<div id="name" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="SearchByName" method="Get">
 			<h3>Name Search</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('name').style.display='none'"
@@ -133,7 +133,7 @@
 				<label for="pName"><b>Product Name</b></label> <input
 					type="text" placeholder="Enter the Product Name"
 					name="pName" required> 
-				<button type="submit">Search Catalog</button>
+				<button type="submit" name="searchName" value="pressed">Search Catalog</button>
 			</div>
 		</form>
 		</div>
