@@ -34,6 +34,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>SearchAllItems</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.SearchAllItems</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchAllItems</servlet-name>
+    <url-pattern>/SearchAllItems</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.fdmgroup.servlets.Logout</servlet-class>
   </servlet>
