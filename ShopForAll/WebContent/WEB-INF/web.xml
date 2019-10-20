@@ -25,6 +25,24 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>CategoryReturn</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.CategoryReturn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryReturn</servlet-name>
+    <url-pattern>/CategoryReturn</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CategorySearch</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.CategorySearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategorySearch</servlet-name>
+    <url-pattern>/CategorySearch</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
     <servlet-name>DeleteItem</servlet-name>
     <servlet-class>com.fdmgroup.servlets.DeleteItem</servlet-class>
   </servlet>

@@ -34,7 +34,7 @@
 						<li><a href="SearchAllItems">All Items</a></li>
 						<li><a href="#" onclick="document.getElementById('priceRange').style.display='block'">Price</a></li>
 						<li><a href="#" onclick="document.getElementById('name').style.display='block'">Name</a></li>
-						<li><a href="#" onclick="document.getElementById('cat').style.display='block'">Category</a></li>
+						<li><a href="CategoryReturn">Category</a></li>
 					</ul>
 				<% if(loggedIn.getType().equals("admin")){ %>
 				<li class="dropdown"><a class="dropdown-toggle"
@@ -134,22 +134,6 @@
 					type="text" placeholder="Enter the Product Name"
 					name="pName" required> 
 				<button type="submit">Search Catalog</button>
-			</div>
-		</form>
-		</div>
-		
-		<div id="cat" class="modal">
-		<form class="modal-content animate" action="" method="post">
-			<h3>Category Search</h3>
-			<div class="imgcontainer">
-				<span onclick="document.getElementById('cat').style.display='none'"
-					class="close" title="Close Modal">&times;</span>
-			</div>
-			<div class="container">
-				 <a href="">Category A </a>
-				 <a href="">Category B </a>
-				 <a href="">Category C </a>
-				 <a href="">Category D </a>
 			</div>
 		</form>
 		</div>

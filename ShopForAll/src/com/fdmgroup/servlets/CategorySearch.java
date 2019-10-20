@@ -13,16 +13,15 @@ import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.model.Item;
 
 /**
- * Servlet implementation class SearchAllItems
+ * Servlet implementation class CategorySearch
  */
-
-public class SearchAllItems extends HttpServlet {
+public class CategorySearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAllItems() {
+    public CategorySearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +30,11 @@ public class SearchAllItems extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		ItemDAO itd = new ItemDAO();
-		ArrayList<Item> allItems = itd.getAllItems();
-		request.setAttribute("allItems", allItems);
+		String cat = request.getParameter("cat");
+		ArrayList<Item> list = itd.getItemsByCategory(cat);
+		request.setAttribute("allItems", list);
 		request.getRequestDispatcher("/WEB-INF/view/SearchPage.jsp").forward(request, response);
 	}
 
@@ -41,6 +42,8 @@ public class SearchAllItems extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

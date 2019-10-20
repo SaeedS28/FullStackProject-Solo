@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
-import com.fdmgroup.model.Item;
 
 /**
- * Servlet implementation class SearchAllItems
+ * Servlet implementation class SearchByCategory
  */
 
-public class SearchAllItems extends HttpServlet {
+public class CategoryReturn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAllItems() {
+    public CategoryReturn() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +31,17 @@ public class SearchAllItems extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ItemDAO itd = new ItemDAO();
-		ArrayList<Item> allItems = itd.getAllItems();
-		request.setAttribute("allItems", allItems);
-		request.getRequestDispatcher("/WEB-INF/view/SearchPage.jsp").forward(request, response);
+		ArrayList<String> getCategories = itd.getCategories();
+		request.setAttribute("categories", getCategories);
+		request.getRequestDispatcher("/WEB-INF/view/Categories.jsp").forward(request, response);;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
