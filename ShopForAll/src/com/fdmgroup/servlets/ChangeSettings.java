@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.model.User;
 
@@ -39,6 +40,7 @@ public class ChangeSettings extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pass = request.getParameter("passwordChange");
+		String address = request.getParameter("addressChange");
 		User loggedIn = (User) request.getSession().getAttribute("user");
 		if(pass!=null && pass.equals("pressed")) {
 			String curPass = request.getParameter("cPassword");
@@ -68,10 +70,26 @@ public class ChangeSettings extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('old password was invalid. No changes made');");
+				out.println("alert('Old password was invalid. No changes made');");
 				out.println("location='MainPage';");
 				out.println("</script>");
 			}
+		}
+		else if(address!=null && address.equals("pressed")) {
+			AddressDAO ad = new AddressDAO();
+			ad.changeStreet(request.getParameter("street"), loggedIn);
+			ad.changeCity(request.getParameter("city"), loggedIn);
+			ad.changeProvince(request.getParameter("province"), loggedIn);
+			ad.changeCountry(request.getParameter("country"), loggedIn);
+			ad.changePostalCode(request.getParameter("pCode"), loggedIn);
+			
+			
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Address changed succressfully. Logging out');");
+			out.println("location='Logout';");
+			out.println("</script>");
 		}
 	}
 

@@ -81,7 +81,7 @@
 			</div>
 		</form>
 		<% if(loggedIn.getType().equals("regular")){ %>
-	<form class="modal-content animate" action="" method="post">
+	<form class="modal-content animate" action="ChangeSettings" method="post">
 			<h3>Change Address</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('setting').style.display='none'"
@@ -98,7 +98,7 @@
 				name="country" value="<%= loggedIn.getAddress().getCountry() %>" required> <label
 				for="pCode"><b>Province</b></label> <input type="text"
 				name="pCode" value="<%= loggedIn.getAddress().getPostalCode() %>" required >
-			<button type="submit" name="addressChange" value="Pressed">Change Address</button>
+			<button type="submit" name="addressChange" value="pressed">Change Address</button>
 			</div>
 		</form>
 		<%} %>
