@@ -23,13 +23,23 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 
 	public boolean addItem(User u, int pid, int quantity) {
-		
+		if(getQuantity(u, pid)>0) {
+			Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
+			q.setParameter("name", u.getUsername());
+			q.setParameter("pid", pid);
+			ShoppingCartItem sce = (ShoppingCartItem) q.getSingleResult();
+			
+			em.getTransaction().begin();
+			sce.setCartQuantity(quantity);
+			em.getTransaction().commit();
+		}
+		else {
 			Item i = em.find(Item.class, pid);
 			ShoppingCartItem sce = new ShoppingCartItem(i.getProductID(),i.getName().toUpperCase(),u.getUsername(),i.getPrice(),quantity);
 			em.getTransaction().begin();
 			em.persist(sce);
 			em.getTransaction().commit();
-		
+		}
 		return true;
 	}
 

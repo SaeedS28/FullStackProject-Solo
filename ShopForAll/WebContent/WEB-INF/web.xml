@@ -25,6 +25,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>ChangeQuantityInCart</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ChangeQuantityInCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeQuantityInCart</servlet-name>
+    <url-pattern>/ChangeQuantityInCart</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ChangeSettings</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeSettings</servlet-class>
   </servlet>
