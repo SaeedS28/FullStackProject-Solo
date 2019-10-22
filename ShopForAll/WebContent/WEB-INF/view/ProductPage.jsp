@@ -1,3 +1,6 @@
+<%@page import="com.fdmgroup.model.Review"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.fdmgroup.dao.implementation.ReviewDAO"%>
 <%@page import="com.fdmgroup.dao.implementation.PurchaseOrderDAO"%>
 <%@page import="com.fdmgroup.model.Item"%>
 <%@page import="com.fdmgroup.dao.implementation.ShoppingCartDAO"%>
@@ -53,10 +56,11 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 </form>
 		 <% } %>
 	</div>
+	
 	<% Integer i = (Integer) request.getAttribute("bought");%>
 	<% if(loggedIn.getType().equals("regular") && i>0){ %>
 	<div class="review" align="center" style="margin-top: 8%; max-width:700px; margin-left:27%">
-		<form action="" method="get">
+		<form action="AddReview" method="Post">
 			<DIV class="header">
 				<H3 class="headers">Product Rating</H3>
 			</DIV>
@@ -66,13 +70,63 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 			</div>
 			<DIV class="textInput">
 				<label for="comment">A brief description</label>
-				<textarea rows="5" cols="100" onkeyup="" name="comment" id="comment"
-					placeholder="Enter some text here"></textarea>
-				<br /> <input type="submit" onclick="" name="submit" value="Submit" />
+				<input type="text" name="comment"
+					placeholder="Enter review details" required>
+				<button name="review" value="<%=item.getProductID()%>">Add Review</button>
 			</DIV>
 		</form>
 	</div>
 	<%} %>
+	
+	<%
+		ReviewDAO rd = new ReviewDAO();
+		ArrayList<Review> rev = rd.retrieveReviews(item.getProductID());
+	%>
+	<div class="sales" style="margin-top: 4%;">
+		<h3 style="text-align: center;">
+			Reviews
+		</h3>
+		<%if(rev == null || rev.size()==0) {%>
+		<h4>No reviews exist. Buy a book to add one.</h4>
+		<%} else{ %>
+		
+		<table border="1" style="text-align: center; width:100%">
+			<thead>
+			<tr>
+				<th>
+					Date of Review
+				</th>
+				<th>
+					User
+				</th>
+				<th>
+					Rating
+				</th>
+				<th>
+					Description
+				</th>
+			</tr>				
+			</thead>
+			<%for(int j =0;j<rev.size();j++){ %>
+			<tr>
+				<td>
+					<%= rev.get(j).getReviewDate() %>
+				</td>
+				 <td>
+				 	<%= rev.get(j).getEmailAddress() %>
+				 </td>
+				 <td>
+				 	<%= rev.get(j).getRating() %>
+				 </td>
+				 <td>
+				 	<%= rev.get(j).getReviewText() %>
+				 </td>
+			</tr>
+			<%} %>
+			</table>
+	<%} %>
+	</div>
+	
 	<div id="addQty" class="modal">
 		<form class="modal-content animate" action="ChangeQuantity" method="Post">
 			<h3>Add Quantity</h3>

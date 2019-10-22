@@ -51,11 +51,11 @@ body{
 	<div class="sales">
 		<% if(items == null || items.size()==0){ %>
 			<h3>The search yielded no results</h3>
-		<%} else{ %>
+		<%} else{ %>		
 		<table border="1" align="center" style="text-align: center;">
 			<% for(int i = 0;i<items.size();i++) { %>
 				<tr>
-				<td style="width: 300px; height: 400"><a
+				<td style="width: 300px; height: 300px"><a
 						href="ProductPage?pid=<%= items.get(i).getProductID() %>"> <img
 						src="image/heroImg.jpg"
 						style="height: 100%; width: 100%" /> 

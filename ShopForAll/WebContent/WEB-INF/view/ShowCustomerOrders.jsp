@@ -63,7 +63,7 @@ body {
 		User u = (User) request.getSession().getAttribute("user");
 		ArrayList<PurchaseOrder> po = pod.getPurchaseOrdersByUser(u);
 	%>
-	<h1 style="text-align: center">Shopping Cart</h1>
+	<h1 style="text-align: center">Customer Orders</h1>
 
 	<div class="sales">
 		<%

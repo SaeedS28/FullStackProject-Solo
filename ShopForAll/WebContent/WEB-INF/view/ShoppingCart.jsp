@@ -57,6 +57,7 @@ body {
 		</div>
 	</div>
 	<%
+	
 		ArrayList<ShoppingCartItem> items = (ArrayList<ShoppingCartItem>) session.getAttribute("sCart");
 	%>
 	<%

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>ShopForAll</display-name>
-  
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>com.fdmgroup.servlets.Login</servlet-class>
@@ -14,7 +13,6 @@
     <servlet-name>Login</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>MainPage</servlet-name>
     <servlet-class>com.fdmgroup.servlets.MainPage</servlet-class>
@@ -23,7 +21,6 @@
     <servlet-name>MainPage</servlet-name>
     <url-pattern>/MainPage</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SeePurchaseHistory</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SeePurchaseHistory</servlet-class>
@@ -32,7 +29,14 @@
     <servlet-name>SeePurchaseHistory</servlet-name>
     <url-pattern>/SeePurchaseHistory</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>AddReview</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.AddReview</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddReview</servlet-name>
+    <url-pattern>/AddReview</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ProcessOrder</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ProcessOrder</servlet-class>
@@ -41,7 +45,6 @@
     <servlet-name>ProcessOrder</servlet-name>
     <url-pattern>/ProcessOrder</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Checkout</servlet-name>
     <servlet-class>com.fdmgroup.servlets.Checkout</servlet-class>
@@ -50,7 +53,6 @@
     <servlet-name>Checkout</servlet-name>
     <url-pattern>/Checkout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeQuantityInCart</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeQuantityInCart</servlet-class>
@@ -59,7 +61,6 @@
     <servlet-name>ChangeQuantityInCart</servlet-name>
     <url-pattern>/ChangeQuantityInCart</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeSettings</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeSettings</servlet-class>
@@ -68,7 +69,6 @@
     <servlet-name>ChangeSettings</servlet-name>
     <url-pattern>/ChangeSettings</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>RemoveItemFromCart</servlet-name>
     <servlet-class>com.fdmgroup.servlets.RemoveItemFromCart</servlet-class>
@@ -77,7 +77,6 @@
     <servlet-name>RemoveItemFromCart</servlet-name>
     <url-pattern>/RemoveItemFromCart</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ShoppingCart</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ShoppingCart</servlet-class>
@@ -86,8 +85,7 @@
     <servlet-name>ShoppingCart</servlet-name>
     <url-pattern>/ShoppingCart</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>AddItemToCart</servlet-name>
     <servlet-class>com.fdmgroup.servlets.AddItemToCart</servlet-class>
   </servlet>
@@ -95,7 +93,6 @@
     <servlet-name>AddItemToCart</servlet-name>
     <url-pattern>/AddItemToCart</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchByPrice</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SearchByPrice</servlet-class>
@@ -104,7 +101,6 @@
     <servlet-name>SearchByPrice</servlet-name>
     <url-pattern>/SearchByPrice</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CategoryReturn</servlet-name>
     <servlet-class>com.fdmgroup.servlets.CategoryReturn</servlet-class>
@@ -113,7 +109,6 @@
     <servlet-name>CategoryReturn</servlet-name>
     <url-pattern>/CategoryReturn</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchByName</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SearchByName</servlet-class>
@@ -122,7 +117,6 @@
     <servlet-name>SearchByName</servlet-name>
     <url-pattern>/SearchByName</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CategorySearch</servlet-name>
     <servlet-class>com.fdmgroup.servlets.CategorySearch</servlet-class>
@@ -131,7 +125,6 @@
     <servlet-name>CategorySearch</servlet-name>
     <url-pattern>/CategorySearch</url-pattern>
   </servlet-mapping>
- 
   <servlet>
     <servlet-name>DeleteItem</servlet-name>
     <servlet-class>com.fdmgroup.servlets.DeleteItem</servlet-class>
@@ -140,7 +133,6 @@
     <servlet-name>DeleteItem</servlet-name>
     <url-pattern>/DeleteItem</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SearchAllItems</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SearchAllItems</servlet-class>
@@ -149,7 +141,6 @@
     <servlet-name>SearchAllItems</servlet-name>
     <url-pattern>/SearchAllItems</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.fdmgroup.servlets.Logout</servlet-class>
@@ -158,7 +149,6 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeCategory</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeCategory</servlet-class>
@@ -167,7 +157,6 @@
     <servlet-name>ChangeCategory</servlet-name>
     <url-pattern>/ChangeCategory</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangePrice</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangePrice</servlet-class>
@@ -176,7 +165,6 @@
     <servlet-name>ChangePrice</servlet-name>
     <url-pattern>/ChangePrice</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeDescription</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeDescription</servlet-class>
@@ -185,7 +173,6 @@
     <servlet-name>ChangeDescription</servlet-name>
     <url-pattern>/ChangeDescription</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeQuantity</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeQuantity</servlet-class>
@@ -194,7 +181,6 @@
     <servlet-name>ChangeQuantity</servlet-name>
     <url-pattern>/ChangeQuantity</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ProductPage</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ProductPage</servlet-class>
@@ -203,7 +189,6 @@
     <servlet-name>ProductPage</servlet-name>
     <url-pattern>/ProductPage</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AddUser</servlet-name>
     <servlet-class>com.fdmgroup.servlets.AddUser</servlet-class>
@@ -212,7 +197,6 @@
     <servlet-name>AddUser</servlet-name>
     <url-pattern>/AddUser</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>DeleteUser</servlet-name>
     <servlet-class>com.fdmgroup.servlets.DeleteUser</servlet-class>

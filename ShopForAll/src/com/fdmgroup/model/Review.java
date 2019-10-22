@@ -33,13 +33,13 @@ public class Review {
 		super();
 	}
 
-	public Review(int productID, String reviewText, String emailAddress, int rating, Timestamp reviewDate) {
+	public Review(int productID, String reviewText, String emailAddress, int rating, Timestamp timestamp) {
 		super();
 		this.productID = productID;
 		this.reviewText = reviewText;
 		this.emailAddress = emailAddress;
 		this.rating = rating;
-		this.reviewDate = reviewDate;
+		this.reviewDate = timestamp;
 	}
 
 	public int getReviewID() {
