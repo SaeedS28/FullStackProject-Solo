@@ -1,3 +1,4 @@
+<%@page import="com.fdmgroup.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -6,8 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link rel="StyleSheet" href="Styles.css" />
-<link rel="StyleSheet" href="Payment.css" type="text/css" />
+<link rel="StyleSheet" href="css/Payment.css" type="text/css" />
 <style>
 .parallax {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -39,7 +39,8 @@ body{
 </head>
 	
 <body>
-
+	<jsp:include page="NavBarAdmin.jsp" />
+<% User user = (User) request.getSession().getAttribute("user"); %>
 <div class="parallax">
 		<div class="hero-text">
 			<h1 style="font-size: 50px">For all your shopping needs</h1>
@@ -48,25 +49,29 @@ body{
 <div class="row" style="margin-top: 5%; max-height: 80%;">
   <div class="col-50">
     <div class="container">
-      <form action="/Bookstore/Checkout" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
+      <form action="ProcessOrder" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>
             <label for="fname"> Full Name</label>
-            <input type="text" id="fname" name="firstname" value="" required="true"/>
+            <input type="text" id="fname" name="firstname" value="<%= user.getFirstname() %> <%=user.getLastname()  %>" required="true"/>
             <label for="adr">Address</label>
-            <input type="text" id="adr" name="address" value="" required="true"/>
+            <input type="text" id="adr" name="address" value="<%= user.getAddress().getStreet() %>" required>
             <label for="city"> City</label>
-            <input type="text" id="city" name="city" value="" required="true"/>
+            <input type="text" id="city" name="city" value="<%= user.getAddress().getCity() %>" required="true"/>
 
             <div class="row">
               <div class="col-50">
-                <label for="state">Province</label>
-                <input type="text" id="province" name="province" value="" required/>
+                <label for="province">Province</label>
+                <input type="text" id="province" name="province" value="<%= user.getAddress().getProvince() %>" required/>
+              </div>
+              <div class="col-50">
+                <label for="Country">Country</label>
+                <input type="text" id="country" name="country" value="<%= user.getAddress().getCountry() %>" required/>
               </div>
               <div class="col-50">
                 <label for="postalcode">Postal Code</label>
-                <input type="text" id="postalcode" name="postalcode" value="" required/>
+                <input type="text" id="postalcode" name="postalcode" value="<%= user.getAddress().getPostalCode() %>" required/>
               </div>
             </div>
           </div>
@@ -76,34 +81,34 @@ body{
 			<div class="row">
               <div class="col-50">
               	<label for="cname">First name on card</label>
-            	<input type="text" id="cfname" name="cardfname" placeholder="John" required="true"/>
+            	<input type="text" id="cfname" name="cardfname" required/>
               </div>
               <div class="col-50">
              	 <label for="cname">Last name on card</label>
-           		 <input type="text" id="clname" name="cardlname" placeholder="Cena" required="true"/>
+           		 <input type="text" id="clname" name="cardlname" required/>
               </div>
             </div>
             <label for="ccnum">Credit card number</label>
-            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required="true"/>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required/>
             
             <div class="row">
               <div class="col-50">
                 <label for="expmonth">Expiry Month</label>
-                <input type="number" id="expmonth" name="expmonth" placeholder="01"  required="true"/>
+                <input type="number" id="expmonth" name="expmonth" placeholder="01"  required/>
               </div>
               <div class="col-50">
                 <label for="expyear">Exp Year</label>
-                <input type="number" id="expyear" name="expyear" placeholder="2018" required="true"/>
+                <input type="number" id="expyear" name="expyear" placeholder="2018" required/>
               </div>
               <div class="col-50">
                 <label for="cvv">CVV</label>
-                <input type="number" id="cvv" name="cvv" placeholder="000" size="3" required="true"/>
+                <input type="number" id="cvv" name="cvv" placeholder="000" size="3" required>
               </div>
             </div>
           </div>
           
         </div>
-        <input type="submit" value="Confirm order" class="btn" name="submit" onclick="return validateInfo();"/>
+        <input type="submit" value="Process" class="btn" name="submit"/>
       </form>
     </div>
   </div>

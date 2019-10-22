@@ -25,6 +25,24 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>ProcessOrder</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ProcessOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessOrder</servlet-name>
+    <url-pattern>/ProcessOrder</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Checkout</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.Checkout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Checkout</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ChangeQuantityInCart</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ChangeQuantityInCart</servlet-class>
   </servlet>

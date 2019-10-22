@@ -109,11 +109,12 @@ body {
 					</form> 
 				</td>
 			</tr>
-			<%
-				}
-			}
-			%>
+			<% } %>
 		</table>
+			<form action="Checkout" method="Post">
+				<button name="checkout" value="pressed">Proceed to Checkout</button>
+			</form> 
+			<%}%>
 	</div>
 </body>
 </html>
