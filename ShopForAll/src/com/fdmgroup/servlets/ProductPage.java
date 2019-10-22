@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
+import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
 import com.fdmgroup.model.Item;
+import com.fdmgroup.model.User;
 
 /**
  * Servlet implementation class ProductPage
@@ -32,7 +34,15 @@ public class ProductPage extends HttpServlet {
 		ItemDAO itd = new ItemDAO();
 		Item item = itd.getItemByPid(productID);
 		request.setAttribute("itemInfo", item);
-		
+		PurchaseOrderDAO pod = new PurchaseOrderDAO();
+		if(pod.isPurchased((User)request.getSession().getAttribute("user"), productID)) {
+			Boolean b = new Boolean(true);
+			request.setAttribute("bought", b);
+		}
+		else {
+			Boolean b = new Boolean(false);
+			request.setAttribute("bought", b);
+		}
 		request.getRequestDispatcher("/WEB-INF/view/ProductPage.jsp").forward(request, response);
 	}
 

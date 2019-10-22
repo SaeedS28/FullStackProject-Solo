@@ -63,6 +63,20 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		return sce;
 	}
 
+	public boolean isPurchased(User u, int pid) {
+		Query query = em.createQuery(
+				"SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username and p.productID = :pid", PurchaseOrder.class);
+		query.setParameter("username", u.getUsername());
+		query.setParameter("pid", pid);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		if(sce.size()==0) {
+			return false;
+		} 
+		return true;
+	}
+	
 	public ArrayList<PurchaseOrder> getAllPurchaseOrders() {
 		Query query = em.createQuery(
 				   "SELECT p FROM Purchase_Order_List p", PurchaseOrder.class);

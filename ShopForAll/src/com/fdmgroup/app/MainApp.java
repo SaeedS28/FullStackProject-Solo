@@ -8,6 +8,7 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
@@ -18,10 +19,10 @@ import com.fdmgroup.view.HomeView;
 public class MainApp {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-//		EntityManagerFactory emf;
-//		EntityManager em;
-//		emf = Persistence.createEntityManagerFactory("SoloProject");
-//		em = emf.createEntityManager();
+		EntityManagerFactory emf;
+		EntityManager em;
+		emf = Persistence.createEntityManagerFactory("SoloProject");
+		em = emf.createEntityManager();
 //
 //		em.getTransaction().begin();
 //		Address a = new Address("saeeds28", "130 Adelaide W", "Toronto", "Ontaio", "Canada", "M5H3P5");
@@ -51,7 +52,14 @@ public class MainApp {
 //		strawberry.add( new Item("Pizza", "Food/Beverage", "Something definitely ain't right here", 45, 12.99));
 //		em.persist(u);
 //		em.persist(u2);
-////		
+		Query query = em.createQuery(
+				"SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username and p.productID = :pid", PurchaseOrder.class);
+		query.setParameter("username","samad");
+		query.setParameter("pid", 6);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		System.out.println(sce.size());
 //		
 //		// Purchases
 //		List<PurchaseOrder> po = new ArrayList<>();

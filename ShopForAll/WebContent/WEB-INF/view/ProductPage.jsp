@@ -1,3 +1,4 @@
+<%@page import="com.fdmgroup.dao.implementation.PurchaseOrderDAO"%>
 <%@page import="com.fdmgroup.model.Item"%>
 <%@page import="com.fdmgroup.dao.implementation.ShoppingCartDAO"%>
 <%@page import="com.fdmgroup.model.User"%>
@@ -53,6 +54,9 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 <% } %>
 	</div>
 	
+	<%PurchaseOrderDAO pod = new PurchaseOrderDAO();%>
+	<%if(pod.isPurchased((User)request.getSession().getAttribute("user"), item.getProductID()) && loggedIn.getType().equals("reqular")) { %>
+	<%= item.getCategory() %>
 	<div class="review" align="center" style="margin-top: 8%; max-width:700px; margin-left:27%">
 		<form action="" method="get">
 			<DIV class="header">
@@ -70,6 +74,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 			</DIV>
 		</form>
 	</div>
+	<% } %>
 	
 	<div id="addQty" class="modal">
 		<form class="modal-content animate" action="ChangeQuantity" method="Post">
