@@ -49,13 +49,17 @@
 				<li><a href="">Contact Us</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+			<% if(loggedIn.getType().equals("regular")){ %>
+				<li><a href="SeePurchaseHistory"><span class="glyphicon glyphicon-user"></span>
 						<%= ((User)session.getAttribute("user")).getFirstname() +" " +((User)session.getAttribute("user")).getLastname() %></a></li>
+				<%} else { %>
+				<li><a><span class="glyphicon glyphicon-user"></span>
+						<%= ((User)session.getAttribute("user")).getFirstname() +" " +((User)session.getAttribute("user")).getLastname() %></a></li>
+				<% } %>
 				<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
 						<% if(loggedIn.getType().equals("regular")){ %>
-						
 							<li><a href="ShoppingCart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 						<% } %>
 				<li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>

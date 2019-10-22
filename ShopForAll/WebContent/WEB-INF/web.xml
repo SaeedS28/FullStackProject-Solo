@@ -25,6 +25,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>SeePurchaseHistory</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.SeePurchaseHistory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SeePurchaseHistory</servlet-name>
+    <url-pattern>/SeePurchaseHistory</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ProcessOrder</servlet-name>
     <servlet-class>com.fdmgroup.servlets.ProcessOrder</servlet-class>
   </servlet>
