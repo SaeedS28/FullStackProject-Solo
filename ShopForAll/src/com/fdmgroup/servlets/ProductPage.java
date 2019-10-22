@@ -35,14 +35,9 @@ public class ProductPage extends HttpServlet {
 		Item item = itd.getItemByPid(productID);
 		request.setAttribute("itemInfo", item);
 		PurchaseOrderDAO pod = new PurchaseOrderDAO();
-		if(pod.isPurchased((User)request.getSession().getAttribute("user"), productID)) {
-			Boolean b = new Boolean(true);
-			request.setAttribute("bought", b);
-		}
-		else {
-			Boolean b = new Boolean(false);
-			request.setAttribute("bought", b);
-		}
+		Integer qty = pod.isPurchased((User)request.getSession().getAttribute("user"), productID);
+		
+		request.setAttribute("bought", qty);
 		request.getRequestDispatcher("/WEB-INF/view/ProductPage.jsp").forward(request, response);
 	}
 

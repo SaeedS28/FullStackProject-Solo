@@ -53,10 +53,8 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 </form>
 		 <% } %>
 	</div>
-	
-	<%PurchaseOrderDAO pod = new PurchaseOrderDAO();%>
-	<%if(pod.isPurchased((User)request.getSession().getAttribute("user"), item.getProductID()) && loggedIn.getType().equals("reqular")) { %>
-	<%= item.getCategory() %>
+	<% Integer i = (Integer) request.getAttribute("bought");%>
+	<% if(loggedIn.getType().equals("regular") && i>0){ %>
 	<div class="review" align="center" style="margin-top: 8%; max-width:700px; margin-left:27%">
 		<form action="" method="get">
 			<DIV class="header">
@@ -74,8 +72,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 			</DIV>
 		</form>
 	</div>
-	<% } %>
-	
+	<%} %>
 	<div id="addQty" class="modal">
 		<form class="modal-content animate" action="ChangeQuantity" method="Post">
 			<h3>Add Quantity</h3>
