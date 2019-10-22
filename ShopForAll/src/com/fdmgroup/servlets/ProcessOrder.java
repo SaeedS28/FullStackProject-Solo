@@ -67,6 +67,10 @@ public class ProcessOrder extends HttpServlet {
 			} else {
 				PurchaseOrderDAO pod= new PurchaseOrderDAO();
 				pod.addPurchaseOrder((User) request.getSession().getAttribute("user"), sci);
+				sci = scd.getCartDetails((User) request.getSession().getAttribute("user"));
+				
+				request.getSession().removeAttribute("sCart");
+				request.getSession().setAttribute("sCart", sci);
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
