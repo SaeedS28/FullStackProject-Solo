@@ -39,7 +39,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
 		<% if(loggedIn.getType().equals("regular") && !isAdded && item.getQuantity()>0){ %>
-		<form action="AddItemToCart" method="get" >
+		<form action="AddItemToCart" method="post" >
 		 	<button name= "pid" value="<%=item.getProductID()%>">Add to Cart</button>
 		</form>
 		 <% } else{%>
@@ -59,7 +59,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 	
 	<% Integer i = (Integer) request.getAttribute("bought");%>
 	<% if(loggedIn.getType().equals("regular") && i>0){ %>
-	<div class="review" align="center" style="margin-top: 8%; max-width:700px; margin-left:27%">
+	<div class="review" align="center" style="margin-top: 4%; max-width:700px; margin-left:27%">
 		<form action="AddReview" method="Post">
 			<DIV class="header">
 				<H3 class="headers">Product Rating</H3>
@@ -90,7 +90,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		<h4>No reviews exist. Buy a book to add one.</h4>
 		<%} else{ %>
 		
-		<table border="1" style="text-align: center; width:100%">
+		<table border="1" style="text-align: center; font-size:1.25em; width:100%">
 			<thead>
 			<tr>
 				<th>

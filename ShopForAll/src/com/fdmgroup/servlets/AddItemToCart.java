@@ -32,6 +32,13 @@ public class AddItemToCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		User loggedIn = (User) request.getSession().getAttribute("user");
 		ShoppingCartDAO scd = new ShoppingCartDAO();
@@ -46,14 +53,6 @@ public class AddItemToCart extends HttpServlet {
 		out.println("alert('Added item to cart.');");
 		out.println("location='ProductPage?pid="+pid+"';");
 		out.println("</script>");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
