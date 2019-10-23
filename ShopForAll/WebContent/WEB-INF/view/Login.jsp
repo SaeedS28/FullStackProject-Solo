@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,16 +20,17 @@
 		<h3>You shop, we drop it off</h3>
 
 	</div>
-		<form action="Login" method="post">
-			<div class="container">
-				<input type="text" placeholder="Enter Username" name="uname" required><br/>
-				<input type="password" placeholder="Enter Password" name="psw" required> <br/>
-				<button type="submit" name="loginPress" value="pressed">Login</button>
-			</div>
+	<form action="Login" method="post">
+		<div class="container">
+			<input type="text" placeholder="Enter Username" name="uname" required><br />
+			<input type="password" placeholder="Enter Password" name="psw"
+				required> <br />
+			<button type="submit" name="loginPress" value="pressed">Login</button>
+		</div>
 
-			<div class="container psw" style="background-color: #f1f1f1">
-				Forgot <a href="mailto:Saad.Saeed@fdmgroup.com?Subject=Forgot%20my%20password">password?</a>
-			</div>
-		</form>
+		<div class="container psw">
+			 <a	href="mailto:Saad.Saeed@fdmgroup.com?Subject=Forgot%20my%20password">Forgot password</a>
+		</div>
+	</form>
 </body>
 </html>
