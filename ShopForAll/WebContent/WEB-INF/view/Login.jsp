@@ -28,7 +28,7 @@
 			</div>
 
 			<div class="container psw" style="background-color: #f1f1f1">
-				Forgot <a href="#">password?</a>
+				Forgot <a href="mailto:Saad.Saeed@fdmgroup.com?Subject=Forgot%20my%20password">password?</a>
 			</div>
 		</form>
 </body>
