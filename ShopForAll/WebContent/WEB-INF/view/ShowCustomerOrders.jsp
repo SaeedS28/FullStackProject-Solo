@@ -1,7 +1,7 @@
 <%@page import="com.fdmgroup.model.PurchaseOrder"%>
 <%@page import="com.fdmgroup.dao.implementation.PurchaseOrderDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@page import="com.fdmgroup.model.Item"%>
 <%@page import="com.fdmgroup.dao.implementation.ItemDAO"%>
 <%@page import="com.fdmgroup.model.User"%>
@@ -59,9 +59,7 @@ body {
 		</div>
 	</div>
 	<%
-		PurchaseOrderDAO pod = new PurchaseOrderDAO();
-		User u = (User) request.getSession().getAttribute("user");
-		ArrayList<PurchaseOrder> po = pod.getPurchaseOrdersByUser(u);
+		ArrayList<PurchaseOrder> po = (ArrayList<PurchaseOrder>) request.getAttribute("orders");
 	%>
 	<h1 style="text-align: center">Customer Orders</h1>
 
@@ -69,50 +67,36 @@ body {
 		<%
 			if (po == null || po.size() == 0) {
 		%>
-		<h3 style="margin-top: 20%; text-align: center;">Nothing purchased yet, m8</h3>
+		<h3 style="margin-top: 20%; text-align: center;">Nothing
+			purchased yet, m8</h3>
 		<%
 			} else {
 		%>
-		<h3 style="text-align: center;">
-			Purchase History
-		</h3>
-		<table border="1" align="center" style="text-align: center; width: 800px;">
+		<h3 style="text-align: center;">Purchase History</h3>
+		<table border="1" align="center"
+			style="text-align: center; width: 800px;">
 			<thead>
-			<tr>
-				<th>
-					Date of purchase
-				</th>
-				<th>
-					Item id
-				</th>
-				<th>
-					Quantity
-				</th>
-				<th>
-					Price/item
-				</th>
-			</tr>				
+				<tr>
+					<th>Date of purchase</th>
+					<th>User</th>
+					<th>Item id</th>
+					<th>Quantity</th>
+					<th>Price/item</th>
+				</tr>
 			</thead>
 			<%
 				for (int i = 0; i < po.size(); i++) {
 			%>
-			
+
 			<tr>
-				<td>
-					<%= po.get(i).getPurchaseDate() %>
-				</td>
-				 <td>
-				 	<%= po.get(i).getProductID() %>
-				 </td>
-				 <td>
-				 	<%= po.get(i).getQuantity() %>
-				 </td>
-				 <td>
-				 	<%= po.get(i).getPrice() %>
-				 </td>
+				<td><%= po.get(i).getPurchaseDate() %></td>
+				<td><%= po.get(i).getEmailAddress() %></td>
+				<td><%= po.get(i).getProductID() %></td>
+				<td><%= po.get(i).getQuantity() %></td>
+				<td><%= po.get(i).getPrice() %></td>
 			</tr>
 			<%}%>
 			<%}%>
-	</div>
+			</div>
 </body>
 </html>

@@ -44,7 +44,7 @@
 						<li><a href="#" onclick="document.getElementById('deleteUsers').style.display='block'">Delete Users</a></li>
 					</ul>
 				<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
-				<li><a href="#"> See Customers History</a></li>
+				<li><a href="SeePurchaseHistory"> See Customers History</a></li>
 				<% } %>
 				<li><a href="">Contact Us</a></li>
 			</ul>
