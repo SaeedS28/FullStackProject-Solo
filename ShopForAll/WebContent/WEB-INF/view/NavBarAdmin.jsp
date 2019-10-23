@@ -46,7 +46,7 @@
 				<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
 				<li><a href="SeePurchaseHistory"> See Customers History</a></li>
 				<% } %>
-				<li><a href="">Contact Us</a></li>
+				<li><a href="mailto:Saad.Saeed@fdmgroup.com?Subject=I%20have%20an%20inquiry">Contact Us</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 			<% if(loggedIn.getType().equals("regular")){ %>
