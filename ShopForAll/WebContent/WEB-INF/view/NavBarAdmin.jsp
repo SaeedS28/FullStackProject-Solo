@@ -162,7 +162,7 @@
 			</div>
 		
 		<div id="addItem" class="modal">
-		<form class="modal-content animate" action="" method="post">
+		<form class="modal-content animate" action="AddItem" method="post">
 			<h3>Add new Item</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addItem').style.display='none'"
@@ -179,7 +179,7 @@
 				placeholder="New Product Description" name="pDesc" required> <label
 				for="pCat"><b>Category</b></label> <input type="text"
 				placeholder="New Product Category" name="pCat" required>
-			<button type="submit">Add Item to Catalog</button>
+			<button type="submit" name="add" value="pressed">Add Item to Catalog</button>
 			</div>
 		</form>
 		</div>

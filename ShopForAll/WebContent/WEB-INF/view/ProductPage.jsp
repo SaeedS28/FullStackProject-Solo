@@ -87,7 +87,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 			Reviews
 		</h3>
 		<%if(rev == null || rev.size()==0) {%>
-		<h4>No reviews exist. Buy a book to add one.</h4>
+		<h4>No reviews exist. Buy this item to add one.</h4>
 		<%} else{ %>
 		
 		<table border="1" style="text-align: center; font-size:1.25em; width:100%">
