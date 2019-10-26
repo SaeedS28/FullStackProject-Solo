@@ -207,4 +207,16 @@ public class ItemDAO implements IItemDAO {
 		}
 		return itemToFind;
 	}
+
+	public int getMaxPid() {
+		Query query = em.createQuery(
+				   "SELECT max(i.productID) FROM Item_List i", Integer.class);
+				
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer> maxPid = (ArrayList<Integer>) query.getResultList();
+		if(maxPid.size()==0) {
+			return 0;
+		}
+		return maxPid.get(0);
+	}
 }
