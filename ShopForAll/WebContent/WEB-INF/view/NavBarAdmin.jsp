@@ -162,7 +162,7 @@
 			</div>
 		
 		<div id="addItem" class="modal">
-		<form class="modal-content animate" action="AddItem" method="post">
+		<form class="modal-content animate" action="AddItemMultipart" method="post" enctype="multipart/form-data">
 			<h3>Add new Item</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addItem').style.display='none'"
@@ -179,6 +179,8 @@
 				placeholder="New Product Description" name="pDesc" required> <label
 				for="pCat"><b>Category</b></label> <input type="text"
 				placeholder="New Product Category" name="pCat" required>
+				<label for="pic"><b>Image upload</b></label>
+				<input type="file" name="pic" required>
 			<button type="submit" name="add" value="pressed">Add Item to Catalog</button>
 			</div>
 		</form>

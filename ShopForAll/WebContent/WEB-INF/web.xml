@@ -213,4 +213,13 @@
     <servlet-name>DeleteUser</servlet-name>
     <url-pattern>/DeleteUser</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddItemMultipart</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.AddItemMultipart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemMultipart</servlet-name>
+    <url-pattern>/AddItemMultipart</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
