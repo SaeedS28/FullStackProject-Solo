@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
@@ -22,6 +26,11 @@ import com.fdmgroup.model.User;
 public class ChangeQuantityInCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,9 +53,9 @@ public class ChangeQuantityInCart extends HttpServlet {
 		String add = request.getParameter("add");
 		String sub = request.getParameter("subtract");
 		
-		ShoppingCartDAO scd = new ShoppingCartDAO();
+		ShoppingCartDAO scd = context.getBean(ShoppingCartDAO.class);
 		User loggedIn = (User) request.getSession().getAttribute("user");
-		ItemDAO itd = new ItemDAO();
+		ItemDAO itd = context.getBean(ItemDAO.class);
 
 		if(add!=null) {
 			System.out.println("add="+add);

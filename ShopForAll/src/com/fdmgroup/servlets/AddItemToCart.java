@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.model.ShoppingCartItem;
@@ -23,6 +27,11 @@ public class AddItemToCart extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     public AddItemToCart() {
         super();
         // TODO Auto-generated constructor stub
@@ -41,7 +50,7 @@ public class AddItemToCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		User loggedIn = (User) request.getSession().getAttribute("user");
-		ShoppingCartDAO scd = new ShoppingCartDAO();
+		ShoppingCartDAO scd = context.getBean(ShoppingCartDAO.class);
 		scd.addItem(loggedIn, pid, 1);
 		ArrayList<ShoppingCartItem> sci = scd.getCartDetails(loggedIn);
 		request.getSession().removeAttribute("sCart");

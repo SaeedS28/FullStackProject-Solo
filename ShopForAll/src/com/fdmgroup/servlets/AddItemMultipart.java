@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.model.Item;
@@ -34,6 +37,12 @@ public class AddItemMultipart extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     public AddItemMultipart() {
         super();
         // TODO Auto-generated constructor stub
@@ -57,7 +66,7 @@ public class AddItemMultipart extends HttpServlet {
 		String desc="";
 		String cat="";
 		
-		ItemDAO itd = new ItemDAO();
+		ItemDAO itd = context.getBean(ItemDAO.class);
 		
 		String filePath=getServletContext().getRealPath("/")+"\\image";
 		File file = null;
@@ -91,7 +100,6 @@ public class AddItemMultipart extends HttpServlet {
 					else {
 						Item prod = new Item(name, cat, desc, quantity, price);
 						itd.addItem(prod);
-						String fileName = item.getName();
 						
 						file = new File(filePath+"\\"+(itd.getMaxPid())+".JPG");
 						item.write(file);

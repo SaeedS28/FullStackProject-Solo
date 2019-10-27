@@ -3,10 +3,14 @@ package com.fdmgroup.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.UserDAO;
 import com.fdmgroup.model.Address;
@@ -26,6 +30,11 @@ public class AddUser extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -38,7 +47,7 @@ public class AddUser extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserDAO ud = new UserDAO();
+		UserDAO ud = context.getBean(UserDAO.class);
 		String addUser = request.getParameter("addUserButton");
 		if(addUser.equals("pressed")) {
 			String userName = request.getParameter("userName");
@@ -77,7 +86,7 @@ public class AddUser extends HttpServlet {
 	}
 	
 	public boolean seeIfUserExists(String username) {
-		UserDAO ud = new UserDAO();
+		UserDAO ud = context.getBean(UserDAO.class);
 		User user = ud.findByUsername(username);
 		if(user == null) {
 			return false;

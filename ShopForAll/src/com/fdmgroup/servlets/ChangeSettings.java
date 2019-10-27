@@ -3,11 +3,15 @@ package com.fdmgroup.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.AddressDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
@@ -20,6 +24,10 @@ import com.fdmgroup.model.User;
 public class ChangeSettings extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,7 +56,7 @@ public class ChangeSettings extends HttpServlet {
 				String newPass = request.getParameter("nPassword");
 				String repPass = request.getParameter("rPassword");
 				if(newPass.equals(repPass)) {
-					UserDAO ud = new UserDAO();
+					UserDAO ud = context.getBean(UserDAO.class);
 					ud.updatePassword(loggedIn, repPass);
 					PrintWriter out = response.getWriter();
 					response.setContentType("text/html");
@@ -76,7 +84,7 @@ public class ChangeSettings extends HttpServlet {
 			}
 		}
 		else if(address!=null && address.equals("pressed")) {
-			AddressDAO ad = new AddressDAO();
+			AddressDAO ad = context.getBean(AddressDAO.class);
 			ad.changeStreet(request.getParameter("street"), loggedIn);
 			ad.changeCity(request.getParameter("city"), loggedIn);
 			ad.changeProvince(request.getParameter("province"), loggedIn);

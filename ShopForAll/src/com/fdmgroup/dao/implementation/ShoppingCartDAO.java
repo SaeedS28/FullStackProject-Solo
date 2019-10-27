@@ -56,6 +56,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		em.getTransaction().begin();
 		em.remove(sce);
 		em.getTransaction().commit();
+		connection.close();
 		return true;
 	}
 	

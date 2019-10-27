@@ -3,11 +3,15 @@ package com.fdmgroup.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
 
@@ -18,6 +22,11 @@ import com.fdmgroup.dao.implementation.ItemDAO;
 public class ChangeQuantity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,7 +50,7 @@ public class ChangeQuantity extends HttpServlet {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		int pQty = Integer.parseInt(request.getParameter("pQty"));
 		
-		ItemDAO itd = new ItemDAO();
+		ItemDAO itd = context.getBean(ItemDAO.class);
 		itd.updateQuantity(pid, pQty);
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");

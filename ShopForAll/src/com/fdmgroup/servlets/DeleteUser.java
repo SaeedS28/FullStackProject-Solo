@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
@@ -20,6 +24,11 @@ import com.fdmgroup.model.User;
 public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,7 +43,7 @@ public class DeleteUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userName = request.getParameter("username");
-		UserDAO ud = new UserDAO();
+		UserDAO ud = context.getBean(UserDAO.class);
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user.getUsername().equals(userName)) {
@@ -47,7 +56,7 @@ public class DeleteUser extends HttpServlet {
 		}
 		else {
 			ud.remove(userName);
-			ShoppingCartDAO scd = new ShoppingCartDAO();
+			ShoppingCartDAO scd = context.getBean(ShoppingCartDAO.class);
 			scd.removeAllItem(userName);
 			PrintWriter out = response.getWriter();
 			ArrayList<User> allUsers = getAllUsers();
@@ -69,7 +78,7 @@ public class DeleteUser extends HttpServlet {
 	}
 	
 	public ArrayList<User> getAllUsers(){
-		UserDAO ud = new UserDAO();
+		UserDAO ud = context.getBean(UserDAO.class);
 		return  ud.getAllUsers();
 	}
 

@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.dao.implementation.PurchaseOrderDAO;
@@ -24,6 +28,11 @@ import com.fdmgroup.model.User;
 public class ProcessOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -45,8 +54,8 @@ public class ProcessOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String process = request.getParameter("submit");
-		ItemDAO itd = new ItemDAO();
-		ShoppingCartDAO scd = new ShoppingCartDAO();
+		ItemDAO itd = context.getBean(ItemDAO.class);
+		ShoppingCartDAO scd = context.getBean(ShoppingCartDAO.class);
 		ArrayList<ShoppingCartItem> sci = scd.getCartDetails((User) request.getSession().getAttribute("user"));
 		
 		if(process!= null && process.equals("Process")) {
@@ -65,7 +74,7 @@ public class ProcessOrder extends HttpServlet {
 				out.println("location='ShoppingCart';");
 				out.println("</script>");
 			} else {
-				PurchaseOrderDAO pod= new PurchaseOrderDAO();
+				PurchaseOrderDAO pod= context.getBean(PurchaseOrderDAO.class);
 				pod.addPurchaseOrder((User) request.getSession().getAttribute("user"), sci);
 				sci = scd.getCartDetails((User) request.getSession().getAttribute("user"));
 				

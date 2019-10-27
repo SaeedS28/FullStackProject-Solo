@@ -3,11 +3,15 @@ package com.fdmgroup.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ItemDAO;
 import com.fdmgroup.model.Item;
@@ -19,6 +23,10 @@ import com.fdmgroup.model.Item;
 public class SearchAllItems extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,7 +39,7 @@ public class SearchAllItems extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ItemDAO itd = new ItemDAO();
+		ItemDAO itd = context.getBean(ItemDAO.class);
 		ArrayList<Item> allItems = itd.getAllItems();
 		request.setAttribute("allItems", allItems);
 		request.getRequestDispatcher("/WEB-INF/view/SearchPage.jsp").forward(request, response);

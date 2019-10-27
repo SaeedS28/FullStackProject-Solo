@@ -17,6 +17,7 @@ public class ItemDAO implements IItemDAO {
 
 	@Autowired
 	DBConnection connection;
+	
 	public ItemDAO() {
 		connection = DBConnection.getInstance();
 	}
@@ -121,7 +122,9 @@ public class ItemDAO implements IItemDAO {
 	public ArrayList<Item> getAllItems() {
 		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select i from Item_List i", Item.class);
-		return (ArrayList<Item>) q.getResultList();
+		ArrayList<Item> retVal = (ArrayList<Item>) q.getResultList();
+		connection.close();
+		return retVal;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -130,8 +133,9 @@ public class ItemDAO implements IItemDAO {
 		Query query = em.createQuery(
 				   "SELECT i FROM Item_List i WHERE i.category LIKE :category", Item.class);
 		query.setParameter("category", category);
+		ArrayList<Item> retVal = (ArrayList<Item>) query.getResultList();
 		connection.close();
-		return (ArrayList<Item>) query.getResultList();
+		return retVal;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -141,7 +145,9 @@ public class ItemDAO implements IItemDAO {
 				   "SELECT i FROM Item_List i WHERE i.price >= :low and i.price <= :high", Item.class);
 		query.setParameter("low", low);
 		query.setParameter("high", high);
-		return (ArrayList<Item>) query.getResultList();
+		ArrayList<Item> retVal = (ArrayList<Item>) query.getResultList();
+		connection.close();
+		return retVal;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -150,12 +156,16 @@ public class ItemDAO implements IItemDAO {
 		Query query = em.createQuery(
 				   "SELECT i FROM Item_List i WHERE i.name LIKE :name", Item.class);
 		query.setParameter("name", "%"+name.toUpperCase()+"%");
-		return (ArrayList<Item>) query.getResultList();
+		ArrayList<Item> retVal = (ArrayList<Item>) query.getResultList();
+		connection.close();
+		return retVal;
 	}
 
 	public Item getItemByPid(int pid) {
 		EntityManager em = connection.getEntityManger();
-		return em.find(Item.class, pid);
+		Item i = em.find(Item.class, pid);
+		connection.close();
+		return i;
 	}
 
 	public boolean removeItem(int pid) {
@@ -200,7 +210,9 @@ public class ItemDAO implements IItemDAO {
 		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT Distinct i.category from Item_List i", String.class);
-		return (ArrayList<String>) query.getResultList();
+		ArrayList<String> retVal = (ArrayList<String>) query.getResultList();
+		connection.close();
+		return retVal;
 	}
 
 	@SuppressWarnings("unchecked")
