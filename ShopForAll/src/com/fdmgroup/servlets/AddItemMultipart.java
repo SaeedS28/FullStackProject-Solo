@@ -3,6 +3,10 @@ package com.fdmgroup.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Iterator;
 import java.util.List;
 
@@ -90,10 +94,12 @@ public class AddItemMultipart extends HttpServlet {
 						String fileName = item.getName();
 						
 						file = new File(filePath+"\\"+(itd.getMaxPid())+".JPG");
-						File file2 = new File("C:\\Users\\Saad\\Desktop\\FullStackProject-Solo\\ShopForAll\\WebContent\\image\\"+(itd.getMaxPid())+".JPG");
-						
 						item.write(file);
-						item.write(file2);
+						
+						Path orig = file.toPath();
+						Path copy = Paths.get("C:\\Users\\Saad\\Desktop\\FullStackProject-Solo\\ShopForAll\\WebContent\\image\\"+(itd.getMaxPid())+".JPG");
+						
+						Files.copy(orig, copy, StandardCopyOption.REPLACE_EXISTING);
 					}
 				}
 			}catch (FileUploadException e) {
