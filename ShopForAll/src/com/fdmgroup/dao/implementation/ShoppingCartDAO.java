@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fdmgroup.dao.interfaces.IShoppingCartDAO;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.ShoppingCartItem;
@@ -14,15 +16,15 @@ import com.fdmgroup.model.User;
 
 public class ShoppingCartDAO implements IShoppingCartDAO {
 
-	EntityManagerFactory emf;
-	EntityManager em;
+	@Autowired
+	DBConnection connection;
 
 	public ShoppingCartDAO() {
-		emf = Persistence.createEntityManagerFactory("SoloProject");
-		em = emf.createEntityManager();		
+		connection = DBConnection.getInstance();
 	}
 
 	public boolean addItem(User u, int pid, int quantity) {
+		EntityManager em = connection.getEntityManger();
 		if(getQuantity(u, pid)>0) {
 			Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
 			q.setParameter("name", u.getUsername());
@@ -40,10 +42,12 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			em.persist(sce);
 			em.getTransaction().commit();
 		}
+		connection.close();
 		return true;
 	}
 
 	public boolean removeItem(User u, int pid) {
+		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
 		q.setParameter("name", u.getUsername());
 		q.setParameter("pid", pid);
@@ -56,6 +60,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 	}
 	
 	public int getSize(User u)  {
+		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select SUM(s.cartQuantity) from Shopping_Cart_Item s where s.userName like :name",Long.class);
 		q.setParameter("name", u.getUsername());
 		@SuppressWarnings("unchecked")
@@ -64,20 +69,24 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			return 0;
 		}
 		Integer i = (int) (long) sce.get(0);
+		connection.close();
 		return i;
 	}
 
 	public ArrayList<ShoppingCartItem> getCartDetails(User u) {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT s FROM Shopping_Cart_Item s WHERE s.userName = :username", ShoppingCartItem.class);
 		query.setParameter("username", u.getUsername());
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<ShoppingCartItem> sce = (ArrayList<ShoppingCartItem>) query.getResultList();
+		connection.close();
 		return sce;
 	}
 
 	public double getCartTotal(User u) {
+		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select SUM(s.cartQuantity * s.price) from Shopping_Cart_Item s where s.userName like :name",Double.class);
 		q.setParameter("name", u.getUsername());
 		@SuppressWarnings("unchecked")
@@ -87,10 +96,12 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		if(total==null) {
 			return 0;
 		}
+		connection.close();
 		return total;
 	}
 
 	public int getQuantity(User u, int pid) {
+		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select s.cartQuantity from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid", Integer.class);
 		q.setParameter("name", u.getUsername());
 		q.setParameter("pid", pid);
@@ -100,10 +111,12 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		if(sce.size()==0) {
 			return 0;
 		}
+		connection.close();
 		return sce.get(0);
 	}
 
 	public boolean removeAllItem(String userName) {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT s FROM Shopping_Cart_Item s WHERE s.userName = :username", ShoppingCartItem.class);
 		query.setParameter("username", userName);
@@ -119,10 +132,12 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 			em.remove(sce.get(j));
 			em.getTransaction().commit();
 		}
+		connection.close();
 		return true;
 	}
 
 	public boolean isItemInCart(User u, int pid) {
+		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid",ShoppingCartItem.class);
 		q.setParameter("name", u.getUsername());
 		q.setParameter("pid", pid);
@@ -131,6 +146,7 @@ public class ShoppingCartDAO implements IShoppingCartDAO {
 		if(sci.size()==0) {
 			return false;
 		}
+		connection.close();
 		return true;
 	}
 }

@@ -9,6 +9,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fdmgroup.dao.interfaces.IPurchaseOrderDAO;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
@@ -17,15 +19,16 @@ import com.fdmgroup.model.User;
 
 public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 
-	EntityManagerFactory emf;
-	EntityManager em;
+
+	@Autowired
+	DBConnection connection;
 
 	public PurchaseOrderDAO() {
-		emf = Persistence.createEntityManagerFactory("SoloProject");
-		em = emf.createEntityManager();		
+		connection = DBConnection.getInstance();
 	}
 	
 	public boolean addPurchaseOrder(User u, ArrayList<ShoppingCartItem> cart) {
+		EntityManager em = connection.getEntityManger();
 		for(int i=0; i<cart.size();i++) {
 			PurchaseOrder po = new PurchaseOrder(
 					new Timestamp(System.currentTimeMillis()), u.getUsername(), 
@@ -49,21 +52,24 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 			em.remove(sci);
 			em.getTransaction().commit();
 		}
-		
+		connection.close();
 		return true;
 	}
 
 	public ArrayList<PurchaseOrder> getPurchaseOrdersByUser(User u) {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username", PurchaseOrder.class);
 		query.setParameter("username", u.getUsername());
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		connection.close();
 		return sce;
 	}
 
 	public int isPurchased(User u, int pid) {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				"SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username and p.productID = :pid", PurchaseOrder.class);
 		query.setParameter("username", u.getUsername());
@@ -71,20 +77,23 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
-		
+		connection.close();
 		return sce.size();
 	}
 	
 	public ArrayList<PurchaseOrder> getAllPurchaseOrders() {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT p FROM Purchase_Order_List p", PurchaseOrder.class);
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<PurchaseOrder> sce = (ArrayList<PurchaseOrder>) query.getResultList();
+		connection.close();
 		return sce;
 	}
 
 	public ArrayList<Item> getDistinctProductPurchasesByUser(User u) {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery(
 				   "SELECT DISTINCT p.productID FROM Purchase_Order_List p where p.emailAddress like :name", Integer.class);
 		query.setParameter("name", u.getUsername());
@@ -93,11 +102,13 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		if(sce.size()==0) {
 			return null;
 		}
+		connection.close();
 		ItemDAO itd = new ItemDAO();
 		return itd.seePurchasedItemByUser(sce);
 	}
 
 	public ArrayList<Item> retrieveTopTenPurchases() {
+		EntityManager em = connection.getEntityManger();
 		Query query = em.createQuery("Select p.productID from Purchase_Order_List p "
 				+ "GROUP BY p.productID having sum(p.quantity) > 0 order by p.productID", Integer.class);
 		
@@ -106,6 +117,7 @@ public class PurchaseOrderDAO implements IPurchaseOrderDAO {
 		if(sce.size()==0) {
 			return null;
 		}
+		connection.close();
 		ItemDAO itd = new ItemDAO();
 		return itd.seePurchasedItemByUser(sce);
 	}

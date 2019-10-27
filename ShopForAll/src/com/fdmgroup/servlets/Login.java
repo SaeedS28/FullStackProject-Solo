@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.dao.implementation.ShoppingCartDAO;
 import com.fdmgroup.dao.implementation.UserDAO;
@@ -27,13 +32,16 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
+	ApplicationContext context;
+	public void init(ServletConfig config) throws ServletException {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	}
+	
 	public Login() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		req.getRequestDispatcher("/WEB-INF/view/Login.jsp").forward(req, resp);
 	}
 
@@ -50,7 +58,7 @@ public class Login extends HttpServlet {
 			if (userSession != null) {
 				HttpSession user = request.getSession();
 				user.setAttribute("user", userSession);
-				ShoppingCartDAO scd = new ShoppingCartDAO(); 
+				ShoppingCartDAO scd = context.getBean(ShoppingCartDAO.class);
 				ArrayList<ShoppingCartItem> sci = scd.getCartDetails(userSession);
 				request.getSession().setAttribute("sCart", sci);
 				request.getRequestDispatcher("/MainPage").forward(request, response);
@@ -67,8 +75,8 @@ public class Login extends HttpServlet {
 	}
 
 	public User login(String username, String password) {
-		UserDAO userDao = new UserDAO();
-		User user = userDao.findByUsername(username);
+		UserDAO userDAO = context.getBean(UserDAO.class); 
+		User user = userDAO.findByUsername(username);
 		if (user != null && user.getPassword().equals(password)) {
 			return user;
 		}
