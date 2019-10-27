@@ -55,9 +55,9 @@ body{
 		<table border="1" align="center" style="text-align: center;">
 			<% for(int i = 0;i<items.size();i++) { %>
 				<tr>
-				<td style="width: 300px; height: 300px"><a
+				<td style="width: 450px; height: 450px"><a
 						href="ProductPage?pid=<%= items.get(i).getProductID() %>"> <img
-						src="image/heroImg.jpg"
+						src="image/<%= items.get(i).getProductID() %>.JPG"
 						style="height: 100%; width: 100%" /> 
 						<h4><%= items.get(i).getName() %></h4>
 						<h6 class="price">Price: <%= items.get(i).getPrice() %></h6>

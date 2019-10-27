@@ -46,14 +46,6 @@
     <url-pattern>/ProcessOrder</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AddItem</servlet-name>
-    <servlet-class>com.fdmgroup.servlets.AddItem</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddItem</servlet-name>
-    <url-pattern>/AddItem</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>Checkout</servlet-name>
     <servlet-class>com.fdmgroup.servlets.Checkout</servlet-class>
   </servlet>

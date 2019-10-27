@@ -2,6 +2,7 @@ package com.fdmgroup.servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,7 +54,6 @@ public class AddItemMultipart extends HttpServlet {
 		String cat="";
 		
 		ItemDAO itd = new ItemDAO();
-		System.out.println(itd.getMaxPid());
 		
 		String filePath=getServletContext().getRealPath("/")+"\\image";
 		File file = null;
@@ -85,13 +85,15 @@ public class AddItemMultipart extends HttpServlet {
 						}
 					}
 					else {
-						System.out.println("File detected");
+						Item prod = new Item(name, cat, desc, quantity, price);
+						itd.addItem(prod);
 						String fileName = item.getName();
-						System.out.println(fileName);
 						
-						file = new File(filePath+"\\"+(itd.getMaxPid()+1)+".jpg");
+						file = new File(filePath+"\\"+(itd.getMaxPid())+".JPG");
+						File file2 = new File("C:\\Users\\Saad\\Desktop\\FullStackProject-Solo\\ShopForAll\\WebContent\\image\\"+(itd.getMaxPid())+".JPG");
+						
 						item.write(file);
-						System.out.println(file.getAbsolutePath());
+						item.write(file2);
 					}
 				}
 			}catch (FileUploadException e) {
@@ -100,7 +102,12 @@ public class AddItemMultipart extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Successfully added a new item');");
+			out.println("location='MainPage';");
+			out.println("</script>");
 		}
 	}
-
 }
