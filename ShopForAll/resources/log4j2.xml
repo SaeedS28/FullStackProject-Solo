@@ -9,7 +9,7 @@
 			<PatternLayout pattern="%d - %msg%n" />
 		</File>
 
-		<File name="FileAppender2" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\ItemAddRemove.log">
+		<File name="FileAppender2" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\logs\ItemAddRemove.log">
 			<PatternLayout pattern="%d - %msg%n" />
 		</File>
 		

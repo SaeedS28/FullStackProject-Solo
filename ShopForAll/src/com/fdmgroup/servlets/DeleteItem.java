@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,6 +24,7 @@ public class DeleteItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	ApplicationContext context;
+	private static Logger itemLogger = LogManager.getLogger("ItemAR");
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
@@ -48,6 +51,9 @@ public class DeleteItem extends HttpServlet {
 		int pid = Integer.parseInt(request.getParameter("delButt"));
 		
 		ItemDAO itd = context.getBean(ItemDAO.class);
+		itemLogger.info("Item with product ID: "+ pid+", name: "+ itd.getItemByPid(pid).getName()+", and price: "+ itd.getItemByPid(pid).getPrice()
+				+" deleted successfully from the store");
+		
 		itd.removeItem(pid);
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");

@@ -22,6 +22,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -37,7 +39,7 @@ public class AddItemMultipart extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
+	private static Logger itemLogger = LogManager.getLogger("ItemAR");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -101,6 +103,9 @@ public class AddItemMultipart extends HttpServlet {
 					else {
 						Item prod = new Item(name, cat, desc, quantity, price);
 						itd.addItem(prod);
+						
+						itemLogger.info("Item with product ID: "+ itd.getMaxPid()+", name: " +name+", price: $"+price +" added to the"
+								+ " catalog. Initial quantity is " + quantity +" units");
 						
 						file = new File(filePath+"\\"+(itd.getMaxPid())+".JPG");
 						item.write(file);
