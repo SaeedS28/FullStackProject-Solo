@@ -43,10 +43,8 @@ public class MainPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User loggedIn = (User) request.getSession().getAttribute("user");
-		if(loggedIn.getType().equals("admin")) {
 			ArrayList<User> allUsers = getAllUsers();
 			request.getSession().setAttribute("allUsers", allUsers);
-		}
 		
 		List<Item> topPurchases = getTopNinePurchases();
 		request.setAttribute("topPurchase", topPurchases);

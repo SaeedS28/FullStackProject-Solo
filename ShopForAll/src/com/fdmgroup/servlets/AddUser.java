@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -25,11 +27,12 @@ public class AddUser extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	private static Logger userLogger = LogManager.getLogger("UserAR");
     public AddUser() {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
     ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -66,6 +69,7 @@ public class AddUser extends HttpServlet {
 				Address add = new Address(userName,street,city,province,country,postalCode);
 				User newUser = new User(userName,password,firstName,lastName,userType,add);
 				ud.create(newUser);
+				userLogger.info("User with username: " + userName + " and account type: "+ userType+" created successfully");
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
@@ -78,7 +82,7 @@ public class AddUser extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Username already takem. Try again');");
+				out.println("alert('Username already taken. Try again');");
 				out.println("location='MainPage';");
 				out.println("</script>");
 			}
@@ -91,6 +95,7 @@ public class AddUser extends HttpServlet {
 		if(user == null) {
 			return false;
 		}
+		userLogger.info("User with username: " + username+" already exists in the database");
 		return true;
 		
 	}

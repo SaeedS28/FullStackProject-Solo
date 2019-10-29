@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,7 +22,7 @@ import com.fdmgroup.dao.implementation.ItemDAO;
  */
 public class ChangeCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private static Logger itemChangeLogger = LogManager.getLogger("ItemChanges");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -50,6 +52,8 @@ public class ChangeCategory extends HttpServlet {
 		
 		ItemDAO itd = context.getBean(ItemDAO.class);
 		itd.updateCategory(pid, category);
+		itemChangeLogger.info("category associated with item product ID: " + pid + " and name: "+ itd.getItemByPid(pid).getName()+" changed successfully"
+				+ " to " + category.toUpperCase()); 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		out.println("<script type=\"text/javascript\">");

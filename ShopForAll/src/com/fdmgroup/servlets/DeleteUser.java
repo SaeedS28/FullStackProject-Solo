@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,6 +26,7 @@ import com.fdmgroup.model.User;
 public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private static Logger userLogger = LogManager.getLogger("UserAR");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -47,6 +50,7 @@ public class DeleteUser extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user.getUsername().equals(userName)) {
+			userLogger.info(userName+" tried to delete their own account. Invalid operation");
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
 			out.println("<script type=\"text/javascript\">");
@@ -60,6 +64,7 @@ public class DeleteUser extends HttpServlet {
 			scd.removeAllItem(userName);
 			PrintWriter out = response.getWriter();
 			ArrayList<User> allUsers = getAllUsers();
+			userLogger.info("User with username: "+userName+" deleted successfully");
 			request.getSession().setAttribute("allUsers", allUsers);
 			response.setContentType("text/html");
 			out.println("<script type=\"text/javascript\">");

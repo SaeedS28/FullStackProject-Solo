@@ -1,0 +1,4 @@
+2019-10-28 22:37:47,238 - User with username: test deleted successfully
+2019-10-28 22:38:19,535 - saeeds28 tried to delete their own account. Invalid operation
+2019-10-28 22:38:58,570 - User with username: saeeds28 already exists in the database
+2019-10-28 22:41:01,324 - User with username: test and account type: admin created successfully

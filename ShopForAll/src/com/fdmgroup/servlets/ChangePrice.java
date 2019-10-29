@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,6 +24,7 @@ import com.fdmgroup.dao.implementation.ItemDAO;
 public class ChangePrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private static Logger itemChangeLogger = LogManager.getLogger("ItemChanges");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -51,6 +54,8 @@ public class ChangePrice extends HttpServlet {
 		double cPrice = Double.parseDouble(request.getParameter("cPrice"));
 		
 		ItemDAO itd = context.getBean(ItemDAO.class);
+		itemChangeLogger.info("Price associated with item product ID: " + pid + " and name: "+ itd.getItemByPid(pid).getName()+" "
+				+ "changed successfully from $"+itd.getItemByPid(pid).getPrice()+" to $" + cPrice); 
 		itd.updatePrice(pid,cPrice);
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");

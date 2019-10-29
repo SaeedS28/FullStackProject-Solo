@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,6 +24,7 @@ public class ChangeDescription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ApplicationContext context;
+	private static Logger itemChangeLogger = LogManager.getLogger("ItemChanges");
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
@@ -50,6 +53,7 @@ public class ChangeDescription extends HttpServlet {
 		
 		ItemDAO itd = context.getBean(ItemDAO.class);
 		itd.updateDescription(pid, desc);
+		itemChangeLogger.info("Description associated with item product ID: " + pid + " and name: "+ itd.getItemByPid(pid).getName()+" changed successfully");
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		out.println("<script type=\"text/javascript\">");
