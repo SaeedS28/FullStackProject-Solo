@@ -40,6 +40,7 @@ public class AddItemMultipart extends HttpServlet {
 	
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
 	

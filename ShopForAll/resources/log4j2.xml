@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="StdOut" target="SYSTEM_OUT">
+			<PatternLayout pattern="%logger - %msg%n" />
+		</Console>
+
+		<File name="FileAppender1" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\logs\UserLogin.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+
+		<File name="FileAppender2" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\ItemAddRemove.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender3" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\logs\ItemAttributesChange.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender4" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\logs\UserAddRemove.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender5" filename="C:\Users\Saad\Desktop\FullStackProject-Solo\ShopForAll\logs\CustomerOrders.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+	</Appenders>
+
+	<Loggers>
+
+<!-- 		<Root level="error"> -->
+<!-- 			<AppenderRef ref="StdOut" /> -->
+<!-- 		</Root> -->
+		
+		<Logger name="stdOutput" level="info" additivity="false">
+			<AppenderRef ref="StdOut" />
+		</Logger>
+
+		<Logger name="LoginAttempts" level="info" additivity="false">
+			<AppenderRef ref="FileAppender1" />
+		</Logger>
+		
+		<Logger name="ItemAR" level="info" additivity="false">
+			<AppenderRef ref="FileAppender2" />
+		</Logger>
+		
+		<Logger name="ItemChanges" level="info" additivity="false">
+			<AppenderRef ref="FileAppender3" />
+		</Logger>
+		
+		<Logger name="UserAR" level="info" additivity="false">
+			<AppenderRef ref="FileAppender4" />
+		</Logger>
+		
+		<Logger name="custOrder" level="info" additivity="false">
+			<AppenderRef ref="FileAppender5" />
+		</Logger>
+	
+	</Loggers>
+</Configuration>

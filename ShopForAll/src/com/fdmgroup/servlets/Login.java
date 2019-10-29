@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,6 +34,7 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
+	private static Logger loginLogger = LogManager.getLogger("LoginAttempts");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -78,8 +81,10 @@ public class Login extends HttpServlet {
 		UserDAO userDAO = context.getBean(UserDAO.class); 
 		User user = userDAO.findByUsername(username);
 		if (user != null && user.getPassword().equals(password)) {
+			loginLogger.info(username + " logged in successfully");
 			return user;
 		}
+		loginLogger.info(username + " tried logging in but was unsuccessful");
 		return null;
 	}
 }
