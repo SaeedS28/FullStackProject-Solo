@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,6 +30,7 @@ import com.fdmgroup.model.User;
 public class ProcessOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private static Logger orderLogger = LogManager.getLogger("custOrder");
 	ApplicationContext context;
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -63,6 +66,8 @@ public class ProcessOrder extends HttpServlet {
 			for(int i=0;i<sci.size();i++) {
 				if(sci.get(i).getCartQuantity()>itd.getItemQuantity(sci.get(i).getProductID())) {
 					isOver=true;
+					orderLogger.info("Orders for user: "+((User) request.getSession().getAttribute("user")).getUsername()+" failed"
+							+ " because an item was out of stock");
 					break;
 				}
 			}
@@ -77,7 +82,7 @@ public class ProcessOrder extends HttpServlet {
 				PurchaseOrderDAO pod= context.getBean(PurchaseOrderDAO.class);
 				pod.addPurchaseOrder((User) request.getSession().getAttribute("user"), sci);
 				sci = scd.getCartDetails((User) request.getSession().getAttribute("user"));
-				
+				orderLogger.info("Orders for user: "+((User) request.getSession().getAttribute("user")).getUsername()+" were approved");
 				request.getSession().removeAttribute("sCart");
 				request.getSession().setAttribute("sCart", sci);
 				PrintWriter out = response.getWriter();
