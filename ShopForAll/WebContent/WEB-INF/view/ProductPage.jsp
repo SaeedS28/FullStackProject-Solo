@@ -121,7 +121,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 				 <td>
 				 	<%= rev.get(j).getReviewText() %>
 				 </td>
-				 <% if(loggedIn.getUsername().equals(rev.get(j).getEmailAddress())){ %>
+				 <% if(loggedIn.getUsername().equals(rev.get(j).getEmailAddress())||loggedIn.getType().equals("admin")){ %>
 				 <td>
 				 	<form action="DeleteReview" method="post" onsubmit="return confirm('Press ok to delete your review');">
 				 		<button name="deleteReview" value="<%=rev.get(j).getReviewID()%>">Delete Review</button>
