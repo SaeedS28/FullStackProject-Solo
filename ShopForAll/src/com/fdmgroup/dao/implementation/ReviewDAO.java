@@ -91,4 +91,16 @@ public class ReviewDAO implements IReviewDAO {
 		return true;
 	}
 
+	@Override
+	public void acceptReview(int reviewID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeIndividualReview(int reviewID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

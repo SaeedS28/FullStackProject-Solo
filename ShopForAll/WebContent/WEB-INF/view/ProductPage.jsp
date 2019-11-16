@@ -50,7 +50,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 <button onclick="document.getElementById('addQty').style.display='block'">Add Quantity</button>
 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>
 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
-		 <button onclick="document.getElementById('changePrice').style.display='block'">>Change Price</button>
+		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button>
 		 <form action="DeleteItem" method="post">
 		 	<button name="delButt" value="${itemInfo.productID}" >Delete Item</button>
 		 </form>

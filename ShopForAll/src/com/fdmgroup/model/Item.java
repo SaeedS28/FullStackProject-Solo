@@ -14,22 +14,22 @@ public class Item {
 	@Id
 	@SequenceGenerator(name="id_generator", sequenceName = "product_id_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
-	@Column(nullable=false)
+	@Column(name ="product_id", nullable=false)
 	private int productID;
 	
-	@Column(nullable=false)
+	@Column(name="product_name", length=69, nullable=false)
 	private String name;
 	
-	@Column(nullable=false)
+	@Column(name="product_description", length = 1500, nullable=false)
 	private String description;
 	
-	@Column(nullable=false)
+	@Column(name="store_quantity", nullable=false)
 	private int quantity;
 	
-	@Column(nullable=false)
+	@Column(name="unit_price", nullable=false)
 	private double price;
 	
-	@Column(nullable=false)
+	@Column(name="product_category", length = 100, nullable=false)
 	private String category;
 	
 	public Item() {}

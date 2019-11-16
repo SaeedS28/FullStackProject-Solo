@@ -170,15 +170,15 @@
 			</div>
 			<div class="container">
 			<label for="pName"><b>Product Name</b></label> <input type="text"
-				placeholder="New Product Name" name="pName" required> <label
+				placeholder="New Product Name" name="pName" required maxlength="69"> <label
 				for="price"><b>Price</b></label> <input type="number"
 				placeholder="New Product Price" name="pPrice" required step="0.01" min="0.01"> <label
 				for="pQuantity"><b>Quantity</b></label> <input type="number"
 				placeholder="New Product Quantity" name="pQuantity" min="1" required > <label
 				for="pDesc"><b>Description</b></label> <input type="text"
-				placeholder="New Product Description" name="pDesc" required> <label
+				placeholder="New Product Description" name="pDesc" required maxlength="1500"> <label
 				for="pCat"><b>Category</b></label> <input type="text"
-				placeholder="New Product Category" name="pCat" required>
+				placeholder="New Product Category" name="pCat" required maxlength="100">
 				<label for="pic"><b>Image upload</b></label>
 				<input type="file" name="pic" required>
 			<button type="submit" name="add" value="pressed">Add Item to Catalog</button>
