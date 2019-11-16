@@ -16,18 +16,23 @@ public class Review {
 	@Id
 	@SequenceGenerator(name="review_generator", sequenceName = "review_id_seq",allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_generator")
-	@Column(nullable=false)
+	@Column(name="review_id", nullable=false)
 	private int reviewID;
-	@Column(nullable=false)
+	@Column(name="product_id", nullable=false)
 	private int productID;
-	@Column(nullable=false)
+	@Column(name="review", length=500, nullable=false)
 	private String reviewText;
-	@Column(nullable=false)
+	@Column(name= "user",nullable=false)
 	private String emailAddress;
 	@Column(nullable=false)
 	private int rating;
-	@Column(nullable=false)
+	@Column(name="review_date", nullable=false)
 	private Timestamp reviewDate;
+	@Column(name="review_status", nullable=false)
+	private String status;
+	
+	public static final String UNDER_REVIEW="Under Review";
+	public static final String ACCEPTED ="Accepted";
 	
 	public Review() {
 		super();
@@ -40,6 +45,7 @@ public class Review {
 		this.emailAddress = emailAddress;
 		this.rating = rating;
 		this.reviewDate = timestamp;
+		this.status = UNDER_REVIEW;
 	}
 
 	public int getReviewID() {
@@ -90,7 +96,10 @@ public class Review {
 		this.reviewDate = reviewDate;
 	}
 
-	@Override
+	public void acceptReview() {
+		this.status = ACCEPTED;
+	}
+	
 	public String toString() {
 		return "reviewID = " + reviewID + ", reviewText = " + reviewText
 				+ ", emailAddress = " + emailAddress + ", rating = " + rating + ", reviewDate = " + reviewDate;

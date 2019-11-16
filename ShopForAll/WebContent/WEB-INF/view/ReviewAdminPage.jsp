@@ -1,5 +1,4 @@
-<%@page import="com.fdmgroup.model.PurchaseOrder"%>
-<%@page import="com.fdmgroup.dao.implementation.PurchaseOrderDAO"%>
+<%@page import="com.fdmgroup.model.Review"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.fdmgroup.model.Item"%>
@@ -12,7 +11,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User Orders</title>
+<title>Review Moderator</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/navBarUser.css">
@@ -59,41 +58,43 @@ body {
 		</div>
 	</div>
 	<%
-		ArrayList<PurchaseOrder> po = (ArrayList<PurchaseOrder>) request.getAttribute("orders");
+		ArrayList<Review> reviews = (ArrayList<Review>) request.getAttribute("reviewMod");
 	%>
 	<h1 style="text-align: center">Customer Orders</h1>
 
 	<div class="sales">
 		<%
-			if (po == null || po.size() == 0) {
+			if (reviews == null || reviews.size() == 0) {
 		%>
-		<h3 style="margin-top: 20%; text-align: center;">Nothing
-			purchased yet, m8</h3>
+		<h3 style="margin-top: 20%; text-align: center;">No reviews to moderate</h3>
 		<%
 			} else {
 		%>
-		<h3 style="text-align: center;">Purchase History</h3>
-		<table border="1" align="center"
+		<h3 style="text-align: center;">Reviews pending approval</h3>
+		<table border="0" align="center"
 			style="text-align: center; width: 800px;">
 			<thead>
 				<tr>
-					<th>Date of purchase</th>
+					<th>Review Id</th>
+					<th>Review Date</th>
 					<th>User</th>
 					<th>Item id</th>
-					<th>Quantity</th>
-					<th>Price/item</th>
+					<th>Rating</th>
+					<th>Review text</th>
+					
 				</tr>
 			</thead>
 			<%
-				for (int i = 0; i < po.size(); i++) {
+				for (int i = 0; i < reviews.size(); i++) {
 			%>
 
 			<tr>
-				<td><%= po.get(i).getPurchaseDate() %></td>
-				<td><%= po.get(i).getEmailAddress() %></td>
-				<td><%= po.get(i).getProductID() %></td>
-				<td><%= po.get(i).getQuantity() %></td>
-				<td><%= po.get(i).getPrice() %></td>
+				<td><%= reviews.get(i).getReviewID() %></td>
+				<td><%= reviews.get(i).getReviewDate() %></td>
+				<td><%= reviews.get(i).getEmailAddress() %></td>
+				<td><%= reviews.get(i).getProductID() %></td>
+				<td><%= reviews.get(i).getRating() %></td>
+				<td><%= reviews.get(i).getReviewText() %></td>
 			</tr>
 			<%}%>
 			<%}%>

@@ -48,7 +48,7 @@ public class ReviewDAO implements IReviewDAO {
 		return true;
 	}
 	
-	public ArrayList<Review> retrieveReviews(int productID) {
+	public ArrayList<Review> retrieveAcceptedReviews(int productID) {
 		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select r from Review_List r where r.productID = :pid",Review.class);
 		q.setParameter("pid", productID);
@@ -92,6 +92,12 @@ public class ReviewDAO implements IReviewDAO {
 	}
 
 	public void acceptReview(int reviewID) {
+		EntityManager em = connection.getEntityManger();
+		Review review = em.find(Review.class, reviewID);
+		em.getTransaction().begin();
+		review.acceptReview();
+		em.getTransaction().commit();
+		connection.close();
 		
 	}
 
@@ -102,6 +108,15 @@ public class ReviewDAO implements IReviewDAO {
 		em.remove(review);
 		em.getTransaction().commit();
 		connection.close();
+	}
+
+	public ArrayList<Review> retrievePendingReviews() {
+		EntityManager em = connection.getEntityManger();
+		Query q = em.createQuery("Select r from Review_List r where r.status like :stat",Review.class);
+		q.setParameter("stat", Review.UNDER_REVIEW);
+		@SuppressWarnings("unchecked")
+		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
+		return rev;
 	}
 
 }
