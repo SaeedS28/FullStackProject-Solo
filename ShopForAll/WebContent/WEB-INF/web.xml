@@ -22,6 +22,14 @@
     <url-pattern>/MainPage</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DeleteReview</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.DeleteReview</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteReview</servlet-name>
+    <url-pattern>/DeleteReview</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SeePurchaseHistory</servlet-name>
     <servlet-class>com.fdmgroup.servlets.SeePurchaseHistory</servlet-class>
   </servlet>

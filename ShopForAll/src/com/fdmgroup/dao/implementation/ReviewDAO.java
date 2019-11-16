@@ -91,16 +91,17 @@ public class ReviewDAO implements IReviewDAO {
 		return true;
 	}
 
-	@Override
 	public void acceptReview(int reviewID) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void removeIndividualReview(int reviewID) {
-		// TODO Auto-generated method stub
-		
+		EntityManager em = connection.getEntityManger();
+		Review review = em.find(Review.class, reviewID);
+		em.getTransaction().begin();
+		em.remove(review);
+		em.getTransaction().commit();
+		connection.close();
 	}
 
 }

@@ -25,7 +25,7 @@
 </head>
 <body>
 	<jsp:include page="NavBarAdmin.jsp" />
-<% User loggedIn = (User)session.getAttribute("user"); 
+<% User loggedIn = (User)session.getAttribute("user");
 ShoppingCartDAO scd = new ShoppingCartDAO();
 Item item = (Item) request.getAttribute("itemInfo");
 boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
@@ -90,22 +90,22 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		<h4>No reviews exist. Buy this item to add one.</h4>
 		<%} else{ %>
 		
-		<table border="1" style="text-align: center; font-size:1.25em; width:100%">
+		<table border="0px" style="text-align: center; font-size:1.25em; width:100%">
 			<thead>
 			<tr>
-				<th>
+				<th align="center">
 					Date of Review
 				</th>
-				<th>
+				<th align="center">
 					User
 				</th>
-				<th>
+				<th align="center">
 					Rating
 				</th>
-				<th>
+				<th align="center">
 					Description
 				</th>
-			</tr>				
+			</tr>	
 			</thead>
 			<%for(int j =0;j<rev.size();j++){ %>
 			<tr>
@@ -121,6 +121,13 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 				 <td>
 				 	<%= rev.get(j).getReviewText() %>
 				 </td>
+				 <% if(loggedIn.getUsername().equals(rev.get(j).getEmailAddress())){ %>
+				 <td>
+				 	<form action="DeleteReview" method="post" onsubmit="return confirm('Press ok to delete your review');">
+				 		<button name="deleteReview" value="<%=rev.get(j).getReviewID()%>">Delete Review</button>
+				 	</form>
+				 </td>
+				 <%} %>
 			</tr>
 			<%} %>
 			</table>
