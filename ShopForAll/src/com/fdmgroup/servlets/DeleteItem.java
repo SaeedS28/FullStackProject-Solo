@@ -1,7 +1,10 @@
 package com.fdmgroup.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,6 +29,7 @@ public class DeleteItem extends HttpServlet {
 	ApplicationContext context;
 	private static Logger itemLogger = LogManager.getLogger("ItemAR");
 	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
 	
@@ -38,19 +42,19 @@ public class DeleteItem extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pid = Integer.parseInt(request.getParameter("delButt"));
-		
+		String filePath=getServletContext().getRealPath("/")+"\\image";
+		System.out.println(filePath);
 		ItemDAO itd = context.getBean(ItemDAO.class);
+		File file = new File(filePath+"\\"+pid+".JPG");
+		file.delete();
+		
+		File copy = new File("C:\\Users\\Saad\\Desktop\\FullStackProject-Solo\\ShopForAll\\WebContent\\image\\"+pid+".JPG");
+		copy.delete();
+		
 		itemLogger.info("Item with product ID: "+ pid+", name: "+ itd.getItemByPid(pid).getName()+", and price: "+ itd.getItemByPid(pid).getPrice()
 				+" deleted successfully from the store");
 		

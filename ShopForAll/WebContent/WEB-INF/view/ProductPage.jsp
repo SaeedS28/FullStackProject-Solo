@@ -51,8 +51,8 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>
 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
 		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button>
-		 <form action="DeleteItem" method="post">
-		 	<button name="delButt" value="${itemInfo.productID}">Delete Item</button>
+		 <form action="DeleteItem" method="post" onsubmit="return confirm('Press ok to delete the item')">
+		 	<button name="delButt" value="<%= item.getProductID() %>">Delete Item</button>
 		 </form>
 		 <% } %>
 	</div>
@@ -60,7 +60,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 	<% Integer i = (Integer) request.getAttribute("bought");%>
 	<% if(loggedIn.getType().equals("regular") && i>0){ %>
 	<div class="review" align="center" style="margin-top: 4%; max-width:700px; margin-left:27%">
-		<form action="AddReview" method="Post" onsubmit="return confirm('Review submitted to the administrator for approval. Continue?');">
+		<form action="AddReview" method="Post" onsubmit="return confirm('Review will be submitted to the administrator for approval. Continue?');">
 			<DIV class="header">
 				<H3 class="headers">Product Rating</H3>
 			</DIV>
