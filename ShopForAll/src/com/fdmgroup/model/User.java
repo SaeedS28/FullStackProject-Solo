@@ -13,14 +13,19 @@ import javax.persistence.Table;
 public class User {
 	//private int id;
 	@Id
+	@Column(name="user_name", nullable=false)
 	private String username;
-	@Column(nullable=false)
+	
+	@Column(name="password_hash", length=256, nullable=false)
 	private String password;
-	@Column(nullable=false)
+	
+	@Column(name="first_name", nullable=false)
 	private String firstname;
-	@Column(nullable=false)
+	
+	@Column(name="last_name", nullable=false)
 	private String lastname;
-	@Column(nullable=false)
+	
+	@Column(name="user_type", nullable=false)
 	private String type;
 	
 	@OneToOne(cascade=CascadeType.ALL)

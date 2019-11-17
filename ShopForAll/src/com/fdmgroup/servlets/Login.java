@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class Login extends HttpServlet {
 			String userName = request.getParameter("uname");
 			String password = request.getParameter("psw");
 
-			User userSession = login(userName, password);
+			User userSession = login(userName, DigestUtils.sha256Hex(password));
 
 			if (userSession != null) {
 				HttpSession user = request.getSession();

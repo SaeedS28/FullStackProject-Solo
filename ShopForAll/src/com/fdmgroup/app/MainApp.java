@@ -10,6 +10,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
@@ -30,8 +32,8 @@ public class MainApp {
 		Address a2 = new Address("samad", "25 Telegram Mews", "Toronto", "Ontaio", "Canada", "M5V3Z1");
 		
 		// Users
-		User u = new User("saeeds28", "bluejays123", "Saad", "Saeed", "admin", a);
-		User u2 = new User("samad", "password", "Samad", "Saeed", "regular", a2);
+		User u = new User("saeeds28", DigestUtils.sha256Hex("bluejays123"), "Saad", "Saeed", "admin", a);
+		User u2 = new User("samad", DigestUtils.sha256Hex("password"), "Samad", "Saeed", "regular", a2);
 
 		// Items
 		List<Item> strawberry = new ArrayList<>();
@@ -75,8 +77,6 @@ public class MainApp {
 		for(PurchaseOrder poi : po) {
 			em.persist(poi);
 		}
-		Review rev = new Review(11,"test","samad",5,new java.sql.Timestamp(System.currentTimeMillis()));
-		em.persist(rev);
 		em.getTransaction().commit();
 
 		em.close();
