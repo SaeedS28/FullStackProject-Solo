@@ -18,16 +18,22 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_generator")
 	@Column(name="review_id", nullable=false)
 	private int reviewID;
+	
 	@Column(name="product_id", nullable=false)
 	private int productID;
-	@Column(name="review", length=500, nullable=false)
+	
+	@Column(name="review_descriptiom", length=500, nullable=false)
 	private String reviewText;
-	@Column(name= "user",nullable=false)
+	
+	@Column(name="user_name", nullable=false)
 	private String emailAddress;
-	@Column(nullable=false)
+	
+	@Column(name="numerical_rating", nullable=false)
 	private int rating;
+	
 	@Column(name="review_date", nullable=false)
 	private Timestamp reviewDate;
+	
 	@Column(name="review_status", nullable=false)
 	private String status;
 	
@@ -100,9 +106,17 @@ public class Review {
 		this.status = ACCEPTED;
 	}
 	
+	public String getStatus() {
+		return this.status;
+	}
+	
 	public String toString() {
 		return "reviewID = " + reviewID + ", reviewText = " + reviewText
 				+ ", emailAddress = " + emailAddress + ", rating = " + rating + ", reviewDate = " + reviewDate;
+	}
+
+	public void setReviewStatus() {
+		this.status = UNDER_REVIEW;
 	}
 	
 	

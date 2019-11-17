@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import com.fdmgroup.model.Address;
 import com.fdmgroup.model.Item;
 import com.fdmgroup.model.PurchaseOrder;
+import com.fdmgroup.model.Review;
 import com.fdmgroup.model.User;
 
 
@@ -74,14 +75,13 @@ public class MainApp {
 		for(PurchaseOrder poi : po) {
 			em.persist(poi);
 		}
+		Review rev = new Review(11,"test","samad",5,new java.sql.Timestamp(System.currentTimeMillis()));
+		em.persist(rev);
 		em.getTransaction().commit();
 
 		em.close();
 		emf.close();
 
 		System.out.println("Please work");
-		//Views
-//		HomeView hv = new HomeView(new Scanner(System.in));
-//		hv.showInitialOptions(false);
 	}
 }

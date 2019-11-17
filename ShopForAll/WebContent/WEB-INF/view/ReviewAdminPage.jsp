@@ -60,19 +60,17 @@ body {
 	<%
 		ArrayList<Review> reviews = (ArrayList<Review>) request.getAttribute("reviewMod");
 	%>
-	<h1 style="text-align: center">Customer Orders</h1>
-
-	<div class="sales">
 		<%
 			if (reviews == null || reviews.size() == 0) {
 		%>
-		<h3 style="margin-top: 20%; text-align: center;">No reviews to moderate</h3>
+		<h1 style="margin-top: 20%; text-align: center;">No reviews to moderate</h1>
 		<%
 			} else {
 		%>
-		<h3 style="text-align: center;">Reviews pending approval</h3>
+		<h1 style="text-align: center;">Reviews pending approval</h1>
+	<div class="sales" style="margin-top: 3%;">
 		<table border="0" align="center"
-			style="text-align: center; width: 800px;">
+			style="text-align: center; width: 95%;">
 			<thead>
 				<tr>
 					<th>Review Id</th>
@@ -81,7 +79,6 @@ body {
 					<th>Item id</th>
 					<th>Rating</th>
 					<th>Review text</th>
-					
 				</tr>
 			</thead>
 			<%
@@ -95,6 +92,16 @@ body {
 				<td><%= reviews.get(i).getProductID() %></td>
 				<td><%= reviews.get(i).getRating() %></td>
 				<td><%= reviews.get(i).getReviewText() %></td>
+				<td>
+				 	<form action="AcceptReview" method="post" onsubmit="return confirm('Press ok to accept this review');">
+				 		<button name="AcceptReview" value="<%=reviews.get(i).getReviewID()%>">Accept Review</button>
+				 	</form>
+				 </td>
+				<td>
+				 	<form action="DeleteReview" method="post" onsubmit="return confirm('Press ok to delete this review');">
+				 		<button name="deleteReview" value="<%=reviews.get(i).getReviewID()%>">Delete Review</button>
+				 	</form>
+				 </td>
 			</tr>
 			<%}%>
 			<%}%>

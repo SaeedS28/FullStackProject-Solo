@@ -42,16 +42,17 @@ public class ReviewDAO implements IReviewDAO {
 			rev.get(0).setRating(b.getRating());
 			rev.get(0).setReviewText(b.getReviewText());
 			rev.get(0).setReviewDate(b.getReviewDate());
+			rev.get(0).setReviewStatus();
 			em.getTransaction().commit();
 		}
-		connection.close();
 		return true;
 	}
 	
 	public ArrayList<Review> retrieveAcceptedReviews(int productID) {
 		EntityManager em = connection.getEntityManger();
-		Query q = em.createQuery("Select r from Review_List r where r.productID = :pid",Review.class);
+		Query q = em.createQuery("Select r from Review_List r where r.productID = :pid and r.status like :stat",Review.class);
 		q.setParameter("pid", productID);
+		q.setParameter("stat", Review.ACCEPTED);
 		@SuppressWarnings("unchecked")
 		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
 		connection.close();

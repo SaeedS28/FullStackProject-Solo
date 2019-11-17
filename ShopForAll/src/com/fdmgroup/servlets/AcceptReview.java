@@ -18,16 +18,15 @@ import com.fdmgroup.model.Review;
 import com.fdmgroup.model.User;
 
 /**
- * Servlet implementation class AddReview
+ * Servlet implementation class AcceptReview
  */
-
-public class AddReview extends HttpServlet {
+public class AcceptReview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddReview() {
+    public AcceptReview() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,17 +35,15 @@ public class AddReview extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ReviewDAO rd = context.getBean(ReviewDAO.class);
-		int pid = Integer.parseInt(request.getParameter("review"));
-		int rating = Integer.parseInt(request.getParameter("rate"));
-		String description = request.getParameter("comment");
-		rd.addReview(new Review(pid, description, ((User) request.getSession().getAttribute("user")).getUsername(), rating, new Timestamp(System.currentTimeMillis())));
-		request.getRequestDispatcher("ProductPage?pid="+pid).forward(request, response);
+		int reviewId = Integer.parseInt(request.getParameter("AcceptReview"));
+		rd.acceptReview(reviewId);
+		request.getRequestDispatcher("ModerateReviewPage").forward(request, response);
 	}
 
 }

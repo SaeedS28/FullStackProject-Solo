@@ -52,7 +52,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
 		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button>
 		 <form action="DeleteItem" method="post">
-		 	<button name="delButt" value="${itemInfo.productID}" >Delete Item</button>
+		 	<button name="delButt" value="${itemInfo.productID}">Delete Item</button>
 		 </form>
 		 <% } %>
 	</div>
@@ -60,7 +60,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 	<% Integer i = (Integer) request.getAttribute("bought");%>
 	<% if(loggedIn.getType().equals("regular") && i>0){ %>
 	<div class="review" align="center" style="margin-top: 4%; max-width:700px; margin-left:27%">
-		<form action="AddReview" method="Post">
+		<form action="AddReview" method="Post" onsubmit="return confirm('Review submitted to the administrator for approval. Continue?');">
 			<DIV class="header">
 				<H3 class="headers">Product Rating</H3>
 			</DIV>
@@ -71,7 +71,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 			<DIV class="textInput">
 				<label for="comment">A brief description</label>
 				<input type="text" name="comment"
-					placeholder="Enter review details" required>
+					placeholder="Enter review details" required maxlength="500">
 				<button name="review" value="<%=item.getProductID()%>">Add Review</button>
 			</DIV>
 		</form>
@@ -80,7 +80,7 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 	
 	<%
 		ReviewDAO rd = new ReviewDAO();
-		ArrayList<Review> rev = rd.retrieveReviews(item.getProductID());
+		ArrayList<Review> rev = rd.retrieveAcceptedReviews(item.getProductID());
 	%>
 	<div class="sales" style="margin-top: 4%;">
 		<h3 style="text-align: center;">

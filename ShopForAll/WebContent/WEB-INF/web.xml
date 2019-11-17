@@ -22,6 +22,22 @@
     <url-pattern>/MainPage</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ModerateReviewPage</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.ModerateReviewPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModerateReviewPage</servlet-name>
+    <url-pattern>/ModerateReviewPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AcceptReview</servlet-name>
+    <servlet-class>com.fdmgroup.servlets.AcceptReview</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcceptReview</servlet-name>
+    <url-pattern>/AcceptReview</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>DeleteReview</servlet-name>
     <servlet-class>com.fdmgroup.servlets.DeleteReview</servlet-class>
   </servlet>
