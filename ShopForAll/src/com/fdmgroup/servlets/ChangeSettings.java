@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -37,13 +38,6 @@ public class ChangeSettings extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,12 +46,12 @@ public class ChangeSettings extends HttpServlet {
 		User loggedIn = (User) request.getSession().getAttribute("user");
 		if(pass!=null && pass.equals("pressed")) {
 			String curPass = request.getParameter("cPassword");
-			if(loggedIn.getPassword().equals(curPass)) {
+			if(loggedIn.getPassword().equals(DigestUtils.sha256Hex(curPass))) {
 				String newPass = request.getParameter("nPassword");
 				String repPass = request.getParameter("rPassword");
-				if(newPass.equals(repPass)) {
+				if(DigestUtils.sha256Hex(newPass).equals(DigestUtils.sha256Hex(repPass))) {
 					UserDAO ud = context.getBean(UserDAO.class);
-					ud.updatePassword(loggedIn, repPass);
+					ud.updatePassword(loggedIn, DigestUtils.sha256Hex(repPass));
 					PrintWriter out = response.getWriter();
 					response.setContentType("text/html");
 					out.println("<script type=\"text/javascript\">");

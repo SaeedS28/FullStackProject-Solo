@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.cli.Digest;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -67,7 +69,7 @@ public class AddUser extends HttpServlet {
 			
 			if(!seeIfUserExists(userName)) {
 				Address add = new Address(userName,street,city,province,country,postalCode);
-				User newUser = new User(userName,password,firstName,lastName,userType,add);
+				User newUser = new User(userName,DigestUtils.sha256Hex(password),firstName,lastName,userType,add);
 				ud.create(newUser);
 				userLogger.info("User with username: " + userName + " and account type: "+ userType+" created successfully");
 				PrintWriter out = response.getWriter();
