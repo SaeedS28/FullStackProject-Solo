@@ -32,10 +32,10 @@ boolean isAdded = scd.isItemInCart(loggedIn, item.getProductID());
 %>
 	<div class="information" align="center" style="margin-top: 5%; max-width:500px; margin-left:34%">
 		<h1>${itemInfo.name}</h1>
-		<img alt="" src="image/${itemInfo.productID}.JPG" style="margin:15px 0 15px 0;height: 450px; width: 450px;">
+		<img src="image/${itemInfo.productID}.JPG" style="margin:15px 0 15px 0;height: 450px; width: 450px;">
 		<h4 style="margin-bottom: 15px">Description: ${itemInfo.description} </h4>
 		<h4 style="margin-bottom: 15px">Price: ${itemInfo.price}</h4>
-		<h4 style="margin-bottom: 15px">Category: ${itemInfo.category}</h4>
+		<h4 style="margin-bottom: 15px">Category:<a href="CategorySearch?cat=${itemInfo.category}"> ${itemInfo.category}</a></h4>
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
 		<% if(loggedIn.getType().equals("regular") && !isAdded && item.getQuantity()>0){ %>
