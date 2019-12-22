@@ -2,14 +2,24 @@ package com.fdmgroup.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="User_List")
 @Table(name="User_List")
+@XmlRootElement(name = "User")
+@XmlType(propOrder = {"username","firstname","lastname","type","address"})
+@JsonPropertyOrder({"username","firstname","lastname","type","address"})
 public class User {
 	//private int id;
 	@Id
@@ -62,15 +72,16 @@ public class User {
 		this.username = username;
 	}
 
+	@XmlTransient
 	public String getPassword() {
 		return password;
 	}
 
-	// add hashing dependency for the password
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	@XmlElement(name = "FirstName")
 	public String getFirstname() {
 		return firstname;
 	}
@@ -79,6 +90,7 @@ public class User {
 		this.firstname = firstname;
 	}
 
+	@XmlElement(name = "LastName")
 	public String getLastname() {
 		return lastname;
 	}
@@ -87,6 +99,7 @@ public class User {
 		this.lastname = lastname;
 	}
 
+	@XmlElement(name = "Address")
 	public Address getAddress() {
 		return address;
 	}

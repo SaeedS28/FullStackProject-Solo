@@ -4,9 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="Address_List")
 @Table(name="Address_List")
+@XmlRootElement(name = "Address")
+@XmlType(propOrder = {"street","city","province","country","postalCode"})
+@JsonPropertyOrder({"street","city","province","country","postalCode"})
 public class Address {
 	@Id
 	private String emailAddress;
@@ -35,10 +44,12 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
+	@XmlTransient
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
+	@XmlElement(name = "StreetAddress")
 	public String getStreet() {
 		return street;
 	}
@@ -47,6 +58,7 @@ public class Address {
 		this.street = street;
 	}
 
+	@XmlElement(name = "City")
 	public String getCity() {
 		return city;
 	}
@@ -55,6 +67,7 @@ public class Address {
 		this.city = city;
 	}
 
+	@XmlElement(name = "Province")
 	public String getProvince() {
 		return province;
 	}
@@ -63,6 +76,7 @@ public class Address {
 		this.province = province;
 	}
 
+	@XmlElement(name = "Country")
 	public String getCountry() {
 		return country;
 	}
@@ -71,6 +85,7 @@ public class Address {
 		this.country = country;
 	}
 
+	@XmlElement(name = "PostalCode")
 	public String getPostalCode() {
 		return postalCode;
 	}
