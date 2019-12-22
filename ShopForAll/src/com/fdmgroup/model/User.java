@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="User_List")
@@ -21,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @XmlType(propOrder = {"username","firstname","lastname","type","address"})
 @JsonPropertyOrder({"username","firstname","lastname","type","address"})
 public class User {
-	//private int id;
 	@Id
 	@Column(name="user_name", nullable=false)
 	private String username;
@@ -72,7 +73,7 @@ public class User {
 		this.username = username;
 	}
 
-	@XmlTransient
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -81,7 +82,6 @@ public class User {
 		this.password = password;
 	}
 
-	@XmlElement(name = "FirstName")
 	public String getFirstname() {
 		return firstname;
 	}
@@ -90,7 +90,6 @@ public class User {
 		this.firstname = firstname;
 	}
 
-	@XmlElement(name = "LastName")
 	public String getLastname() {
 		return lastname;
 	}
@@ -99,7 +98,6 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	@XmlElement(name = "Address")
 	public Address getAddress() {
 		return address;
 	}
