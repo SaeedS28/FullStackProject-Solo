@@ -1,4 +1,4 @@
-package com.fdmgroup.app;
+package com.fdmgroup.resources;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;

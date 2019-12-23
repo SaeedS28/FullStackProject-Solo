@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="Address_List")
 @Table(name="Address_List")
-@XmlRootElement(name = "Address")
-@XmlType(propOrder = {"street","city","province","country","postalCode"})
-@JsonPropertyOrder({"street","city","province","country","postalCode"})
+@JsonPropertyOrder({"Street","City","Province","Country","PostalCode"})
 public class Address {
 	@Id
 	private String emailAddress;
@@ -50,10 +50,16 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
+	@JsonIgnore
 	public String getEmailAddress() {
 		return emailAddress;
 	}
-
+	
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+	
+	@JsonProperty("Street")
 	public String getStreet() {
 		return street;
 	}
@@ -62,6 +68,7 @@ public class Address {
 		this.street = street;
 	}
 
+	@JsonProperty("City")
 	public String getCity() {
 		return city;
 	}
@@ -70,6 +77,7 @@ public class Address {
 		this.city = city;
 	}
 
+	@JsonProperty("Province")
 	public String getProvince() {
 		return province;
 	}
@@ -78,6 +86,7 @@ public class Address {
 		this.province = province;
 	}
 
+	@JsonProperty("Country")
 	public String getCountry() {
 		return country;
 	}
@@ -86,6 +95,7 @@ public class Address {
 		this.country = country;
 	}
 
+	@JsonProperty("PostalCode")
 	public String getPostalCode() {
 		return postalCode;
 	}
@@ -94,8 +104,11 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
+	@Override
 	public String toString() {
-		return "[ street=" + street + ", city=" + city + ", province="
+		return "Address [emailAddress=" + emailAddress + ", street=" + street + ", city=" + city + ", province="
 				+ province + ", country=" + country + ", postalCode=" + postalCode + "]";
 	}
+
+	
 }

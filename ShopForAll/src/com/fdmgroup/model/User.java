@@ -15,13 +15,12 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="User_List")
 @Table(name="User_List")
-@XmlRootElement(name = "User")
-@XmlType(propOrder = {"username","firstname","lastname","type","address"})
-@JsonPropertyOrder({"username","firstname","lastname","type","address"})
+@JsonPropertyOrder({"Username","Firstname","Lastname","Password","Type","Address"})
 public class User {
 	@Id
 	@Column(name="user_name", nullable=false)
@@ -57,6 +56,7 @@ public class User {
 		this.address = a;
 	}
 
+	@JsonProperty("Type")
 	public String getType() {
 		return type;
 	}
@@ -65,6 +65,7 @@ public class User {
 		this.type = type;
 	}
 
+	@JsonProperty("Username")
 	public String getUsername() {
 		return username;
 	}
@@ -73,7 +74,7 @@ public class User {
 		this.username = username;
 	}
 
-	@JsonIgnore
+	@JsonProperty("Password")
 	public String getPassword() {
 		return password;
 	}
@@ -82,6 +83,7 @@ public class User {
 		this.password = password;
 	}
 
+	@JsonProperty("Firstname")
 	public String getFirstname() {
 		return firstname;
 	}
@@ -90,6 +92,7 @@ public class User {
 		this.firstname = firstname;
 	}
 
+	@JsonProperty("Lastname")
 	public String getLastname() {
 		return lastname;
 	}
@@ -98,6 +101,7 @@ public class User {
 		this.lastname = lastname;
 	}
 
+	@JsonProperty("Address")
 	public Address getAddress() {
 		return address;
 	}

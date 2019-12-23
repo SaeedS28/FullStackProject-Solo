@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.fdmgroup.model.User;
+import com.fdmgroup.resources.ApiStatus;
 import com.fdmgroup.rest.service.UserService;
 
 
@@ -35,7 +36,15 @@ public class UserMapper {
 	
 	@POST
 	@Path("add")
-	public void addUser(User user) {
-		System.out.println(user+"\t"+user.getAddress());
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response addUser(User user) {
+		if(um.addCustomer(user)) {
+			return Response.status(Response.Status.ACCEPTED).entity(
+					new ApiStatus("201", "User added successfully", "Successful")
+					).build();
+		}
+		return Response.status(Response.Status.BAD_REQUEST).entity(
+				new ApiStatus("400", "Bad Request", "Invalid parameters provided")
+				).build();
 	}
 }
