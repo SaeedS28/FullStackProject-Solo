@@ -120,6 +120,16 @@ public class ReviewDAO implements IReviewDAO {
 		return rev;
 	}
 
+	public ArrayList<Review> retrieveReviewsByCustomer(String username) {
+		EntityManager em = connection.getEntityManger();
+		Query q = em.createQuery("Select r from Review_List r where r.status like :stat and r.emailAddress like :username",Review.class);
+		q.setParameter("stat", Review.ACCEPTED);
+		q.setParameter("username", username);
+		@SuppressWarnings("unchecked")
+		ArrayList<Review> rev = (ArrayList<Review>) q.getResultList();
+		return rev;
+	}
+	
 	public ArrayList<Review> retrieveAcceptedReviews() {
 		EntityManager em = connection.getEntityManger();
 		Query q = em.createQuery("Select r from Review_List r where r.status like :stat",Review.class);

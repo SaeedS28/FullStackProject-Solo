@@ -12,4 +12,5 @@ public interface IReviewDAO {
 	public boolean removeReviewForUser(String userName);
 	public void acceptReview(int reviewID);
 	public void removeIndividualReview(int reviewID);
+	public ArrayList<Review> retrieveReviewsByCustomer(String username);
 }

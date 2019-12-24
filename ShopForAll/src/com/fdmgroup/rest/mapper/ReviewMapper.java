@@ -20,4 +20,8 @@ public class ReviewMapper {
 	public List<Review> getAllReviews(){
 		return ud.retrieveAcceptedReviews();
 	}
+
+	public List<Review> getReviewsByUser(String name) {
+		return ud.retrieveReviewsByCustomer(name);
+	}
 }

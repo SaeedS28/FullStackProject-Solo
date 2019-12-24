@@ -77,6 +77,7 @@ public class UserMapper {
 			user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 			user.setType("regular");
 			ud.create(user);
+			userLogger.info("User with username: " + user.getUsername() + " and account type: "+ user.getType() +" created successfully");
 			return true;
 			
 		}

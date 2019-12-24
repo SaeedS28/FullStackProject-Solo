@@ -3,6 +3,7 @@ package com.fdmgroup.rest.service;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -14,7 +15,11 @@ public class ReviewService {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getAllReviews() {
-		return Response.status(Response.Status.OK).entity(rm.getAllReviews()).build();
+	public Response getAllReviews(@QueryParam("username") String name) {
+		if(name==null || name.isEmpty()) {
+			return Response.status(Response.Status.OK).entity(rm.getAllReviews()).build();
+		}
+		return Response.status(Response.Status.OK).entity(rm.getReviewsByUser(name)).build();
 	}
+	
 }
