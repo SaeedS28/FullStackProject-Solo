@@ -81,6 +81,8 @@ public class UserMapper {
 			return true;
 			
 		}
+		userLogger.info("Attempt to create a user with username: " + user.getUsername() + " and account type: "+ 
+							user.getType() +" failed because either the user already exists or bad input was provided");
 		return false;
 	}
 	

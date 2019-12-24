@@ -24,4 +24,8 @@ public class ReviewMapper {
 	public List<Review> getReviewsByUser(String name) {
 		return ud.retrieveReviewsByCustomer(name);
 	}
+	
+	public List<Review> getReviewsByItem(int productID){
+		return ud.retrieveAcceptedReviews(productID);
+	}
 }
