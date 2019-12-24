@@ -2,49 +2,84 @@ package com.fdmgroup.rest.mapper;
 
 import java.util.ArrayList;
 
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.fdmgroup.dao.implementation.UserDAO;
+import com.fdmgroup.model.Address;
 import com.fdmgroup.model.User;
-import com.fdmgroup.resources.ApiStatus;
-import com.fdmgroup.rest.service.UserService;
 
-
-@Path("Users")
 public class UserMapper {
-	UserService um = new UserService();
-	
-	@GET
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response getAllUsers() {
-		ArrayList<User> getAll = um.getAllUser();
-		return Response.status(Response.Status.OK).entity(getAll).build();
+
+	private static Logger userLogger = LogManager.getLogger("UserAR");
+	ApplicationContext context;
+	UserDAO ud;
+	public UserMapper() {
+		context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ud = context.getBean(UserDAO.class); 
+	}
+
+	public ArrayList<User> getAllUser(){
+		return (ArrayList<User>)ud.getAllUsers();
 	}
 	
-	@GET
-	@Path("{username}")
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response getUserByUserName(@PathParam("username") String username) {
-		return Response.status(Response.Status.OK).entity(um.getIndividualUserByUserName(username)).build();
+	public User getIndividualUserByUserName(String username) {
+		return ud.findByUsername(username);
 	}
 	
-	@POST
-	@Path("add")
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response addUser(User user) {
-		if(um.addCustomer(user)) {
-			return Response.status(Response.Status.ACCEPTED).entity(
-					new ApiStatus("201", "User added successfully", "Successful")
-					).build();
+	private boolean checkUserFields(User user) {
+		if(user.getUsername()==null || user.getUsername().isEmpty()) {
+			System.out.println("something wrong with username");
+			return false;
 		}
-		return Response.status(Response.Status.BAD_REQUEST).entity(
-				new ApiStatus("400", "Bad Request", "Invalid parameters provided")
-				).build();
+		if(user.getPassword()==null || user.getPassword().isEmpty()) {
+			System.out.println("something wrong with password");
+			return false;
+		}
+		if(user.getFirstname()==null || user.getFirstname().isEmpty()) {
+			System.out.println("something wrong with first name");
+			return false;
+		}
+		if(user.getLastname()==null || user.getLastname().isEmpty()) {
+			System.out.println("something wrong with last name");
+			return false;
+		}
+		if(user.getType()==null || user.getType().isEmpty() || !user.getType().equalsIgnoreCase("customer")) {
+			System.out.println("something wrong with type");
+			return false;
+		}
+		
+		user.getAddress().setEmailAddress(user.getUsername());
+		
+		if(user.getAddress().getCity()==null || user.getAddress().getCity().isEmpty()) {
+			return false;
+		}
+		if(user.getAddress().getCountry()==null || user.getAddress().getCountry().isEmpty()) {
+			return false;
+		}
+		if(user.getAddress().getProvince()==null || user.getAddress().getProvince().isEmpty()) {
+			return false;
+		}
+		if(user.getAddress().getPostalCode()==null || user.getAddress().getPostalCode().isEmpty()) {
+			return false;
+		}
+		if(user.getAddress().getStreet()==null || user.getAddress().getStreet().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
+	
+	public boolean addCustomer(User user) {
+		if(checkUserFields(user) && ud.findByUsername(user.getUsername())==null) {
+			user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+			user.setType("regular");
+			ud.create(user);
+			return true;
+		}
+		return false;
+	}
+	
 }
