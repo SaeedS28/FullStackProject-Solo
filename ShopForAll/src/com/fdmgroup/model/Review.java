@@ -10,8 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @Entity(name ="Review_List")
 @Table(name="Review_List")
+@JsonPropertyOrder({"ProductID","Username","Review","Rating","Date"})
 public class Review {
 	@Id
 	@SequenceGenerator(name="review_generator", sequenceName = "review_id_seq",allocationSize=1)
@@ -54,6 +60,7 @@ public class Review {
 		this.status = UNDER_REVIEW;
 	}
 
+	@JsonIgnore
 	public int getReviewID() {
 		return reviewID;
 	}
@@ -62,6 +69,7 @@ public class Review {
 		this.reviewID = reviewID;
 	}
 
+	@JsonProperty("ProductID")
 	public int getProductID() {
 		return productID;
 	}
@@ -70,6 +78,7 @@ public class Review {
 		this.productID = productID;
 	}
 
+	@JsonProperty("Review")
 	public String getReviewText() {
 		return reviewText;
 	}
@@ -78,6 +87,7 @@ public class Review {
 		this.reviewText = reviewText;
 	}
 
+	@JsonProperty("Username")
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -86,6 +96,7 @@ public class Review {
 		this.emailAddress = emailAddress;
 	}
 
+	@JsonProperty("Rating")
 	public int getRating() {
 		return rating;
 	}
@@ -94,6 +105,8 @@ public class Review {
 		this.rating = rating;
 	}
 
+	@JsonProperty("Date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MM yyyy HH:mm:ss z", timezone = "GMT-5")
 	public Timestamp getReviewDate() {
 		return reviewDate;
 	}
@@ -106,6 +119,7 @@ public class Review {
 		this.status = ACCEPTED;
 	}
 	
+	@JsonIgnore
 	public String getStatus() {
 		return this.status;
 	}
@@ -118,6 +132,4 @@ public class Review {
 	public void setReviewStatus() {
 		this.status = UNDER_REVIEW;
 	}
-	
-	
 }

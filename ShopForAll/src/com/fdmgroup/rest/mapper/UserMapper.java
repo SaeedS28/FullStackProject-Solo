@@ -78,6 +78,7 @@ public class UserMapper {
 			user.setType("regular");
 			ud.create(user);
 			return true;
+			
 		}
 		return false;
 	}
