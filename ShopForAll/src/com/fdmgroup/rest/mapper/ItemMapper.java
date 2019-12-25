@@ -24,4 +24,12 @@ public class ItemMapper {
 	public List<Item> getAllItems(){
 		return id.getAllItems();
 	}
+
+	public List<Item> getTopItems() {
+		return pod.retrieveTopTenPurchases();
+	}
+
+	public Item getItemByProductID(int pid) {
+		return id.getItemByPid(pid);
+	}
 }
