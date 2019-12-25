@@ -8,8 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @Entity(name ="Item_List")
 @Table(name="Item_List")
+@JsonPropertyOrder({
+	"ID",
+	"Name",
+	"Description",
+	"Quantity",
+	"Price",
+	"Category"
+})
 public class Item {
 	@Id
 	@SequenceGenerator(name="id_generator", sequenceName = "product_id_seq", allocationSize=1)
@@ -42,6 +53,7 @@ public class Item {
 		this.setPrice(price);
 	}
 
+	@JsonProperty("ID")
 	public int getProductID() {
 		return productID;
 	}
@@ -50,6 +62,7 @@ public class Item {
 		this.productID = productID;
 	}
 
+	@JsonProperty("Name")
 	public String getName() {
 		return name;
 	}
@@ -58,6 +71,7 @@ public class Item {
 		this.name = name;
 	}
 
+	@JsonProperty("Description")
 	public String getDescription() {
 		return description;
 	}
@@ -66,6 +80,7 @@ public class Item {
 		this.description = description;
 	}
 
+	@JsonProperty("Quantity")
 	public int getQuantity() {
 		return quantity;
 	}
@@ -74,6 +89,7 @@ public class Item {
 		this.quantity = quantity;
 	}
 
+	@JsonProperty("Price")
 	public double getPrice() {
 		return price;
 	}
@@ -82,6 +98,7 @@ public class Item {
 		this.price = price;
 	}
 
+	@JsonProperty("Category")
 	public String getCategory() {
 		return category;
 	}
@@ -95,6 +112,4 @@ public class Item {
 		return "productID = " + productID + ", name = " + name + ", description = " + description + ", quantity = "
 				+ quantity + ", price = "  + price + ", category = " + category;
 	}
-
-	
 }
