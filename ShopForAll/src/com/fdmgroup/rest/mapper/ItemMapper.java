@@ -32,4 +32,8 @@ public class ItemMapper {
 	public Item getItemByProductID(int pid) {
 		return id.getItemByPid(pid);
 	}
+
+	public List<Item> getItemsInRange(List<Integer> range) {
+		return id.getItemsByPriceRange(range.get(0), range.get(1));
+	}
 }
