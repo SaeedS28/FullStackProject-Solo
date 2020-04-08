@@ -16,8 +16,8 @@ public class DummyController {
 	
 	@RequestMapping("home")
 	public ModelAndView dummyMethod() {
-		ModelAndView mv = new ModelAndView("dumb.jsp");
-		ir.save(new Item("baseball", "Sports", "MLB Grade", 10000, 6.99));
+		ModelAndView mv = new ModelAndView("dumb");
+		//ir.save(new Item("baseball", "Sports", "MLB Grade", 10000, 6.99));
 		return mv;
 	}
 	
