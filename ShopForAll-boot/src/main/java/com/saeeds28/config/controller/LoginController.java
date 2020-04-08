@@ -9,15 +9,14 @@ import com.saeeds28.config.model.Item;
 import com.saeeds28.config.repository.ItemRepo;
 
 @Controller
-public class DummyController {
+public class LoginController {
 
 	@Autowired
 	ItemRepo ir;
 	
-	@RequestMapping("home")
+	@RequestMapping(path = "login")
 	public ModelAndView dummyMethod() {
-		ModelAndView mv = new ModelAndView("dumb");
-		//ir.save(new Item("baseball", "Sports", "MLB Grade", 10000, 6.99));
+		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
 	

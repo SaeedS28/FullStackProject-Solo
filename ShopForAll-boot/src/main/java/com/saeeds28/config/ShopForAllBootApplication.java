@@ -17,7 +17,7 @@ public class ShopForAllBootApplication {
 	}
 
 	private static void openHomePage() {
-		String url = "http://localhost:8080/ShopForAll/";
+		String url = "http://localhost:8080/ShopForAll/login";
 		if (Desktop.isDesktopSupported()) {
 			Desktop desktop = Desktop.getDesktop();
 			try {
