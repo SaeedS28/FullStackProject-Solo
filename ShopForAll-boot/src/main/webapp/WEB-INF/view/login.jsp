@@ -20,10 +20,10 @@
 		<h3>You shop, we drop it off</h3>
 
 	</div>
-	<form action="Login" method="post">
+	<form action="main" method="post">
 		<div class="container">
-			<input type="text" placeholder="Enter Username" name="uname" required><br />
-			<input type="password" placeholder="Enter Password" name="psw"
+			<input type="text" placeholder="Enter Username" name="username" required><br />
+			<input type="password" placeholder="Enter Password" name="password"
 				required> <br />
 			<button type="submit" name="loginPress" value="pressed">Login</button>
 		</div>

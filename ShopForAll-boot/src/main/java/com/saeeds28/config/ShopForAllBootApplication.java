@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class ShopForAllBootApplication {
 
@@ -17,7 +18,7 @@ public class ShopForAllBootApplication {
 	}
 
 	private static void openHomePage() {
-		String url = "http://localhost:8080/ShopForAll/login";
+		String url = "http://localhost:8080/ShopForAll/";
 		if (Desktop.isDesktopSupported()) {
 			Desktop desktop = Desktop.getDesktop();
 			try {
