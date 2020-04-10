@@ -37,7 +37,7 @@ body{
 </style>
 </head>
 <body>
-<%-- 	<jsp:include page="NavBarAdmin.jsp" /> --%>
+	<jsp:include page="navBar.jsp" />
 	<div class="parallax">
 		<div class="hero-text">
 			<h1 style="font-size: 50px">For all your shopping needs</h1>

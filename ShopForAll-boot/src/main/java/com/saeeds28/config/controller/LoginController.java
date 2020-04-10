@@ -38,7 +38,6 @@ public class LoginController {
 		User loggedIn = us.attemptLogin(username, password);
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-
 		if (loggedIn != null) {
 			session.setAttribute("user", loggedIn);
 			out.println("<script type=\"text/javascript\">");
