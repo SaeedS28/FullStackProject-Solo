@@ -25,27 +25,30 @@ public class LoginController {
 	UserService us;
 
 	@RequestMapping(path = { "/", "/logout" }, method = RequestMethod.GET)
-	public ModelAndView ShowLoginPage(HttpSession session) {
+	public ModelAndView showLoginPage(HttpSession session) {
 		session.invalidate();
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
 
-	@RequestMapping(path = { "/main" }, method = RequestMethod.POST)
+	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
 	public void attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password,
-			HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+			HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		User loggedIn = us.attemptLogin(username, password);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+
 		if (loggedIn != null) {
 			session.setAttribute("user", loggedIn);
-			request.getRequestDispatcher("/WEB-INF/view/logged.jsp").forward(request, response);
-			
+			out.println("<script type=\"text/javascript\">");
+			out.println("location='/ShopForAll/main';");
+			out.println("</script>");
 		} else {
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html");
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('invalid username or password');");
 			out.println("location='/ShopForAll/';");
-			out.println("</script>");	
+			out.println("</script>");
 		}
 	}
 }
