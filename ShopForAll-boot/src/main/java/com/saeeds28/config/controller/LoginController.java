@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.config.model.User;
+import com.saeeds28.config.model.UserSession;
 import com.saeeds28.config.service.UserService;
 
 @Controller()
@@ -27,6 +28,7 @@ public class LoginController {
 	@RequestMapping(path = { "/", "/logout" }, method = RequestMethod.GET)
 	public ModelAndView showLoginPage(HttpSession session) {
 		session.invalidate();
+		UserSession.setLoggedInUser(null);
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
@@ -40,6 +42,7 @@ public class LoginController {
 		response.setContentType("text/html");
 		if (loggedIn != null) {
 			session.setAttribute("user", loggedIn);
+			UserSession.setLoggedInUser(loggedIn);
 			out.println("<script type=\"text/javascript\">");
 			out.println("location='/ShopForAll/main';");
 			out.println("</script>");

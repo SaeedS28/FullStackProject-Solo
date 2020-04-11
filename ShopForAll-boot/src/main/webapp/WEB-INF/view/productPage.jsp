@@ -28,25 +28,27 @@
 		<h4 style="margin-bottom: 15px">Category:<a href="CategorySearch?cat=${itemInfo.category}"> ${itemInfo.category}</a></h4>
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
-<%-- 		<% if(loggedIn.getType().equals("regular") && !isAdded && item.getQuantity()>0){ %> --%>
-<!-- 		<form action="AddItemToCart" method="post" > -->
-<%-- 		 	<button name= "pid" value="<%=item.getProductID()%>">Add to Cart</button> --%>
-<!-- 		</form> -->
-<%-- 		 <% } else{%> --%>
-<!-- 		 	<h4 style="margin-bottom: 15px">Item cannot be added </h4> -->
-<%-- 		 <% } %> --%>
-		 
-<%-- 		<% if(loggedIn.getType().equals("admin")){ %> --%>
-<!-- 		 <button onclick="document.getElementById('addQty').style.display='block'">Add Quantity</button> -->
-<!-- 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button> -->
-<!-- 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button> -->
-<!-- 		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button> -->
-<!-- 		 <form action="DeleteItem" method="post" onsubmit="return confirm('Press ok to delete the item')"> -->
-<%-- 		 	<button name="delButt" value="<%= item.getProductID() %>">Delete Item</button> --%>
-<!-- 		 </form> -->
-<%-- 		 <% } %> --%>
-<!-- 	</div> -->
-	
+			<c:if test="${user.type == 'regular' && inCart && itemInfo.quantity > 0}">
+				<form action="AddItemToCart" method="post" >
+				 	<button name= "pid" value="${itemInfo.productID}">Add to Cart</button>
+				</form>
+			</c:if>
+			
+			<c:if test="${user.type == 'admin' || !inCart || itemInfo.quantity <= 0}">
+		 		<h4 style="margin-bottom: 15px">Item cannot be added </h4>
+			</c:if>
+		
+		<c:if test="${user.type == 'admin'}">
+		 <button onclick="document.getElementById('addQty').style.display='block'">Add Quantity</button>
+		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>
+		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
+		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button>
+		 <form action="DeleteItem" method="post" onsubmit="return confirm('Press ok to delete the item')">
+		 	<button name="delButt" value="${itemInfo.productID}">Delete Item</button>
+		 </form>
+		</div>
+		</c:if>
+		
 <%-- 	<% Integer i = (Integer) request.getAttribute("bought");%> --%>
 <%-- 	<% if(loggedIn.getType().equals("regular") && i>0){ %> --%>
 <!-- 	<div class="review" align="center" style="margin-top: 4%; max-width:700px; margin-left:27%"> -->
@@ -125,7 +127,9 @@
 	</div>
     </c:when>
 		<c:otherwise>
-        var1 is NOT empty or null.
+		<div class="information" align="center" style="margin-top: 25%; max-width:500px; margin-left:37%">
+      		  <h1>Item does not exist</h1>
+      	</div>
     </c:otherwise>
 	</c:choose>
 	
