@@ -31,7 +31,7 @@
 						<li><a href="SearchAllItems">All Items</a></li>
 						<li><a href="#" onclick="document.getElementById('priceRange').style.display='block'">Price</a></li>
 						<li><a href="#" onclick="document.getElementById('name').style.display='block'">Name</a></li>
-						<li><a href="CategoryReturn">Category</a></li>
+						<li><a href="category">Category</a></li>
 					</ul>
 				<c:if test="${user.type == 'admin'}">
 					<li class="dropdown"><a class="dropdown-toggle"

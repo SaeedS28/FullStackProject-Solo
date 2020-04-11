@@ -13,4 +13,8 @@ public interface ItemRepo extends JpaRepository<Item, Integer>{
 	
 	@Query("Select p.productID from Purchase_Order_List p GROUP BY p.productID having sum(p.quantity) > 0 order by p.productID")
 	List<Integer> getTopPurchasedItemsProductID();
+	
+	@Query("SELECT Distinct i.category from Item_List i")
+	List<String> getProductCategory();
+	
 }

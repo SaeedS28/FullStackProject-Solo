@@ -29,4 +29,8 @@ public class ItemService {
 	public Item getItemById(int productID) {
 		return ir.findById(productID).orElse(null);
 	}
+	
+	public List<String> getProductCategories(){
+		return ir.getProductCategory();
+	}
 }
