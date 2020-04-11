@@ -28,13 +28,13 @@
 		<h4 style="margin-bottom: 15px">Category:<a href="search?cat=${itemInfo.category}"> ${itemInfo.category}</a></h4>
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
-			<c:if test="${user.type == 'regular' && inCart && itemInfo.quantity > 0}">
+			<c:if test="${user.type == 'regular' && !inCart && itemInfo.quantity > 0}">
 				<form action="AddItemToCart" method="post" >
 				 	<button name= "pid" value="${itemInfo.productID}">Add to Cart</button>
 				</form>
 			</c:if>
 			
-			<c:if test="${user.type == 'admin' || !inCart || itemInfo.quantity <= 0}">
+			<c:if test="${user.type == 'admin' || inCart || itemInfo.quantity <= 0}">
 		 		<h4 style="margin-bottom: 15px">Item cannot be added </h4>
 			</c:if>
 		

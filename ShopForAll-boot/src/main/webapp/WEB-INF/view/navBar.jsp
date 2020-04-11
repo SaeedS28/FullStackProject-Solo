@@ -70,26 +70,25 @@
 		</div>
 	</nav>
 	<div id="setting" class="modal">
-		<form class="modal-content animate" action="ChangeSettings" method="post">
+		<form class="modal-content animate" action="changePassword" method="post">
 			<h3>Change Password</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('setting').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-				<label for="cPassword"><b>Current Password</b></label> <input
-					type="password" placeholder="Enter Current Password"
-					name="cPassword" required> <label for="nPassword"><b>New
-						Password</b></label> <input type="password" placeholder="Enter New Password"
-					name="nPassword" minLenght="7" required> <label for="rPassword"><b>Confirm
-						Password</b></label> <input type="password" placeholder="Enter New Password"
-					name="rPassword" minLenght="7" required>
+				<label for="currentPassword"><b>Current Password</b></label> 
+				<input type="password" placeholder="Enter Current Password" name="currentPassword" required> 
+				<label for="newPassword"><b>New	Password</b></label> 
+				<input type="password" placeholder="Enter New Password"	name="newPassword" minLength="7" required> 
+				<label for="repeatPassword"><b>Confirm Password</b></label> 
+				<input type="password" placeholder="Enter New Password"	name="repeatPassword" minLength="7" required>
 
 				<button type="submit" name="passwordChange" value="pressed">Change Password</button>
 			</div>
 		</form>
 		<c:if test="${user.type == 'regular'}">
-	<form class="modal-content animate" action="ChangeSettings" method="post">
+	<form class="modal-content animate" action="ChangeAddress" method="post">
 			<h3>Change Address</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('setting').style.display='none'"
