@@ -33,4 +33,8 @@ public class ItemService {
 	public List<String> getProductCategories(){
 		return ir.getProductCategory();
 	}
+	
+	public List<Item> getAllItems(){
+		return ir.findAll();
+	}
 }

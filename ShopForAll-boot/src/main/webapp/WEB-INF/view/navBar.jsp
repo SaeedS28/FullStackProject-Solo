@@ -28,7 +28,7 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="">Search <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="SearchAllItems">All Items</a></li>
+						<li><a href="search">All Items</a></li>
 						<li><a href="#" onclick="document.getElementById('priceRange').style.display='block'">Price</a></li>
 						<li><a href="#" onclick="document.getElementById('name').style.display='block'">Name</a></li>
 						<li><a href="category">Category</a></li>
@@ -113,7 +113,7 @@
 		</div>
 			
 		<div id="priceRange" class="modal">
-		<form class="modal-content animate" action="SearchByPrice" method="Get">
+		<form class="modal-content animate" action="search" method="Get">
 			<h3>Price Search</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('priceRange').style.display='none'"
@@ -131,7 +131,7 @@
 		</div>
 		
 		<div id="name" class="modal">
-		<form class="modal-content animate" action="SearchByName" method="Get">
+		<form class="modal-content animate" action="search" method="Get">
 			<h3>Name Search</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('name').style.display='none'"

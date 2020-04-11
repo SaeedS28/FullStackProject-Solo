@@ -17,4 +17,5 @@ public interface ItemRepo extends JpaRepository<Item, Integer>{
 	@Query("SELECT Distinct i.category from Item_List i")
 	List<String> getProductCategory();
 	
+	
 }
