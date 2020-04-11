@@ -25,4 +25,8 @@ public class ItemService {
 		}
 		return topTenPurchases;
 	}
+	
+	public Item getItemById(int productID) {
+		return ir.findById(productID).orElse(null);
+	}
 }
