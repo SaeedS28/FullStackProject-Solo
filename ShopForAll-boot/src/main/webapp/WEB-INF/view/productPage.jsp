@@ -25,7 +25,7 @@
 		<img src="image/${itemInfo.productID}.JPG" style="margin:15px 0 15px 0;height: 450px; width: 450px;">
 		<h4 style="margin-bottom: 15px">Description: ${itemInfo.description} </h4>
 		<h4 style="margin-bottom: 15px">Price: ${itemInfo.price}</h4>
-		<h4 style="margin-bottom: 15px">Category:<a href="CategorySearch?cat=${itemInfo.category}"> ${itemInfo.category}</a></h4>
+		<h4 style="margin-bottom: 15px">Category:<a href="search?cat=${itemInfo.category}"> ${itemInfo.category}</a></h4>
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
 			<c:if test="${user.type == 'regular' && inCart && itemInfo.quantity > 0}">

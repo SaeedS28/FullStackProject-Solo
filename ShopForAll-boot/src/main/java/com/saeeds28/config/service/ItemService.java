@@ -20,7 +20,7 @@ public class ItemService {
 		
 		List<Item> topTenPurchases = new ArrayList<>();
 		
-		for(int i=0; i<10;i++) {
+		for(int i=0; i < 10; i++) {
 			topTenPurchases.add(ir.findById(id.get(i)).orElse(null));
 		}
 		return topTenPurchases;
@@ -36,5 +36,19 @@ public class ItemService {
 	
 	public List<Item> getAllItems(){
 		return ir.findAll();
+	}
+	
+	public List<Item> getItemsByName(String name){
+		String productName = "%" + name.toUpperCase() + "%";
+		return ir.getItemsByName(productName);
+	}
+	
+	public List<Item> getItemsByPriceRange(double low, double high){
+		return ir.getItemsInPriceRange(low, high);
+	}
+	
+	public List<Item> getItemsByCategory(String category){
+		category = category.toUpperCase();
+		return ir.getItemsByCategory(category);
 	}
 }

@@ -28,7 +28,7 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="">Search <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="search">All Items</a></li>
+						<li><a href="search?allItems=true">All Items</a></li>
 						<li><a href="#" onclick="document.getElementById('priceRange').style.display='block'">Price</a></li>
 						<li><a href="#" onclick="document.getElementById('name').style.display='block'">Name</a></li>
 						<li><a href="category">Category</a></li>
@@ -122,9 +122,9 @@
 			<div class="container">
 				<label for="minPrice"><b>Minimum Price</b></label> <input
 					type="number" placeholder="Enter Minimum Price"
-					name="minPrice" required step="0.01"> <label for="maxPrice"><b>Maximum Price
+					name="minPrice" required step="0.01" min="0"> <label for="maxPrice"><b>Maximum Price
 					</b></label> <input type="number" placeholder="Enter Maximum Price"
-					name="maxPrice" required step="0.01"> 
+					name="maxPrice" required step="0.01" min="0"> 
 				<button type="submit" name="price" value="pressed">Search Catalog</button>
 			</div>
 		</form>
