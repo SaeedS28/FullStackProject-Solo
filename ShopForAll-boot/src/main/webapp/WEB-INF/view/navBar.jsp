@@ -38,7 +38,8 @@
 						data-toggle="dropdown" href="">Users <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#" onclick="document.getElementById('addUsers').style.display='block'">Add Users</a></li>
-							<li><a href="#" onclick="document.getElementById('deleteUsers').style.display='block'">Delete Users</a></li>
+							<li><a href="#" onclick="document.getElementById('disableUser').style.display='block'">Deactivate Users</a></li>
+							<li><a href="#" onclick="document.getElementById('enableUser').style.display='block'">Activate Users</a></li>
 						</ul>
 					<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
 					<li><a href="SeePurchaseHistory"> See Customers History</a></li>
@@ -145,24 +146,78 @@
 		</form>
 		</div>
 		
-		<div id="deleteUsers" class="modal">
+		<div id="disableUser" class="modal">
 		<div class="modal-content animate">
-			<h3>Delete Users</h3>
-			<h4>Click on a user to delete it</h4>
+			<h3>Deactivate an account</h3>
+			<h4 style="padding-left: 10px">Click on the button</h4>
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('deleteUsers').style.display='none'"
+				<span onclick="document.getElementById('disableUser').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div style="text-align: center; margin-left: 0;">
 			 <ul  style="font-size: 1.5em; list-style-type:none;">
+			 <form class="modal-content animate" action="disableUser" method="post">
+			 <table width="100%">
+				  <tr>
+				  	<th>Choice</th>
+				    <th>User Name</th>
+				    <th>First Name</th>
+				    <th>Last Name</th>
+				    <th>User Type</th>
+				  </tr>
 			 <c:forEach items="${allUsers}" var="allUsers">
-<li><a href="DeleteUser?username=${allUsers.username}" style="color: black;">${allUsers.username} &nbsp; ${allUsers.firstname} ${allUsers.lastname} &nbsp; ${allUsers.type}</a></li>
+				  <tr style="text-align: left;">
+				  <td><input type="radio" name="username" value="${allUsers.username}" /></td>
+				    <td>${allUsers.username}</td>
+				    <td>${allUsers.firstname}</td>
+				    <td>${allUsers.lastname}</td>
+				    <td>${allUsers.type}</td>
+				  </tr>
 			</c:forEach>
+			</table>
+			<button type="submit">Deactivate User</button>
+			</form>
 			</ul>
 			</div>
 			</div>
 			</div>
 		
+		<div id="enableUser" class="modal">
+		<div class="modal-content animate">
+			<h3>Activate an account</h3>
+			<h4 style="padding-left: 10px">Click on the button</h4>
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('enableUser').style.display='none'"
+					class="close" title="Close Modal">&times;</span>
+			</div>
+			<div style="text-align: center; margin-left: 0;">
+			 <ul  style="font-size: 1.5em; list-style-type:none;">
+			 <form class="modal-content animate" action="enableUser" method="post">
+			 <table width="100%">
+				  <tr>
+				  	<th>Choice</th>
+				    <th>User Name</th>
+				    <th>First Name</th>
+				    <th>Last Name</th>
+				    <th>User Type</th>
+				  </tr>
+			 <c:forEach items="${allUsers}" var="allUsers">
+				  <tr style="text-align: left;">
+				  <td><input type="radio" name="username" value="${allUsers.username}" /></td>
+				    <td>${allUsers.username}</td>
+				    <td>${allUsers.firstname}</td>
+				    <td>${allUsers.lastname}</td>
+				    <td>${allUsers.type}</td>
+				  </tr>
+			</c:forEach>
+			</table>
+			<button type="submit">Activate User</button>
+			</form>
+			</ul>
+			</div>
+			</div>
+			</div>
+			
 		<div id="addItem" class="modal">
 		<form class="modal-content animate" action="AddItemMultipart" method="post" enctype="multipart/form-data">
 			<h3>Add new Item</h3>

@@ -26,8 +26,8 @@ insert into ADDRESS_LIST (EMAIL_ADDRESS, STREET, CITY, PROVINCE, COUNTRY, POSTAL
 
 -- Adding users to the store
 
-insert into USER_LIST (USER_NAME, PASSWORD_HASH, FIRST_NAME, LAST_NAME, USER_TYPE, EMAIL_ADDRESS) VALUES ('saeeds28','2d0587d5fbd8f92c092a788953d79e01dbb9bdb25e7bff499fa6f39fd7ca8ae2', 'Saad', 'Saeed', 'admin', 'saeeds28');
-insert into USER_LIST (USER_NAME, PASSWORD_HASH, FIRST_NAME, LAST_NAME, USER_TYPE, EMAIL_ADDRESS) VALUES ('samad','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Samad', 'Saeed', 'regular', 'samad');
+insert into USER_LIST (USER_NAME, PASSWORD_HASH, FIRST_NAME, LAST_NAME, USER_TYPE, EMAIL_ADDRESS, USER_STATUS) VALUES ('saeeds28','2d0587d5fbd8f92c092a788953d79e01dbb9bdb25e7bff499fa6f39fd7ca8ae2', 'Saad', 'Saeed', 'admin', 'saeeds28', 'ACTIVE');
+insert into USER_LIST (USER_NAME, PASSWORD_HASH, FIRST_NAME, LAST_NAME, USER_TYPE, EMAIL_ADDRESS, USER_STATUS) VALUES ('samad','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Samad', 'Saeed', 'regular', 'samad', 'ACTIVE');
 
 
 -- Adding purchased items to the store

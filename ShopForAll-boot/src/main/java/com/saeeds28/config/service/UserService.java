@@ -1,5 +1,7 @@
 package com.saeeds28.config.service;
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,4 +55,15 @@ public class UserService {
 		return true;
 	}
 	
+	public List<User> getAllUsers(){
+		return userRepo.findAll();
+	}
+	
+//	public boolean invalidateUser(String username) {
+//		
+//	}
+//	
+//	public boolean validateUser(String username) {
+//		
+//	}
 }

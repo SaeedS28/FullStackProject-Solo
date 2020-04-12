@@ -41,9 +41,6 @@ public class UserController {
 	
 	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
 	public void addUser(User newUser, Address address, HttpServletResponse response) throws IOException {
-		System.out.println(newUser);
-		System.out.println(address);
-		
 		boolean isAdded = us.addUser(newUser, address);
 		
 		PrintWriter out = response.getWriter();
@@ -57,6 +54,25 @@ public class UserController {
 		}
 		out.println("location='/ShopForAll/main';");
 		out.println("</script>");
+		
+	}
+	
+	@RequestMapping(path = "/deleteUser", method = RequestMethod.POST)
+	public void addUser(String username, HttpServletResponse response) throws IOException {
+		System.out.println(username);
+		
+		//boolean isDeleted = us.addUser(newUser, address);
+		
+//		PrintWriter out = response.getWriter();
+//		response.setContentType("text/html");
+//		out.println("<script type=\"text/javascript\">");
+//		if (isAdded) {
+//			out.println("alert('User added successfully');");
+//		} else {
+//			out.println("alert('Duplicate username found. User not added');");
+//		}
+//		out.println("location='/ShopForAll/main';");
+//		out.println("</script>");
 		
 	}
 }

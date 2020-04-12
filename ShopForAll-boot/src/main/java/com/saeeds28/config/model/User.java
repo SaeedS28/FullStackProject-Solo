@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity(name ="User_List")
 @Table(name="User_List")
-@JsonPropertyOrder({"Username","Firstname","Lastname","Password","Type","Address"})
+@JsonPropertyOrder({"Username","Firstname","Lastname","Password","Type","Status","Address"})
 public class User {
 	@Id
 	@Column(name="user_name", nullable=false)
@@ -30,6 +30,10 @@ public class User {
 	@Column(name="user_type", nullable=false)
 	private String type;
 	
+	@Column(name="user_status", nullable=false)
+	private String Status;
+	
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="emailAddress")
 	private Address address;
@@ -101,10 +105,22 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-	public String toString() {
-		return "username = " + username +  ", firstname = " + firstname
-				+ ", lastname = " + lastname + ", user type = " + type;
+	
+	@JsonProperty("Status")
+	public String getStatus() {
+		return Status;
 	}
+	
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", type=" + type + ", Status=" + Status + ", address=" + address + "]";
+	}
+
+	
 
 }
