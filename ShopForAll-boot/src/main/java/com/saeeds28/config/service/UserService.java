@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saeeds28.config.model.Address;
 import com.saeeds28.config.model.User;
 import com.saeeds28.config.model.UserSession;
 import com.saeeds28.config.repository.UserRepo;
@@ -38,6 +39,18 @@ public class UserService {
 			return false;
 		}
 		return false;
+	}
+	
+	public boolean addUser(User user, Address a) {
+		User existing = userRepo.findById(user.getUsername()).orElse(null);
+		if(existing != null) {
+			return false;
+		}
+		a.setEmailAddress(user.getUsername());
+		user.setAddress(a);
+		user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+		userRepo.save(user);
+		return true;
 	}
 	
 }

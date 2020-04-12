@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.saeeds28.config.model.Address;
+import com.saeeds28.config.model.User;
 import com.saeeds28.config.service.UserService;
 
 @Controller
@@ -18,7 +20,7 @@ public class UserController {
 	@Autowired
 	UserService us;
 	
-	@RequestMapping(path = "changePassword", method = RequestMethod.POST)
+	@RequestMapping(path = "/changePassword", method = RequestMethod.POST)
 	public void changePassword(String currentPassword, String newPassword, String repeatPassword, HttpServletResponse response) throws IOException {
 		boolean isChanged = us.changePassword(currentPassword, newPassword, repeatPassword);
 		PrintWriter out = response.getWriter();
@@ -35,5 +37,26 @@ public class UserController {
 			out.println("location='/ShopForAll/main';");
 			out.println("</script>");
 		}
+	}
+	
+	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
+	public void addUser(User newUser, Address address, HttpServletResponse response) throws IOException {
+		System.out.println(newUser);
+		System.out.println(address);
+		
+		boolean isAdded = us.addUser(newUser, address);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		if(isAdded) {
+			out.println("alert('User added successfully');");
+		}
+		else {
+			out.println("alert('Duplicate username found. User not added');");			
+		}
+		out.println("location='/ShopForAll/main';");
+		out.println("</script>");
+		
 	}
 }
