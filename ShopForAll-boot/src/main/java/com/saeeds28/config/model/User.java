@@ -31,9 +31,8 @@ public class User {
 	private String type;
 	
 	@Column(name="user_status", nullable=false)
-	private String Status;
+	private String status;
 	
-
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="emailAddress")
 	private Address address;
@@ -108,17 +107,17 @@ public class User {
 	
 	@JsonProperty("Status")
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 	
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", type=" + type + ", Status=" + Status + ", address=" + address + "]";
+				+ lastname + ", type=" + type + ", status=" + status + ", address=" + address + "]";
 	}
 
 	

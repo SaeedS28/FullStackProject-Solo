@@ -28,8 +28,10 @@ public class MainPageController {
 		ModelAndView mv = new ModelAndView("mainPage");
 		List<Item> topPurchases = is.getTopTenPurchasedItems();
 		if(UserSession.getLoggedInUser().getType().equals("admin")) {
-			List<User> allUsers = us.getAllUsers();
-			mv.addObject("allUsers", allUsers);			
+			List<User> activeUsers = us.getActivelUsers();
+			List<User> inactiveUsers = us.getInactiveUsers();
+			mv.addObject("active", activeUsers);
+			mv.addObject("inactive", inactiveUsers);
 		}
 		mv.addObject("pop", topPurchases);
 		return mv;

@@ -57,22 +57,37 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(path = "/deleteUser", method = RequestMethod.POST)
-	public void addUser(String username, HttpServletResponse response) throws IOException {
-		System.out.println(username);
+	@RequestMapping(path = "/disableUser", method = RequestMethod.POST)
+	public void deactivateUser(String username, HttpServletResponse response) throws IOException {		
+		boolean isInactive = us.inactivateUser(username);
 		
-		//boolean isDeleted = us.addUser(newUser, address);
-		
-//		PrintWriter out = response.getWriter();
-//		response.setContentType("text/html");
-//		out.println("<script type=\"text/javascript\">");
-//		if (isAdded) {
-//			out.println("alert('User added successfully');");
-//		} else {
-//			out.println("alert('Duplicate username found. User not added');");
-//		}
-//		out.println("location='/ShopForAll/main';");
-//		out.println("</script>");
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		if (isInactive) {
+			out.println("alert('User inactivated successfully');");
+		} else {
+			out.println("alert('You cannot deactivate yourself. Get another admin to deactivate the account');");
+		}
+		out.println("location='/ShopForAll/main';");
+		out.println("</script>");
 		
 	}
+	@RequestMapping(path = "/enableUser", method = RequestMethod.POST)
+	public void activateUser(String username, HttpServletResponse response) throws IOException {		
+		boolean isActive = us.activateUser(username);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		if (isActive) {
+			out.println("alert('User activated successfully');");
+		} else {
+			out.println("alert('You cannot deactivate yourself. Get another admin to deactivate the account');");
+		}
+		out.println("location='/ShopForAll/main';");
+		out.println("</script>");
+		
+	}
+	
 }

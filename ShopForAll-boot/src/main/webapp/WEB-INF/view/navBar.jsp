@@ -165,9 +165,9 @@
 				    <th>Last Name</th>
 				    <th>User Type</th>
 				  </tr>
-			 <c:forEach items="${allUsers}" var="allUsers">
+			 <c:forEach items="${active}" var="allUsers">
 				  <tr style="text-align: left;">
-				  <td><input type="radio" name="username" value="${allUsers.username}" /></td>
+				  <td><input type="radio" name="username" value="${allUsers.username}" required /></td>
 				    <td>${allUsers.username}</td>
 				    <td>${allUsers.firstname}</td>
 				    <td>${allUsers.lastname}</td>
@@ -192,6 +192,12 @@
 			</div>
 			<div style="text-align: center; margin-left: 0;">
 			 <ul  style="font-size: 1.5em; list-style-type:none;">
+			 
+			 <c:if test="${empty inactive}">
+			 <h2>No deactivated users</h2>
+			 </c:if>
+			 
+			 <c:if test="${not empty inactive}">
 			 <form class="modal-content animate" action="enableUser" method="post">
 			 <table width="100%">
 				  <tr>
@@ -201,9 +207,9 @@
 				    <th>Last Name</th>
 				    <th>User Type</th>
 				  </tr>
-			 <c:forEach items="${allUsers}" var="allUsers">
+			 <c:forEach items="${inactive}" var="allUsers">
 				  <tr style="text-align: left;">
-				  <td><input type="radio" name="username" value="${allUsers.username}" /></td>
+				  <td><input type="radio" name="username" value="${allUsers.username}" required/></td>
 				    <td>${allUsers.username}</td>
 				    <td>${allUsers.firstname}</td>
 				    <td>${allUsers.lastname}</td>
@@ -213,6 +219,7 @@
 			</table>
 			<button type="submit">Activate User</button>
 			</form>
+			</c:if>
 			</ul>
 			</div>
 			</div>
