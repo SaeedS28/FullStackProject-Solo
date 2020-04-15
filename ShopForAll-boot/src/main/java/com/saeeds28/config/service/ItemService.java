@@ -11,61 +11,79 @@ import com.saeeds28.config.repository.ItemRepo;
 
 @Service
 public class ItemService {
-	
+
 	@Autowired
 	ItemRepo ir;
-	
-	public List<Item> getTopTenPurchasedItems(){
+
+	public List<Item> getTopTenPurchasedItems() {
 		List<Integer> id = ir.getTopPurchasedItemsProductID();
-		
+
 		List<Item> topTenPurchases = new ArrayList<>();
-		
-		for(int i=0; i < 10; i++) {
+
+		for (int i = 0; i < 10; i++) {
 			topTenPurchases.add(ir.findById(id.get(i)).orElse(null));
 		}
 		return topTenPurchases;
 	}
-	
+
 	public Item getItemById(int productID) {
 		return ir.findById(productID).orElse(null);
 	}
-	
-	public List<String> getProductCategories(){
+
+	public List<String> getProductCategories() {
 		return ir.getProductCategory();
 	}
-	
-	public List<Item> getAllItems(){
+
+	public List<Item> getAllItems() {
 		return ir.findAll();
 	}
-	
-	public List<Item> getItemsByName(String name){
+
+	public List<Item> getItemsByName(String name) {
 		String productName = "%" + name.toUpperCase() + "%";
 		return ir.getItemsByName(productName);
 	}
-	
-	public List<Item> getItemsByPriceRange(double low, double high){
+
+	public List<Item> getItemsByPriceRange(double low, double high) {
 		return ir.getItemsInPriceRange(low, high);
 	}
-	
-	public List<Item> getItemsByCategory(String category){
+
+	public List<Item> getItemsByCategory(String category) {
 		category = category.toUpperCase();
 		return ir.getItemsByCategory(category);
 	}
-	
+
 	public void addQuantity(int productId, int quantity) {
 		Item item = ir.findById(productId).orElse(null);
-		
-		if(item != null) {
+
+		if (item != null) {
 			item.setQuantity(item.getQuantity() + quantity);
 			ir.save(item);
 		}
 	}
-	
+
 	public void changePrice(int productId, double price) {
 		Item item = ir.findById(productId).orElse(null);
-		
-		if(item != null) {
+
+		if (item != null) {
 			item.setPrice(price);
+			ir.save(item);
+		}
+	}
+
+	public void changeDescription(int productId, String description) {
+		Item item = ir.findById(productId).orElse(null);
+
+		if (item != null) {
+			item.setDescription(description);
+			ir.save(item);
+		}
+	}
+
+	public void changeCategory(int productId, String category) {
+		Item item = ir.findById(productId).orElse(null);
+
+		if (item != null) {
+			item.setCategory(category.toUpperCase());
 			ir.save(item);
 		}
 	}

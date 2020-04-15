@@ -151,32 +151,32 @@
 		</div>
 		
 	<div id="changeDesc" class="modal">
-		<form class="modal-content animate" action="ChangeDescription" method="post">
+		<form class="modal-content animate" action="changeDescription" method="post" onsubmit="return confirm('Press ok to change description');">
 			<h3>Change product description</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('changeDesc').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-				<label for="pDesc"><b>Product Description</b></label> <input
+				<label for="description"><b>Product Description</b></label> <input
 					type="text" placeholder="Enter a new Product description"
-					name="pDesc" required> 
+					name="description" required maxlength="1500"> 
 				<button type="submit" name="pid" value="${itemInfo.productID}">Change Description</button>
 			</div>
 		</form>
 		</div>
 		
 	<div id="changeCat" class="modal">
-		<form class="modal-content animate" action="ChangeCategory" method="post">
+		<form class="modal-content animate" action="changeCategory" method="post" onsubmit="return confirm('Press ok to change category');">
 			<h3>Change product category</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('changeCat').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-				<label for="pCat"><b>Product Category</b></label> <input
+				<label for="category"><b>Product Category</b></label> <input
 					type="text" placeholder="Enter a new Product category"
-					name="pCat" required> 
+					name="category" required maxlength="100">
 				<button type="submit" name="pid" value="${itemInfo.productID}">Change Category</button>
 			</div>
 		</form>

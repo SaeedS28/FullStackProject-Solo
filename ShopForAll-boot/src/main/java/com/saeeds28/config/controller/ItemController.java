@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.config.service.ItemService;
 
@@ -31,7 +30,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping(path = "/changePrice", method = RequestMethod.POST)
-	public void addQuantity(int pid, double price, HttpServletResponse response) throws IOException {
+	public void changePrice(int pid, double price, HttpServletResponse response) throws IOException {
 		is.changePrice(pid, price);
 		
 		PrintWriter out = response.getWriter();
@@ -41,5 +40,25 @@ public class ItemController {
 		out.println("</script>");
 	}
 	
+	@RequestMapping(path = "/changeDescription", method = RequestMethod.POST)
+	public void changeDescription(int pid, String description, HttpServletResponse response) throws IOException {
+		is.changeDescription(pid, description);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/ProductPage?pid="+pid+"';");
+		out.println("</script>");
+	}
 	
+	@RequestMapping(path = "/changeCategory", method = RequestMethod.POST)
+	public void changeCategory(int pid, String category, HttpServletResponse response) throws IOException {
+		is.changeCategory(pid, category);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/ProductPage?pid="+pid+"';");
+		out.println("</script>");
+	}
 }
