@@ -23,10 +23,10 @@ public class ItemService {
 	@Autowired
 	ItemRepo ir;
 
-	public int getHighestProductID() {
+	int getHighestProductID() {
 		return ir.getMaxPid();
 	}
-	
+
 	public List<Item> getTopTenPurchasedItems() {
 		List<Integer> id = ir.getTopPurchasedItemsProductID();
 
@@ -99,23 +99,42 @@ public class ItemService {
 			ir.save(item);
 		}
 	}
-	
-	public void addItemToCatalogue(HttpServletRequest request, Item i) {
-		ir.save(i);
-		
-		String directoryPath = request.getServletContext().getRealPath("\\")+"\\image";
+
+	public int addItem(HttpServletRequest request) {
+		String name = "", desc="", cat="";
+		double price = 0;
+		int quantity = 0;
+
+		String directoryPath = request.getServletContext().getRealPath("\\") + "\\image";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		//factory.setRepository(repository);
+		// factory.setRepository(repository);
 		List<FileItem> items;
 		try {
 			items = upload.parseRequest(request);
+
 			Iterator<FileItem> fieldsIterator = items.iterator();
-			
-			while(fieldsIterator.hasNext()) {
+
+			while (fieldsIterator.hasNext()) {
+				System.out.println("hit outside");
 				FileItem item = fieldsIterator.next();
-				if(!item.isFormField()) {
-					File uploadedFile = new File(directoryPath+"\\"+getHighestProductID()+".JPG");
+				if (item.isFormField()) {
+					if (item.getFieldName().equals("name")) {
+						name = item.getString();
+					} else if (item.getFieldName().equals("price")) {
+						price = Double.parseDouble(item.getString());
+					} else if (item.getFieldName().equals("quantity")) {
+						quantity = Integer.parseInt(item.getString());
+					} else if (item.getFieldName().equals("description")) {
+						desc = item.getString();
+					} else if (item.getFieldName().equals("category")) {
+						cat = item.getString();
+					}
+				} else {
+					Item newItem = new Item(name, cat, desc, quantity, price);
+					System.out.println("hit");
+					ir.save(newItem);
+					File uploadedFile = new File(directoryPath + "\\" + getHighestProductID() + ".JPG");
 					item.write(uploadedFile);
 				}
 			}
@@ -124,5 +143,6 @@ public class ItemService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return getHighestProductID();
 	}
 }

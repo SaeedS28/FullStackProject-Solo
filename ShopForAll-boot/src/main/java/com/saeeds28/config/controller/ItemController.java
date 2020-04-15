@@ -1,11 +1,18 @@
 package com.saeeds28.config.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,8 +72,12 @@ public class ItemController {
 	}
 	
 	@RequestMapping(path = "/addItem", method = RequestMethod.POST)
-	public void addNewItem(Item i, HttpServletRequest request, HttpServletResponse response) {
-		is.addItemToCatalogue(request,i);
-		System.out.println(i);
+	public void addItemToCatalogue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int pid = is.addItem(request);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/ProductPage?pid="+pid+"';");
+		out.println("</script>");
 	}
 }
