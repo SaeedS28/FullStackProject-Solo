@@ -3,6 +3,7 @@ package com.saeeds28.config.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.saeeds28.config.model.Item;
 import com.saeeds28.config.service.ItemService;
 
 @Controller
@@ -60,5 +62,11 @@ public class ItemController {
 		out.println("<script type=\"text/javascript\">");
 		out.println("location='/ShopForAll/ProductPage?pid="+pid+"';");
 		out.println("</script>");
+	}
+	
+	@RequestMapping(path = "/addItem", method = RequestMethod.POST)
+	public void addNewItem(Item i, HttpServletRequest request, HttpServletResponse response) {
+		is.addItemToCatalogue(request,i);
+		System.out.println(i);
 	}
 }

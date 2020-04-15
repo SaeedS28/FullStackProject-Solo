@@ -226,25 +226,25 @@
 			</div>
 			
 		<div id="addItem" class="modal">
-		<form class="modal-content animate" action="AddItemMultipart" method="post" enctype="multipart/form-data">
+		<form class="modal-content animate" action="addItem" method="post" enctype="multipart/form-data">
 			<h3>Add new Item</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addItem').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-			<label for="pName"><b>Product Name</b></label> <input type="text"
-				placeholder="New Product Name" name="pName" required maxlength="69"> <label
-				for="price"><b>Price</b></label> <input type="number"
-				placeholder="New Product Price" name="pPrice" required step="0.01" min="0.01"> <label
-				for="pQuantity"><b>Quantity</b></label> <input type="number"
-				placeholder="New Product Quantity" name="pQuantity" min="1" required > <label
-				for="pDesc"><b>Description</b></label> <input type="text"
-				placeholder="New Product Description" name="pDesc" required maxlength="1500"> <label
-				for="pCat"><b>Category</b></label> <input type="text"
-				placeholder="New Product Category" name="pCat" required maxlength="100">
-				<label for="pic"><b>Image upload</b></label>
-				<input type="file" name="pic" required>
+			<label for="name"><b>Product Name</b></label> 
+			<input type="text" placeholder="New Product Name" name="name" required maxlength="69"> 
+			<label for="price"><b>Price</b></label> 
+			<input type="number" placeholder="New Product Price" name="price" required step="0.01" min="0.01"> 
+			<label for="quantity"><b>Quantity</b></label> 
+			<input type="number" placeholder="New Product Quantity" name="quantity" min="1" required> 
+			<label for="description"><b>Description</b></label> 
+			<input type="text" placeholder="New Product Description" name="description" required maxlength="1500"> 
+			<label for="category"><b>Category</b></label> 
+			<input type="text" placeholder="New Product Category" name="category" required maxlength="100">
+			<label for="pic"><b>Image upload</b></label>
+			<input type="file" name="pic" required>
 			<button type="submit" name="add" value="pressed">Add Item to Catalog</button>
 			</div>
 		</form>

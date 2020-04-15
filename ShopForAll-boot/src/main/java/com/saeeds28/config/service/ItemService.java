@@ -1,8 +1,16 @@
 package com.saeeds28.config.service;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +23,10 @@ public class ItemService {
 	@Autowired
 	ItemRepo ir;
 
+	public int getHighestProductID() {
+		return ir.getMaxPid();
+	}
+	
 	public List<Item> getTopTenPurchasedItems() {
 		List<Integer> id = ir.getTopPurchasedItemsProductID();
 
@@ -85,6 +97,32 @@ public class ItemService {
 		if (item != null) {
 			item.setCategory(category.toUpperCase());
 			ir.save(item);
+		}
+	}
+	
+	public void addItemToCatalogue(HttpServletRequest request, Item i) {
+		ir.save(i);
+		
+		String directoryPath = request.getServletContext().getRealPath("\\")+"\\image";
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		//factory.setRepository(repository);
+		List<FileItem> items;
+		try {
+			items = upload.parseRequest(request);
+			Iterator<FileItem> fieldsIterator = items.iterator();
+			
+			while(fieldsIterator.hasNext()) {
+				FileItem item = fieldsIterator.next();
+				if(!item.isFormField()) {
+					File uploadedFile = new File(directoryPath+"\\"+getHighestProductID()+".JPG");
+					item.write(uploadedFile);
+				}
+			}
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

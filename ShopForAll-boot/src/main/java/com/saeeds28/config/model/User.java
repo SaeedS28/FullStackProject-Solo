@@ -41,12 +41,13 @@ public class User {
 		super();
 	}
 	
-	public User(String username, String password, String firstname, String lastname, String type, Address a) {
+	public User(String username, String password, String firstname, String lastname, String type, String status, Address a) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.status = status;
 		this.type = type;
 		this.address = a;
 	}
