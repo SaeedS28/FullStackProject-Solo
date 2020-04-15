@@ -51,4 +51,13 @@ public class ItemService {
 		category = category.toUpperCase();
 		return ir.getItemsByCategory(category);
 	}
+	
+	public void addQuantity(int productId, int quantity) {
+		Item item = ir.findById(productId).orElse(null);
+		
+		if(item != null) {
+			item.setQuantity(item.getQuantity() + quantity);
+			ir.save(item);
+		}
+	}
 }

@@ -135,16 +135,16 @@
 	
 	
 	<div id="addQty" class="modal">
-		<form class="modal-content animate" action="ChangeQuantity" method="Post">
+		<form class="modal-content animate" action="addQty" method="Post" onsubmit="return confirm('Press ok to add quantity');">
 			<h3>Add Quantity</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('addQty').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-				<label for="pQty"><b>Quantity</b></label> <input
+				<label for="quantity"><b>Quantity</b></label> <input
 					type="number" min="1" placeholder="Enter the product quantity"
-					name="pQty" required> 
+					name="quantity" required> 
 				<button type="submit" name="pid" value="${itemInfo.productID}">Add</button>
 			</div>
 		</form>
