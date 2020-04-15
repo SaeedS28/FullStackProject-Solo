@@ -60,4 +60,13 @@ public class ItemService {
 			ir.save(item);
 		}
 	}
+	
+	public void changePrice(int productId, double price) {
+		Item item = ir.findById(productId).orElse(null);
+		
+		if(item != null) {
+			item.setPrice(price);
+			ir.save(item);
+		}
+	}
 }

@@ -183,16 +183,16 @@
 		</div>
 		
 		<div id="changePrice" class="modal">
-		<form class="modal-content animate" action="ChangePrice" method="post">
+		<form class="modal-content animate" action="changePrice" method="post" onsubmit="return confirm('Press ok to change price');">
 			<h3>Change Price</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('changePrice').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
 			</div>
 			<div class="container">
-				<label for="cPrice"><b>Price</b></label> <input
+				<label for="price"><b>Price</b></label> <input
 					type="number" min="0.1" step="0.01" placeholder="Enter the product price"
-					name="cPrice" required> 
+					name="price" required> 
 				<button type="submit" name="pid" value="${itemInfo.productID}">Change Price</button>
 			</div>
 		</form>
