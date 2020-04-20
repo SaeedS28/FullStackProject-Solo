@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saeeds28.config.model.Item;
+import com.saeeds28.config.model.ShoppingCartItem;
 import com.saeeds28.config.repository.ItemRepo;
 
 @Service
@@ -22,6 +23,8 @@ public class ItemService {
 
 	@Autowired
 	ItemRepo ir;
+	@Autowired
+	CartService cs; 
 
 	int getHighestProductID() {
 		return ir.getMaxPid();
@@ -79,6 +82,15 @@ public class ItemService {
 		if (item != null) {
 			item.setPrice(price);
 			ir.save(item);
+		}
+		
+		// Updates items already in customers' carts
+		List<ShoppingCartItem> sci = cs.getShoppingCartItems(productId);
+		if(sci != null && sci.size() > 0) {
+			for(int i=0; i<sci.size();i++) {
+				sci.get(i).setPrice(price);
+			}
+			cs.update(sci);
 		}
 	}
 

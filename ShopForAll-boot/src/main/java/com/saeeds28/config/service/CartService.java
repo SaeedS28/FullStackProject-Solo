@@ -34,7 +34,15 @@ public class CartService {
 		cr.save(sciCartItem);
 	}
 
-	public List<ShoppingCartItem> getShoppingCartItems() {
+	public List<ShoppingCartItem> getShoppingCartItemsForUser() {
 		return cr.getCartForUser(UserSession.getLoggedInUser().getUsername());
+	}
+	
+	public List<ShoppingCartItem> getShoppingCartItems(int pid) {
+		return cr.getAnItemFromAllCarts(pid);
+	}
+	
+	public void update(List<ShoppingCartItem> sci) {
+		cr.saveAll(sci);
 	}
 }
