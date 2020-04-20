@@ -148,8 +148,8 @@
 		
 		<div id="disableUser" class="modal">
 		<div class="modal-content animate">
-			<h3>Deactivate an account</h3>
-			<h4 style="padding-left: 10px">Click on the button</h4>
+			<h3>Deactivate</h3>
+			<h4 style="padding-left: 10px">Click on button</h4>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('disableUser').style.display='none'"
 					class="close" title="Close Modal">&times;</span>
@@ -184,8 +184,8 @@
 		
 		<div id="enableUser" class="modal">
 		<div class="modal-content animate">
-			<h3>Activate an account</h3>
-			<h4 style="padding-left: 10px">Click on the button</h4>
+			<h3>Activate</h3>
+			<h4 style="padding-left: 10px">Click on button</h4>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('enableUser').style.display='none'"
 					class="close" title="Close Modal">&times;</span>

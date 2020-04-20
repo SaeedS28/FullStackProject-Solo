@@ -1,5 +1,7 @@
 package com.saeeds28.config.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +15,6 @@ public interface CartRepo extends JpaRepository<ShoppingCartItem, Integer> {
 	@Query("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid")
 	ShoppingCartItem getItemQuantityInCartForUser(@Param("name") String username, @Param("pid") int productID);
 	
+	@Query("Select s from Shopping_Cart_Item s where s.userName like :name")
+	List<ShoppingCartItem> getCartForUser(@Param("name") String username);
 }

@@ -26,7 +26,7 @@ public class ProductPageController {
 	@RequestMapping(path = "/ProductPage", method = RequestMethod.GET)
 	public ModelAndView loadProductPage(@RequestParam("pid") int pid, HttpSession session) {
 		Item item = is.getItemById(pid);
-		boolean isItemInCart = cs.doesItemExistInUserCart(UserSession.getLoggedInUser().getUsername(), pid);
+		boolean isItemInCart = cs.doesItemExistInUserCart(pid);
 		ModelAndView mv = new ModelAndView("productPage");
 		mv.addObject("itemInfo", item);
 		mv.addObject("inCart", isItemInCart);

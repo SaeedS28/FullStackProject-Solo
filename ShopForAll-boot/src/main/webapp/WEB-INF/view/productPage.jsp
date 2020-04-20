@@ -29,7 +29,7 @@
 		<h4 style="margin-bottom: 15px">Quantity: ${itemInfo.quantity}</h4>
 		
 			<c:if test="${user.type == 'regular' && !inCart && itemInfo.quantity > 0}">
-				<form action="AddItemToCart" method="post" >
+				<form action="addToCart" method="post" >
 				 	<button name= "pid" value="${itemInfo.productID}">Add to Cart</button>
 				</form>
 			</c:if>
@@ -43,7 +43,7 @@
 		 <button onclick="document.getElementById('changeDesc').style.display='block'" >Change Description</button>
 		 <button onclick="document.getElementById('changeCat').style.display='block'">Change Category</button>
 		 <button onclick="document.getElementById('changePrice').style.display='block'">Change Price</button>
-		 <form action="DeleteItem" method="post" onsubmit="return confirm('Press ok to delete the item')">
+		 <form action="delete" method="post" onsubmit="return confirm('Press ok to delete the item')">
 		 	<button name="delButt" value="${itemInfo.productID}">Delete Item</button>
 		 </form>
 		</div>

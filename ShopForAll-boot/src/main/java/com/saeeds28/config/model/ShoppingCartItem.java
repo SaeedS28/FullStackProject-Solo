@@ -15,17 +15,17 @@ public class ShoppingCartItem {
 	@Id
 	@SequenceGenerator(name="iid_generator", sequenceName = "Item_id_seq", allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "iid_generator")
-	@Column(nullable=false)
+	@Column(nullable=false, name = "item_id")
 	private int itemID;
-	@Column(nullable=false)
+	@Column(nullable=false, name = "product_id")
 	private int productID;
-	@Column(nullable=false)
+	@Column(nullable=false, name = "product_name")
 	private String productName;
-	@Column(nullable=false)
+	@Column(nullable=false, name = "user_name")
 	private String userName;
-	@Column(nullable=false)
+	@Column(nullable=false, name = "price")
 	private double price;
-	@Column(nullable=false)
+	@Column(nullable=false, name = "cart_quantity")
 	private int cartQuantity;
 	
 	public ShoppingCartItem() {}
