@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.config.model.ShoppingCartItem;
@@ -20,7 +21,7 @@ public class CartController {
 	@Autowired
 	CartService cs;
 	
-	@RequestMapping(path = "/cart")
+	@RequestMapping(path = "/cart", method = RequestMethod.GET)
 	public ModelAndView showCartPage() {
 		ModelAndView mv = new ModelAndView("cart");
 		List<ShoppingCartItem> sci = cs.getShoppingCartItemsForUser();
@@ -30,7 +31,7 @@ public class CartController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "/addToCart")
+	@RequestMapping(path = "/addToCart", method = RequestMethod.POST)
 	public void addItemToCart(int pid, HttpServletResponse response) throws IOException {
 		cs.addItemToCart(pid);
 		PrintWriter out = response.getWriter();
@@ -39,4 +40,15 @@ public class CartController {
 		out.println("location='/ShopForAll/ProductPage?pid="+pid+"';");
 		out.println("</script>");
 	}
+	
+	@RequestMapping(path = "/removeItem", method = RequestMethod.POST)
+	public void removeItemFromCart(int pid, HttpServletResponse response) throws IOException {
+		cs.removeItemFromCart(pid);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/cart';");
+		out.println("</script>");
+	}
+	
 }

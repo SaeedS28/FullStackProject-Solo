@@ -13,7 +13,7 @@ import com.saeeds28.config.model.ShoppingCartItem;
 public interface CartRepo extends JpaRepository<ShoppingCartItem, Integer> {
 
 	@Query("Select s from Shopping_Cart_Item s where s.userName like :name and s.productID = :pid")
-	ShoppingCartItem getItemQuantityInCartForUser(@Param("name") String username, @Param("pid") int productID);
+	ShoppingCartItem getItemsInCartForUser(@Param("name") String username, @Param("pid") int productID);
 	
 	@Query("Select s from Shopping_Cart_Item s where s.userName like :name")
 	List<ShoppingCartItem> getCartForUser(@Param("name") String username);

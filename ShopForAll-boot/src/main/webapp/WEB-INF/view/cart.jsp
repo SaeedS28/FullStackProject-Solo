@@ -57,7 +57,8 @@ body {
 	<div class="sales">
 
 		<c:if test="${empty cart}">
-			<h3 style="margin-top: 20%; text-align: center;">No Item in the	cart, fam</h3>
+			<h3 style="margin-top: 20%; text-align: center;">No Item in the
+				cart, fam</h3>
 		</c:if>
 
 		<c:if test="${not empty cart}">
@@ -66,27 +67,27 @@ body {
 			<table border="1" align="center" style="text-align: center;">
 				<c:forEach items="${cart}" var="item">
 					<tr>
-						<td style="width: 300px;"><a
-							href="ProductPage?pid=${item.productID}">
-								<h3>${item.productName}</h3>
-						</a>
+						<td style="width: 300px;"><h3>
+								<a href="ProductPage?pid=${item.productID}">
+									${item.productName}</a>
+							</h3>
 							<h3 class="price">Price: ${item.price} each</h3>
 							<h4 class="price">Quantity in cart: ${item.cartQuantity}</h4>
-							<form action="RemoveItemFromCart" method="post">
-								<button name="remove" value="${item.productID}">Remove
+							<form action="removeItem" method="post">
+								<button name="pid" value="${item.productID}">Remove
 									Item</button>
 							</form>
-							<form action="ChangeQuantityInCart" method="Post">
-								<button name="add" value="${item.productID}">+</button>
+							<form action="addQuantity" method="post">
+								<button name="pid" value="${item.productID}">+</button>
 							</form>
-							<form action="ChangeQuantityInCart" method="Post">
-								<button name="subtract" value="${item.productID}">-</button>
+							<form action="subtractQuantity" method="post">
+								<button name="pid" value="${item.productID}">-</button>
 							</form></td>
 					</tr>
 				</c:forEach>
 
 			</table>
-			<form action="checkout" method="Post">
+			<form action="checkout" method="post">
 				<button name="checkout" value="pressed">Proceed to Checkout</button>
 			</form>
 		</c:if>

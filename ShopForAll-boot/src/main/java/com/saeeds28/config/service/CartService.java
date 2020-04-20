@@ -19,7 +19,7 @@ public class CartService {
 	ItemService is;
 
 	public boolean doesItemExistInUserCart(int productID) {
-		ShoppingCartItem sci = cr.getItemQuantityInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
 
 		if (sci != null && sci.getCartQuantity() > 0) {
 			return true;
@@ -49,6 +49,11 @@ public class CartService {
 			return 0;
 		}
 		return total;
+	}
+	
+	public void removeItemFromCart(int productID) {
+		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		cr.delete(sci);
 	}
 	
 	public void update(List<ShoppingCartItem> sci) {
