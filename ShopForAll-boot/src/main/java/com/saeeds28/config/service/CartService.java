@@ -55,6 +55,30 @@ public class CartService {
 		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
 		cr.delete(sci);
 	}
+
+	public boolean subtractItem(int productID) {
+		Item item = is.getItemById(productID);
+		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		
+		if(sci.getCartQuantity() - 1 > 0) {
+			sci.setCartQuantity(sci.getCartQuantity() - 1);
+			cr.save(sci);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addItem(int productID) {
+		Item item = is.getItemById(productID);
+		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		
+		if(sci.getCartQuantity() + 1 <= item.getQuantity()) {
+			sci.setCartQuantity(sci.getCartQuantity() + 1);
+			cr.save(sci);
+			return true;
+		}
+		return false;
+	}
 	
 	public void update(List<ShoppingCartItem> sci) {
 		cr.saveAll(sci);

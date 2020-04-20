@@ -51,4 +51,26 @@ public class CartController {
 		out.println("</script>");
 	}
 	
+	@RequestMapping(path = "/subtractQuantity", method = RequestMethod.POST)
+	public void subtractItemQuantity(int pid, HttpServletResponse response) throws IOException {
+		cs.subtractItem(pid);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/cart';");
+		out.println("</script>");
+	}
+	
+	@RequestMapping(path = "/addQuantity", method = RequestMethod.POST)
+	public void addItemQuantity(int pid, HttpServletResponse response) throws IOException {
+		boolean isAdded = cs.addItem(pid);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		if(!isAdded) {
+			out.println("alert('Cart quantity exceeded stock. Nothing changed');");
+		}
+		out.println("location='/ShopForAll/cart';");
+		out.println("</script>");
+	}
 }

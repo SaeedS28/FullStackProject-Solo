@@ -79,10 +79,11 @@ body {
 							</form>
 							<form action="addQuantity" method="post">
 								<button name="pid" value="${item.productID}">+</button>
-							</form>
-							<form action="subtractQuantity" method="post">
-								<button name="pid" value="${item.productID}">-</button>
-							</form></td>
+							</form> <c:if test="${item.cartQuantity > 1}">
+								<form action="subtractQuantity" method="post">
+									<button name="pid" value="${item.productID}">-</button>
+								</form>
+							</c:if></td>
 					</tr>
 				</c:forEach>
 
