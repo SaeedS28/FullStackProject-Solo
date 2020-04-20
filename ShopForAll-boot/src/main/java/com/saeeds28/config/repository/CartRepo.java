@@ -20,4 +20,7 @@ public interface CartRepo extends JpaRepository<ShoppingCartItem, Integer> {
 	
 	@Query("Select s from Shopping_Cart_Item s where s.productID = :pid")
 	List<ShoppingCartItem> getAnItemFromAllCarts(@Param("pid") int productID);
+	
+	@Query("Select SUM(s.cartQuantity * s.price) from Shopping_Cart_Item s where s.userName like :name")
+	Double getCartTotal(@Param("name") String username);
 }

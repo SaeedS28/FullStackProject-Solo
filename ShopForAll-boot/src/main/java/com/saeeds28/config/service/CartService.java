@@ -42,6 +42,15 @@ public class CartService {
 		return cr.getAnItemFromAllCarts(pid);
 	}
 	
+	public double getCartTotal() {
+		Double total = cr.getCartTotal(UserSession.getLoggedInUser().getUsername());
+		
+		if(total == null) {
+			return 0;
+		}
+		return total;
+	}
+	
 	public void update(List<ShoppingCartItem> sci) {
 		cr.saveAll(sci);
 	}
