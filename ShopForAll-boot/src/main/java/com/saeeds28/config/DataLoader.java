@@ -15,7 +15,7 @@ import com.saeeds28.config.model.Item;
 import com.saeeds28.config.model.PurchaseOrder;
 import com.saeeds28.config.model.User;
 import com.saeeds28.config.repository.ItemRepo;
-import com.saeeds28.config.repository.PurchaseOrderRepo;
+import com.saeeds28.config.repository.CheckoutRepo;
 import com.saeeds28.config.repository.UserRepo;
 
 @Component
@@ -26,7 +26,7 @@ public class DataLoader {
 	@Autowired
 	ItemRepo ir;
 	@Autowired
-	PurchaseOrderRepo por;
+	CheckoutRepo por;
 	
 	@PostConstruct
 	public void addData() {

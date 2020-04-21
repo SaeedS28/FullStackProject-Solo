@@ -48,7 +48,7 @@ body{
 <div class="row" style="margin-top: 5%; max-height: 80%;">
   <div class="col-50">
     <div class="container">
-      <form action="ProcessOrder" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
+      <form action="process" method="post" onsubmit="return confirm('Press ok to confirm your order');" >
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>

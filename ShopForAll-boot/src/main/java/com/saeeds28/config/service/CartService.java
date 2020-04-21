@@ -82,4 +82,9 @@ public class CartService {
 	public void update(List<ShoppingCartItem> sci) {
 		cr.saveAll(sci);
 	}
+	
+	public void emptyUserCart() {
+		List<ShoppingCartItem> sci = getShoppingCartItemsForUser();
+		cr.deleteAll(sci);
+	}
 }

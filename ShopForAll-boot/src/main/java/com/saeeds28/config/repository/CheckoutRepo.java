@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.saeeds28.config.model.PurchaseOrder;
 
-public interface PurchaseOrderRepo extends JpaRepository<PurchaseOrder, Integer> {
+public interface CheckoutRepo extends JpaRepository<PurchaseOrder, Integer> {
 
 }

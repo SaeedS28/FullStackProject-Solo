@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,12 @@ public class CartController {
 	CartService cs;
 	
 	@RequestMapping(path = "/cart", method = RequestMethod.GET)
-	public ModelAndView showCartPage() {
+	public ModelAndView showCartPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView("cart");
 		List<ShoppingCartItem> sci = cs.getShoppingCartItemsForUser();
 		double cartTotal = cs.getCartTotal();
 		mv.addObject("total", cartTotal);
-		mv.addObject("cart", sci);
+		session.setAttribute("cart", sci);
 		return mv;
 	}
 	
