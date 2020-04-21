@@ -57,7 +57,6 @@ public class CartService {
 	}
 
 	public boolean subtractItem(int productID) {
-		Item item = is.getItemById(productID);
 		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
 		
 		if(sci.getCartQuantity() - 1 > 0) {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.config.model.Item;
-import com.saeeds28.config.model.UserSession;
 import com.saeeds28.config.service.CartService;
 import com.saeeds28.config.service.ItemService;
 

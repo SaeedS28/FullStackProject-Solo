@@ -64,8 +64,8 @@
 						Settings</a></li>
 						
 				<c:if test="${user.type == 'regular'}">
-							<li><a href="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-						</c:if>
+					<li><a href="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+				</c:if>
 				<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
 				</ul>
 		</div>
