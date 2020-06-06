@@ -1,0 +1,26 @@
+package com.saeeds28.config.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.saeeds28.config.model.PurchaseOrder;
+import com.saeeds28.config.model.UserSession;
+import com.saeeds28.config.repository.PurchaseOrderRepo;
+
+@Service
+public class PurchaseOrderService {
+
+	@Autowired
+	PurchaseOrderRepo po;
+	
+	public List<PurchaseOrder> getAllPurchasesForCustomers(){
+		if(UserSession.getLoggedInUser().getType().equals("admin")) {
+			return po.findAll();
+		}
+		return po.getPurchasesByUser(UserSession.getLoggedInUser().getUsername());			
+	}
+	
+	// add method to calculate total spent by customer(s)
+}

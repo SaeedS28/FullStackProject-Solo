@@ -1,0 +1,14 @@
+package com.saeeds28.config.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.saeeds28.config.model.PurchaseOrder;
+
+public interface PurchaseOrderRepo extends JpaRepository<PurchaseOrder, Integer>{
+
+	@Query("SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username")
+	List<PurchaseOrder> getPurchasesByUser(String username);
+}

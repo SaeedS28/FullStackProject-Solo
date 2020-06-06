@@ -42,7 +42,7 @@
 							<li><a href="#" onclick="document.getElementById('enableUser').style.display='block'">Activate Users</a></li>
 						</ul>
 					<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
-					<li><a href="SeePurchaseHistory"> See Customers History</a></li>
+					<li><a href="purchaseHistory"> See All Customers History</a></li>
 					<li><a href="ModerateReviewPage"> Moderate Reviews</a></li>
 				</c:if>
 				<li><a href="mailto:Saad.Saeed@fdmgroup.com?Subject=I%20have%20an%20inquiry">Contact Us</a></li>
@@ -51,7 +51,7 @@
 			
 			<c:choose>
 				  <c:when test="${user.type == 'regular'}">
-				<li><a href="SeePurchaseHistory"><span class="glyphicon glyphicon-user"></span>
+				<li><a href="purchaseHistory"><span class="glyphicon glyphicon-user"></span>
 						${user.firstname} ${user.lastname}</a></li>
 				</c:when>
 				<c:otherwise>

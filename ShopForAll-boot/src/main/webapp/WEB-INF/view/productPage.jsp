@@ -20,7 +20,7 @@
 	<jsp:include page="navBar.jsp" />
 	<c:choose>
 		<c:when test="${not empty itemInfo}">
-        <div class="information" align="center" style="margin-top: 5%; max-width:500px; margin-left:37%">
+        <div class="information" align="center" style="margin-top: 5%; max-width:500px; margin-left:34%">
 		<h1>${itemInfo.name}</h1>
 		<img src="image/${itemInfo.productID}.JPG" style="margin:15px 0 15px 0;height: 450px; width: 450px;">
 		<h4 style="margin-bottom: 15px">Description: ${itemInfo.description} </h4>
