@@ -23,4 +23,18 @@ public class PurchaseOrderService {
 	}
 	
 	// add method to calculate total spent by customer(s)
+	public double getPurchaseTotal() {
+		Double total;
+		if(UserSession.getLoggedInUser().getType().equals("admin")) {
+			total = po.getSumOfAllPurchases();
+		}
+		else {
+			total = po.getSumOfAllPurchases(UserSession.getLoggedInUser().getUsername());
+		}
+		
+		if(total == null) {
+			return 0;
+		}
+		return total;
+	}
 }

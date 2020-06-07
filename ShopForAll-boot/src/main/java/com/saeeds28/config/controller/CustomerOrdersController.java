@@ -18,6 +18,7 @@ public class CustomerOrdersController {
 	public ModelAndView getAllPurchases() {
 		ModelAndView mv = new ModelAndView("customerOrders");
 		mv.addObject("po", pos.getAllPurchasesForCustomers());
+		mv.addObject("totalSpent", pos.getPurchaseTotal());
 		return mv;
 	}
 }

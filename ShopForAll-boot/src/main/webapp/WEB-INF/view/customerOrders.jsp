@@ -42,6 +42,13 @@ body {
 	transform: translate(-50%, -50%);
 	color: white;
 }
+
+.footer {
+  position: fixed;
+  left: 80%;
+  bottom: 0;
+  text-align: center;
+}
 </style>
 </head>
 <body>
@@ -86,6 +93,12 @@ body {
 				</c:forEach>
 			</table>
 		</c:if>
+	</div>
+	
+	<div class="footer">
+		<p>
+			Total Spent: $${totalSpent}		
+		</p>
 	</div>
 </body>
 </html>

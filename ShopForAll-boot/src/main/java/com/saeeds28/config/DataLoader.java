@@ -38,7 +38,7 @@ public class DataLoader {
 		User u2 = new User("samad", DigestUtils.sha256Hex("password"), "Samad", "Saeed", "regular", UserStatus.ACTIVE.toString(), a2);
 
 		// Items
-		List<Item> strawberry = new ArrayList();
+		List<Item> strawberry = new ArrayList<>();
 		strawberry.add(new Item("Boots", "Clothing", "They cover your feet from the cold and wet", 32, 12.99));
 		strawberry.add(new Item("Google Pixel Phone", "Technology", "It's a phone fam", 12, 699.99));
 		strawberry.add(new Item("Water Bottle", "Essentials", "You can smuggle your alcohol now", 42, 5.99));
@@ -72,9 +72,9 @@ public class DataLoader {
 		po.add(new PurchaseOrder(new Timestamp(System.currentTimeMillis()),"samad",2,1,699.99));
 		
 		///////////////  UNCOMMENT IF RUNNING THE APPLICATION FOR THE FIRST TIME OR IF DATABASE FLUSHES  /////////////// 
-		//por.saveAll(po);
-		//ir.saveAll(strawberry);
-		//ur.save(u2);
-		//ur.save(u);
+//		por.saveAll(po);
+//		ir.saveAll(strawberry);
+//		ur.save(u2);
+//		ur.save(u);
 	}
 }
