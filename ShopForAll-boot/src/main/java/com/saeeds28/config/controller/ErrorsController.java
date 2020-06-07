@@ -25,13 +25,15 @@ public class ErrorsController implements ErrorController {
 			if(code == HttpStatus.NOT_FOUND.value()) {
 				return new ModelAndView("Status404");
 			}
+			else if(code == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+				return new ModelAndView("Status500");
+			}
 		}
 		return null;
 	}
 
 	@Override
 	public String getErrorPath() {
-		// TODO Auto-generated method stub
 		return PATH;
 	}
 }
