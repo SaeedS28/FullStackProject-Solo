@@ -10,117 +10,48 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity(name ="User_List")
 @Table(name="User_List")
 @JsonPropertyOrder({"Username","Firstname","Lastname","Password","Type","Status","Address"})
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class User {
 	@Id
+	@JsonProperty("Username")
 	@Column(name="user_name", nullable=false)
 	private String username;
 	
+	@JsonProperty("Password")
 	@Column(name="password_hash", length=256, nullable=false)
 	private String password;
 	
+	@JsonProperty("Firstname")
 	@Column(name="first_name", nullable=false)
 	private String firstname;
 	
+	@JsonProperty("Lastname")
 	@Column(name="last_name", nullable=false)
 	private String lastname;
 	
+	@JsonProperty("Type")
 	@Column(name="user_type", nullable=false)
 	private String type;
 	
+	@JsonProperty("Status")
 	@Column(name="user_status", nullable=false)
 	private String status;
 	
+	@JsonProperty("Address")
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="emailAddress")
 	private Address address;
-	
-	public User() {
-		super();
-	}
-	
-	public User(String username, String password, String firstname, String lastname, String type, String status, Address a) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.status = status;
-		this.type = type;
-		this.address = a;
-	}
-
-	@JsonProperty("Type")
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	@JsonProperty("Username")
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@JsonProperty("Password")
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@JsonProperty("Firstname")
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	@JsonProperty("Lastname")
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	@JsonProperty("Address")
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
-	@JsonProperty("Status")
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", type=" + type + ", status=" + status + ", address=" + address + "]";
-	}
-
-	
-
 }
