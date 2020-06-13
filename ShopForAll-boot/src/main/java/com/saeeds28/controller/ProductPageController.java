@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.saeeds28.model.Item;
 import com.saeeds28.service.CartService;
 import com.saeeds28.service.ItemService;
+import com.saeeds28.service.PurchaseOrderService;
 
 @Controller
 public class ProductPageController {
@@ -22,10 +23,14 @@ public class ProductPageController {
 	@Autowired
 	CartService cs;
 	
+	@Autowired
+	PurchaseOrderService ps;
+	
 	@RequestMapping(path = "/ProductPage", method = RequestMethod.GET)
 	public ModelAndView loadProductPage(@RequestParam("pid") int pid, HttpSession session) {
 		Item item = is.getItemById(pid);
 		boolean isItemInCart = cs.doesItemExistInUserCart(pid);
+		System.out.println(ps.isItemPurchased(pid));
 		ModelAndView mv = new ModelAndView("productPage");
 		mv.addObject("itemInfo", item);
 		mv.addObject("inCart", isItemInCart);

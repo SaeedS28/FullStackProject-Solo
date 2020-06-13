@@ -18,4 +18,7 @@ public interface PurchaseOrderRepo extends JpaRepository<PurchaseOrder, Integer>
 	
 	@Query("SELECT SUM(p.quantity * p.price) from Purchase_Order_List p WHERE p.emailAddress = :name")
 	Double getSumOfAllPurchases(@Param("name") String username);
+	
+	@Query("SELECT COUNT(p.productID) from Purchase_Order_List p where p.productID = :pid and p.emailAddress = :name")
+	Integer getPurchaseCountForUser(@Param("pid") int productID, @Param("name") String username);
 }

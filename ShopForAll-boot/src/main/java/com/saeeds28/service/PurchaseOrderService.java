@@ -22,7 +22,6 @@ public class PurchaseOrderService {
 		return po.getPurchasesByUser(UserSession.getLoggedInUser().getUsername());			
 	}
 	
-	// add method to calculate total spent by customer(s)
 	public double getPurchaseTotal() {
 		Double total;
 		if(UserSession.getLoggedInUser().getType().equals("admin")) {
@@ -36,5 +35,13 @@ public class PurchaseOrderService {
 			return 0;
 		}
 		return total;
+	}
+	
+	public boolean isItemPurchased(int productId) {
+		System.out.println(po.getPurchaseCountForUser(productId, UserSession.getLoggedInUser().getUsername()));
+		if(po.getPurchaseCountForUser(productId, UserSession.getLoggedInUser().getUsername()) > 0) {
+			return true;
+		}
+		return false;
 	}
 }
