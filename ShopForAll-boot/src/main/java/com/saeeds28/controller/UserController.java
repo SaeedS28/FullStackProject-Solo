@@ -39,6 +39,17 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(path = "/changeAddress", method = RequestMethod.POST)
+	public void changeAddress(Address a, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		us.changeAddress(a);
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('Address updated successfully');");
+		out.println("location='/ShopForAll/main';");
+		out.println("</script>");
+	}
+	
 	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
 	public void addUser(User newUser, Address address, HttpServletResponse response) throws IOException {
 		boolean isAdded = us.addUser(newUser, address);

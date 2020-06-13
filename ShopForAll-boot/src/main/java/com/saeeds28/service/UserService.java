@@ -26,7 +26,18 @@ public class UserService {
 		}
 		return null;
 	}
-
+	
+	public void changeAddress(Address a) {
+		User loggedIn = userRepo.getOne(UserSession.getLoggedInUser().getUsername());
+		Address toChange = loggedIn.getAddress();
+		toChange.setStreet(a.getStreet());
+		toChange.setCountry(a.getCountry());
+		toChange.setProvince(a.getProvince());
+		toChange.setPostalCode(a.getPostalCode());
+		userRepo.save(loggedIn);
+		UserSession.getLoggedInUser().setAddress(a);
+	}
+	
 	public boolean changePassword(String currentPassword, String newPassword, String repeat) {
 		String currentHash = DigestUtils.sha256Hex(currentPassword);
 		String newHash = DigestUtils.sha256Hex(newPassword);

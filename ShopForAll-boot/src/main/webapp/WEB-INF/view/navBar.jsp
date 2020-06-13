@@ -89,7 +89,7 @@
 			</div>
 		</form>
 		<c:if test="${user.type == 'regular'}">
-	<form class="modal-content animate" action="ChangeAddress" method="post">
+	<form class="modal-content animate" action="changeAddress" method="post">
 			<h3>Change Address</h3>
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('setting').style.display='none'"
