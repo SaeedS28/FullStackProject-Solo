@@ -1,4 +1,4 @@
-package com.saeeds28;
+package com.saeeds28.util;
 
 public enum UserStatus {
 	ACTIVE, INACTIVE

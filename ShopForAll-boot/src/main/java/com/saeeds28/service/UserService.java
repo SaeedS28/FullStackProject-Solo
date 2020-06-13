@@ -6,11 +6,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.saeeds28.UserStatus;
 import com.saeeds28.model.Address;
 import com.saeeds28.model.User;
 import com.saeeds28.model.UserSession;
 import com.saeeds28.repository.UserRepo;
+import com.saeeds28.util.UserStatus;
 
 @Service
 public class UserService {

@@ -1,4 +1,4 @@
-package com.saeeds28;
+package com.saeeds28.util;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

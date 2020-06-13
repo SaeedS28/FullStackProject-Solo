@@ -14,41 +14,64 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.saeeds28.util.ReviewStatus;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name ="Review_List")
 @Table(name="Review_List")
 @JsonPropertyOrder({"ProductID","Username","Review","Rating","Date"})
+
+@NoArgsConstructor
+@ToString
 public class Review {
 	@Id
 	@SequenceGenerator(name="review_generator", sequenceName = "review_id_seq",allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_generator")
+	@Getter
+	@Setter
+	@JsonIgnore
 	@Column(name="review_id", nullable=false)
 	private int reviewID;
 	
+	@Getter
+	@Setter
+	@JsonProperty("ProductID")
 	@Column(name="product_id", nullable=false)
 	private int productID;
 	
+	@Getter
+	@Setter
+	@JsonProperty("Review")
 	@Column(name="review_descriptiom", length=500, nullable=false)
 	private String reviewText;
 	
+	@Getter
+	@Setter
+	@JsonProperty("Username")
 	@Column(name="user_name", nullable=false)
 	private String emailAddress;
 	
+	@Getter
+	@Setter
+	@JsonProperty("Rating")
 	@Column(name="numerical_rating", nullable=false)
 	private int rating;
 	
+	@Getter
+	@Setter
+	@JsonProperty("Date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MM yyyy HH:mm:ss z", timezone = "GMT-5")
 	@Column(name="review_date", nullable=false)
 	private Timestamp reviewDate;
 	
+	@Getter
+	@JsonIgnore
 	@Column(name="review_status", nullable=false)
 	private String status;
-	
-	public static final String UNDER_REVIEW="Under Review";
-	public static final String ACCEPTED ="Accepted";
-	
-	public Review() {
-		super();
-	}
 
 	public Review(int productID, String reviewText, String emailAddress, int rating, Timestamp timestamp) {
 		super();
@@ -57,79 +80,14 @@ public class Review {
 		this.emailAddress = emailAddress;
 		this.rating = rating;
 		this.reviewDate = timestamp;
-		this.status = UNDER_REVIEW;
+		this.status = ReviewStatus.UNDER_REVIEW.toString();
 	}
-
-	@JsonIgnore
-	public int getReviewID() {
-		return reviewID;
-	}
-
-	public void setReviewID(int reviewID) {
-		this.reviewID = reviewID;
-	}
-
-	@JsonProperty("ProductID")
-	public int getProductID() {
-		return productID;
-	}
-
-	public void setProductID(int productID) {
-		this.productID = productID;
-	}
-
-	@JsonProperty("Review")
-	public String getReviewText() {
-		return reviewText;
-	}
-
-	public void setReviewText(String reviewText) {
-		this.reviewText = reviewText;
-	}
-
-	@JsonProperty("Username")
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
-	@JsonProperty("Rating")
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	@JsonProperty("Date")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MM yyyy HH:mm:ss z", timezone = "GMT-5")
-	public Timestamp getReviewDate() {
-		return reviewDate;
-	}
-
-	public void setReviewDate(Timestamp reviewDate) {
-		this.reviewDate = reviewDate;
-	}
-
+	
 	public void acceptReview() {
-		this.status = ACCEPTED;
+		this.status = ReviewStatus.ACCEPTED.toString();
 	}
 	
-	@JsonIgnore
-	public String getStatus() {
-		return this.status;
-	}
-	
-	public String toString() {
-		return "reviewID = " + reviewID + ", reviewText = " + reviewText
-				+ ", emailAddress = " + emailAddress + ", rating = " + rating + ", reviewDate = " + reviewDate;
-	}
-
 	public void setReviewStatus() {
-		this.status = UNDER_REVIEW;
+		this.status = ReviewStatus.UNDER_REVIEW.toString();
 	}
 }

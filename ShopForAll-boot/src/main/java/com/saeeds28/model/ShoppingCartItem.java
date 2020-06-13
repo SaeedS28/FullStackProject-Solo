@@ -8,9 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity(name="Shopping_Cart_Item")
 @Table(name = "Shopping_Cart_Item")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class ShoppingCartItem {
 	@Id
 	@SequenceGenerator(name="iid_generator", sequenceName = "Item_id_seq", allocationSize=1)
@@ -27,8 +35,6 @@ public class ShoppingCartItem {
 	private double price;
 	@Column(nullable=false, name = "cart_quantity")
 	private int cartQuantity;
-	
-	public ShoppingCartItem() {}
 
 	public ShoppingCartItem(int productID, String productName, String userName, double price,
 			int cartQuantity) {
@@ -39,58 +45,4 @@ public class ShoppingCartItem {
 		this.price = price;
 		this.cartQuantity = cartQuantity;
 	}
-
-	public int getItemID() {
-		return itemID;
-	}
-
-	public void setItemID(int itemID) {
-		this.itemID = itemID;
-	}
-
-	public int getProductID() {
-		return productID;
-	}
-
-	public void setProductID(int productID) {
-		this.productID = productID;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public int getCartQuantity() {
-		return cartQuantity;
-	}
-
-	public void setCartQuantity(int cartQuantity) {
-		this.cartQuantity = cartQuantity;
-	}
-
-	public String toString() {
-		return "itemID = " + itemID + ", productName = " + productName+ ", price per unit = " + price + ", quantity = " + cartQuantity;
-	}
-	
-		
 }
