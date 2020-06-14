@@ -45,6 +45,11 @@ public class ReviewService {
 		rr.save(toAccept);
 	}
 	
+	public void rejectReview(int reviewId) {
+		Review toReject = rr.findById(reviewId).orElse(null);
+		rr.delete(toReject);
+	}
+	
 	private Review reviewExist(int productId, String username) {
 		Review existReview = rr.findByProductIDAndEmailAddress(productId, username);
 		return existReview;

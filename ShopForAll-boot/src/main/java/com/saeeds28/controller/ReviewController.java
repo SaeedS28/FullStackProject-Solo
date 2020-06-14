@@ -49,4 +49,15 @@ public class ReviewController {
 		out.println("location='/ShopForAll/moderateReviews';");
 		out.println("</script>");
 	}
+	
+	@RequestMapping(path = "deleteReview", method = RequestMethod.POST)
+	public void rejectReview(@RequestParam("rid") int reviewId, HttpServletResponse response) throws IOException {
+		rs.rejectReview(reviewId);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/moderateReviews';");
+		out.println("</script>");
+	}
 }
