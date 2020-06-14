@@ -51,51 +51,61 @@ body {
 			<h1 style="font-size: 50px">For all your shopping needs</h1>
 		</div>
 	</div>
+	<c:choose>
+		<c:when test="${user.type == 'admin'}">
+			<c:if test="${empty modReviews}">
+				<h1 style="margin-top: 20%; text-align: center;">No reviews to
+					moderate</h1>
+			</c:if>
 
-	<c:if test="${empty modReviews}">
-		<h1 style="margin-top: 20%; text-align: center;">No reviews to moderate</h1>
-	</c:if>
+			<c:if test="${not empty modReviews}">
+				<h1 style="text-align: center;">Reviews pending approval</h1>
+				<div class="sales" style="margin-top: 3%;">
+					<table border="0" align="center"
+						style="text-align: center; width: 95%;">
+						<thead>
+							<tr>
+								<th>Review Id</th>
+								<th>Review Date</th>
+								<th>User</th>
+								<th>Item id</th>
+								<th>Rating</th>
+								<th>Review text</th>
+							</tr>
+						</thead>
 
-	<c:if test="${not empty modReviews}">
-		<h1 style="text-align: center;">Reviews pending approval</h1>
-		<div class="sales" style="margin-top: 3%;">
-			<table border="0" align="center"
-				style="text-align: center; width: 95%;">
-				<thead>
-					<tr>
-						<th>Review Id</th>
-						<th>Review Date</th>
-						<th>User</th>
-						<th>Item id</th>
-						<th>Rating</th>
-						<th>Review text</th>
-					</tr>
-				</thead>
-
-				<c:forEach items="${modReviews}" var="reviews">
-					<tr>
-						<td>${reviews.reviewID}</td>
-						<td>${reviews.reviewDate}</td>
-						<td>${reviews.emailAddress}</td>
-						<td>${reviews.productID}</td>
-						<td>${reviews.rating}</td>
-						<td>${reviews.reviewText}</td>
-						<td>
-							<form action="acceptReview" method="post"
-								onsubmit="return confirm('Press ok to accept this review');">
-								<button name="rid" value="${reviews.reviewID}">Accept Review</button>
-							</form>
-						</td>
-						<td>
-							<form action="rejectReview" method="post"
-								onsubmit="return confirm('Press ok to delete this review');">
-								<button name="rid" value="${reviews.reviewID}">Reject Review</button>
-							</form>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</c:if>
+						<c:forEach items="${modReviews}" var="reviews">
+							<tr>
+								<td>${reviews.reviewID}</td>
+								<td>${reviews.reviewDate}</td>
+								<td>${reviews.emailAddress}</td>
+								<td>${reviews.productID}</td>
+								<td>${reviews.rating}</td>
+								<td>${reviews.reviewText}</td>
+								<td>
+									<form action="acceptReview" method="post"
+										onsubmit="return confirm('Press ok to accept this review');">
+										<button name="rid" value="${reviews.reviewID}">Accept
+											Review</button>
+									</form>
+								</td>
+								<td>
+									<form action="rejectReview" method="post"
+										onsubmit="return confirm('Press ok to delete this review');">
+										<button name="rid" value="${reviews.reviewID}">Reject
+											Review</button>
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</c:if>
+		</c:when>
+		<c:otherwise>
+			<h1 style="margin-top: 20%; text-align: center;">Permission
+				Denied...Nice try :)</h1>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
