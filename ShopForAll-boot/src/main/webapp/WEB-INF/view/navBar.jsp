@@ -43,7 +43,7 @@
 						</ul>
 					<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
 					<li><a href="purchaseHistory"> See All Customers History</a></li>
-					<li><a href="ModerateReviewPage"> Moderate Reviews</a></li>
+					<li><a href="moderateReviews"> Moderate Reviews</a></li>
 				</c:if>
 				<li><a href="mailto:Saad.Saeed@fdmgroup.com?Subject=I%20have%20an%20inquiry">Contact Us</a></li>
 			</ul>

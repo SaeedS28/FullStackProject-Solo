@@ -1,5 +1,8 @@
 package com.saeeds28.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.service.ReviewService;
 
@@ -18,8 +22,20 @@ public class ReviewController {
 
 	@RequestMapping(path = "addReview", method = RequestMethod.POST)
 	public void addReview(@RequestParam("rate") int rating, @RequestParam("comment") String reviewText,
-			@RequestParam("review") int productId, HttpServletResponse response) {
+			@RequestParam("review") int productId, HttpServletResponse response) throws IOException {
 		rs.addReview(productId, rating, reviewText);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/ProductPage?pid="+productId+"';");
+		out.println("</script>");
 	}
-
+	
+	@RequestMapping(path = "moderateReviews", method = RequestMethod.GET)
+	public ModelAndView showModerationPage() {
+		ModelAndView mv = new ModelAndView("reviewModeration");
+		mv.addObject("modReviews", rs.getReviewsToModerate());
+		return mv;
+	}
 }

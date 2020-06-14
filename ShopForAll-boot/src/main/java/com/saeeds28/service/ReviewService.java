@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.saeeds28.model.Review;
 import com.saeeds28.model.UserSession;
 import com.saeeds28.repository.ReviewRepo;
+import com.saeeds28.util.ReviewStatus;
 
 @Service
 public class ReviewService {
@@ -28,6 +29,14 @@ public class ReviewService {
 		else {
 			rr.save(new Review(productId, reviewText, UserSession.getLoggedInUser().getUsername(), rating, new Timestamp(System.currentTimeMillis())));
 		}
+	}
+	
+	public List<Review> getAcceptedReviews(int productId) {
+		return rr.findByProductIDAndStatus(productId, ReviewStatus.ACCEPTED.toString());
+	}
+	
+	public List<Review> getReviewsToModerate() {
+		return rr.findByStatus(ReviewStatus.UNDER_REVIEW.toString());
 	}
 
 	private Review reviewExist(int productId, String username) {
