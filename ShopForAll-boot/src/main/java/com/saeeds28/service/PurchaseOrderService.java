@@ -38,7 +38,6 @@ public class PurchaseOrderService {
 	}
 	
 	public boolean isItemPurchased(int productId) {
-		System.out.println(po.getPurchaseCountForUser(productId, UserSession.getLoggedInUser().getUsername()));
 		if(po.getPurchaseCountForUser(productId, UserSession.getLoggedInUser().getUsername()) > 0) {
 			return true;
 		}

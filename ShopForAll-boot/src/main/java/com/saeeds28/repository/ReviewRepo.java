@@ -8,4 +8,6 @@ import com.saeeds28.model.Review;
 @Repository
 public interface ReviewRepo extends JpaRepository<Review, Integer> {
 
+	Review findByProductIDAndEmailAddress(int productId, String username);
+
 }

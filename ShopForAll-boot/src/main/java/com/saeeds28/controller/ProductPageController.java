@@ -30,10 +30,11 @@ public class ProductPageController {
 	public ModelAndView loadProductPage(@RequestParam("pid") int pid, HttpSession session) {
 		Item item = is.getItemById(pid);
 		boolean isItemInCart = cs.doesItemExistInUserCart(pid);
-		System.out.println(ps.isItemPurchased(pid));
+		boolean isPurchased = ps.isItemPurchased(pid);
 		ModelAndView mv = new ModelAndView("productPage");
 		mv.addObject("itemInfo", item);
 		mv.addObject("inCart", isItemInCart);
+		mv.addObject("purchased", isPurchased);
 		return mv;
 	}
 }

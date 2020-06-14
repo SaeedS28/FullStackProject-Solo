@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -48,29 +49,33 @@
 		 </form>
 		</div>
 		</c:if>
-		
-<%-- 	<% Integer i = (Integer) request.getAttribute("bought");%> --%>
-<%-- 	<% if(loggedIn.getType().equals("regular") && i>0){ %> --%>
-<!-- 	<div class="review" align="center" style="margin-top: 4%; max-width:700px; margin-left:27%"> -->
-<!-- 		<form action="AddReview" method="Post" onsubmit="return confirm('Review will be submitted to the administrator for approval. Continue?');"> -->
-<!-- 			<DIV class="header"> -->
-<!-- 				<H3 class="headers">Product Rating</H3> -->
-<!-- 			</DIV> -->
-<!-- 			<div> -->
-<!-- 				<label for="rate" >Numerical rating</label> -->
-<!-- 				<input type="number"  min="1" max="5" name = "rate" placeholder="Enter a number between 1 and 5" required> -->
-<!-- 			</div> -->
-<!-- 			<DIV class="textInput"> -->
-<!-- 				<label for="comment">A brief description</label> -->
-<!-- 				<input type="text" name="comment" -->
-<!-- 					placeholder="Enter review details" required maxlength="500"> -->
-<%-- 				<button name="review" value="<%=item.getProductID()%>">Add Review</button> --%>
-<!-- 			</DIV> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
-<%-- 	<%} %> --%>
-	
-<%-- 	<% --%>
+
+
+			<c:if test="${purchased == true}">
+				<div class="review" align="center"
+					style="margin-top: 4%; max-width: 700px;">
+					<form action="addReview" method="Post"
+						onsubmit="return confirm('Review will be submitted to the administrator for approval. Continue?');">
+						<DIV class="header">
+							<H3 class="headers">Product Rating</H3>
+						</DIV>
+						<div>
+							<label for="rate">Numerical rating</label> <input type="number"
+								min="1" max="5" name="rate"
+								placeholder="Enter a number between 1 and 5" required>
+						</div>
+						<DIV class="textInput">
+							<label for="comment">A brief description</label> <input
+								type="text" name="comment" placeholder="Enter review details"
+								required maxlength="500">
+							<button name="review" value="${itemInfo.productID}">Add
+								Review</button>
+						</DIV>
+					</form>
+				</div>
+			</c:if>
+
+			<%-- 	<% --%>
 // 		ReviewDAO rd = new ReviewDAO();
 // 		ArrayList<Review> rev = rd.retrieveAcceptedReviews(item.getProductID());
 <%-- 	%> --%>
