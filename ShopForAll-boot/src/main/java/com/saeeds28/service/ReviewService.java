@@ -38,7 +38,13 @@ public class ReviewService {
 	public List<Review> getReviewsToModerate() {
 		return rr.findByStatus(ReviewStatus.UNDER_REVIEW.toString());
 	}
-
+	
+	public void acceptReview(int reviewId) {
+		Review toAccept = rr.findById(reviewId).orElse(null);
+		toAccept.acceptReview();
+		rr.save(toAccept);
+	}
+	
 	private Review reviewExist(int productId, String username) {
 		Review existReview = rr.findByProductIDAndEmailAddress(productId, username);
 		return existReview;

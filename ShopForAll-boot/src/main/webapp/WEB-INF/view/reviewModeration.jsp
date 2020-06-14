@@ -53,8 +53,7 @@ body {
 	</div>
 
 	<c:if test="${empty modReviews}">
-		<h1 style="margin-top: 20%; text-align: center;">No reviews to
-			moderate</h1>
+		<h1 style="margin-top: 20%; text-align: center;">No reviews to moderate</h1>
 	</c:if>
 
 	<c:if test="${not empty modReviews}">
@@ -82,15 +81,15 @@ body {
 						<td>${reviews.rating}</td>
 						<td>${reviews.reviewText}</td>
 						<td>
-							<form action="AcceptReview" method="post"
+							<form action="acceptReview" method="post"
 								onsubmit="return confirm('Press ok to accept this review');">
-								<button name="AcceptReview" value="${reviews.reviewID}">Accept Review</button>
+								<button name="rid" value="${reviews.reviewID}">Accept Review</button>
 							</form>
 						</td>
 						<td>
-							<form action="DeleteReview" method="post"
+							<form action="deleteReview" method="post"
 								onsubmit="return confirm('Press ok to delete this review');">
-								<button name="deleteReview" value="${reviews.reviewID}">Delete Review</button>
+								<button name="rid" value="${reviews.reviewID}">Delete Review</button>
 							</form>
 						</td>
 					</tr>

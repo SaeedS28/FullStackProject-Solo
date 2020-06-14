@@ -38,4 +38,15 @@ public class ReviewController {
 		mv.addObject("modReviews", rs.getReviewsToModerate());
 		return mv;
 	}
+	
+	@RequestMapping(path = "acceptReview", method = RequestMethod.POST)
+	public void acceptReview(@RequestParam("rid") int reviewId, HttpServletResponse response) throws IOException {
+		rs.acceptReview(reviewId);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<script type=\"text/javascript\">");
+		out.println("location='/ShopForAll/moderateReviews';");
+		out.println("</script>");
+	}
 }
