@@ -87,9 +87,9 @@ body {
 							</form>
 						</td>
 						<td>
-							<form action="deleteReview" method="post"
+							<form action="rejectReview" method="post"
 								onsubmit="return confirm('Press ok to delete this review');">
-								<button name="rid" value="${reviews.reviewID}">Delete Review</button>
+								<button name="rid" value="${reviews.reviewID}">Reject Review</button>
 							</form>
 						</td>
 					</tr>

@@ -124,7 +124,7 @@ body{
 						<h6 class="price">${pop[7].description}</h6>
 				</a></td>
 				<td style="width: 450px; height: 450px;"><a
-						href="ProductPage?pid=${pop[0].productID}"><img
+						href="ProductPage?pid=${pop[8].productID}"><img
 						src="image/${pop[8].productID}.JPG"
 						style="height: 100%; width: 100%" /> 
 						<h4>${pop[8].name}</h4>

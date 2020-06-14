@@ -15,4 +15,5 @@ public interface ReviewRepo extends JpaRepository<Review, Integer> {
 	List<Review> findByProductIDAndStatus(int productId, String status);
 	
 	List<Review> findByStatus(String status);
+	
 }
