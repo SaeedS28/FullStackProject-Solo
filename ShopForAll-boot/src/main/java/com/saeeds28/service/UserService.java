@@ -3,6 +3,8 @@ package com.saeeds28.service;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,9 @@ import com.saeeds28.util.UserStatus;
 
 @Service
 public class UserService {
-
+	
+	private static Logger login = LogManager.getLogger("login");
+	
 	@Autowired
 	UserRepo userRepo;
 
@@ -22,6 +26,7 @@ public class UserService {
 		User loggedUser = userRepo.findById(username).orElse(null);
 		if (loggedUser != null && loggedUser.getPassword().equals(DigestUtils.sha256Hex(password))
 				&& loggedUser.getStatus().equals(UserStatus.ACTIVE.toString())) {
+			login.info("Login attempt: username (" + username + ") successful");
 			return loggedUser;
 		}
 		return null;

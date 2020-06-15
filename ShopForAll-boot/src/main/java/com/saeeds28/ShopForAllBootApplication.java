@@ -17,6 +17,7 @@ public class ShopForAllBootApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ShopForAllBootApplication.class, args);
+		System.out.println(System.getProperty("user.dir"));
 		openHomePage();
 	}
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+	<Appenders>
+		<Console name="StdOut" target="SYSTEM_OUT">
+			<PatternLayout pattern="%logger - %msg%n" />
+		</Console>
+
+		<File name="FileAppender1" filename="logs/loginAttempts.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender2" filename="logs/items.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender3" filename="logs/users.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+		<File name="FileAppender4" filename="logs/purchases.log">
+			<PatternLayout pattern="%d - %msg%n" />
+		</File>
+		
+	</Appenders>
+
+	<Loggers>
+
+		<Root level="error">
+			<AppenderRef ref="StdOut" />
+		</Root>
+		
+		<Logger name="stdOutput" level="debug" additivity="false">
+			<AppenderRef ref="StdOut" />
+		</Logger>
+
+		<Logger name="login" level="debug" additivity="false">
+			<AppenderRef ref="FileAppender1" />
+		</Logger>
+		
+		<Logger name="item" level="debug" additivity="false">
+			<AppenderRef ref="FileAppender2" />
+		</Logger>
+		
+		<Logger name="user" level="debug" additivity="false">
+			<AppenderRef ref="FileAppender3" />
+		</Logger>
+		
+		<Logger name="order" level="debug" additivity="false">
+			<AppenderRef ref="FileAppender4" />
+		</Logger>
+	</Loggers>
+</Configuration>
