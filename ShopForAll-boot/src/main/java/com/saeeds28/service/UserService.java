@@ -18,6 +18,7 @@ import com.saeeds28.util.UserStatus;
 public class UserService {
 	
 	private static Logger login = LogManager.getLogger("login");
+	private static Logger user = LogManager.getLogger("user");
 	
 	@Autowired
 	UserRepo userRepo;
@@ -29,6 +30,7 @@ public class UserService {
 			login.info("Login attempt: username (" + username + ") successful");
 			return loggedUser;
 		}
+		login.info("Login attempt: username (" + username + ") unsuccessful");
 		return null;
 	}
 	
@@ -41,6 +43,7 @@ public class UserService {
 		toChange.setPostalCode(a.getPostalCode());
 		userRepo.save(loggedIn);
 		UserSession.getLoggedInUser().setAddress(a);
+		user.info("(" + UserSession.getLoggedInUser().getUsername() + " address change success");
 	}
 	
 	public boolean changePassword(String currentPassword, String newPassword, String repeat) {
@@ -53,23 +56,28 @@ public class UserService {
 				User loggedIn = userRepo.getOne(UserSession.getLoggedInUser().getUsername());
 				loggedIn.setPassword(DigestUtils.sha256Hex(newPassword));
 				userRepo.save(loggedIn);
+				user.info("(" + UserSession.getLoggedInUser()+")" + " password change success");
 				return true;
 			}
+			user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " password change fail. Password mismatch");
 			return false;
 		}
+		user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " password change fail. Password mismatch");
 		return false;
 	}
 
-	public boolean addUser(User user, Address a) {
-		User existing = userRepo.findById(user.getUsername()).orElse(null);
+	public boolean addUser(User userAdd, Address a) {
+		User existing = userRepo.findById(userAdd.getUsername()).orElse(null);
 		if (existing != null) {
+			user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " initiated addUser. Fail (" + userAdd.getUsername() + ") already taken");
 			return false;
 		}
-		a.setEmailAddress(user.getUsername());
-		user.setAddress(a);
-		user.setStatus(UserStatus.ACTIVE.toString());
-		user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
-		userRepo.save(user);
+		a.setEmailAddress(userAdd.getUsername());
+		userAdd.setAddress(a);
+		userAdd.setStatus(UserStatus.ACTIVE.toString());
+		userAdd.setPassword(DigestUtils.sha256Hex(userAdd.getPassword()));
+		userRepo.save(userAdd);
+		user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " initiated addUser. Success (" + userAdd.getUsername() + ") with user type " + userAdd.getType());
 		return true;
 	}
 
@@ -83,19 +91,21 @@ public class UserService {
 	
 	public boolean inactivateUser(String username) {
 		if(UserSession.getLoggedInUser().getUsername().equals(username)) {
+			user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " failed user ban. Cannot ban self");
 			return false;
 		}
-		User user = userRepo.getOne(username);
-		user.setStatus(UserStatus.INACTIVE.toString());
-		userRepo.save(user);
+		User userBan = userRepo.getOne(username);
+		userBan.setStatus(UserStatus.INACTIVE.toString());
+		userRepo.save(userBan);
+		user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " successfully banned user (" + username + ")");
 		return true;
 	}
 	
 	public boolean activateUser(String username) {
-		User user = userRepo.getOne(username);
-		user.setStatus(UserStatus.ACTIVE.toString());
-		userRepo.save(user);
-
+		User userActive = userRepo.getOne(username);
+		userActive.setStatus(UserStatus.ACTIVE.toString());
+		userRepo.save(userActive);
+		user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " reactivated user account (" + username + ")");
 		return true;
 	}
 }
