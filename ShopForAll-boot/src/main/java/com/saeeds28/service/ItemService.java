@@ -11,20 +11,25 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saeeds28.model.Item;
 import com.saeeds28.model.ShoppingCartItem;
+import com.saeeds28.model.UserSession;
 import com.saeeds28.repository.ItemRepo;
 
 @Service
 public class ItemService {
 
+	private static Logger itemLog = LogManager.getLogger("item");
+
 	@Autowired
 	ItemRepo ir;
 	@Autowired
-	CartService cs; 
+	CartService cs;
 
 	int getHighestProductID() {
 		return ir.getMaxPid();
@@ -73,6 +78,8 @@ public class ItemService {
 		if (item != null) {
 			item.setQuantity(item.getQuantity() + quantity);
 			ir.save(item);
+			itemLog.info("(" + UserSession.getLoggedInUser().getUsername() + ") added " + quantity + " of " + "("
+					+ item.getProductID() + "," + item.getName() + ")");
 		}
 	}
 
@@ -83,15 +90,16 @@ public class ItemService {
 			item.setPrice(price);
 			ir.save(item);
 		}
-		
-		// Updates items already in customers' carts
+
 		List<ShoppingCartItem> sci = cs.getShoppingCartItems(productId);
-		if(sci != null && sci.size() > 0) {
-			for(int i=0; i<sci.size();i++) {
+		if (sci != null && sci.size() > 0) {
+			for (int i = 0; i < sci.size(); i++) {
 				sci.get(i).setPrice(price);
 			}
 			cs.update(sci);
 		}
+		itemLog.info("(" + UserSession.getLoggedInUser().getUsername() + ") changed price to $" + price + " of " + "("
+				+ item.getProductID() + "," + item.getName() + ")");
 	}
 
 	public void changeDescription(int productId, String description) {
@@ -113,14 +121,13 @@ public class ItemService {
 	}
 
 	public int addItem(HttpServletRequest request) {
-		String name = "", desc="", cat="";
+		String name = "", desc = "", cat = "";
 		double price = 0;
 		int quantity = 0;
 
 		String directoryPath = request.getServletContext().getRealPath("\\") + "\\image";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		// factory.setRepository(repository);
 		List<FileItem> items;
 		try {
 			items = upload.parseRequest(request);
@@ -128,7 +135,6 @@ public class ItemService {
 			Iterator<FileItem> fieldsIterator = items.iterator();
 
 			while (fieldsIterator.hasNext()) {
-				System.out.println("hit outside");
 				FileItem item = fieldsIterator.next();
 				if (item.isFormField()) {
 					if (item.getFieldName().equals("name")) {
@@ -155,6 +161,9 @@ public class ItemService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		itemLog.info("(" + UserSession.getLoggedInUser().getUsername() + ") added item: (" + getHighestProductID() + ","
+				+ name + "," + cat + "," + desc + "," + quantity + ", $" + price + ")");
 		return getHighestProductID();
 	}
 }
