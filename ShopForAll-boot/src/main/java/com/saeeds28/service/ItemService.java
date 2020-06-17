@@ -69,7 +69,7 @@ public class ItemService {
 
 	public List<Item> getItemsByCategory(String category) {
 		category = category.toUpperCase();
-		return ir.getItemsByCategory(category);
+		return ir.findByCategory(category);
 	}
 
 	public void addQuantity(int productId, int quantity) {

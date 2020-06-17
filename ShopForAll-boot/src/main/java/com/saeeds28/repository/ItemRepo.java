@@ -24,8 +24,7 @@ public interface ItemRepo extends JpaRepository<Item, Integer>{
 	@Query("SELECT i FROM Item_List i WHERE i.name like :productName")
 	List<Item> getItemsByName(@Param("productName") String pName);
 	
-	@Query("SELECT i FROM Item_List i WHERE i.category like :cat")
-	List<Item> getItemsByCategory(@Param("cat") String category);
+	List<Item> findByCategory(String category);
 	
 	@Query("SELECT MAX(i.productID) FROM Item_List i")
 	Integer getMaxPid();
