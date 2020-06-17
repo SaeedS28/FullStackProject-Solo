@@ -42,24 +42,17 @@
 							<li><a href="#" onclick="document.getElementById('enableUser').style.display='block'">Activate Users</a></li>
 						</ul>
 					<li><a href="#"  onclick="document.getElementById('addItem').style.display='block'" >Add Item</a></li>
-					<li><a href="purchaseHistory"> See All Customers History</a></li>
 					<li><a href="moderateReviews"> Moderate Reviews</a></li>
 				</c:if>
 				<li><a href="mailto:Saad.Saeed@fdmgroup.com?Subject=I%20have%20an%20inquiry">Contact Us</a></li>
+					<li><a href="purchaseHistory"> See Purchase History</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-			
-			<c:choose>
-				  <c:when test="${user.type == 'regular'}">
-				<li><a href="purchaseHistory"><span class="glyphicon glyphicon-user"></span>
-						${user.firstname} ${user.lastname}</a></li>
-				</c:when>
-				<c:otherwise>
+	
 				<li><a><span class="glyphicon glyphicon-user"></span>
 						${user.firstname} ${user.lastname}</a></li>
-				</c:otherwise>
-			</c:choose>
-				<li onclick="document.getElementById('setting').style.display='block'"><a
+						
+					<li onclick="document.getElementById('setting').style.display='block'"><a
 					href="#"><span class="glyphicon glyphicon-list-alt"></span>
 						Settings</a></li>
 						
