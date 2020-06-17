@@ -18,9 +18,9 @@
 			<PatternLayout pattern="%d - %msg%n" />
 		</File>
 		
-		<File name="FileAppender4" filename="logs/purchases.log">
-			<PatternLayout pattern="%d - %msg%n" />
-		</File>
+<!-- 		<File name="FileAppender4" filename="logs/purchases.log"> -->
+<!-- 			<PatternLayout pattern="%d - %msg%n" /> -->
+<!-- 		</File> -->
 		
 	</Appenders>
 
@@ -46,8 +46,8 @@
 			<AppenderRef ref="FileAppender3" />
 		</Logger>
 		
-		<Logger name="order" level="debug" additivity="false">
-			<AppenderRef ref="FileAppender4" />
-		</Logger>
+<!-- 		<Logger name="order" level="debug" additivity="false"> -->
+<!-- 			<AppenderRef ref="FileAppender4" /> -->
+<!-- 		</Logger> -->
 	</Loggers>
 </Configuration>

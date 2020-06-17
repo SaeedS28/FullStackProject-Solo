@@ -19,7 +19,7 @@ public class CartService {
 	ItemService is;
 
 	public boolean doesItemExistInUserCart(int productID) {
-		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		ShoppingCartItem sci = cr.findByUserNameAndProductID(UserSession.getLoggedInUser().getUsername(), productID);
 
 		if (sci != null && sci.getCartQuantity() > 0) {
 			return true;
@@ -35,11 +35,11 @@ public class CartService {
 	}
 
 	public List<ShoppingCartItem> getShoppingCartItemsForUser() {
-		return cr.getCartForUser(UserSession.getLoggedInUser().getUsername());
+		return cr.findByUserName(UserSession.getLoggedInUser().getUsername());
 	}
 	
 	public List<ShoppingCartItem> getShoppingCartItems(int pid) {
-		return cr.getAnItemFromAllCarts(pid);
+		return cr.findByProductID(pid);
 	}
 	
 	public double getCartTotal() {
@@ -52,12 +52,12 @@ public class CartService {
 	}
 	
 	public void removeItemFromCart(int productID) {
-		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		ShoppingCartItem sci = cr.findByUserNameAndProductID(UserSession.getLoggedInUser().getUsername(), productID);
 		cr.delete(sci);
 	}
 
 	public boolean subtractItem(int productID) {
-		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		ShoppingCartItem sci = cr.findByUserNameAndProductID(UserSession.getLoggedInUser().getUsername(), productID);
 		
 		if(sci.getCartQuantity() - 1 > 0) {
 			sci.setCartQuantity(sci.getCartQuantity() - 1);
@@ -69,7 +69,7 @@ public class CartService {
 	
 	public boolean addItem(int productID) {
 		Item item = is.getItemById(productID);
-		ShoppingCartItem sci = cr.getItemsInCartForUser(UserSession.getLoggedInUser().getUsername(), productID);
+		ShoppingCartItem sci = cr.findByUserNameAndProductID(UserSession.getLoggedInUser().getUsername(), productID);
 		
 		if(sci.getCartQuantity() + 1 <= item.getQuantity()) {
 			sci.setCartQuantity(sci.getCartQuantity() + 1);

@@ -19,7 +19,7 @@ public class PurchaseOrderService {
 		if(UserSession.getLoggedInUser().getType().equals("admin")) {
 			return po.findAll();
 		}
-		return po.getPurchasesByUser(UserSession.getLoggedInUser().getUsername());			
+		return po.findByEmailAddress(UserSession.getLoggedInUser().getUsername());			
 	}
 	
 	public double getPurchaseTotal() {

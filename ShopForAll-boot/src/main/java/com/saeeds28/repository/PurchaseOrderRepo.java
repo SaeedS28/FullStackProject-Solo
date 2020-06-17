@@ -10,8 +10,7 @@ import com.saeeds28.model.PurchaseOrder;
 
 public interface PurchaseOrderRepo extends JpaRepository<PurchaseOrder, Integer>{
 
-	@Query("SELECT p FROM Purchase_Order_List p WHERE p.emailAddress = :username")
-	List<PurchaseOrder> getPurchasesByUser(String username);
+	List<PurchaseOrder> findByEmailAddress(String username);
 
 	@Query("SELECT SUM(p.quantity * p.price) from Purchase_Order_List p")
 	Double getSumOfAllPurchases();

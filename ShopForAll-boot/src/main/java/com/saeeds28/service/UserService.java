@@ -82,11 +82,11 @@ public class UserService {
 	}
 
 	public List<User> getActivelUsers() {
-		return userRepo.getActiveUsers();
+		return userRepo.findByStatus(UserStatus.ACTIVE.toString());
 	}
 
 	public List<User> getInactiveUsers() {
-		return userRepo.getInactiveUsers();
+		return userRepo.findByStatus(UserStatus.INACTIVE.toString());
 	}
 	
 	public boolean inactivateUser(String username) {

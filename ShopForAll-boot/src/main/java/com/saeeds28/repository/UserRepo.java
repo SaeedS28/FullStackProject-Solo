@@ -11,9 +11,5 @@ import com.saeeds28.model.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {
 	
-	@Query("SELECT u FROM User_List u WHERE u.status like 'ACTIVE'")
-	List<User> getActiveUsers();
-	
-	@Query("SELECT u FROM User_List u WHERE u.status like 'INACTIVE'")
-	List<User> getInactiveUsers();
+	List<User> findByStatus(String status);
 }
