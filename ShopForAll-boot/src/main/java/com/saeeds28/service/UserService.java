@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.saeeds28.exception.ResourceNotFoundException;
 import com.saeeds28.model.Address;
 import com.saeeds28.model.User;
 import com.saeeds28.model.UserSession;
@@ -116,10 +115,26 @@ public class UserService {
 
 	public User getUserByUsername(String username) {
 		User find = userRepo.findById(username).orElse(null);
-		
-		if(find == null) {
-			throw new ResourceNotFoundException();
-		}
 		return find;
+	}
+	
+	public void changeAddressFromRest(Address a, User userTarget) {
+		Address toChange = userTarget.getAddress();
+		if(a.getCity() != null) {
+			toChange.setCity(a.getCity());
+		}
+		if(a.getStreet() != null) {
+			toChange.setStreet(a.getStreet());
+		}
+		if(a.getCountry() != null) {
+			toChange.setCountry(a.getCountry());			
+		}
+		if(a.getProvince() != null) {
+			toChange.setProvince(a.getProvince());			
+		}
+		if(a.getPostalCode() != null) {
+			toChange.setPostalCode(a.getPostalCode());			
+		}
+		userRepo.save(userTarget);
 	}
 }

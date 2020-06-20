@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -18,7 +20,7 @@ import lombok.ToString;
 
 @Entity(name ="User_List")
 @Table(name="User_List")
-@JsonPropertyOrder({"Username","Firstname","Lastname","Password","Type","Status","Address"})
+@JsonPropertyOrder({"Username","Firstname","Lastname","Type","Status","Address"})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,7 +32,7 @@ public class User {
 	@Column(name="user_name", nullable=false)
 	private String username;
 	
-	@JsonProperty("Password")
+	@JsonIgnore
 	@Column(name="password_hash", length=256, nullable=false)
 	private String password;
 	
