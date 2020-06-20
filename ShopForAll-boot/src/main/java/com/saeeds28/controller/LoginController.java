@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +25,7 @@ public class LoginController {
 	@Autowired
 	UserService us;
 
-	@RequestMapping(path = { "/", "/logout" }, method = RequestMethod.GET)
+	@GetMapping(path = { "/", "/logout" })
 	public ModelAndView showLoginPage(HttpSession session) {
 		session.invalidate();
 		UserSession.setLoggedInUser(null);
@@ -33,7 +33,7 @@ public class LoginController {
 		return mv;
 	}
 
-	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
+	@PostMapping(path = "/login")
 	public void attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {

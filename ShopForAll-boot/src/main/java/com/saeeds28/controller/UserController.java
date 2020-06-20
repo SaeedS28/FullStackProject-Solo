@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserService us;
 	
-	@RequestMapping(path = "/changePassword", method = RequestMethod.POST)
+	@PostMapping(path = "/changePassword")
 	public void changePassword(String currentPassword, String newPassword, String repeatPassword, HttpServletResponse response) throws IOException {
 		boolean isChanged = us.changePassword(currentPassword, newPassword, repeatPassword);
 		PrintWriter out = response.getWriter();
@@ -39,7 +40,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(path = "/changeAddress", method = RequestMethod.POST)
+	@PostMapping(path = "/changeAddress")
 	public void changeAddress(Address a, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		us.changeAddress(a);
@@ -50,7 +51,7 @@ public class UserController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
+	@PostMapping(path = "/addUser")
 	public void addUser(User newUser, Address address, HttpServletResponse response) throws IOException {
 		boolean isAdded = us.addUser(newUser, address);
 		
@@ -68,7 +69,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(path = "/disableUser", method = RequestMethod.POST)
+	@PostMapping(path = "/disableUser")
 	public void deactivateUser(String username, HttpServletResponse response) throws IOException {		
 		boolean isInactive = us.inactivateUser(username);
 		
@@ -84,7 +85,8 @@ public class UserController {
 		out.println("</script>");
 		
 	}
-	@RequestMapping(path = "/enableUser", method = RequestMethod.POST)
+	
+	@PostMapping(path = "/enableUser")
 	public void activateUser(String username, HttpServletResponse response) throws IOException {		
 		boolean isActive = us.activateUser(username);
 		

@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.model.Item;
@@ -23,7 +22,7 @@ public class MainPageController {
 	@Autowired
 	UserService us;
 	
-	@RequestMapping(path = { "/main" }, method = RequestMethod.GET)
+	@GetMapping(path = "/main")
 	public ModelAndView showMainPage() {
 		ModelAndView mv = new ModelAndView("mainPage");
 		List<Item> topPurchases = is.getTopTenPurchasedItems();

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +21,7 @@ public class ReviewController {
 	@Autowired
 	ReviewService rs;
 
-	@RequestMapping(path = "addReview", method = RequestMethod.POST)
+	@PostMapping(path = "addReview")
 	public void addReview(@RequestParam("rate") int rating, @RequestParam("comment") String reviewText,
 			@RequestParam("review") int productId, HttpServletResponse response) throws IOException {
 		rs.addReview(productId, rating, reviewText);
@@ -33,14 +33,14 @@ public class ReviewController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "moderateReviews", method = RequestMethod.GET)
+	@GetMapping(path = "moderateReviews")
 	public ModelAndView showModerationPage() {
 		ModelAndView mv = new ModelAndView("reviewModeration");
 		mv.addObject("modReviews", rs.getReviewsToModerate());
 		return mv;
 	}
 	
-	@RequestMapping(path = "acceptReview", method = RequestMethod.POST)
+	@PostMapping(path = "acceptReview")
 	public void acceptReview(@RequestParam("rid") int reviewId, HttpServletResponse response) throws IOException {
 		rs.acceptReview(reviewId);
 		
@@ -51,7 +51,7 @@ public class ReviewController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "rejectReview", method = RequestMethod.POST)
+	@PostMapping(path = "rejectReview")
 	public void rejectReview(@RequestParam("rid") int reviewId, HttpServletResponse response) throws IOException {
 		rs.rejectReview(reviewId);
 		
@@ -62,7 +62,7 @@ public class ReviewController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "deleteReview", method = RequestMethod.POST)
+	@PostMapping(path = "deleteReview")
 	public void deleteReview(@RequestParam("rid") int reviewId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		rs.rejectReview(reviewId);
 		

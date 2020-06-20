@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.model.ShoppingCartItem;
@@ -19,10 +18,11 @@ import com.saeeds28.service.CheckoutService;
 
 @Controller
 public class CheckoutController {
+	
 	@Autowired
 	CheckoutService cs;
 	
-	@RequestMapping(path = "/checkout", method = RequestMethod.POST)
+	@PostMapping(path = "/checkout")
 	public ModelAndView showCheckoutPage() {
 		ModelAndView mv = new ModelAndView("checkout");
 		mv.addObject("user", UserSession.getLoggedInUser());
@@ -30,7 +30,7 @@ public class CheckoutController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(path = "/process", method = RequestMethod.POST)
+	@PostMapping(path = "/process")
 	public void processOrder(HttpSession session, HttpServletResponse response) throws IOException {
 		List<ShoppingCartItem> sci = (List<ShoppingCartItem>)session.getAttribute("cart");
 		boolean isProcessed = cs.processOrder(sci);

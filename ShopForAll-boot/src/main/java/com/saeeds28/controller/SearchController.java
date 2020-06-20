@@ -7,8 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.model.Item;
@@ -20,7 +19,7 @@ public class SearchController {
 	@Autowired
 	ItemService is;
 
-	@RequestMapping(path = "/category", method = RequestMethod.GET)
+	@GetMapping(path = "/category")
 	public ModelAndView getAllProductCategories() {
 		ModelAndView mv = new ModelAndView("categories");
 		List<String> categories = is.getProductCategories();
@@ -29,7 +28,7 @@ public class SearchController {
 		return mv;
 	}
 
-	@RequestMapping(path = "/search", method = RequestMethod.GET)
+	@GetMapping(path = "/search")
 	public ModelAndView executeSearch(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("searchPage");
 

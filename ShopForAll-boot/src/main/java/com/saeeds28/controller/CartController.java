@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.saeeds28.model.ShoppingCartItem;
@@ -22,7 +22,7 @@ public class CartController {
 	@Autowired
 	CartService cs;
 	
-	@RequestMapping(path = "/cart", method = RequestMethod.GET)
+	@GetMapping(path = "/cart")
 	public ModelAndView showCartPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView("cart");
 		List<ShoppingCartItem> sci = cs.getShoppingCartItemsForUser();
@@ -32,7 +32,7 @@ public class CartController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "/addToCart", method = RequestMethod.POST)
+	@PostMapping(path = "/addToCart")
 	public void addItemToCart(int pid, HttpServletResponse response) throws IOException {
 		cs.addItemToCart(pid);
 		PrintWriter out = response.getWriter();
@@ -42,7 +42,7 @@ public class CartController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "/removeItem", method = RequestMethod.POST)
+	@PostMapping(path = "/removeItem")
 	public void removeItemFromCart(int pid, HttpServletResponse response) throws IOException {
 		cs.removeItemFromCart(pid);
 		PrintWriter out = response.getWriter();
@@ -52,7 +52,7 @@ public class CartController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "/subtractQuantity", method = RequestMethod.POST)
+	@PostMapping(path = "/subtractQuantity")
 	public void subtractItemQuantity(int pid, HttpServletResponse response) throws IOException {
 		cs.subtractItem(pid);
 		PrintWriter out = response.getWriter();
@@ -62,7 +62,7 @@ public class CartController {
 		out.println("</script>");
 	}
 	
-	@RequestMapping(path = "/addQuantity", method = RequestMethod.POST)
+	@PostMapping(path = "/addQuantity")
 	public void addItemQuantity(int pid, HttpServletResponse response) throws IOException {
 		boolean isAdded = cs.addItem(pid);
 		PrintWriter out = response.getWriter();
