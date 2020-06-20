@@ -108,4 +108,12 @@ public class UserService {
 		user.info("(" + UserSession.getLoggedInUser().getUsername() + ")" + " reactivated user account (" + username + ")");
 		return true;
 	}
+
+	public List<User> getAllUsers() {
+		return userRepo.findAll();
+	}
+
+	public User getUserByUsername(String username) {
+		return userRepo.findById(username).orElse(null);
+	}
 }
