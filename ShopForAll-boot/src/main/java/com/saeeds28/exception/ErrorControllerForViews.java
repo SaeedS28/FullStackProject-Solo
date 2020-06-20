@@ -1,4 +1,4 @@
-package com.saeeds28.controller;
+package com.saeeds28.exception;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ErrorsController implements ErrorController {
+public class ErrorControllerForViews implements ErrorController {
 
 	private static final String PATH= "/error";
 	

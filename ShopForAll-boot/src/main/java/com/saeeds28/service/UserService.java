@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saeeds28.exception.ResourceNotFoundException;
 import com.saeeds28.model.Address;
 import com.saeeds28.model.User;
 import com.saeeds28.model.UserSession;
@@ -114,6 +115,11 @@ public class UserService {
 	}
 
 	public User getUserByUsername(String username) {
-		return userRepo.findById(username).orElse(null);
+		User find = userRepo.findById(username).orElse(null);
+		
+		if(find == null) {
+			throw new ResourceNotFoundException();
+		}
+		return find;
 	}
 }
