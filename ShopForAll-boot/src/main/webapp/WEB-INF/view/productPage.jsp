@@ -61,18 +61,12 @@
 					<button
 						onclick="document.getElementById('changePrice').style.display='block'">Change
 						Price</button>
-					<form action="delete" method="post"
-						onsubmit="return confirm('Press ok to delete the item')">
-						<button name="delButt" value="${itemInfo.productID}">Delete
-							Item</button>
-					</form>
+				</c:if>
 			</div>
-			</c:if>
 
 
 			<c:if test="${purchased == true}">
-				<div class="review" align="center"
-					style="margin-top: 4%;">
+				<div class="review" align="center" style="margin-top: 4%;">
 					<form action="addReview" method="Post"
 						onsubmit="return confirm('Review will be submitted to the administrator for approval. Continue?');">
 						<DIV class="header">
@@ -122,8 +116,8 @@
 									<td>
 										<form action="deleteReview" method="post"
 											onsubmit="return confirm('Press ok to delete your review');">
-											<button name="rid"
-												value="${reviews.reviewID}">Delete Review</button>
+											<button name="rid" value="${reviews.reviewID}">Delete
+												Review</button>
 										</form>
 									</td>
 								</c:if>
