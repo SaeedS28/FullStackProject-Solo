@@ -1,7 +1,7 @@
 # FullStackProject-Solo
 
 ##  ShopForAll
-Implemented an ecommerce website from scratch. Also features an API component.
+Implemented an ecommerce website from scratch. Also features an API component (See the restcontroller package for a list of endpoints).
 
 ### Techmologies Used
 
@@ -38,7 +38,7 @@ password: password
 - change their passowrd
 - view store analytics
 
-### Customers
+#### Customers
 - purchase product
 - change their password and address
 - write reviews for a product they have purchased

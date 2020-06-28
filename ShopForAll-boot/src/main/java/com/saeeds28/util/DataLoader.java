@@ -31,7 +31,7 @@ public class DataLoader {
 	@PostConstruct
 	public void addData() {
 		Address a = new Address("saeeds28", "130 Adelaide W", "Toronto", "Ontaio", "Canada", "M5H3P5");
-		Address a2 = new Address("samad", "25 Telegram Mews", "Toronto", "Ontaio", "Canada", "M5V3Z1");
+		Address a2 = new Address("samad", "4700 Keele Street", "Toronto", "Ontaio", "Canada", "M3J1P3");
 
 		// Users
 		User u = new User("saeeds28", DigestUtils.sha256Hex("bluejays123"), "Saad", "Saeed", "admin", UserStatus.ACTIVE.toString(), a);
