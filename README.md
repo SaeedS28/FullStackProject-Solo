@@ -5,9 +5,9 @@ Implemented an ecommerce website from scratch. Also features an API component (S
 
 ### Techmologies Used
 
-View - JSP
-Backend - Oracle 11g database
-Java 8 with Spring Boot
+- JSP and JSTL
+- Oracle 11g Database
+- Java 8 with Spring Boot
 
 ### Instructions
 
