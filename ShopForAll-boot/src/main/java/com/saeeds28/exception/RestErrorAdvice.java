@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@RestControllerAdvice		// Global exception handling
 public class RestErrorAdvice {
 
+	// Specific exception
 	@ExceptionHandler(value = ResourceNotFoundException.class)
 	public ResponseEntity<CustomErrorResponse> notFound(ResourceNotFoundException e) {
 		CustomErrorResponse exception = new CustomErrorResponse("NOT_FOUND", e.getMessage());
@@ -25,4 +26,14 @@ public class RestErrorAdvice {
 		exception.setStatus((HttpStatus.BAD_REQUEST.value()));
 		return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
 	}
+	
+	// catch-all
+	@ExceptionHandler(value = Exception.class)
+	public ResponseEntity<CustomErrorResponse> ServerSideError(Exception e) {
+		CustomErrorResponse exception = new CustomErrorResponse("SERVER_ERROR", e.getMessage());
+		exception.setTimestamp(LocalDateTime.now());
+		exception.setStatus((HttpStatus.INTERNAL_SERVER_ERROR.value()));
+		return new ResponseEntity<>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 }
