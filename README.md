@@ -21,12 +21,10 @@ Implemented an ecommerce website from scratch. Also features an API component (S
 
 ### Login Credentials
 #### Administrator
-username: saeeds28 <br/>
-password bluejays123
+username: saeeds28
 
 #### Customer
-username: samad <br/>
-password: password
+username: samad
 
 ### Permissions
 #### Admins
